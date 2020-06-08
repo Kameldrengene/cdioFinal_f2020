@@ -28,17 +28,25 @@ function Personslist() {
 function Loginlist() {
     $(document).ready(function () {
         $.getJSON("/SinglePageWEB_war_exploded/rest/persons",function (data) {
-            var person_data = '';
-            $.each(data,function (key,value) {
-                person_data += '<tr>';
-                person_data += '<td>'+value.id+'</td>';
-                person_data += '<td>'+value.name+'</td>';
-                person_data += '<td>'+value.name+'</td>';
-                person_data += "<td><input id='login' class='edit' type='submit' value='Login as'/></td>";
-                person_data +=  '</tr>';
-
+            var person_data = '<tr>\n' +
+                '                <th>ID</th>\n' +
+                '                <th>Initials</th>\n' +
+                '                <th>Role</th>\n' +
+                '                <th>Login</th>\n' +
+                '            </tr>';
+            $.each(data,function (key,inner) {
+                //TODO: Insert if statement to check if active
+                $.each(inner,function (key, value) {
+                    var auserid = value.userID;
+                    person_data += '<tr>';
+                    person_data += '<td>'+auserid+'</td>';
+                    person_data += '<td>'+value.ini+'</td>';
+                    person_data += '<td>'+value.rolesToString+'</td>';
+                    person_data += "<td><input id='updateuser' class='update' type='button' value='login as'/> </td>";
+                    person_data +=  '</tr>';
+                });
             });
-            $('#Person_table').append(person_data);
+            $('#Person_table').html(person_data);
         });
     });
 }
