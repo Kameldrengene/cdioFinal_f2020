@@ -4,8 +4,29 @@
     <meta charset="UTF-8">
     <title>Admin Screen</title>
     <link rel="stylesheet" type="text/css" href="../default.css">
+    <link rel="stylesheet" type="text/css" href="index.css">
+    <script src="../jquery/jquery-3.5.1.min.js"></script>
+    <script src="../jqScripts.js"></script>
 </head>
 <body>
-<h1>Admin Screen</h1>
+<h1>Admin screen</h1>
+
+<button onclick="switchP('index.html');">create new person</button>
+<div id="list" class="container" className="brugertable">
+    <div class="table-responsive">
+        <h1>Persons table</h1>
+        <br/>
+        <table class="table table-bordered table-striped" id="Person_table">
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Age</th>
+                <th>Address</th>
+            </tr>
+        </table>
+        <h1 id="error"></h1>
+    </div>
+</div>
+<script>Personslist();</script>
 </body>
 </html>
