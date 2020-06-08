@@ -20,6 +20,25 @@ function Personslist() {
     });
 }
 
+function Loginlist() {
+    $(document).ready(function () {
+        $.getJSON("/SinglePageWEB_war_exploded/rest/persons",function (data) {
+            var person_data = '';
+            $.each(data,function (key,value) {
+                person_data += '<tr>';
+                person_data += '<td>'+value.id+'</td>';
+                person_data += '<td>'+value.name+'</td>';
+                person_data += '<td>'+value.name+'</td>';
+                person_data += "<td><input id='login' class='edit' type='submit' value='Login as'/></td>";
+                person_data +=  '</tr>';
+
+            });
+            $('#Person_table').append(person_data);
+        });
+    });
+}
+
+
 function createbutton(value, id) {
     return "</td><td><input id='update' class='edit' type='submit' value=''/> </td>";
 }
