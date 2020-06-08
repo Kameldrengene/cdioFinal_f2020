@@ -2,25 +2,28 @@ var ID = 'delete';
 function Personslist() {
     $(document).ready(function () {
         $.getJSON("/BoilerPlate_war_exploded/rest/live/mysql_json",function (data) {
-            var person_data = '';
+            var person_data = '<tr>\n' +
+                '                <th>ID</th>\n' +
+                '                <th>Name</th>\n' +
+                '                <th>Age</th>\n' +
+                '                <th>Address</th>\n' +
+                '            </tr>';
             $.each(data,function (key,inner) {
                 $.each(inner,function (key, value) {
-                    var id = value.userID;
+                    var userID = value.userID;
                     person_data += '<tr>';
-                    person_data += '<td>'+id+'</td>';
+                    person_data += '<td>'+userID+'</td>';
                     person_data += '<td>'+value.userName+'</td>';
                     person_data += '<td>'+value.ini+'</td>';
                     person_data += '<td>'+value.cpr+'</td>';
                     person_data += '<td>'+value.password+'</td>';
                     person_data += '<td>'+value.rolesToString+'</td>';
-                    person_data += "<td><input id='updateuser' class='update' type='button' value='update'/> </td>";
-                    person_data += "<td><input id='deleteuser' class='slet' type='button' value='slet'/> </td>";
+                    person_data += "<td><input id='updateuser' class='update' type='button' value='Update'/> </td>";
+                    person_data += "<td><input id='deleteuser' class='slet' type='button' value='Slet' onclick='deleteUser("+userID+")'/> </td>";
                     person_data +=  '</tr>';
-                    console.log(data);
-                    console.log(key, value);
                 });
             });
-            $('#Person_table').append(person_data);
+            $('#Person_table').html(person_data);
         });
     });
 }
@@ -51,6 +54,14 @@ function Loginlist() {
     });
 }
 
+
+function deleteUser(ID) {
+    //console.log("Delete user:" + ID);
+    if(confirm("Do you sure you want to delete user: "+ID+"?")){
+        fetch("/BoilerPlate_war_exploded/rest/live/mysql_json/deleteUser/"+ID);
+        Personslist();
+    }
+}
 
 function createbutton(value, id) {
     return "</td><td><input id='update' class='edit' type='submit' value=''/> </td>";
