@@ -13,8 +13,8 @@ function Personslist() {
                     person_data += '<td>'+value.cpr+'</td>';
                     person_data += '<td>'+value.password+'</td>';
                     person_data += '<td>'+value.rolesToString+'</td>';
-                    person_data += "<td><input id='updateUser' className='update' type='button' value='update'/> </td>";
-                    person_data += "<td><input id='deleteUser' className='slet' type='button' value='slet'/> </td>";
+                    person_data += "<td><input id='updateuser' class='update' type='button' value='update'/> </td>";
+                    person_data += "<td><input id='deleteuser' class='slet' type='button' value='slet'/> </td>";
                     person_data +=  '</tr>';
                     console.log(data);
                     console.log(key, value);
