@@ -31,6 +31,6 @@ async function createUser() {
 }
 
 function load_users(){
-    document.getElementById("content").innerHTML='<object type="text/html" data="Brugeroversigt/index.html" ></object>';
+    document.getElementById("content").innerHTML='<object type="text/html" data="../index.html" ></object>';
 }
 
