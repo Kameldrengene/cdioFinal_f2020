@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>CDIO2</title>
+
+    <!-- Henter Font fra Google's Font API Stærk inspireret af Malte's løsning i for html og css
+     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans" > -->
+    <!-- Linker vores stylesheet -->
+    <link rel="stylesheet" type="text/css" href="default.css">
+</head>
+<body>
+
+<h1>CDIO 2</h1>
+<div id="content">
+    <form action="/" onSubmit="load_users(this); return false;">
+        <input type="text" name="username" placeholder="Username"><br>
+        <input id="psw" type="password" name="passwd" placeholder="Password"><br>
+        <input type="submit" class="hvr-buzz" value="Sign in">
+    </form>
+
+    <!-- Logo med style defineret direkte i HTML -->
+    <img id="logo" src="dtu_logo.png" style="margin-top: 2%" width="50" height="72.5"></div>
+
+<script src="login.js"></script>
+</body>
+</html>

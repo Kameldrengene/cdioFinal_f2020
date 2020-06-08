@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Opret bruger</title>
+
+    <!-- Henter Font fra Google's Font API Stærk inspireret af Malte's løsning i for html og css
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans" > -->
+
+    <!-- Linker vores stylesheet -->
+    <link rel="stylesheet" type="text/css" href="default.css">
+    <link rel="stylesheet" type="text/css" href="opretbruger.css">
+</head>
+<body>
+<div id="content"><h1>Opret ny bruger</h1>
+    <br>
+
+
+    <input type="text" id="username" placeholder="Brugernavn" value=""><br>
+    <input type="text" id="ini"  placeholder="Initialer" value=""><br>
+    <input type="text" id="cpr"  placeholder="CPR-Nummer" value=""><br>
+    <input type="text" id="pass"  placeholder="Password" value=""><br>
+
+    <!-- En <div> (gruppe) der indeholder en serie labels og 'radio'-knapper -->
+    <div class="roller">
+        <!-- Kun én knap af dem med "name=gender" kan vælges -->
+        <label id="subject">Vælg rolle:</label><br>
+
+        <input type="checkbox" id="role1" name="Admin" value="Admin">
+        <label for="role1"> Admin </label><br>
+
+        <input type="checkbox" id="role2" name="Foreman" value="Foreman">
+        <label for="role2"> Foreman</label><br>
+
+        <input type="checkbox" id="role3" name="Operator" value="Operator">
+        <label for="role3"> Operator</label><br>
+
+        <input type="checkbox" id="role4" name="Pharmacist" value="Pharmacist">
+        <label for="role4"> Pharmacist</label><br><br>
+
+        <input type="button" onclick="createUser()" class="hvr-pop" value="Opret">
+    </div>
+
+    <script src="createUser.js"></script></div>
+
+</body>
+</html>

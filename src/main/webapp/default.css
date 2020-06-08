@@ -1,0 +1,193 @@
+/*Stærk inspireret af Malte's løsning i for html og css */
+/* Du kan også bruge :root selector */
+* {
+    /* Definerer en global variabel til vores "temafarve" */
+    --color-primary: #45ABB8;
+    --col-background: #2a2a2a;
+    --col-secondarybackground: #333333;
+    --col-textprimary: #E9E9EA;
+    --col-textsecondary: #666666;
+    --col-textthird: rgba(233, 233, 234, 0.6);
+
+    /* Sætter Font i prioriteret rækkefølge, i tilfælde af at browseren
+     ikke har en fonten. */
+    font-family: Open Sans, Verdana, sans-serif;
+}
+
+/* Selector på flere tags */
+h1, h2, h3 {
+    color: var(--color-primary);
+}
+
+/* Centerer alt text i <body> */
+body {
+    margin-top: 5%;
+    text-align: center;
+    background-color: var(--col-background);
+}
+
+
+/* Selector, der vælger alle <input> tags som har sin 'type' attribut
+    sat til enten 'text' eller 'password'.*/
+input[type=text], input[type=password] {
+    margin-bottom: 1%;
+    /* Fjerner boxen rundt om tekstfeltet  */
+    border: none;
+    border-bottom: 1px solid var(--color-primary);
+    background-color: var(--col-background);
+    color: var(--col-textprimary);
+}
+
+
+/* Selector der vælger de samme som ovenstående, blot
+    når der 'focused', dvs */
+input[type=text]:focus, input[type=password]:focus {
+    outline: none;
+    border-bottom: 2px solid var(--color-primary);
+    background-color: var(--col-background);
+}
+
+
+/* Styler klassen 'primarybutton' */
+.primarybutton {
+    font-size: 100%;
+    color: var(--col-textprimary);
+    font-weight: bold;
+    background-color: var(--color-primary);
+    padding: 8px;
+    margin-top: 1%;
+    border-radius: 10px; /* Border radius gør vores kanter runde*/
+    border: none;
+    outline: none;
+    /* Bonus: Brug transitions til flydende at skifte properties (her
+        'background-color' og 'color', når der skiftes til denne */
+    transition: background-color 0.25s, color 0.25s;
+}
+
+/* Styler hvordan knappen skal set ud, når
+    der hovers over den.*/
+.primarybutton:hover{
+    border: none;
+    color: var(--col-background);
+    transition: background-color 0.25s, color 0.25s;
+}
+
+/* Note til primary button:
+    Da alle de "knapper" vi styler, faktisk er input elementer
+    med attributten 'type=submit', kan vi selecte dem alle med
+    selectoren:
+
+        input[type=submit] {
+            <css>
+        }
+
+    Den vælger alle <input> elementer, der har attributten 'type'
+    sat til 'submit'.
+ */
+
+/* Buzz---https://ianlunn.github.io/Hover/ */
+@-webkit-keyframes hvr-buzz {
+    50% {
+        -webkit-transform: translateX(3px) rotate(2deg);
+        transform: translateX(3px) rotate(2deg);
+    }
+    100% {
+        -webkit-transform: translateX(-3px) rotate(-2deg);
+        transform: translateX(-3px) rotate(-2deg);
+    }
+}
+@keyframes hvr-buzz {
+    50% {
+        -webkit-transform: translateX(3px) rotate(2deg);
+        transform: translateX(3px) rotate(2deg);
+    }
+    100% {
+        -webkit-transform: translateX(-3px) rotate(-2deg);
+        transform: translateX(-3px) rotate(-2deg);
+    }
+}
+.hvr-buzz {
+    font-size: 100%;
+
+    color: var(--col-background);
+    font-weight: bold;
+    background-color: var(--color-primary);
+    padding: 8px;
+    margin-top: 1%;
+    border-radius: 10px; /* Border radius gør vores kanter runde*/
+    border: none;
+    outline: none;
+    /* Bonus: Brug transitions til flydende at skifte properties (her
+        'background-color' og 'color', når der skiftes til denne */
+    transition: background-color 0.25s, color 0.25s;
+
+    display: inline-block;
+    vertical-align: middle;
+    -webkit-transform: perspective(1px) translateZ(0);
+    transform: perspective(1px) translateZ(0);
+    box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+}
+.hvr-buzz:hover, .hvr-buzz:focus, .hvr-buzz:active {
+    -webkit-animation-name: hvr-buzz;
+    animation-name: hvr-buzz;
+    -webkit-animation-duration: 0.15s;
+    animation-duration: 0.15s;
+    -webkit-animation-timing-function: linear;
+    animation-timing-function: linear;
+    -webkit-animation-iteration-count: infinite;
+    animation-iteration-count: infinite;
+    color: var(--col-textprimary);
+    transition: background-color 0.25s, color 0.25s;
+    border: none;
+}
+
+/* Pop -----https://ianlunn.github.io/Hover/*/
+@-webkit-keyframes hvr-pop {
+    50% {
+        -webkit-transform: scale(1.2);
+        transform: scale(1.2);
+    }
+}
+@keyframes hvr-pop {
+    50% {
+        -webkit-transform: scale(1.2);
+        transform: scale(1.2);
+    }
+}
+.hvr-pop,.slet, .update {
+    color: var(--col-background);
+    font-weight: bold;
+    background-color: var(--color-primary);
+    padding: 8px;
+    margin-top: 1%;
+    border-radius: 10px; /* Border radius gør vores kanter runde*/
+    border: none;
+    outline: none;
+    /* Bonus: Brug transitions til flydende at skifte properties (her
+        'background-color' og 'color', når der skiftes til denne */
+    transition: background-color 0.25s, color 0.25s;
+
+    display: inline-block;
+    vertical-align: middle;
+    -webkit-transform: perspective(1px) translateZ(0);
+    transform: perspective(1px) translateZ(0);
+    box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+}
+.hvr-pop:hover, .slet:hover, .update:hover,  .hvr-pop:focus , .slet:focus, .update:focus, .hvr-pop:active , .slet:active, .update:active {
+    -webkit-animation-name: hvr-pop;
+    animation-name: hvr-pop;
+    -webkit-animation-duration: 0.3s;
+    animation-duration: 0.3s;
+    -webkit-animation-timing-function: linear;
+    animation-timing-function: linear;
+    -webkit-animation-iteration-count: 1;
+    animation-iteration-count: 1;
+    color: var(--col-textprimary);
+    transition: background-color 0.25s, color 0.25s;
+    border: none;
+}
+
+#content object {
+    height:700px;
+    width: 850px;
+}

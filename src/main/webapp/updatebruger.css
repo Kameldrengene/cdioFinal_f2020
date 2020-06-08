@@ -1,0 +1,33 @@
+
+/* Styler hele <div> med ID 'brugerid' (også
+    det <label> det indeholder. */
+#brugerid {
+    font-size: 120%;
+    margin-bottom: 1%;
+}
+/* Styler kun label tagget inde i elementet med
+    ID'et 'brugerid'*/
+#brugerid label{
+    font-weight: bold;
+}
+
+
+/* Vælger alle elementer i klassen 'radiogroup' */
+.roller{
+    margin-top: 1%;
+    color: #696969;
+}
+.roller label:hover{
+    color: var(--col-textprimary);
+}
+
+/* Vælger element med id='subject' inde i elementet med
+    klassen 'radiogroup */
+.radiogroup #subject{
+    font-style: italic;
+}
+
+select{
+    background-color: var(--col-background);
+    color: var(--col-textprimary);
+}
