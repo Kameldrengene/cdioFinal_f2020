@@ -1,19 +1,24 @@
 var ID = 'delete';
 function Personslist() {
     $(document).ready(function () {
-        $.getJSON("/SinglePageWEB_war_exploded/rest/persons",function (data) {
+        $.getJSON("/BoilerPlate_war_exploded/rest/live/mysql_json",function (data) {
             var person_data = '';
-            $.each(data,function (key,value) {
-                var id = value.id;
-                person_data += '<tr>';
-                person_data += '<td>'+id+'</td>';
-                person_data += '<td>'+value.name+'</td>';
-                person_data += '<td>'+value.age+'</td>';
-                person_data += '<td>'+value.address+'</td>';
-                person_data += "</td><td><input id='update' class='edit' type='submit' value='update'/> </td>";
-                person_data += "</td><td><input id='' class='edit' type='submit' value='delete'/> </td>";
-                person_data +=  '</tr>';
-
+            $.each(data,function (key,inner) {
+                $.each(inner,function (key, value) {
+                    var id = value.userID;
+                    person_data += '<tr>';
+                    person_data += '<td>'+id+'</td>';
+                    person_data += '<td>'+value.userName+'</td>';
+                    person_data += '<td>'+value.ini+'</td>';
+                    person_data += '<td>'+value.cpr+'</td>';
+                    person_data += '<td>'+value.password+'</td>';
+                    person_data += '<td>'+value.rolesToString+'</td>';
+                    person_data += "<td><input id='updateUser' className='update' type='button' value='update'/> </td>";
+                    person_data += "<td><input id='deleteUser' className='slet' type='button' value='slet'/> </td>";
+                    person_data +=  '</tr>';
+                    console.log(data);
+                    console.log(key, value);
+                });
             });
             $('#Person_table').append(person_data);
         });
