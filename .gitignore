@@ -1,3 +1,10 @@
+# Created by .ignore support plugin (hsz.mobi)
+.idea/
+BoilerPlateWebREST.iml
+META-INF/
+target/
+BoilerPlate.iml
+
 # Compiled class file
 *.class
 
