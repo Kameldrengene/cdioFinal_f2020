@@ -18,7 +18,7 @@ async function updateUser() {
     if (user.username != "" && user.ini != "" && user.cpr != "" && user.pass != "" && nrOfRoles != 0) {
         if (confirm("Are you sure you want to update user?")) {
             var response = await fetch("/BoilerPlate_war_exploded/rest/live/mysql_json/updateUser/" + updateID + "/" + user.username + "/" + user.ini + "/" + user.cpr + "/" + user.pass + "/" + user.roles[0] + "/" + user.roles[1] + "/" + user.roles[2] + "/" + user.roles[3]);
-            location.href = "brugeroversigt.html";
+            location.href = "../index.html";
             //load_users();
         }
     } else if(nrOfRoles > 0){
@@ -30,5 +30,5 @@ async function updateUser() {
 }
 
 function load_users(){
-    document.getElementById("content").innerHTML='<object type="text/html" data="brugeroversigt.html" ></object>';
+    document.getElementById("content").innerHTML='<object type="text/html" data="Brugeroversigt/index.html" ></object>';
 }

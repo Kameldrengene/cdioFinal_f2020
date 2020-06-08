@@ -1,5 +1,5 @@
 async function deleteUser(ID) {
-    console.log("Delete user:" + ID);
+    //console.log("Delete user:" + ID);
     if(confirm("Do you sure you want to delete user: "+ID+"?")){
         await fetch("/BoilerPlate_war_exploded/rest/live/mysql_json/deleteUser/"+ID);
         loadUserTable();
@@ -8,7 +8,7 @@ async function deleteUser(ID) {
 
 async function updateUser(ID) {
     localStorage.setItem("userID",ID);
-    location.href = "updatebruger.html";
+    location.href = "Updatebruger/index.html";
 }
 
 
