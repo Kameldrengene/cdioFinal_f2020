@@ -1,5 +1,6 @@
 package controller;
 
+import dal.IDALException;
 import dal.IUserDAO;
 import dal.UserDAOSQL;
 import dal.dto.UserDTO;
@@ -10,7 +11,7 @@ import javax.ws.rs.core.MediaType;
 
 public class UserController {
 
-    public UserDAOSQL getData() throws IUserDAO.DALException {
+    public UserDAOSQL getData() throws IDALException.DALException {
         return new UserDAOSQL();
     }
 
@@ -18,7 +19,7 @@ public class UserController {
         UserDAOSQL db = new UserDAOSQL();
         try {
             db.aktivitySwitchUser(user.getUserID());
-        } catch (IUserDAO.DALException e) {
+        } catch (IDALException.DALException e) {
             e.printStackTrace();
         }
         return user;
@@ -29,7 +30,7 @@ public class UserController {
         UserDAOSQL db = new UserDAOSQL();
         try {
             db.createUser(user);
-        } catch (IUserDAO.DALException e) {
+        } catch (IDALException.DALException e) {
             e.printStackTrace();
         }
         return user;
@@ -40,7 +41,7 @@ public class UserController {
         UserDAOSQL db = new UserDAOSQL();
         try {
             db.updateUser(user);
-        } catch (IUserDAO.DALException e) {
+        } catch (IDALException.DALException e) {
             e.printStackTrace();
         }
         return user;
