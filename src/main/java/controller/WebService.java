@@ -1,10 +1,11 @@
+package controller;
+
 import dal.IUserDAO;
 import dal.UserDAOSQL;
 import dal.dto.UserDTO;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
-import java.util.List;
 
 @Path("live")
 @Consumes(MediaType.APPLICATION_JSON)
@@ -16,12 +17,12 @@ public class WebService {
         return new UserDAOSQL();
     }
 
-    @Path("deleteUser")
+    @Path("activeUser")
     @POST
-    public UserDTO deleteUser(UserDTO user) {
+    public UserDTO activitySwitchUser(UserDTO user) {
         UserDAOSQL db = new UserDAOSQL();
         try {
-            db.deleteUser(user.getUserID());
+            db.aktivitySwitchUser(user.getUserID());
         } catch (IUserDAO.DALException e) {
             e.printStackTrace();
         }

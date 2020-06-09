@@ -23,7 +23,7 @@ public class UserDAOSQL implements IUserDAO {
             user.setIni(rs.getString("ini"));
             user.setCpr(rs.getString("cpr"));
             user.setPassword(rs.getString("password"));
-            user.setRole(rs.getString("job"));
+            user.setJob(rs.getString("Job"));
             user.setAktiv(rs.getBoolean("aktiv"));
             rs.close();
         } catch (SQLException e) {
@@ -49,7 +49,7 @@ public class UserDAOSQL implements IUserDAO {
                 user.setIni(rs.getString("ini"));
                 user.setCpr(rs.getString("cpr"));
                 user.setPassword(rs.getString("password"));
-                user.setRole(rs.getString("job"));
+                user.setJob(rs.getString("Job"));
                 user.setAktiv(rs.getBoolean("aktiv"));
                 userList.add(user);
             }
@@ -66,7 +66,7 @@ public class UserDAOSQL implements IUserDAO {
     @Override
     public void createUser(UserDTO user) throws DALException { //We make a new user
         db.connect();
-        db.update("insert into userdto (userID, userName, ini, cpr, password, role, aktiv) VALUE ('" + user.getUserID() + "','" + user.getUserName() + "','" + user.getIni() + "','" + user.getCpr() + "','" + user.getPassword() + "','" + user.getRole() + "','" + user.getAktiv() + "')");
+        db.update("insert into userdto (userID, userName, ini, cpr, password, role, aktiv) VALUE ('" + user.getUserID() + "','" + user.getUserName() + "','" + user.getIni() + "','" + user.getCpr() + "','" + user.getPassword() + "','" + user.getJob() + "','" + user.getAktiv() + "')");
         db.close();
     }
 
@@ -82,7 +82,7 @@ public class UserDAOSQL implements IUserDAO {
                 db.update("UPDATE userdto SET ini = '" + user.getIni() + "' WHERE (userID = '" + user.getUserID() + "');");
                 db.update("UPDATE userdto SET cpr = '" + user.getCpr() + "' WHERE (userID = '" + user.getUserID() + "');");
                 db.update("UPDATE userdto SET password = '" + user.getPassword() + "' WHERE (userID = '" + user.getUserID() + "');");
-                db.update("UPDATE userdto SET role = '" + user.getRole() + "' WHERE (userID = '" + user.getUserID() + "');");
+                db.update("UPDATE userdto SET role = '" + user.getJob() + "' WHERE (userID = '" + user.getUserID() + "');");
                 db.update("UPDATE userdto SET aktiv = '" + user.getAktiv() + "' WHERE (userID = '" + user.getUserID() + "');");
             }
             rs.close();
@@ -94,10 +94,17 @@ public class UserDAOSQL implements IUserDAO {
     }
 
     @Override
-    public void deleteUser(int userId) throws DALException { //We delete user
+    public void aktivitySwitchUser(int userId) throws DALException { //We switch the activity of the user
         db.connect();
-        db.update("delete from userdto where userID=" + userId);
-        db.update("delete from userdto_roles where userID="+userId);
+        ResultSet rs = db.query("SELECT aktiv FROM userdto where userID=" + userId);
+        boolean b = false;
+        try {
+            rs.next();
+            b = rs.getBoolean("aktiv");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        db.update("UPDATE userdto SET aktiv=" + ((b) ? "FALSE" : "TRUE") + " WHERE userID=" + userId);
         db.close();
     }
 }

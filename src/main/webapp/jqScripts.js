@@ -9,34 +9,32 @@ function Personslist() {
                 '                <th>CPR</th>\n' +
                 '                <th>Password</th>\n' +
                 '                <th>Role</th>\n' +
+                '                <th>Activivity</th>\n' +
                 '                <th>Update</th>\n' +
                 '                <th>ActiveSwitch</th>\n' +
                 '            </tr>';
             $.each(data,function (key,inner) {
                 $.each(inner,function (key, value) {
+                    var userID = value.userID;
+                    console.log((value.aktiv) ? "Aktiv" : "Ikke aktiv" )
                     person_data += '<tr>';
-                    person_data += '<td>'+value.userID+'</td>';
+                    person_data += '<td>'+userID+'</td>';
                     person_data += '<td>'+value.userName+'</td>';
                     person_data += '<td>'+value.ini+'</td>';
                     person_data += '<td>'+value.cpr+'</td>';
                     person_data += '<td>'+value.password+'</td>';
-                    person_data += '<td>'+value.rolesToString+'</td>';
+                    person_data += '<td>'+value.job+'</td>';
+                    //if (value.aktiv)
+
+                    person_data += '<td>'+ ((value.aktiv) ? "Aktiv" : "Ikke aktiv") +'</td>';
                     person_data += "<td><input id='updateuser' class='update' type='button' value='Update'/> </td>";
-                    person_data += "<td><input id='deleteuser' class='slet' type='button' value='TODO: FixMe' onclick='deleteUser("+value+")'/> </td>";
+                    person_data += "<td><input id='deleteuser' class='slet' type='button' value='Switch Activity' onclick='switchActivityUser("+userID+")'/> </td>";
                     person_data +=  '</tr>';
                 });
             });
             $('#Person_table').html(person_data);
         });
     });
-}
-
-function deleteUser(user) {
-    if(confirm("Do you sure you want to delete user: "+user.userID+"?")){
-        $.post("/BoilerPlate_war_exploded/rest/live/deleteUser", JSON.stringify(user), "json");
-        Personslist();
-    }
-
 }
 
 function Loginlist() {
@@ -49,15 +47,16 @@ function Loginlist() {
                 '                <th>Login</th>\n' +
                 '            </tr>';
             $.each(data,function (key,inner) {
-                //TODO: Insert if statement to check if active
                 $.each(inner,function (key, value) {
-                    var auserid = value.userID;
-                    person_data += '<tr>';
-                    person_data += '<td>'+auserid+'</td>';
-                    person_data += '<td>'+value.ini+'</td>';
-                    person_data += '<td>'+value.rolesToString+'</td>';
-                    person_data += "<td><input id='updateuser' class='update' type='button' value='login as'/> </td>";
-                    person_data +=  '</tr>';
+                    if (value.aktiv) {
+                        var auserid = value.userID;
+                        person_data += '<tr>';
+                        person_data += '<td>' + auserid + '</td>';
+                        person_data += '<td>' + value.ini + '</td>';
+                        person_data += '<td>' + value.rolesToString + '</td>';
+                        person_data += "<td><input id='updateuser' class='update' type='button' value='login as'/> </td>";
+                        person_data += '</tr>';
+                    }
                 });
             });
             $('#Person_table').html(person_data);
@@ -66,13 +65,13 @@ function Loginlist() {
 }
 
 
-/*function deleteUser(ID) {
+function switchActivityUser(ID) {
     //console.log("Delete user:" + ID);
-    if(confirm("Do you sure you want to delete user: "+ID+"?")){
-        fetch("/BoilerPlate_war_exploded/rest/live/mysql_json/deleteUser/"+ID);
+    if(confirm("Are you sure you want to switch the activity for user: "+ID+"?")){
+        fetch("/BoilerPlate_war_exploded/rest/live/activeUser/"+ID);
         Personslist();
     }
-}*/
+}
 
 function createbutton(value, id) {
     return "</td><td><input id='update' class='edit' type='submit' value=''/> </td>";
