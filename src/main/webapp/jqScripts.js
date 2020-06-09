@@ -16,6 +16,7 @@ function Personslist() {
             $.each(data,function (key,inner) {
                 $.each(inner,function (key, value) {
                     var userID = value.userID;
+                    console.log((value.aktiv) ? "Aktiv" : "Ikke aktiv" )
                     person_data += '<tr>';
                     person_data += '<td>'+userID+'</td>';
                     person_data += '<td>'+value.userName+'</td>';
@@ -23,7 +24,9 @@ function Personslist() {
                     person_data += '<td>'+value.cpr+'</td>';
                     person_data += '<td>'+value.password+'</td>';
                     person_data += '<td>'+value.job+'</td>';
-                    person_data += '<td>'+ (value.aktiv) ? "Aktiv" : "Ikke aktiv" +'</td>';
+                    //if (value.aktiv)
+
+                    person_data += '<td>'+ ((value.aktiv) ? "Aktiv" : "Ikke aktiv") +'</td>';
                     person_data += "<td><input id='updateuser' class='update' type='button' value='Update'/> </td>";
                     person_data += "<td><input id='deleteuser' class='slet' type='button' value='Switch Activity' onclick='switchActivityUser("+userID+")'/> </td>";
                     person_data +=  '</tr>';
