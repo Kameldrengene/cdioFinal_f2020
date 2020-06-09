@@ -4,17 +4,16 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-
     <link rel="stylesheet" type="text/css" href="default.css">
     <link rel="stylesheet" type="text/css" href="Login/Login.css">
 
     <script src="jquery/jquery-3.5.1.min.js"></script>
+    <script src="Login/Login.js"></script>
     <script src="jqScripts.js"></script>
 
 </head>
 
 <body>
-
     <h1>CDIO Final</h1>
 
     <div id="login">
@@ -22,7 +21,7 @@
         <form>
             <h3>Vælg rolle</h3>
 
-            <table>
+            <table class="rolletabel">
                 <tr>
                     <td> <input type="radio" name="rolle" id="administrator"> </td>
                     <td> <Label for="administrator">Administrator</Label> </td>
@@ -43,14 +42,22 @@
             </table>
         </form>
 
-        <div id="list" style="height:200px; overflow:auto;">
+
+        <table class="brugertable">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Navn</th>
+                </tr>
+            </thead>
+
+            <tbody id="personer">
+
+            </tbody>
+        </table>
 
 
-
-        </div>
-
-        <input type="submit" class="hvr-buzz" value="Sign in">
-        <br>
+        <button class="hvr-buzz" onclick="switchP('AdminScreen/index.html')">Sign in</button>
 
         <hr>
         <p style="color:white;">Login for testing/initial designing</p>
@@ -61,31 +68,12 @@
         <button class="hvr-buzz" onclick="switchP('LabScreen/index.html')">Sign in as Laborant</button>
         <br>
 
-
-
         <!-- Logo med style defineret direkte i HTML -->
         <img id="logo" src="dtu_logo.png" style="margin-top: 2%" width="50" height="72.5">
-
     </div>
 
     <script src="login.js"></script>
 
-
-
-
-
-
-<!--    <div id="content">-->
-<!--        <form action="/" onSubmit="load_users(this); return false;">-->
-<!--            <input type="text" name="username" placeholder="Username"><br>-->
-<!--            <input id="psw" type="password" name="passwd" placeholder="Password"><br>-->
-<!--            <input type="submit" class="hvr-buzz" value="Sign in">-->
-<!--        </form>-->
-
-<!--        &lt;!&ndash; Logo med style defineret direkte i HTML &ndash;&gt;-->
-<!--        <img id="logo" src="dtu_logo.png" style="margin-top: 2%" width="50" height="72.5">-->
-<!--       -->
-<!--    </div>-->
 
 </body>
 </html>
