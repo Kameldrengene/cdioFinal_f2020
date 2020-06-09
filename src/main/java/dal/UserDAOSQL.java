@@ -23,7 +23,7 @@ public class UserDAOSQL implements IUserDAO {
             user.setIni(rs.getString("ini"));
             user.setCpr(rs.getString("cpr"));
             user.setPassword(rs.getString("password"));
-            user.setJob(rs.getString("Job"));
+            user.setJob(rs.getString("job"));
             user.setAktiv(rs.getBoolean("aktiv"));
             rs.close();
         } catch (SQLException e) {
@@ -49,7 +49,7 @@ public class UserDAOSQL implements IUserDAO {
                 user.setIni(rs.getString("ini"));
                 user.setCpr(rs.getString("cpr"));
                 user.setPassword(rs.getString("password"));
-                user.setJob(rs.getString("Job"));
+                user.setJob(rs.getString("job"));
                 user.setAktiv(rs.getBoolean("aktiv"));
                 userList.add(user);
             }
