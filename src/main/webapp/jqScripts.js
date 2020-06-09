@@ -44,18 +44,16 @@ function Loginlist() {
                 '                <th>Role</th>\n' +
                 '                <th>Login</th>\n' +
                 '            </tr>';
-            $.each(data,function (key,inner) {
-                $.each(inner,function (key, value) {
-                    if (value.aktiv) {
-                        var auserid = value.userID;
-                        person_data += '<tr>';
-                        person_data += '<td>' + auserid + '</td>';
-                        person_data += '<td>' + value.ini + '</td>';
-                        person_data += '<td>' + value.rolesToString + '</td>';
-                        person_data += "<td><input id='updateuser' class='update' type='button' value='login as'/> </td>";
-                        person_data += '</tr>';
-                    }
-                });
+            $.each(data,function (key,value) {
+                if (value.aktiv) {
+                    var auserid = value.userID;
+                    person_data += '<tr>';
+                    person_data += '<td>' + auserid + '</td>';
+                    person_data += '<td>' + value.ini + '</td>';
+                    person_data += '<td>' + value.job + '</td>';
+                    person_data += "<td><input id='updateuser' class='update' type='button' value='login as'/> </td>";
+                    person_data += '</tr>';
+                }
             });
             $('#Person_table').html(person_data);
         });
