@@ -165,7 +165,7 @@ function createUser() {
     };
     if (user.username != "" && user.ini != "" && user.cpr != "" && user.pass != "" && user.role != "") {
         if (confirm("Are you sure you want to create user?")) {
-            var response = await fetch("/BoilerPlate_war_exploded/rest/live/mysql_json/createUser/" + user.username + "/" + user.ini + "/" + user.cpr + "/" + user.pass + "/" + user.roles[0] + "/" + user.roles[1] + "/" + user.roles[2] + "/" + user.roles[3]);
+            var response = fetch("/BoilerPlate_war_exploded/rest/live/mysql_json/createUser/" + user.username + "/" + user.ini + "/" + user.cpr + "/" + user.pass + "/" + user.roles[0] + "/" + user.roles[1] + "/" + user.roles[2] + "/" + user.roles[3]);
             //console.log(JSON.stringify(user));
             //console.log(response.text());
             location.href = "../index.html";
