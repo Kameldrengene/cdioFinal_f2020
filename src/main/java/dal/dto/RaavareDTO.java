@@ -33,5 +33,4 @@ public class RaavareDTO {
         return leverandoer;
     }
 
-
 }

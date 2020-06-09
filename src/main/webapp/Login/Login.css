@@ -11,10 +11,17 @@
 
 .brugertable{
     margin: 40px auto;
-    max-width: 300px;
+    width: 300px;
+    overflow: scroll;
 }
 
-thead, tbody {
+th, td{
+    /*border-style: solid;*/
+    /*border-color: red;*/
+    min-width: 20px;
+}
+
+thead, tbody{
     display: block;
 }
 
@@ -23,3 +30,6 @@ thead, tbody {
     overflow: auto;
 
 }
+
+
+
