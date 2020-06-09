@@ -65,7 +65,7 @@ function Loginlist() {
 function switchActivityUser(ID) {
     //console.log("Delete user:" + ID);
     if(confirm("Are you sure you want to switch the activity for user: "+ID+"?")){
-        fetch("/BoilerPlate_war_exploded/rest/live/mysql_json/activeUser/"+ID);
+        fetch("/BoilerPlate_war_exploded/rest/live/activeUser/"+ID);
         Personslist();
     }
 }
