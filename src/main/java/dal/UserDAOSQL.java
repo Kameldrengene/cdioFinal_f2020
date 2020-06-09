@@ -15,7 +15,6 @@ public class UserDAOSQL implements IUserDAO {
         ResultSet rs = db.query("SELECT * FROM userdto where userID=" + userId); //Select all columns from userdto where userID is input
 
         UserDTO user = new UserDTO();
-        List<String> roles = new ArrayList<>();
         //Try to insert columns into userDTO object
         try {
             rs.next();
@@ -24,21 +23,12 @@ public class UserDAOSQL implements IUserDAO {
             user.setIni(rs.getString("ini"));
             user.setCpr(rs.getString("cpr"));
             user.setPassword(rs.getString("password"));
+            user.setRole(rs.getString("role"));
+            user.setAktiv(rs.getBoolean("aktiv"));
             rs.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        ResultSet rs_roles = db.query("SELECT * FROM userdto_roles where userID = " + userId + ";"); //Get roles from userID
-        try {
-            while (rs_roles.next()) {
-                roles.add(rs_roles.getString("role_name")); //Insert roles into roles
-            }
-            rs_roles.close();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        user.setRoles(roles);
-
         db.close();
         return user;
     }
@@ -59,17 +49,8 @@ public class UserDAOSQL implements IUserDAO {
                 user.setIni(rs.getString("ini"));
                 user.setCpr(rs.getString("cpr"));
                 user.setPassword(rs.getString("password"));
-                List<String> roles = new ArrayList<>();
-                ResultSet rs_roles = db.query("SELECT * FROM userdto_roles where userID = " + user.getUserID() + ";");
-                try {
-                    while (rs_roles.next()) {
-                        roles.add(rs_roles.getString("role_name"));
-                    }
-                    rs_roles.close();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-                user.setRoles(roles);
+                user.setRole(rs.getString("role"));
+                user.setAktiv(rs.getBoolean("aktiv"));
                 userList.add(user);
             }
             rs.close();
@@ -85,10 +66,7 @@ public class UserDAOSQL implements IUserDAO {
     @Override
     public void createUser(UserDTO user) throws DALException { //We make a new user
         db.connect();
-        db.update("insert into userdto (userID, userName, ini, cpr, password) VALUE ('" + user.getUserID() + "','" + user.getUserName() + "','" + user.getIni() + "','" + user.getCpr() + "','" + user.getPassword() + "')");
-        for(int i = 0; i < user.getRoles().size();i++){
-            db.update("insert into userdto_roles (userID,role_name) VALUE('"+user.getUserID()+"','"+user.getRoles().get(i)+"');");
-        }
+        db.update("insert into userdto (userID, userName, ini, cpr, password, role, aktiv) VALUE ('" + user.getUserID() + "','" + user.getUserName() + "','" + user.getIni() + "','" + user.getCpr() + "','" + user.getPassword() + "','" + user.getRole() + "','" + user.getAktiv() + "')");
         db.close();
     }
 
@@ -104,12 +82,10 @@ public class UserDAOSQL implements IUserDAO {
                 db.update("UPDATE userdto SET ini = '" + user.getIni() + "' WHERE (userID = '" + user.getUserID() + "');");
                 db.update("UPDATE userdto SET cpr = '" + user.getCpr() + "' WHERE (userID = '" + user.getUserID() + "');");
                 db.update("UPDATE userdto SET password = '" + user.getPassword() + "' WHERE (userID = '" + user.getUserID() + "');");
+                db.update("UPDATE userdto SET role = '" + user.getRole() + "' WHERE (userID = '" + user.getUserID() + "');");
+                db.update("UPDATE userdto SET aktiv = '" + user.getAktiv() + "' WHERE (userID = '" + user.getUserID() + "');");
             }
             rs.close();
-            db.update("delete from userdto_roles where userID="+user.getUserID());
-            for(int i = 0; i < user.getRoles().size();i++){
-                db.update("insert into userdto_roles (userID,role_name) VALUE('"+user.getUserID()+"','"+user.getRoles().get(i)+"');");
-            }
         } catch (SQLException e) {
             e.printStackTrace();
         }
