@@ -7,7 +7,7 @@ public class SQLDatabaseIO {
     private String DatabaseURL;
     private String USER;
     private String PASS;
-    private String db_name = "cdioFinal_2020";
+    private String db_name = "cdio1_2020";
     private boolean connected = false;
     private Connection conn = null;
     private Statement stmt = null;
