@@ -109,7 +109,7 @@ public class TUI implements IUI {
         System.out.println("1:Admin, 2:Pharmacist, 3:Foreman, 4:Operator");
         
         //Remove previously attached roles to user
-        user.removeRoles();
+        /*user.removeRoles();
         
         //Let user choose new roles and add them
         inp = scan.nextLine();
@@ -135,7 +135,7 @@ public class TUI implements IUI {
             } catch (NumberFormatException e) {
                 System.out.println(e.getMessage());
             }
-        }
+        }*/
     }
 
     public UserDTO createUser(int id) {

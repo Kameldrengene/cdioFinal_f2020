@@ -12,13 +12,13 @@ public class UserDTO implements Serializable{
 	private String ini;
 	private String cpr;
 	private String password;
-	private List<String> roles;
+	private String role;
+	private boolean aktiv;
 	private static int counter = 11;
 	
 //TODO Add relevant fields
 	
 	public UserDTO() {
-		this.roles = new ArrayList<>();
 		this.password = "SkiftMig!";
 	}
 	
@@ -55,48 +55,18 @@ public class UserDTO implements Serializable{
 		this.cpr = cpr;
 	}
 
-	public List<String> getRoles() {
-		return roles;
+	public String getRole() {
+		return role;
 	}
-	public String getRolesToString(){
-		String answer = "";
-		for (int i = 0; i < roles.size(); i++) {
-			if (i > 0)
-				answer = answer + "-" + roles.get(i);
-			else
-				answer = answer + roles.get(i);
-		}
-		return answer;
+	public void setRole(String role) {
+		this.role = role;
 	}
-	public void setRoles(List<String> roles) {
-		this.roles = roles;
-	}
+	public boolean getAktiv(){return aktiv;}
+	public void setAktiv(boolean aktiv) {this.aktiv = aktiv;}
+
 	
-	public void addRole(String role){
-		boolean exist = false;
-		for (int i = 0; i < roles.size(); i++) {
-			if (role.equals(roles.get(i))) {
-				exist = true;
-				break;
-			}
-		}
-		if (!exist)
-			this.roles.add(role);
-	}
-	/**
-	 * 
-	 * @param role
-	 * @return true if role existed, false if not
-	 */
-	public void removeRole(String role){
-		this.roles.remove(role);
-	}
-	
-	public void removeRoles(){
-		removeRole("Admin");
-		removeRole("Pharmacist");
-		removeRole("Foreman");
-		removeRole("Operator");
+	public void removeRole(){
+		this.role = null;
 	}
 	
 	public static int getCounter() {
@@ -109,7 +79,7 @@ public class UserDTO implements Serializable{
 
 	@Override
 	public String toString() {
-		return "UserDTO [userId=" + userID + ", userName=" + userName + ", ini=" + ini + ", roles=" + roles + "]";
+		return "UserDTO [userId=" + userID + ", userName=" + userName + ", ini=" + ini + ", role=" + role + ", aktiv=" + aktiv + ", password=" + password + "]";
 	}
 	
 	
