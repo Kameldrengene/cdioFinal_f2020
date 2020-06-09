@@ -5,8 +5,12 @@ function Personslist() {
             var person_data = '<tr>\n' +
                 '                <th>ID</th>\n' +
                 '                <th>Name</th>\n' +
-                '                <th>Age</th>\n' +
-                '                <th>Address</th>\n' +
+                '                <th>Initials</th>\n' +
+                '                <th>CPR</th>\n' +
+                '                <th>Password</th>\n' +
+                '                <th>Role</th>\n' +
+                '                <th>Update</th>\n' +
+                '                <th>ActiveSwitch</th>\n' +
                 '            </tr>';
             $.each(data,function (key,inner) {
                 $.each(inner,function (key, value) {
@@ -19,7 +23,7 @@ function Personslist() {
                     person_data += '<td>'+value.password+'</td>';
                     person_data += '<td>'+value.rolesToString+'</td>';
                     person_data += "<td><input id='updateuser' class='update' type='button' value='Update'/> </td>";
-                    person_data += "<td><input id='deleteuser' class='slet' type='button' value='Slet' onclick='deleteUser("+userID+")'/> </td>";
+                    person_data += "<td><input id='deleteuser' class='slet' type='button' value='TODO: FixMe' onclick='deleteUser("+userID+")'/> </td>";
                     person_data +=  '</tr>';
                 });
             });
