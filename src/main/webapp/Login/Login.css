@@ -31,5 +31,11 @@ thead, tbody{
 
 }
 
+input{
+    border-style: solid;
+    border-color: red;
+    /*background-color: red;*/
+}
+
 
 

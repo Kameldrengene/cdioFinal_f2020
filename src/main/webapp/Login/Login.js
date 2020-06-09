@@ -1,25 +1,30 @@
 $("document").ready(function () {
+
     $("#administrator").click(function () {
+        localStorage.setItem("loginRole", "admin");
         PersonList("Administrator");
     });
-});
 
-$("document").ready(function () {
     $("#farmaceut").click(function () {
+        localStorage.setItem("loginRole", "farma");
         PersonList("Farmaceut");
     });
-});
 
-$("document").ready(function () {
     $("#produktionsleder").click(function () {
+        localStorage.setItem("loginRole", "prodLeder");
         PersonList("Produktionsleder");
     });
-});
 
-$("document").ready(function () {
     $("#laborant").click(function () {
+        localStorage.setItem("loginRole", "laborant");
         PersonList("Laborant");
     });
+
+    //Saves the ID of the selected user in localStorage
+    $(".brugertable").on("click", "input", function () {
+        localStorage.setItem("loginID", this.id);
+    })
+
 });
 
 function PersonList(role) {
@@ -30,18 +35,18 @@ function PersonList(role) {
 
         //Variable to hold all the tabel rows
         var tabelData;
-        var counter = 0;
 
         //Loop through
         $.each(data, function(key, value) {
 
-                tabelData += "<tr>";
-                tabelData += "<td><input type = 'radio' name = 'rolle' id ='" + counter + "'></td>";
-                tabelData += "<td><Label for ='" + counter + "'>" + value.userID + "</Label></td>"
-                tabelData += "<td><Label for ='" + counter + "'>" + value.userName + "</Label></td>";
-                tabelData += "</tr>";
+            var userID = value.userID;
 
-                counter++;
+            //Uses userID for label reference
+            tabelData += "<tr>";
+            tabelData += "<td><input type = 'radio' name = 'rolle' id ='" + userID + "'></td>";
+            tabelData += "<td><Label for ='" + userID + "'>" + userID + "</Label></td>"
+            tabelData += "<td><Label for ='" + userID + "'>" + value.userName + "</Label></td>";
+            tabelData += "</tr>";
         });
 
         $('#personer').html(tabelData);
