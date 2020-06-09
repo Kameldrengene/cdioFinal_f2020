@@ -7,12 +7,13 @@ import dal.dto.UserDTO;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
+import java.util.List;
 
 
 public class UserController {
 
-    public UserDAOSQL getData() throws IDALException.DALException {
-        return new UserDAOSQL();
+    public List<UserDTO> getData() throws IDALException.DALException {
+        return new UserDAOSQL().getData();
     }
 
     public UserDTO activitySwitchUser(UserDTO user) {
