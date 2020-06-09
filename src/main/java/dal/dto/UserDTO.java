@@ -12,7 +12,7 @@ public class UserDTO implements Serializable{
 	private String ini;
 	private String cpr;
 	private String password;
-	private String role;
+	private String job;
 	private boolean aktiv;
 	private static int counter = 11;
 	
@@ -55,18 +55,18 @@ public class UserDTO implements Serializable{
 		this.cpr = cpr;
 	}
 
-	public String getRole() {
-		return role;
+	public String getJob() {
+		return job;
 	}
-	public void setRole(String role) {
-		this.role = role;
+	public void setJob(String job) {
+		this.job = job;
 	}
 	public boolean getAktiv(){return aktiv;}
 	public void setAktiv(boolean aktiv) {this.aktiv = aktiv;}
 
 	
 	public void removeRole(){
-		this.role = null;
+		this.job = null;
 	}
 	
 	public static int getCounter() {
@@ -79,7 +79,7 @@ public class UserDTO implements Serializable{
 
 	@Override
 	public String toString() {
-		return "UserDTO [userId=" + userID + ", userName=" + userName + ", ini=" + ini + ", role=" + role + ", aktiv=" + aktiv + ", password=" + password + "]";
+		return "UserDTO [userId=" + userID + ", userName=" + userName + ", ini=" + ini + ", job=" + job + ", aktiv=" + aktiv + ", password=" + password + "]";
 	}
 	
 	
