@@ -8,7 +8,7 @@ import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 
 
-public class UserService {
+public class UserController {
 
     public UserDAOSQL getData() throws IUserDAO.DALException {
         return new UserDAOSQL();
