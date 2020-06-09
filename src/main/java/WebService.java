@@ -16,16 +16,20 @@ public class WebService {
         return new UserDAOSQL();
     }
 
-    @Path("mysql_json/deleteUser/{i}")
-    @GET
-    public String removeUser(@PathParam("i") int i) throws IUserDAO.DALException {
+    @Path("mysql_json/deleteUser")
+    @POST
+    public UserDTO deleteUser(UserDTO user) {
         UserDAOSQL db = new UserDAOSQL();
-        db.deleteUser(i);
-        return "User: " + i + " deleted";
+        try {
+            db.deleteUser(user.getUserID());
+        } catch (IUserDAO.DALException e) {
+            e.printStackTrace();
+        }
+        return user;
     }
 
     @POST
-    public UserDTO createUser(UserDTO user){
+    public UserDTO createUser(UserDTO user) {
         UserDAOSQL db = new UserDAOSQL();
         try {
             db.createUser(user);
@@ -35,45 +39,17 @@ public class WebService {
         return user;
     }
 
-
-    @Path("mysql_json/updateUser/{id}/{username}/{ini}/{cpr}/{pass}/{role1}/{role2}/{role3}/{role4}")
-    @GET
-    public String updateUser(@PathParam("id") String id,
-                             @PathParam("username") String username,
-                             @PathParam("ini") String ini,
-                             @PathParam("cpr") String cpr,
-                             @PathParam("pass") String pass,
-                             @PathParam("role1") String role1,
-                             @PathParam("role2") String role2,
-                             @PathParam("role3") String role3,
-                             @PathParam("role4") String role4) {
-        UserDTO user = new UserDTO();
-        user.setUserID(Integer.parseInt(id));
-        user.setUserName(username);
-        user.setIni(ini);
-        user.setCpr(cpr);
-        user.setPassword(pass);
-        if (!role1.equals("null")) {
-            user.addRole(role1);
-        }
-        if (!role2.equals("null")) {
-            user.addRole(role2);
-        }
-        if (!role3.equals("null")) {
-            user.addRole(role3);
-        }
-        if (!role4.equals("null")) {
-            user.addRole(role4);
-        }
+    @Path("updateUser")
+    @POST
+    public UserDTO updateUser(UserDTO user) {
         UserDAOSQL db = new UserDAOSQL();
-
         try {
             db.updateUser(user);
         } catch (IUserDAO.DALException e) {
             e.printStackTrace();
         }
-        System.out.println(user.toString());
-        return user.toString();
+        return user;
     }
+
 
 }
