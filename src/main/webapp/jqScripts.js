@@ -98,8 +98,8 @@ function updateUser() {
     var UPcpr = $("#Upcpr").val();
     var UPpass = $("#Uppass").val();
     var UPjob ="" ;
-    var UPboolean = 0;
-    if($('#Uprole1').is(":checked")){
+    var UPboolean = 0;      //todo update boolean in backend
+    if($('#Uprole1').is(":checked")){   //todo update job in backend
         UPjob = "Administrator";
     }else if ($('#Uprole2').is(":checked")){
         UPjob = "Farmaceut";
@@ -179,7 +179,7 @@ function postdata() {
         else if ($('#role4').is(":checked")) {
             Ijob = "Laborant";
         }
-        if ($('#aktivcheckbox').is(":checked")){
+        if ($('#aktivcheckbox').is(":checked")){   //todo fix aktiv værdier i backend
             boolean = 1;
         }else if ($('#aktivcheckboxno').is(":checked")){
             boolean = 0;
