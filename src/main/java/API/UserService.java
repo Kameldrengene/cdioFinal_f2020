@@ -16,10 +16,11 @@ import java.util.List;
 public class UserService {
     public UserController userController = new UserController();
     @Path("getUsers")
+    @Produces(MediaType.APPLICATION_JSON)
     @GET
     public List<UserDTO> getData() {
         try {
-            return userController.getData();
+            return userController.getData().getData();
         } catch (IDALException.DALException e) {
             e.printStackTrace();
         }

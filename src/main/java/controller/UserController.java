@@ -12,8 +12,8 @@ import java.util.List;
 
 public class UserController {
 
-    public List<UserDTO> getData() throws IDALException.DALException {
-        return new UserDAOSQL().getData();
+    public UserDAOSQL getData() throws IDALException.DALException {
+        return new UserDAOSQL();
     }
 
     public UserDTO activitySwitchUser(UserDTO user) {
