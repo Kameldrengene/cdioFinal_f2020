@@ -16,7 +16,7 @@ public class WebService {
         return new UserDAOSQL();
     }
 
-    @Path("mysql_json/deleteUser")
+    @Path("deleteUser")
     @POST
     public UserDTO deleteUser(UserDTO user) {
         UserDAOSQL db = new UserDAOSQL();
