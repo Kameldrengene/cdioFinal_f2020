@@ -34,8 +34,7 @@ public class UserService {
     @Produces(MediaType.APPLICATION_JSON)
     @GET
     public List<UserDTO> getRole(@QueryParam("role") String role){
-        System.out.println(role);
-        return userController.getAdmins(role);
+        return userController.getRole(role);
     }
 
 

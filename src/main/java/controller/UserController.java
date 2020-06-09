@@ -23,8 +23,8 @@ public class UserController {
         return userDAOSQL;
     }
 
-    public List<UserDTO> getAdmins(String role){
-        return userDAOSQL.getAdmins(role);
+    public List<UserDTO> getRole(String role){
+        return userDAOSQL.getRole(role);
     }
 
 

@@ -34,7 +34,7 @@ public class UserDAOSQL implements IUserDAO {
     }
 
     // -Mikkel
-    public List<UserDTO> getAdmins(String role){
+    public List<UserDTO> getRole(String role){
 
         List<UserDTO> userList = new ArrayList<>();
 
@@ -66,7 +66,6 @@ public class UserDAOSQL implements IUserDAO {
         }
 
         return userList;
-
     }
 
 

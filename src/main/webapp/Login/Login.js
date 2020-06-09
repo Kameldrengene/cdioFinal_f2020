@@ -39,10 +39,7 @@ $("document").ready(function () {
 
         //todo fejlhåndtering
 
-
-
-    })
-
+    });
 });
 
 function PersonList(role) {
