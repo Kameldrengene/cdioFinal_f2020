@@ -64,13 +64,15 @@ public class UserDAOSQL implements IUserDAO {
     }
 
     @Override
-    public void createUser(UserDTO user) throws IDALException.DALException { //We make a new user
+    public UserDTO createUser(UserDTO user) throws IDALException.DALException { //We make a new user
         db.connect();
         List<UserDTO> users = getData();
         db.connect();
         int idIndex = users.get(users.size()-1).getUserID()+1;
         user.setUserID(idIndex);
         db.update("insert into userdto (userID, userName, ini, cpr, password, job, aktiv) VALUES ('" + user.getUserID() + "', '" + user.getUserName() + "','" + user.getIni() + "','" + user.getCpr() + "','" + user.getPassword() + "','" + user.getJob() + "'," + user.getAktiv() + ")");
+        db.close();
+        return user;
     }
 
     @Override
@@ -92,7 +94,7 @@ public class UserDAOSQL implements IUserDAO {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
+        db.close();
     }
 
     @Override

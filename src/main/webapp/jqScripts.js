@@ -26,7 +26,7 @@ function Personslist() {
                 //if (value.aktiv)
 
                 person_data += '<td>'+ ((value.aktiv) ? "Aktiv" : "Ikke aktiv") +'</td>';
-                person_data += "<td><input id='updateuser' class='update' type='button' value='Update'/> </td>";
+                person_data += "<td><input id='updateuser' class='update' type='button' onclick='confirmUpdate("+userID+")' value='Update'/> </td>";
                 person_data += "<td><input id='deleteuser' class='slet' type='button' value='Switch Activity' onclick='switchActivityUser("+userID+")'/> </td>";
                 person_data +=  '</tr>';
             });
@@ -68,6 +68,70 @@ function switchActivityUser(ID) {
         Personslist();
     }
 }
+var updatedID;
+function confirmUpdate(ID) {
+    $(document).ready(function () {
+        if(confirm("are you sure, you want to update this user ?" + ID)){
+            switchP('Brugeroversigt/Updatebruger/index.html')
+            updatedID = ID;
+        }
+        else {
+            alert("no worries!");
+        }
+    });
+}
+
+function postUpdate() {
+    if(confirm("are sure?")){
+        updateUser();
+    }else {
+        alert("no changes, you're back!");
+        homepage();
+    }
+
+}
+
+function updateUser() {
+    var UPid = updatedID;
+    var UPuser = $("#UpUsername").val();
+    var UPini = $("#Upini").val();
+    var UPcpr = $("#Upcpr").val();
+    var UPpass = $("#Uppass").val();
+    var UPjob ="" ;
+    var UPboolean = 0;
+    if($('#Uprole1').is(":checked")){
+        UPjob = "Administrator";
+    }else if ($('#Uprole2').is(":checked")){
+        UPjob = "Farmaceut";
+    }else if ($('#Uprole3').is(":checked")){
+        UPjob = "Produktionsleder";
+    }
+    else if ($('#Uprole4').is(":checked")) {
+        UPjob = "Laborant";
+    }
+    if ($('#Upyes').is(":checked")){
+        UPboolean = 1;
+    }else if ($('#Upno').is(":checked")){
+        UPboolean = 0;
+    }
+    var statuscode;
+    var UPjsondata = {userID: UPid, userName: UPuser, ini: UPini, cpr: UPcpr, password: UPpass, job: UPjob, aktiv: UPboolean};
+    $.ajax({
+        url: "/BoilerPlate_war_exploded/rest/user/updateUser",
+        type: 'PUT',
+        contentType: "application/json",
+        dataType: 'json',
+        data: JSON.stringify(UPjsondata),
+        success: function (data) {
+            homepage();
+        },
+        error: function (jqXHR, text, error) {
+            alert(JSON.stringify(jsondata));
+        }
+    });
+}
+
+
 
 function createbutton(value, id) {
     return "</td><td><input id='update' class='edit' type='submit' value=''/> </td>";
@@ -110,9 +174,9 @@ function postdata() {
         }else if ($('#role2').is(":checked")){
             Ijob = "Farmaceut";
         }else if ($('#role3').is(":checked")){
-            Ijob = "Projektleder";
+            Ijob = "Produktionsleder";
         }
-        else if ($('#role3').is(":checked")) {
+        else if ($('#role4').is(":checked")) {
             Ijob = "Laborant";
         }
         if ($('#aktivcheckbox').is(":checked")){
@@ -141,9 +205,9 @@ function successTest() {
     }else if ($('#role2').is(":checked")){
         Ijob = "Farmaceut";
     }else if ($('#role3').is(":checked")){
-        Ijob = "Projektleder";
+        Ijob = "Produktionsleder";
     }
-    else if ($('#role3').is(":checked")) {
+    else if ($('#role4').is(":checked")) {
         Ijob = "Laborant";
     }
     if ($('#aktivcheckbox').is(":checked")){
@@ -154,7 +218,7 @@ function successTest() {
     var statuscode;
     var jsondata = {userName: Iuser, ini: Iini, cpr: Icpr, password: Ipass, job: Ijob, aktiv: boolean};
     $.ajax({
-        url: "/BoilerPlate_war_exploded/rest/live",
+        url: "/BoilerPlate_war_exploded/rest/user/createUser",
         type: 'POST',
         contentType: "application/json",
         dataType: 'json',

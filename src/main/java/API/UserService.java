@@ -16,7 +16,6 @@ import java.util.List;
 public class UserService {
     public UserController userController = new UserController();
     @Path("getUsers")
-    @Produces(MediaType.APPLICATION_JSON)
     @GET
     public List<UserDTO> getData() {
         try {
@@ -31,12 +30,15 @@ public class UserService {
     public UserDTO activitySwitchUser(UserDTO user){
         return userController.activitySwitchUser(user);
     }
+
+    @Path("createUser")
     @POST
     public UserDTO createUser(UserDTO user){
-        return userController.createUser(user);
+        userController.createUser(user);
+        return user;
     }
     @Path("updateUser")
-    @POST
+    @PUT
     public UserDTO updateUser(UserDTO user){
         return userController.updateUser(user);
     }
