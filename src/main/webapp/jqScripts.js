@@ -1,7 +1,7 @@
 var ID = 'delete';
 function Personslist() {
     $(document).ready(function () {
-        $.getJSON("/BoilerPlate_war_exploded/rest/live/mysql_json",function (data) {
+        $.getJSON("/BoilerPlate_war_exploded/rest/live/getUsers",function (data) {
             var person_data = '<tr>\n' +
                 '                <th>ID</th>\n' +
                 '                <th>Name</th>\n' +
