@@ -10,7 +10,7 @@ import javax.ws.rs.core.MediaType;
 @Path("live")
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
-public class WebService {
+public class UserService {
     @Path("getUsers")
     @GET
     public UserDAOSQL getData() throws IUserDAO.DALException {
