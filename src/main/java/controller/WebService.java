@@ -6,6 +6,7 @@ import dal.dto.UserDTO;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
+import java.util.List;
 
 @Path("live")
 @Consumes(MediaType.APPLICATION_JSON)
@@ -34,6 +35,7 @@ public class WebService {
         UserDAOSQL db = new UserDAOSQL();
         try {
             db.createUser(user);
+            System.out.println("User added");
         } catch (IUserDAO.DALException e) {
             e.printStackTrace();
         }
@@ -41,7 +43,7 @@ public class WebService {
     }
 
     @Path("updateUser")
-    @POST
+    @PUT
     public UserDTO updateUser(UserDTO user) {
         UserDAOSQL db = new UserDAOSQL();
         try {

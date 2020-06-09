@@ -19,7 +19,6 @@ public class UserDTO implements Serializable{
 //TODO Add relevant fields
 	
 	public UserDTO() {
-		this.password = "SkiftMig!";
 	}
 	
 	public String getPassword(){
@@ -79,9 +78,14 @@ public class UserDTO implements Serializable{
 
 	@Override
 	public String toString() {
-		return "UserDTO [userId=" + userID + ", userName=" + userName + ", ini=" + ini + ", job=" + job + ", aktiv=" + aktiv + ", password=" + password + "]";
+		return "UserDTO{" +
+				"userID=" + userID +
+				", userName='" + userName + '\'' +
+				", ini='" + ini + '\'' +
+				", cpr='" + cpr + '\'' +
+				", password='" + password + '\'' +
+				", job='" + job + '\'' +
+				", aktiv=" + aktiv +
+				'}';
 	}
-	
-	
-	
 }

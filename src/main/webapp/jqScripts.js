@@ -103,6 +103,29 @@ function deletedata(id) {
 
 function postdata() {
     $(document).ready(function () {
+        var Iuser = $("#username").val();
+        var Iini = $("#ini").val();
+        var Icpr = $("#cpr").val();
+        var Ipass = $("#pass").val();
+        var Ijob ="" ;
+        var boolean = 0;
+        if($('#role1').is(":checked")){
+            Ijob = "Administrator";
+        }else if ($('#role2').is(":checked")){
+            Ijob = "Farmaceut";
+        }else if ($('#role3').is(":checked")){
+            Ijob = "Projektleder";
+        }
+        else if ($('#role3').is(":checked")) {
+            Ijob = "Laborant";
+        }
+        if ($('#aktivcheckbox').is(":checked")){
+            boolean = 1;
+        }else if ($('#aktivcheckboxno').is(":checked")){
+            boolean = 0;
+        }
+        alert(Ijob);
+        alert(boolean);
         if(confirm("Are you sure?")){
             successTest();
         }else
@@ -111,14 +134,31 @@ function postdata() {
 }
 
 function successTest() {
-    var Pid = $("#id").val();
-    var Pname = $("#name").val();
-    var Page = $("#age").val();
-    var Paddress = $("#address").val();
+    var Iuser = $("#username").val();
+    var Iini = $("#ini").val();
+    var Icpr = $("#cpr").val();
+    var Ipass = $("#pass").val();
+    var Ijob ="" ;
+    var boolean = 0;
+    if($('#role1').is(":checked")){
+        Ijob = "Administrator";
+    }else if ($('#role2').is(":checked")){
+        Ijob = "Farmaceut";
+    }else if ($('#role3').is(":checked")){
+        Ijob = "Projektleder";
+    }
+    else if ($('#role3').is(":checked")) {
+        Ijob = "Laborant";
+    }
+    if ($('#aktivcheckbox').is(":checked")){
+        boolean = 1;
+    }else if ($('#aktivcheckboxno').is(":checked")){
+        boolean = 0;
+    }
     var statuscode;
-    var jsondata = {id: Pid, name: Pname, age: Page, address: Paddress};
+    var jsondata = {userName: Iuser, ini: Iini, cpr: Icpr, password: Ipass, job: Ijob, aktiv: boolean};
     $.ajax({
-        url: "/SinglePageWEB_war_exploded/rest/persons",
+        url: "/BoilerPlate_war_exploded/rest/live",
         type: 'POST',
         contentType: "application/json",
         dataType: 'json',
@@ -127,7 +167,7 @@ function successTest() {
             homepage();
         },
         error: function (jqXHR, text, error) {
-            alert(jqXHR.status + text + error);
+            alert(JSON.stringify(jsondata));
         }
     });
 }
@@ -150,7 +190,7 @@ function homepage () {
             return $("body").load(page);
         }
 
-        window.setTimeout(switchPage('Persons.html'), 5000);
+        window.setTimeout(switchPage('AdminScreen/index.html'), 5000);
     });
 }
 function switchP(page) {
