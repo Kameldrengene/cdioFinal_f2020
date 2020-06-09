@@ -64,8 +64,8 @@ public class RaavareDAOSQL {
             ResultSet rs = db.query("SELECT * FROM Raavarer where raavareID=" + raavare.getRaavareId());
             rs.next();
             if (rs.getInt("raavareID") == raavare.getRaavareId()) {
-                db.update("UPDATE Recepter SET raavareNavn = '" + raavare.getRaavareNavn() + "' WHERE (RID = '" + raavare.getReceptId() + "');");
-                db.update("UPDATE Recepter SET leverandoer = '" + raavare.getLeverandoer() + "' WHERE (RID = '" + raavare.getReceptId() + "');");
+                db.update("UPDATE Recepter SET raavareNavn = '" + raavare.getRaavareNavn() + "' WHERE (RID = '" + raavare.getRaavareId() + "');");
+                db.update("UPDATE Recepter SET leverandoer = '" + raavare.getLeverandoer() + "' WHERE (RID = '" + raavare.getRaavareId() + "');");
             }
             rs.close();
         } catch (SQLException e) {
