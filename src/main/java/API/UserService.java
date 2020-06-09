@@ -8,6 +8,7 @@ import dal.dto.UserDTO;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
+import java.util.List;
 
 @Path("user")
 @Consumes(MediaType.APPLICATION_JSON)
@@ -16,7 +17,7 @@ public class UserService {
     public UserController userController = new UserController();
     @Path("getUsers")
     @GET
-    public UserDAOSQL getData() {
+    public List<UserDTO> getData() {
         try {
             return userController.getData();
         } catch (IDALException.DALException e) {
