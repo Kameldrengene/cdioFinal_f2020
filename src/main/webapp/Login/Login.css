@@ -10,7 +10,7 @@
 }
 
 .brugertable{
-    margin: 40px auto;
+    margin: 20px auto;
     width: 300px;
     overflow: scroll;
 }
@@ -35,6 +35,11 @@ input{
     border-style: solid;
     border-color: red;
     /*background-color: red;*/
+}
+
+#logo{
+    display: block;
+    margin: auto;
 }
 
 

@@ -25,6 +25,24 @@ $("document").ready(function () {
         localStorage.setItem("loginID", this.id);
     })
 
+    $(".hvr-buzz").click(function () {
+        var loginRole = localStorage.getItem("loginRole");
+
+        if(loginRole == "admin")
+            switchP("AdminScreen/index.html");
+        else if(loginRole == "farma")
+            switchP("FarmaScreen/index.html");
+        else if(loginRole == "prodLeder")
+            switchP("PLeadScreen/index.html")
+        else if(loginRole == "laborant")
+            switchP("LabScreen/index.html");
+
+        //todo fejlhåndtering
+
+
+
+    })
+
 });
 
 function PersonList(role) {
