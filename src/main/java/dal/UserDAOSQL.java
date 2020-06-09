@@ -1,7 +1,6 @@
 package dal;
 
-import services.SQLDatabaseIO;
-import dto.UserDTO;
+import dal.dto.UserDTO;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;

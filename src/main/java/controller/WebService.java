@@ -1,6 +1,6 @@
 import dal.IUserDAO;
 import dal.UserDAOSQL;
-import dto.UserDTO;
+import dal.dto.UserDTO;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
@@ -63,22 +63,6 @@ public class WebService {
         System.out.println(user.toString());
         return user.toString();
     }
-    /*@Path("mysql_json/createUser")
-    @GET
-    @Consumes(MediaType.APPLICATION_JSON)
-    public String createUser(UserDTO user) {
-        UserDAOSQL db = new UserDAOSQL();
-
-        try {
-            List<UserDTO> data = db.getData();
-            user.setUserID(data.get(data.size()-1).getUserID()+1);
-            db.createUser(user);
-        } catch (IUserDAO.DALException e) {
-            e.printStackTrace();
-        }
-        System.out.println(user.toString());
-        return user.toString();
-    }*/
 
     @Path("mysql_json/updateUser/{id}/{username}/{ini}/{cpr}/{pass}/{role1}/{role2}/{role3}/{role4}")
     @GET
