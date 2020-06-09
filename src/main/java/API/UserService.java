@@ -1,6 +1,7 @@
 package API;
 
 import controller.UserController;
+import dal.IDALException;
 import dal.IUserDAO;
 import dal.UserDAOSQL;
 import dal.dto.UserDTO;
@@ -18,7 +19,7 @@ public class UserService {
     public UserDAOSQL getData() {
         try {
             return userController.getData();
-        } catch (IUserDAO.DALException e) {
+        } catch (IDALException.DALException e) {
             e.printStackTrace();
         }
         return null;
