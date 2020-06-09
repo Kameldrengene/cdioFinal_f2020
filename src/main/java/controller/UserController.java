@@ -7,18 +7,13 @@ import dal.dto.UserDTO;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 
-@Path("live")
-@Consumes(MediaType.APPLICATION_JSON)
-@Produces(MediaType.APPLICATION_JSON)
-public class UserService {
-    @Path("getUsers")
-    @GET
+
+public class UserController {
+
     public UserDAOSQL getData() throws IUserDAO.DALException {
         return new UserDAOSQL();
     }
 
-    @Path("activeUser")
-    @POST
     public UserDTO activitySwitchUser(UserDTO user) {
         UserDAOSQL db = new UserDAOSQL();
         try {
@@ -29,7 +24,7 @@ public class UserService {
         return user;
     }
 
-    @POST
+
     public UserDTO createUser(UserDTO user) {
         UserDAOSQL db = new UserDAOSQL();
         try {
@@ -40,8 +35,7 @@ public class UserService {
         return user;
     }
 
-    @Path("updateUser")
-    @POST
+
     public UserDTO updateUser(UserDTO user) {
         UserDAOSQL db = new UserDAOSQL();
         try {

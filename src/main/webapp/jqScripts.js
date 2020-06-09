@@ -1,7 +1,7 @@
 var ID = 'delete';
 function Personslist() {
     $(document).ready(function () {
-        $.getJSON("/BoilerPlate_war_exploded/rest/live/getUsers",function (data) {
+        $.getJSON("/BoilerPlate_war_exploded/rest/user/getUsers",function (data) {
             var person_data = '<tr>\n' +
                 '                <th>ID</th>\n' +
                 '                <th>Name</th>\n' +
@@ -68,7 +68,7 @@ function Loginlist() {
 function switchActivityUser(ID) {
     //console.log("Delete user:" + ID);
     if(confirm("Are you sure you want to switch the activity for user: "+ID+"?")){
-        fetch("/BoilerPlate_war_exploded/rest/live/activeUser/"+ID);
+        fetch("/BoilerPlate_war_exploded/rest/user/activeUser/"+ID);
         Personslist();
     }
 }
