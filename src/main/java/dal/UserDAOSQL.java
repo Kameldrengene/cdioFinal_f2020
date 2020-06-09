@@ -66,7 +66,7 @@ public class UserDAOSQL implements IUserDAO {
     @Override
     public void createUser(UserDTO user) throws DALException { //We make a new user
         db.connect();
-        db.update("insert into userdto (userID, userName, ini, cpr, password, role, aktiv) VALUE ('" + user.getUserID() + "','" + user.getUserName() + "','" + user.getIni() + "','" + user.getCpr() + "','" + user.getPassword() + "','" + user.getJob() + "','" + user.getAktiv() + "')");
+        db.update("insert into userdto (userID, userName, ini, cpr, password, job, aktiv) VALUE ('" + user.getUserID() + "','" + user.getUserName() + "','" + user.getIni() + "','" + user.getCpr() + "','" + user.getPassword() + "','" + user.getJob() + "','" + user.getAktiv() + "')");
         db.close();
     }
 
