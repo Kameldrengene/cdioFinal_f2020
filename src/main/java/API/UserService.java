@@ -14,7 +14,9 @@ import java.util.List;
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
 public class UserService {
+
     public UserController userController = new UserController();
+
     @Path("getUsers")
     @GET
     public List<UserDTO> getData() {
@@ -25,6 +27,17 @@ public class UserService {
         }
         return null;
     }
+
+    // -Mikkel
+    @Path("getRole")
+    @Produces(MediaType.APPLICATION_JSON)
+    @GET
+    public List<UserDTO> getRole(@QueryParam("role") String role){
+        return userController.getRole(role);
+    }
+
+
+
     @Path("activeUser")
     @POST
     public UserDTO activitySwitchUser(UserDTO user){

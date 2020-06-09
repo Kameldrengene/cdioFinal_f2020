@@ -12,9 +12,21 @@ import java.util.List;
 
 public class UserController {
 
-    public UserDAOSQL getData() throws IDALException.DALException {
-        return new UserDAOSQL();
+    private UserDAOSQL userDAOSQL;
+
+    //Constructor
+    public UserController(){
+        userDAOSQL = new UserDAOSQL();
     }
+
+    public UserDAOSQL getData() throws IDALException.DALException {
+        return userDAOSQL;
+    }
+
+    public List<UserDTO> getRole(String role){
+        return userDAOSQL.getRole(role);
+    }
+
 
     public UserDTO activitySwitchUser(UserDTO user) {
         UserDAOSQL db = new UserDAOSQL();

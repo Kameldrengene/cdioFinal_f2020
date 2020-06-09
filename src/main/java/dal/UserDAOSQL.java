@@ -33,6 +33,42 @@ public class UserDAOSQL implements IUserDAO {
         return user;
     }
 
+    // -Mikkel
+    public List<UserDTO> getRole(String role){
+
+        List<UserDTO> userList = new ArrayList<>();
+
+        try{
+            db.connect();
+            ResultSet rs = db.query("SELECT * FROM userdto where job ='" + role + "'");
+
+            while(rs.next()){
+                UserDTO user = new UserDTO();
+                user.setUserID(rs.getInt("userID"));
+                user.setUserName(rs.getString("userName"));
+                user.setIni(rs.getString("ini"));
+                user.setCpr(rs.getString("cpr"));
+                user.setPassword(rs.getString("password"));
+                user.setJob(rs.getString("job"));
+
+                //todo hvad er aktiv?
+                user.setAktiv(rs.getBoolean("aktiv"));
+                userList.add(user);
+            }
+
+            rs.close();
+            db.close();
+
+
+        //todo skal det håndteres anderledes?
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+
+        return userList;
+    }
+
+
     @Override
     public List<UserDTO> getData() throws IDALException.DALException { //We get a list of users here
         db.connect();

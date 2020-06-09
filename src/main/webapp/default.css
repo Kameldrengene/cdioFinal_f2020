@@ -197,7 +197,7 @@ input[type=text]:focus, input[type=password]:focus {
 .brugertable {
     /* Auto margin i højre og venstre side (her alle), gør
         elementet bliver centreret på skærmen. */
-    margin: auto;
+
     margin-top: 2%;
     text-align: left;
     border: none;
@@ -248,6 +248,15 @@ input[type=text]:focus, input[type=password]:focus {
 .update{
     background: cornflowerblue;
 }
+
+form label:hover{
+    color: var(--col-textprimary);
+}
+
+form{
+    color: var(--col-textsecondary)
+}
+
 
 .screenbtn{
     margin-left: auto;
