@@ -248,3 +248,12 @@ input[type=text]:focus, input[type=password]:focus {
 .update{
     background: cornflowerblue;
 }
+
+form label:hover{
+    color: var(--col-textprimary);
+}
+
+form{
+    color: var(--col-textsecondary)
+}
+
