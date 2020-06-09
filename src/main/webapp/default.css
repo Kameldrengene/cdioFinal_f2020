@@ -113,7 +113,7 @@ input[type=text]:focus, input[type=password]:focus {
     font-weight: bold;
     background-color: var(--color-primary);
     padding: 8px;
-    margin-top: 1%;
+    margin-top: 3%;
     border-radius: 10px; /* Border radius gør vores kanter runde*/
     border: none;
     outline: none;
@@ -258,3 +258,7 @@ form{
 }
 
 
+.screenbtn{
+    margin-left: auto;
+    margin-right: auto;
+}

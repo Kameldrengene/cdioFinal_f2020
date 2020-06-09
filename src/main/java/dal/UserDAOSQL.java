@@ -10,7 +10,7 @@ public class UserDAOSQL implements IUserDAO {
     SQLDatabaseIO db = new SQLDatabaseIO("kamel", "dreng", "runerne.dk", 8003); //Makes new SQLDatabaseIO object.
 
     @Override
-    public UserDTO getUser(int userId) throws DALException {
+    public UserDTO getUser(int userId) throws IDALException.DALException {
         db.connect();
         ResultSet rs = db.query("SELECT * FROM userdto where userID=" + userId); //Select all columns from userdto where userID is input
 
@@ -23,7 +23,7 @@ public class UserDAOSQL implements IUserDAO {
             user.setIni(rs.getString("ini"));
             user.setCpr(rs.getString("cpr"));
             user.setPassword(rs.getString("password"));
-            user.setJob(rs.getString("Job"));
+            user.setJob(rs.getString("job"));
             user.setAktiv(rs.getBoolean("aktiv"));
             rs.close();
         } catch (SQLException e) {
@@ -34,7 +34,7 @@ public class UserDAOSQL implements IUserDAO {
     }
 
     @Override
-    public List<UserDTO> getData() throws DALException { //We get a list of users here
+    public List<UserDTO> getData() throws IDALException.DALException { //We get a list of users here
         db.connect();
         ResultSet rs = db.query("SELECT * FROM userdto"); //Select all data from userdto
 
@@ -49,7 +49,7 @@ public class UserDAOSQL implements IUserDAO {
                 user.setIni(rs.getString("ini"));
                 user.setCpr(rs.getString("cpr"));
                 user.setPassword(rs.getString("password"));
-                user.setJob(rs.getString("Job"));
+                user.setJob(rs.getString("job"));
                 user.setAktiv(rs.getBoolean("aktiv"));
                 userList.add(user);
             }
@@ -64,14 +64,14 @@ public class UserDAOSQL implements IUserDAO {
     }
 
     @Override
-    public void createUser(UserDTO user) throws DALException { //We make a new user
+    public void createUser(UserDTO user) throws IDALException.DALException { //We make a new user
         db.connect();
-        db.update("insert into userdto (userID, userName, ini, cpr, password, role, aktiv) VALUE ('" + user.getUserID() + "','" + user.getUserName() + "','" + user.getIni() + "','" + user.getCpr() + "','" + user.getPassword() + "','" + user.getJob() + "','" + user.getAktiv() + "')");
+        db.update("insert into userdto (userID, userName, ini, cpr, password, job, aktiv) VALUE ('" + user.getUserID() + "','" + user.getUserName() + "','" + user.getIni() + "','" + user.getCpr() + "','" + user.getPassword() + "','" + user.getJob() + "','" + user.getAktiv() + "')");
         db.close();
     }
 
     @Override
-    public void updateUser(UserDTO user) throws DALException { //We update user with a new user
+    public void updateUser(UserDTO user) throws IDALException.DALException { //We update user with a new user
         db.connect();
         try {
             ResultSet rs = db.query("SELECT * FROM userdto where userID=" + user.getUserID());
@@ -94,7 +94,7 @@ public class UserDAOSQL implements IUserDAO {
     }
 
     @Override
-    public void aktivitySwitchUser(int userId) throws DALException { //We switch the activity of the user
+    public void aktivitySwitchUser(int userId) throws IDALException.DALException { //We switch the activity of the user
         db.connect();
         ResultSet rs = db.query("SELECT aktiv FROM userdto where userID=" + userId);
         boolean b = false;
