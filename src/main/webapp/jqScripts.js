@@ -232,7 +232,7 @@ function homepage () {
     });
 }
 
-function viewlist(headers, link, btnHtmlfunc) {
+function viewlist(headers, link, tableName, btnHtmlfunc) {
     $(document).ready(function () {
         $.getJSON(link /*"/BoilerPlate_war_exploded/rest/Raavare/getRaavarer"*/,function (BEdata) {
             var data = '<tr>\n';
@@ -247,11 +247,10 @@ function viewlist(headers, link, btnHtmlfunc) {
                 $.each(value, function (key2, inner) {
                     data += '<td>'+inner+'</td>'
                 });
-                //if (value.aktiv)
                 data += btnHtmlfunc(value);
                 data +=  '</tr>';
             });
-            $('#raavare_table').html(data);
+            $('#' + tableName).html(data);
         });
     });
 }
