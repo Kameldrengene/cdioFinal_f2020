@@ -13,7 +13,7 @@ import java.util.List;
 @Produces(MediaType.APPLICATION_JSON)
 public class RaavareService {
     public RaavareController raavareController = new RaavareController();
-    @Path("getRaavare")
+    @Path("getRaavarer")
     @GET
     public List<RaavareDTO> getData() throws IDALException.DALException {
         return raavareController.getData();

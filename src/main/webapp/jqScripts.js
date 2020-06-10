@@ -28,7 +28,7 @@ function Personslist() {
                 //if (value.aktiv)
 
                 person_data += '<td>'+ ((value.aktiv) ? "Aktiv" : "Ikke aktiv") +'</td>';
-                person_data += "<td><input id='updateuser' class='update' type='button' onclick='confirmUpdate("+userID+")' value='Update'/> </td>";
+                person_data += "<td><input id='updateuser' class='update' type='button' onclick='confirmUserUpdate("+userID+")' value='Update'/> </td>";
                 person_data += "<td><input id='deleteuser' class='slet' type='button' value='Switch Activity' onclick='switchActivityUser("+userID+")'/> </td>";
                 person_data +=  '</tr>';
             });
@@ -47,7 +47,7 @@ function switchActivityUser(ID) {
     }
 }
 var updatedID;
-function confirmUpdate(ID) {
+function confirmUserUpdate(ID) {
     $(document).ready(function () {
         if(confirm("are you sure, you want to update this user ?" + ID)){
             switchP('Brugeroversigt/Updatebruger/index.html')
@@ -231,6 +231,43 @@ function homepage () {
         window.setTimeout(switchPage('AdminScreen/index.html'), 5000);
     });
 }
+
+function viewlist(headers, link, btnHtmlfunc) {
+    $(document).ready(function () {
+        $.getJSON(link /*"/BoilerPlate_war_exploded/rest/Raavare/getRaavarer"*/,function (BEdata) {
+            var data = '<tr>\n';
+            for (let i = 0; i < headers.length; i++){
+                data += '<th>'+ headers[i] +'</th>';
+            }
+            data += '</tr>';
+
+            $.each(BEdata,function (key,value) {
+                //console.log(value);
+                data += '<tr>';
+                $.each(value, function (key2, inner) {
+                    data += '<td>'+inner+'</td>'
+                });
+                //if (value.aktiv)
+                data += btnHtmlfunc(value);
+                data +=  '</tr>';
+            });
+            $('#raavare_table').html(data);
+        });
+    });
+}
+
+function confirmRaavareUpdate(id){
+    $(document).ready(function () {
+        if(confirm("are you sure, you want to update this råvare "+ id +"?")){
+            switchP('FarmaScreen/VisRaavare/UpdateRaavare/index.html')
+            updatedID = id;
+        }
+        else {
+            alert("no worries!");
+        }
+    });
+}
+
 
 function createUser() {
     var user = {
