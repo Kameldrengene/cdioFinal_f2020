@@ -123,8 +123,15 @@ public class UserDAOSQL implements IUserDAO {
                 db.update("UPDATE userdto SET ini = '" + user.getIni() + "' WHERE (userID = '" + user.getUserID() + "');");
                 db.update("UPDATE userdto SET cpr = '" + user.getCpr() + "' WHERE (userID = '" + user.getUserID() + "');");
                 db.update("UPDATE userdto SET password = '" + user.getPassword() + "' WHERE (userID = '" + user.getUserID() + "');");
-                db.update("UPDATE userdto SET role = '" + user.getJob() + "' WHERE (userID = '" + user.getUserID() + "');");
-                db.update("UPDATE userdto SET aktiv = '" + user.getAktiv() + "' WHERE (userID = '" + user.getUserID() + "');");
+                db.update("UPDATE userdto SET job = '" + user.getJob() + "' WHERE (userID = '" + user.getUserID() + "');");
+                boolean b = user.getAktiv();
+                int bool;
+                if(b){
+                    bool = 1;
+                }else {
+                    bool = 0;
+                }
+                db.update("UPDATE userdto SET aktiv = '" + bool + "' WHERE (userID = '" + user.getUserID() + "');");
             }
             rs.close();
         } catch (SQLException e) {
@@ -137,14 +144,44 @@ public class UserDAOSQL implements IUserDAO {
     public void aktivitySwitchUser(int userId) throws IDALException.DALException { //We switch the activity of the user
         db.connect();
         ResultSet rs = db.query("SELECT aktiv FROM userdto where userID=" + userId);
-        boolean b = false;
+        boolean b;
+        int boolVal = 0;
         try {
             rs.next();
             b = rs.getBoolean("aktiv");
+            if(b){
+                boolVal = 0;
+            }else {
+                boolVal = 1;
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        db.update("UPDATE userdto SET aktiv=" + ((b) ? "FALSE" : "TRUE") + " WHERE userID=" + userId);
+        db.update("UPDATE userdto SET aktiv = " + boolVal + " WHERE userID=" + userId);
         db.close();
+    }
+
+    public boolean getActivity(int id) throws IDALException.DALException {
+        UserDTO user = new UserDTO();
+        try {
+            db.connect();
+            ResultSet rs = db.query("SELECT * FROM userdto where userID ='" + id + "'");
+            rs.next();
+
+            user.setUserID(rs.getInt("userID"));
+            user.setUserName(rs.getString("userName"));
+            user.setIni(rs.getString("ini"));
+            user.setCpr(rs.getString("cpr"));
+            user.setPassword(rs.getString("password"));
+            user.setJob(rs.getString("job"));
+            user.setAktiv(rs.getBoolean("aktiv"));
+
+            rs.close();
+            db.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return user.getAktiv();
     }
 }

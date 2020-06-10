@@ -9,6 +9,7 @@ public class Main {
     public static void main(String[] args)  {
         UserDAOSQL data = new UserDAOSQL();
         UserDTO userDTO = new UserDTO();
+        userDTO.setUserID(12);
         userDTO.setUserName("newadmin");
         userDTO.setIni("adm");
         userDTO.setCpr("132154500");
@@ -17,7 +18,7 @@ public class Main {
         userDTO.setAktiv(false);
 
         try {
-            data.createUser(userDTO);
+            data.updateUser(userDTO);
             // System.out.println(data.getData());
         }catch (Exception e){
             e.printStackTrace();
