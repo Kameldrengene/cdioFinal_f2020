@@ -49,6 +49,15 @@ public class UserController {
         return false;
     }
 
+    public UserDTO getUser(int id) {
+        UserDAOSQL db = new UserDAOSQL();
+        try {
+            return db.getUser(id);
+        } catch (IDALException.DALException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 
     public UserDTO createUser(UserDTO user) {
         UserDAOSQL db = new UserDAOSQL();
