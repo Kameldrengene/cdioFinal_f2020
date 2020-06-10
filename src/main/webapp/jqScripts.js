@@ -16,7 +16,7 @@ function Personslist() {
                 '                <th>ActiveSwitch</th>\n' +
                 '            </tr>';
             $.each(data,function (key,value) {
-                console.log(value);
+                //console.log(value);
                 var userID = value.userID;
                 person_data += '<tr>';
                 person_data += '<td>'+userID+'</td>';
@@ -31,31 +31,6 @@ function Personslist() {
                 person_data += "<td><input id='updateuser' class='update' type='button' onclick='confirmUpdate("+userID+")' value='Update'/> </td>";
                 person_data += "<td><input id='deleteuser' class='slet' type='button' value='Switch Activity' onclick='switchActivityUser("+userID+")'/> </td>";
                 person_data +=  '</tr>';
-            });
-            $('#Person_table').html(person_data);
-        });
-    });
-}
-
-function Loginlist() {
-    $(document).ready(function () {
-        $.getJSON("/SinglePageWEB_war_exploded/rest/persons",function (data) {
-            var person_data = '<tr>\n' +
-                '                <th>ID</th>\n' +
-                '                <th>Initials</th>\n' +
-                '                <th>Role</th>\n' +
-                '                <th>Login</th>\n' +
-                '            </tr>';
-            $.each(data,function (key,value) {
-                if (value.aktiv) {
-                    var auserid = value.userID;
-                    person_data += '<tr>';
-                    person_data += '<td>' + auserid + '</td>';
-                    person_data += '<td>' + value.ini + '</td>';
-                    person_data += '<td>' + value.job + '</td>';
-                    person_data += "<td><input id='updateuser' class='update' type='button' value='login as'/> </td>";
-                    person_data += '</tr>';
-                }
             });
             $('#Person_table').html(person_data);
         });
