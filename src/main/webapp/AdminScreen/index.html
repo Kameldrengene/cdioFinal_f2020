@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-        <script src="AdminScreen/Admin.js"></script>
         <link rel="stylesheet" type="text/css" href="AdminScreen/Admin.css">
 </head>
 
 <body>
-        <h5 id="brugerInfo">Nej</h5>
+        <h5 id="brugerInfo">Loading</h5>
+        <script src="currentUserScript.js"></script>
 
         <h1>Admin screen</h1>
 
@@ -20,7 +20,7 @@
         </div>
 
 
-        <input type="submit" class="hvr-buzz screenbtn" value="Log ud" onclick="switchP('index.html'); return false">
+        <input type="submit" class="hvr-buzz screenbtn" value="Log ud" onclick="localStorage.setItem('loginID', 'None'); switchP('index.html'); return false">
 
         <script>Personslist();</script>
 </body>

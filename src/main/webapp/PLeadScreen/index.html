@@ -6,11 +6,14 @@
     <link rel="stylesheet" type="text/css" href="../default.css">
 </head>
 <body>
+<h5 id="brugerInfo">Loading</h5>
+<script src="currentUserScript.js"></script>
+
 <h1>PLead Screen</h1>
 
 
 
-<input type="submit" class="hvr-buzz screenbtn" value="Log ud" onclick="switchP('index.html'); return false">
+<input type="submit" class="hvr-buzz screenbtn" value="Log ud" onclick="localStorage.setItem('loginID', 'None'); switchP('index.html'); return false">
 
 </body>
 </html>
