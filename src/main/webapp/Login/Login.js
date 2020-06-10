@@ -1,3 +1,5 @@
+$.ajaxSetup({async: false});
+
 $("document").ready(function () {
 
     $("#administrator").click(function () {

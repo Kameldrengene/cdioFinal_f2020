@@ -1,3 +1,5 @@
+$.ajaxSetup({async: false});
+
 var ID = 'delete';
 function Personslist() {
     $(document).ready(function () {
