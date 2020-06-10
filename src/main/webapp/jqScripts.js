@@ -62,6 +62,7 @@ function Loginlist() {
     });
 }
 
+setInterval(Personslist, 3000);
 
 function switchActivityUser(ID) {
     //console.log("Delete user:" + ID);
