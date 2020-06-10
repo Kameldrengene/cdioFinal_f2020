@@ -1,3 +1,5 @@
+$.ajaxSetup({async: false});
+
 var ID = 'delete';
 function Personslist() {
     $(document).ready(function () {
@@ -14,7 +16,7 @@ function Personslist() {
                 '                <th>ActiveSwitch</th>\n' +
                 '            </tr>';
             $.each(data,function (key,value) {
-                console.log(value);
+                //console.log(value);
                 var userID = value.userID;
                 person_data += '<tr>';
                 person_data += '<td>'+userID+'</td>';
@@ -26,7 +28,7 @@ function Personslist() {
                 //if (value.aktiv)
 
                 person_data += '<td>'+ ((value.aktiv) ? "Aktiv" : "Ikke aktiv") +'</td>';
-                person_data += "<td><input id='updateuser' class='update' type='button' value='Update'/> </td>";
+                person_data += "<td><input id='updateuser' class='update' type='button' onclick='confirmUpdate("+userID+")' value='Update'/> </td>";
                 person_data += "<td><input id='deleteuser' class='slet' type='button' value='Switch Activity' onclick='switchActivityUser("+userID+")'/> </td>";
                 person_data +=  '</tr>';
             });
@@ -35,31 +37,7 @@ function Personslist() {
     });
 }
 
-function Loginlist() {
-    $(document).ready(function () {
-        $.getJSON("/SinglePageWEB_war_exploded/rest/persons",function (data) {
-            var person_data = '<tr>\n' +
-                '                <th>ID</th>\n' +
-                '                <th>Initials</th>\n' +
-                '                <th>Role</th>\n' +
-                '                <th>Login</th>\n' +
-                '            </tr>';
-            $.each(data,function (key,value) {
-                if (value.aktiv) {
-                    var auserid = value.userID;
-                    person_data += '<tr>';
-                    person_data += '<td>' + auserid + '</td>';
-                    person_data += '<td>' + value.ini + '</td>';
-                    person_data += '<td>' + value.job + '</td>';
-                    person_data += "<td><input id='updateuser' class='update' type='button' value='login as'/> </td>";
-                    person_data += '</tr>';
-                }
-            });
-            $('#Person_table').html(person_data);
-        });
-    });
-}
-
+setInterval(Personslist, 3000);
 
 function switchActivityUser(ID) {
     //console.log("Delete user:" + ID);
@@ -68,6 +46,70 @@ function switchActivityUser(ID) {
         Personslist();
     }
 }
+var updatedID;
+function confirmUpdate(ID) {
+    $(document).ready(function () {
+        if(confirm("are you sure, you want to update this user ?" + ID)){
+            switchP('Brugeroversigt/Updatebruger/index.html')
+            updatedID = ID;
+        }
+        else {
+            alert("no worries!");
+        }
+    });
+}
+
+function postUpdate() {
+    if(confirm("are sure?")){
+        updateUser();
+    }else {
+        alert("no changes, you're back!");
+        homepage();
+    }
+
+}
+
+function updateUser() {
+    var UPid = updatedID;
+    var UPuser = $("#UpUsername").val();
+    var UPini = $("#Upini").val();
+    var UPcpr = $("#Upcpr").val();
+    var UPpass = $("#Uppass").val();
+    var UPjob ="" ;
+    var UPboolean = 0;      //todo update boolean in backend
+    if($('#Uprole1').is(":checked")){   //todo update job in backend
+        UPjob = "Administrator";
+    }else if ($('#Uprole2').is(":checked")){
+        UPjob = "Farmaceut";
+    }else if ($('#Uprole3').is(":checked")){
+        UPjob = "Produktionsleder";
+    }
+    else if ($('#Uprole4').is(":checked")) {
+        UPjob = "Laborant";
+    }
+    if ($('#Upyes').is(":checked")){
+        UPboolean = 1;
+    }else if ($('#Upno').is(":checked")){
+        UPboolean = 0;
+    }
+    var statuscode;
+    var UPjsondata = {userID: UPid, userName: UPuser, ini: UPini, cpr: UPcpr, password: UPpass, job: UPjob, aktiv: UPboolean};
+    $.ajax({
+        url: "/BoilerPlate_war_exploded/rest/user/updateUser",
+        type: 'PUT',
+        contentType: "application/json",
+        dataType: 'json',
+        data: JSON.stringify(UPjsondata),
+        success: function (data) {
+            homepage();
+        },
+        error: function (jqXHR, text, error) {
+            alert(JSON.stringify(jsondata));
+        }
+    });
+}
+
+
 
 function createbutton(value, id) {
     return "</td><td><input id='update' class='edit' type='submit' value=''/> </td>";
@@ -99,6 +141,29 @@ function deletedata(id) {
 
 function postdata() {
     $(document).ready(function () {
+        var Iuser = $("#username").val();
+        var Iini = $("#ini").val();
+        var Icpr = $("#cpr").val();
+        var Ipass = $("#pass").val();
+        var Ijob ="" ;
+        var boolean = 0;
+        if($('#role1').is(":checked")){
+            Ijob = "Administrator";
+        }else if ($('#role2').is(":checked")){
+            Ijob = "Farmaceut";
+        }else if ($('#role3').is(":checked")){
+            Ijob = "Produktionsleder";
+        }
+        else if ($('#role4').is(":checked")) {
+            Ijob = "Laborant";
+        }
+        if ($('#aktivcheckbox').is(":checked")){   //todo fix aktiv værdier i backend
+            boolean = 1;
+        }else if ($('#aktivcheckboxno').is(":checked")){
+            boolean = 0;
+        }
+        alert(Ijob);
+        alert(boolean);
         if(confirm("Are you sure?")){
             successTest();
         }else
@@ -107,14 +172,31 @@ function postdata() {
 }
 
 function successTest() {
-    var Pid = $("#id").val();
-    var Pname = $("#name").val();
-    var Page = $("#age").val();
-    var Paddress = $("#address").val();
+    var Iuser = $("#username").val();
+    var Iini = $("#ini").val();
+    var Icpr = $("#cpr").val();
+    var Ipass = $("#pass").val();
+    var Ijob ="" ;
+    var boolean = 0;
+    if($('#role1').is(":checked")){
+        Ijob = "Administrator";
+    }else if ($('#role2').is(":checked")){
+        Ijob = "Farmaceut";
+    }else if ($('#role3').is(":checked")){
+        Ijob = "Produktionsleder";
+    }
+    else if ($('#role4').is(":checked")) {
+        Ijob = "Laborant";
+    }
+    if ($('#aktivcheckbox').is(":checked")){
+        boolean = 1;
+    }else if ($('#aktivcheckboxno').is(":checked")){
+        boolean = 0;
+    }
     var statuscode;
-    var jsondata = {id: Pid, name: Pname, age: Page, address: Paddress};
+    var jsondata = {userName: Iuser, ini: Iini, cpr: Icpr, password: Ipass, job: Ijob, aktiv: boolean};
     $.ajax({
-        url: "/SinglePageWEB_war_exploded/rest/persons",
+        url: "/BoilerPlate_war_exploded/rest/user/createUser",
         type: 'POST',
         contentType: "application/json",
         dataType: 'json',
@@ -123,7 +205,7 @@ function successTest() {
             homepage();
         },
         error: function (jqXHR, text, error) {
-            alert(jqXHR.status + text + error);
+            alert(JSON.stringify(jsondata));
         }
     });
 }
@@ -146,7 +228,7 @@ function homepage () {
             return $("body").load(page);
         }
 
-        window.setTimeout(switchPage('Persons.html'), 5000);
+        window.setTimeout(switchPage('AdminScreen/index.html'), 5000);
     });
 }
 

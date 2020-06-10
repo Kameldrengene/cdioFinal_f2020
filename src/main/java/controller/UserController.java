@@ -19,8 +19,8 @@ public class UserController {
         userDAOSQL = new UserDAOSQL();
     }
 
-    public UserDAOSQL getData() throws IDALException.DALException {
-        return userDAOSQL;
+    public List<UserDTO> getData() throws IDALException.DALException {
+        return userDAOSQL.getData();
     }
 
     public List<UserDTO> getRole(String role){

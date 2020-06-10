@@ -50,8 +50,6 @@ public class UserDAOSQL implements IUserDAO {
                 user.setCpr(rs.getString("cpr"));
                 user.setPassword(rs.getString("password"));
                 user.setJob(rs.getString("job"));
-
-                //todo hvad er aktiv?
                 user.setAktiv(rs.getBoolean("aktiv"));
                 userList.add(user);
             }
@@ -100,10 +98,15 @@ public class UserDAOSQL implements IUserDAO {
     }
 
     @Override
-    public void createUser(UserDTO user) throws IDALException.DALException { //We make a new user
+    public UserDTO createUser(UserDTO user) throws IDALException.DALException { //We make a new user
         db.connect();
-        db.update("insert into userdto (userID, userName, ini, cpr, password, job, aktiv) VALUE ('" + user.getUserID() + "','" + user.getUserName() + "','" + user.getIni() + "','" + user.getCpr() + "','" + user.getPassword() + "','" + user.getJob() + "','" + user.getAktiv() + "')");
+        List<UserDTO> users = getData();
+        db.connect();
+        int idIndex = users.get(users.size()-1).getUserID()+1;
+        user.setUserID(idIndex);
+        db.update("insert into userdto (userID, userName, ini, cpr, password, job, aktiv) VALUES ('" + user.getUserID() + "', '" + user.getUserName() + "','" + user.getIni() + "','" + user.getCpr() + "','" + user.getPassword() + "','" + user.getJob() + "'," + user.getAktiv() + ")");
         db.close();
+        return user;
     }
 
     @Override
@@ -126,7 +129,6 @@ public class UserDAOSQL implements IUserDAO {
             e.printStackTrace();
         }
         db.close();
-
     }
 
     @Override

@@ -33,6 +33,7 @@ public class SQLDatabaseIO {
             try{
                 conn = DriverManager.getConnection(DatabaseURL, USER, PASS);
                 connected = true;
+                System.out.println("connected");
             }catch(SQLException e){
                 //System.out.println("Connecting failed");
                 connected=false;
@@ -44,9 +45,11 @@ public class SQLDatabaseIO {
     public void update(String query){
         if(connected){
             try {
+                System.out.println("starting");
                 stmt = conn.createStatement();
                 stmt.executeUpdate("use "+db_name);
                 stmt.executeUpdate(query);
+                System.out.println("executed!");
             } catch (SQLException e) {
                 e.printStackTrace();
             }
@@ -74,6 +77,7 @@ public class SQLDatabaseIO {
             try {
                 conn.close();
                 connected=false;
+                System.out.println("closed");
             } catch (SQLException e) {
                 connected=true;
                 e.printStackTrace();

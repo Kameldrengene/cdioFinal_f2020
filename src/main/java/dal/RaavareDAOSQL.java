@@ -8,12 +8,13 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class RaavareDAOSQL {
+public class RaavareDAOSQL implements IRaavareDAO{
     SQLDatabaseIO db = new SQLDatabaseIO("kamel", "dreng", "runerne.dk", 8003); //Makes new SQLDatabaseIO object.
 
-    RaavareDTO getRaavare(int raavareId) throws IDALException.DALException{
+    @Override
+    public RaavareDTO getRaavare(int raavareId) throws IDALException.DALException{
         db.connect();
-        ResultSet rs = db.query("SELECT * FROM Recepter where RID=" + raavareId); //Select all columns from recept where receptID is input
+        ResultSet rs = db.query("SELECT * FROM Raavarer where raavareID=" + raavareId); //Select all columns from recept where receptID is input
         RaavareDTO raavare = new RaavareDTO();
         try {
             rs.next();
@@ -29,7 +30,8 @@ public class RaavareDAOSQL {
     }
 
 
-    List<RaavareDTO> getRaavareList() throws IDALException.DALException{
+    @Override
+    public List<RaavareDTO> getRaavareList() throws IDALException.DALException{
         db.connect();
         ResultSet rs = db.query("SELECT * FROM Raavarer"); //Select all data from raavarer
         List<RaavareDTO> raavareList = new ArrayList<>();
@@ -52,20 +54,22 @@ public class RaavareDAOSQL {
         return raavareList;
     }
 
-    void createRaavare(RaavareDTO raavare) throws IDALException.DALException{
+    @Override
+    public void createRaavare(RaavareDTO raavare) throws IDALException.DALException{
         db.connect();
-        db.update("insert into Recepter (raavareID, raavareNavn, leverandoer) VALUE ('" + raavare.getRaavareId() + "','" + raavare.getRaavareNavn() + "','" + raavare.getLeverandoer()  + "')");
+        db.update("insert into Raavarer (raavareID, raavareNavn, leverandoer) VALUE ('" + raavare.getRaavareId() + "','" + raavare.getRaavareNavn() + "','" + raavare.getLeverandoer()  + "')");
         db.close();
     }
 
-    void updateRaavare(RaavareDTO raavare) throws IDALException.DALException{
+    @Override
+    public void updateRaavare(RaavareDTO raavare) throws IDALException.DALException{
         db.connect();
         try {
             ResultSet rs = db.query("SELECT * FROM Raavarer where raavareID=" + raavare.getRaavareId());
             rs.next();
             if (rs.getInt("raavareID") == raavare.getRaavareId()) {
-                db.update("UPDATE Recepter SET raavareNavn = '" + raavare.getRaavareNavn() + "' WHERE (raavareID = '" + raavare.getRaavareId() + "');");
-                db.update("UPDATE Recepter SET leverandoer = '" + raavare.getLeverandoer() + "' WHERE (raavareID = '" + raavare.getRaavareId() + "');");
+                db.update("UPDATE Raavarer SET raavareNavn = '" + raavare.getRaavareNavn() + "' WHERE (raavareID = '" + raavare.getRaavareId() + "');");
+                db.update("UPDATE Raavarer SET leverandoer = '" + raavare.getLeverandoer() + "' WHERE (raavareID = '" + raavare.getRaavareId() + "');");
             }
             rs.close();
         } catch (SQLException e) {

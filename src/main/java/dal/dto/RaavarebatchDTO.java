@@ -17,12 +17,20 @@ public class RaavarebatchDTO {
         this.raavareId = raavareId;
     }
 
-    public double getMaengde() {
-        return maengde;
+    public double getAktuelMaengde() {
+        return aktuelMaengde;
     }
 
-    public void setMaengde(double maengde) {
-        this.maengde = maengde;
+    public void setAktuelMaengde(double aktuelMaengde) {
+        this.aktuelMaengde = aktuelMaengde;
+    }
+
+    public double getStartMaengde() {
+        return startMaengde;
+    }
+
+    public void setStartMaengde(double startMaengde) {
+        this.startMaengde = startMaengde;
     }
 
     /** raavare batch id i området 1-99999999. Vælges af brugerne */
@@ -30,5 +38,7 @@ public class RaavarebatchDTO {
     /** raavare id i området 1-99999999 vælges af brugerne */
     int raavareId;
     /** mængde på lager */
-    double maengde;
+    double aktuelMaengde;
+    /** Start mængde */
+    double startMaengde;
 }

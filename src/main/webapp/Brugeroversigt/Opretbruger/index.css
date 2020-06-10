@@ -21,6 +21,14 @@
     color: var(--col-textprimary);
 }
 
+.aktivebox{
+    margin-top: 1%;
+    color: #696969;
+}
+.aktivebox:hover{
+    color: var(--col-textprimary);
+}
+
 /* Vælger element med id='subject' inde i elementet med
     klassen 'radiogroup */
 .radiogroup #subject{

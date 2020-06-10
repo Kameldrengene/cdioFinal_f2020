@@ -1,4 +1,4 @@
-$.ajax({async: false});
+$.ajaxSetup({async: false});
 
 $("document").ready(function () {
 

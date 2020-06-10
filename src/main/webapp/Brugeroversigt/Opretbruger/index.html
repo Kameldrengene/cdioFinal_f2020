@@ -21,27 +21,33 @@
     <input type="text" id="cpr"  placeholder="CPR-Nummer" value=""><br>
     <input type="text" id="pass"  placeholder="Password" value=""><br>
 
+
     <!-- En <div> (gruppe) der indeholder en serie labels og 'radio'-knapper -->
     <div class="roller">
         <!-- Kun én knap af dem med "name=gender" kan vælges -->
-        <label id="subject">Vælg rolle:</label><br>
+        <label id="subject">Vælg job:</label><br>
 
-        <input type="radio" id="role1" name="Administrator" value="Administrator">
-        <label for="role1"> Administrator </label><br>
+        <input type="radio" id="role1" name="jobs" class="jobsradio"  value="Administrator">
+        <label for="role1"> Administrators </label><br>
 
-        <input type="radio" id="role2" name="Farmacuet" value="Farmaceut">
+        <input type="radio" id="role2" name="jobs" class="jobsradio" value="Farmaceut">
         <label for="role2"> Farmaceut </label><br>
 
-        <input type="radio" id="role3" name="Projektleder" value="Projektleder">
-        <label for="role3"> Projektleder</label><br>
+        <input type="radio" id="role3" name="jobs" class="jobsradio" value="Produktionsleder">
+        <label for="role3"> Produktionsleder</label><br>
 
-        <input type="radio" id="role4" name="Laborant" value="Laborant">
+        <input type="radio" id="role4" name="jobs" class="jobsradio" value="Laborant">
         <label for="role4"> Laborant </label><br><br>
 
-        <input type="button" onclick="createUser()" class="hvr-pop" value="Opret">
+        <label for="aktivcheckbox"> aktiv: </label><br>
+        <input type="radio" id="aktivcheckbox" name="aktive" class="jobs" value="true">
+        <label for="aktivcheckbox"> yes </label><br>
+
+        <input type="radio" id="aktivcheckboxno" name="aktive" class="jobs" value="false">
+        <label for="aktivcheckboxno"> no </label><br>
+
+        <input type="button" onclick="postdata()" class="hvr-pop" value="Opret">
     </div>
-
-    <script src="createUser.js"></script></div>
-
+</div>
 </body>
 </html>
