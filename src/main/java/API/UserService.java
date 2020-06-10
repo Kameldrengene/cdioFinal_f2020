@@ -26,6 +26,18 @@ public class UserService {
         return null;
     }
 
+    @Path("getUser/{id}")
+    @Produces(MediaType.APPLICATION_JSON)
+    @GET
+    public UserDTO getUser(@PathParam("id") int id) {
+        try {
+            return userController.getUser(id);
+        } catch (IDALException.DALException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
     // -Mikkel
     @Path("getRole")
     @Produces(MediaType.APPLICATION_JSON)
