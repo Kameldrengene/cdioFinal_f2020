@@ -73,7 +73,6 @@ public class ReceptDAOSQL implements IReceptDAO{
             ResultSet rs = db.query("SELECT * FROM Recepter where RID=" + recept.getReceptId());
             rs.next();
             if (rs.getInt("RID") == recept.getReceptId()) {
-                db.update("UPDATE Recepter SET RID = '" + recept.getReceptId() + "' WHERE (RID = '" + recept.getReceptId() + "');");
                 db.update("UPDATE Recepter SET RName = '" + recept.getReceptNavn() + "' WHERE (RID = '" + recept.getReceptId() + "');");
                 db.update("UPDATE Recepter SET raavareID = '" + recept.getRaavareId() + "' WHERE (RID = '" + recept.getReceptId() + "');");
                 db.update("UPDATE Recepter SET nonNetto = '" + recept.getNonNetto() + "' WHERE (RID = '" + recept.getReceptId() + "');");

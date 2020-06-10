@@ -21,7 +21,7 @@ public class UserService {
     @GET
     public List<UserDTO> getData() {
         try {
-            return userController.getData().getData();
+            return userController.getData();
         } catch (IDALException.DALException e) {
             e.printStackTrace();
         }
