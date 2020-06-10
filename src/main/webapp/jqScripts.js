@@ -16,7 +16,7 @@ function Personslist() {
                 '                <th>ActiveSwitch</th>\n' +
                 '            </tr>';
             $.each(data,function (key,value) {
-                console.log(value);
+                //console.log(value);
                 var userID = value.userID;
                 person_data += '<tr>';
                 person_data += '<td>'+userID+'</td>';
@@ -37,30 +37,7 @@ function Personslist() {
     });
 }
 
-function Loginlist() {
-    $(document).ready(function () {
-        $.getJSON("/SinglePageWEB_war_exploded/rest/persons",function (data) {
-            var person_data = '<tr>\n' +
-                '                <th>ID</th>\n' +
-                '                <th>Initials</th>\n' +
-                '                <th>Role</th>\n' +
-                '                <th>Login</th>\n' +
-                '            </tr>';
-            $.each(data,function (key,value) {
-                if (value.aktiv) {
-                    var auserid = value.userID;
-                    person_data += '<tr>';
-                    person_data += '<td>' + auserid + '</td>';
-                    person_data += '<td>' + value.ini + '</td>';
-                    person_data += '<td>' + value.job + '</td>';
-                    person_data += "<td><input id='updateuser' class='update' type='button' value='login as'/> </td>";
-                    person_data += '</tr>';
-                }
-            });
-            $('#Person_table').html(person_data);
-        });
-    });
-}
+setInterval(Personslist, 3000);
 
 var currentactivity = "";
 function getcurrentActivity(ID) { //opdatere brugerens aktivitet
@@ -94,6 +71,7 @@ function getcurrentActivity(ID) { //opdatere brugerens aktivitet
         }
     });
 }
+
 //updatere brugerens aktivitet
 function testalert(ID) {
     getcurrentActivity(ID);
@@ -243,6 +221,42 @@ function homepage () {
         window.setTimeout(switchPage('AdminScreen/index.html'), 5000);
     });
 }
+
+function viewlist(headers, link, tableName, btnHtmlfunc) {
+    $(document).ready(function () {
+        $.getJSON(link /*"/BoilerPlate_war_exploded/rest/Raavare/getRaavarer"*/,function (BEdata) {
+            var data = '<tr>\n';
+            for (let i = 0; i < headers.length; i++){
+                data += '<th>'+ headers[i] +'</th>';
+            }
+            data += '</tr>';
+
+            $.each(BEdata,function (key,value) {
+                //console.log(value);
+                data += '<tr>';
+                $.each(value, function (key2, inner) {
+                    data += '<td>'+inner+'</td>'
+                });
+                data += btnHtmlfunc(value);
+                data +=  '</tr>';
+            });
+            $('#' + tableName).html(data);
+        });
+    });
+}
+
+function confirmRaavareUpdate(id){
+    $(document).ready(function () {
+        if(confirm("are you sure, you want to update this råvare "+ id +"?")){
+            switchP('FarmaScreen/VisRaavare/UpdateRaavare/index.html')
+            updatedID = id;
+        }
+        else {
+            alert("no worries!");
+        }
+    });
+}
+
 
 function createUser() {
     var user = {

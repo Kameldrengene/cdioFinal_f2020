@@ -50,8 +50,6 @@ public class UserDAOSQL implements IUserDAO {
                 user.setCpr(rs.getString("cpr"));
                 user.setPassword(rs.getString("password"));
                 user.setJob(rs.getString("job"));
-
-                //todo hvad er aktiv?
                 user.setAktiv(rs.getBoolean("aktiv"));
                 userList.add(user);
             }

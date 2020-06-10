@@ -1,7 +1,6 @@
 package dal;
 
 import dal.dto.ReceptDTO;
-import dal.dto.UserDTO;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;

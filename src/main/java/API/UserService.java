@@ -2,8 +2,6 @@ package API;
 
 import controller.UserController;
 import dal.IDALException;
-import dal.IUserDAO;
-import dal.UserDAOSQL;
 import dal.dto.UserDTO;
 
 import javax.ws.rs.*;
