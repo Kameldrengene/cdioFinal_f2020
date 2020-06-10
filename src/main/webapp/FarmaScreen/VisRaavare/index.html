@@ -3,25 +3,32 @@
 <head>
     <meta charset="UTF-8">
     <title>Farma Screen</title>
-    <link rel="stylesheet" type="text/css" href="../default.css">
+    <link rel="stylesheet" type="text/css" href="../../default.css">
 </head>
 <body>
-<h1>Farmaceut</h1>
-<div style="width: 30%; margin: auto">
-<div style="width: 50%; float: left;">
-    <h2>Råvarer</h2>
-    <input type="submit" class="hvr-buzz screenbtn" value="Opret ny Råvare" onclick="switchP('AdminScreen/index.html'); return false"><br>
-    <input type="submit" class="hvr-buzz screenbtn" value="Vis råvarer" onclick="switchP('FarmaScreen/index.html'); return false">
-</div>
+<h1>Råvare oversigt</h1>
+<div>
+    <div id="list" class="container" className="brugertable">
+        <br/>
+        <table class="brugertable" id="raavare_table">
 
-<div style="width: 50%; float: right;">
-    <h2>Recepter</h2>
-    <input type="submit" class="hvr-buzz screenbtn" value="Opret ny Recept" onclick="switchP('PLeadScreen/index.html'); return false"><br>
-    <input type="submit" class="hvr-buzz screenbtn" value="Vis recepter" onclick="switchP('LabScreen/index.html'); return false">
-</div>
+        </table>
+        <h1 id="error"></h1>
+    </div>
 </div>
 
 <input type="submit" class="hvr-buzz screenbtn" value="Retur" onclick="switchP('FarmaScreen/index.html'); return false">
+
+<script>viewlist
+(["ID", "Navn", "Leverandør", "Lagerbehold", "Update"],
+"/BoilerPlate_war_exploded/rest/Raavare/getRaavarer",
+"raavare_table",
+function (value) {
+    const id = value.raavareId
+    let msg = "";
+    msg += "<td><input id='updateuser' class='update' type='button' onclick='confirmRaavareUpdate("+ id +")' value='Update'/> </td>";
+    return msg
+});</script>
 
 </body>
 </html>
