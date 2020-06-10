@@ -30,12 +30,7 @@ public class UserService {
     @Produces(MediaType.APPLICATION_JSON)
     @GET
     public UserDTO getUser(@PathParam("id") int id) {
-        try {
-            return userController.getUser(id);
-        } catch (IDALException.DALException e) {
-            e.printStackTrace();
-        }
-        return null;
+        return userController.getUser(id);
     }
 
     // -Mikkel

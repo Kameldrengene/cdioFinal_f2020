@@ -1,6 +1,5 @@
 $.ajaxSetup({async: false});
 
-
 var ID = 'delete';
 function Personslist() {
     $(document).ready(function () {
@@ -87,7 +86,32 @@ function confirmUserUpdate(ID) { //metoden sender videre til update html siden.
             switchP('Brugeroversigt/Updatebruger/index.html')
             //load info from user into page
             $(document).ready(function () {
-                $.getJSON("/BoilerPlate_war_exploded/rest/user/getUsers",function (data) {
+                $.getJSON("/BoilerPlate_war_exploded/rest/user/getUser/" + updatedID, function (data) {
+                    document.getElementById("UpUsername").value = data.userName;
+                    document.getElementById("Upini").value =  data.ini;
+                    document.getElementById("Upcpr").value =  data.cpr;
+                    document.getElementById("Uppass").value =  data.password;
+                    if (data.job === "Administrator") {
+                        document.getElementById("Uprole1").checked = "checked";
+                    }else if (data.job === "Farmaceut") {
+                        document.getElementById("Uprole2").checked = "checked";
+                    }else if (data.job === "Produktionsleder") {
+                        document.getElementById("Uprole3").checked = "checked";
+                    }else if (data.job === "Laborant") {
+                        document.getElementById("Uprole4").checked = "checked";
+                    }else {
+                        alert("Error: No or wrong role");
+                    }
+
+                    if (data.aktiv){
+                        document.getElementById("Upyes").checked = "checked";
+                    } else {
+                        document.getElementById("Upno").checked = "checked";
+                    }
+
+
+                })
+            });
         }
         else {
             alert("no worries!");
