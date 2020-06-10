@@ -1,5 +1,6 @@
 $.ajaxSetup({async: false});
 
+localStorage.setItem('loginID', 'None');
 var ID = 'delete';
 function Personslist() {
     $(document).ready(function () {
