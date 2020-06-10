@@ -34,13 +34,19 @@ public class UserService {
         return userController.getRole(role);
     }
 
-
+    @Path("getactivity/{id}")
+    @Produces(MediaType.APPLICATION_JSON)
+    @GET
+    public boolean getUserActivity (@PathParam("id") int id){
+        return userController.CurrentActivity(id);
+    }
 
     @Path("activeUser")
-    @POST
+    @PUT
     public UserDTO activitySwitchUser(UserDTO user){
         return userController.activitySwitchUser(user);
     }
+
 
     @Path("createUser")
     @POST

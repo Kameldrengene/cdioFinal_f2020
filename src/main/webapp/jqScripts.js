@@ -28,8 +28,8 @@ function Personslist() {
                 //if (value.aktiv)
 
                 person_data += '<td>'+ ((value.aktiv) ? "Aktiv" : "Ikke aktiv") +'</td>';
-                person_data += "<td><input id='updateuser' class='update' type='button' onclick='confirmUserUpdate("+userID+")' value='Update'/> </td>";
-                person_data += "<td><input id='deleteuser' class='slet' type='button' value='Switch Activity' onclick='switchActivityUser("+userID+")'/> </td>";
+                person_data += "<td><input id='updateuser' class='update' type='button' onclick='confirmUpdate("+userID+")' value='Update'/> </td>";
+                person_data += "<td><input id='deleteuser' class='slet' type='button' value='Switch Activity' onclick='testalert("+userID+")'/> </td>";
                 person_data +=  '</tr>';
             });
             $('#Person_table').html(person_data);
@@ -39,15 +39,47 @@ function Personslist() {
 
 setInterval(Personslist, 3000);
 
-function switchActivityUser(ID) {
-    //console.log("Delete user:" + ID);
-    if(confirm("Are you sure you want to switch the activity for user: "+ID+"?")){
-        fetch("/BoilerPlate_war_exploded/rest/user/activeUser/"+ID);
-        Personslist();
-    }
+var currentactivity = "";
+function getcurrentActivity(ID) { //opdatere brugerens aktivitet
+    $(document).ready(function () {
+        if(confirm("are you sure, you want to update this user: " + ID+" ?")) {
+            $.getJSON("/BoilerPlate_war_exploded/rest/user/getactivity/" + ID + "", function (data) {
+                currentactivity = data;
+            });
+            var USERID = ID;
+            var bool = 1;
+            if (currentactivity === "false") {
+                bool = 1;
+            }
+            if (currentactivity === "true") {
+                bool = 0;
+            }
+            var jsondata = {userID: USERID, aktiv: bool};
+            $.ajax({
+                url: "/BoilerPlate_war_exploded/rest/user/activeUser",
+                type: 'PUT',
+                contentType: "application/json",
+                dataType: 'json',
+                data: JSON.stringify(jsondata),
+                success: function (data) {
+                    Personslist();
+                },
+                error: function (jqXHR, text, error) {
+                    alert(JSON.stringify(jsondata));
+                }
+            });
+        }
+    });
 }
-var updatedID;
-function confirmUserUpdate(ID) {
+
+//updatere brugerens aktivitet
+function testalert(ID) {
+    getcurrentActivity(ID);
+}
+
+
+var updatedID; //gemmer ID'et
+function confirmUpdate(ID) { //metoden sender videre til update html siden.
     $(document).ready(function () {
         if(confirm("are you sure, you want to update this user ?" + ID)){
             switchP('Brugeroversigt/Updatebruger/index.html')
@@ -59,9 +91,9 @@ function confirmUserUpdate(ID) {
     });
 }
 
-function postUpdate() {
+function postUpdate() { // metoden bliver kaldt når man trykker på opret knappen
     if(confirm("are sure?")){
-        updateUser();
+        updateUser(); // opdatere brugeren
     }else {
         alert("no changes, you're back!");
         homepage();
@@ -104,38 +136,8 @@ function updateUser() {
             homepage();
         },
         error: function (jqXHR, text, error) {
-            alert(JSON.stringify(jsondata));
+            alert(JSON.stringify(UPjsondata));
         }
-    });
-}
-
-
-
-function createbutton(value, id) {
-    return "</td><td><input id='update' class='edit' type='submit' value=''/> </td>";
-}
-
-function deletebutton(ID) {
-    var jsondata = {id: ID};
-    $.ajax({
-        url: "/SinglePageWEB_war_exploded/rest/persons",
-        type: 'DELETE',
-        contentType: "application/json",
-        dataType: 'json',
-        data: JSON.stringify(jsondata),
-        success: function (data) {
-            homepage();
-        },
-    });
-
-}
-
-function deletedata(id) {
-    $(document).ready(function () {
-        if(confirm("Are you sure you wanna delete?")){
-            deletebutton(id);
-        }else
-            alert("Try again!")
     });
 }
 
@@ -210,18 +212,6 @@ function successTest() {
     });
 }
 
-function failTest() {
-    $.ajax({
-        url: "/SinglePageWEB_war_exploded/rest/persons",
-        type: 'POST',
-        contentType: "application/json",
-        dataType: 'json',
-        data: JSON.stringify(jsondata),
-        error: function (jqXHR, text, error) {
-            alert(jqXHR.status + text + error);
-        }
-    });
-}
 function homepage () {
     $(function () {
         function switchPage(page) {

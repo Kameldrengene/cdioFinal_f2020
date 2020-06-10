@@ -23,6 +23,7 @@ public class UserController {
         return userDAOSQL.getData();
     }
 
+
     public List<UserDTO> getRole(String role){
         return userDAOSQL.getRole(role);
     }
@@ -36,6 +37,16 @@ public class UserController {
             e.printStackTrace();
         }
         return user;
+    }
+
+    public boolean CurrentActivity (int id){
+        UserDAOSQL db = new UserDAOSQL();
+        try {
+            return db.getActivity(id);
+        } catch (IDALException.DALException e) {
+            e.printStackTrace();
+        }
+        return false;
     }
 
 
