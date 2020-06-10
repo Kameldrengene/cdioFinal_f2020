@@ -73,16 +73,16 @@ async function PersonList(role) {
 
         //Loop through
         $.each(data, function (key, value) {
+            if (value.aktiv) {
+                var userID = value.userID;
 
-            var userID = value.userID;
-
-            //Uses userID for label reference
-            tabelData += "<tr>";
-            tabelData += "<td><input type = 'radio' name = 'rolle' id ='" + userID + "'></td>";
-            tabelData += "<td><Label for ='" + userID + "'>" + userID + "</Label></td>";
-            tabelData += "<td><Label for ='" + userID + "'>" + value.userName + "</Label></td>";
-            tabelData += "</tr>";
-
+                //Uses userID for label reference
+                tabelData += "<tr>";
+                tabelData += "<td><input type = 'radio' name = 'rolle' id ='" + userID + "'></td>";
+                tabelData += "<td><Label for ='" + userID + "'>" + userID + "</Label></td>";
+                tabelData += "<td><Label for ='" + userID + "'>" + value.userName + "</Label></td>";
+                tabelData += "</tr>";
+            }
         });
     });
 
