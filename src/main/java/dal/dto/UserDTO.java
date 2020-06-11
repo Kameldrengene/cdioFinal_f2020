@@ -6,7 +6,7 @@ import java.util.List;
 
 public class UserDTO implements Serializable{
 
-	private static final long serialVersionUID = 4545864587995944260L;
+	private static final long serialVersionUID = 4545864587995944260L; //TODO Bliver denne overhovedet brugt??
 	private int userID;
 	private String userName;                
 	private String ini;
@@ -24,29 +24,31 @@ public class UserDTO implements Serializable{
 	public String getPassword(){
 	    return password;
     }
-    
     public void setPassword(String newPassword){
 	    this.password = newPassword;
     }
-	
+
 	public int getUserID() {
 		return userID;
 	}
 	public void setUserID(int userID) {
 		this.userID = userID;
 	}
+
 	public String getUserName() {
 		return userName;
 	}
 	public void setUserName(String userName) {
 		this.userName = userName;
 	}
+
 	public String getIni() {
 		return ini;
 	}
 	public void setIni(String ini) {
 		this.ini = ini;
 	}
+
 	public String getCpr() {
 		return cpr;
 	}
@@ -60,21 +62,19 @@ public class UserDTO implements Serializable{
 	public void setJob(String job) {
 		this.job = job;
 	}
+
 	public boolean getAktiv(){return aktiv;}
 	public void setAktiv(boolean aktiv) {this.aktiv = aktiv;}
 
-	
 	public void removeRole(){
 		this.job = null;
 	}
-	
 	public static int getCounter() {
 		return counter;
 	}
-
 	public static void setCounter(int counter) {
 		UserDTO.counter = counter;
-	}
+	} //TODO bliver ikke brugt.. skal fjernes? tror det blev brugt til TUI
 
 	@Override
 	public String toString() {

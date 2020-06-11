@@ -17,18 +17,18 @@ public class RaavarevbatchController {
     }
 
     public List<RaavarebatchDTO> getData() throws IDALException.DALException {
-        return DAOSQL.getRaavarebatchList();
+        return DAOSQL.getRVBList();
     }
 
 
     public List<RaavarebatchDTO> getAktuelle() throws IDALException.DALException {
-        return DAOSQL.getAktuelRaavarebatchList();
+        return DAOSQL.getAktuelRVBList();
     }
 
     public RaavarebatchDTO getBatch(String batchID) throws IDALException.DALException{
 
         int batchIDint = Integer.parseInt(batchID);
-        return DAOSQL.getRaavarebatch(batchIDint);
+        return DAOSQL.getRBV(batchIDint);
     }
 
 }

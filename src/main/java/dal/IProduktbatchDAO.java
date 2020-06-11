@@ -5,9 +5,9 @@ import dal.dto.ProduktbatchDTO;
 import java.util.List;
 
 public interface IProduktbatchDAO {
-    ProduktbatchDTO getProduktBatch(int pbId) throws IDALException.DALException;
-    List<ProduktbatchDTO> getProduktBatchList() throws IDALException.DALException;
-    void createProduktBatch(ProduktbatchDTO produktbatch) throws IDALException.DALException;
-    void updateProduktBatch(ProduktbatchDTO produktbatch) throws IDALException.DALException;
+    ProduktbatchDTO getPB(int pbId) throws IDALException.DALException;
+    List<ProduktbatchDTO> getPBList() throws IDALException.DALException;
+    void opretPB(ProduktbatchDTO produktbatch) throws IDALException.DALException;
+    void opdaterPB(ProduktbatchDTO produktbatch) throws IDALException.DALException;
 
 }
