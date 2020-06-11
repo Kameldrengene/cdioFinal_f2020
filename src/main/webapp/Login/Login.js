@@ -3,10 +3,10 @@ $.ajaxSetup({async: false});
 $("document").ready(function () {
 
     //Keeps the different users stored, so they don't have to be reloaded multiple times
-    PersonList("Administrator");
-    PersonList("Farmaceut");
-    PersonList("Produktionsleder");
-    PersonList("Laborant");
+    userRoleList("Administrator");
+    userRoleList("Farmaceut");
+    userRoleList("Produktionsleder");
+    userRoleList("Laborant");
 
     // $(document).ajaxComplete(function(){
     //     $(".loader").css("display", "none");
@@ -51,9 +51,9 @@ $("document").ready(function () {
     //Switches tjo the right page when "sing in" button is pressed
     $(".hvr-buzz").click(function () {
         var loginRole = localStorage.getItem("loginRole");
-        var ID = localStorage.getItem("loginID");
+        var loginID = localStorage.getItem("loginID");
 
-        if (ID === "None") {
+        if (loginID === "None") {
             alert("Vælg venligst en rolle")
         } else {
             if (loginRole == "admin")
@@ -71,7 +71,7 @@ $("document").ready(function () {
 });
 
 
-async function PersonList(role) {
+async function userRoleList(role) {
 
     //Variable to hold all the tabel rows
     var tabelData = "";
