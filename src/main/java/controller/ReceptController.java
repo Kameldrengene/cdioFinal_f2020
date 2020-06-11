@@ -7,45 +7,46 @@ import dal.dto.ReceptDTO;
 import java.util.List;
 
 public class ReceptController {
-    private ReceptDAOSQL receptDAOSQL;
+    private ReceptDAOSQL RCDAO;
 
     public ReceptController(){
-        receptDAOSQL = new ReceptDAOSQL();
+        RCDAO = new ReceptDAOSQL();
     }
-    public List<ReceptDTO> getData()  {
+
+    public List<ReceptDTO> getRCList()  {
         try {
-            return receptDAOSQL.getRCList();
+            return RCDAO.getRCList();
         }catch (IDALException.DALException e){
             e.printStackTrace();
         }
         return null;
     }
 
-    public ReceptDTO getRecept (int receptId) {
+    public ReceptDTO getRC(int RCID) {
         try {
-            return receptDAOSQL.getRC(receptId);
+            return RCDAO.getRC(RCID);
         }catch (IDALException.DALException e){
             e.printStackTrace();
         }
         return null;
     }
 
-    public ReceptDTO opretRecept (ReceptDTO recept){
+    public ReceptDTO opretRC(ReceptDTO rc){
         try {
-             receptDAOSQL.opretRC(recept);
+             RCDAO.opretRC(rc);
         }catch (IDALException.DALException e){
             e.printStackTrace();
         }
-        return recept;
+        return rc;
     }
 
-    public ReceptDTO updateRecept (ReceptDTO recept){
+    public ReceptDTO opdaterRC(ReceptDTO rc){
         try {
-            receptDAOSQL.opdaterRC(recept);
+            RCDAO.opdaterRC(rc);
         }catch (IDALException.DALException e){
             e.printStackTrace();
         }
-        return recept;
+        return rc;
     }
 }
 

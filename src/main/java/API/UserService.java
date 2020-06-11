@@ -45,7 +45,7 @@ public class UserService {
     @Produces(MediaType.APPLICATION_JSON)
     @GET
     public boolean getUserActivity (@PathParam("id") int id){
-        return userController.CurrentActivity(id);
+        return userController.getActivity(id);
     }
 
     @Path("activeUser")
@@ -57,13 +57,13 @@ public class UserService {
     @Path("createUser")
     @POST
     public UserDTO createUser(UserDTO user){
-        userController.createUser(user);
+        userController.opretUser(user);
         return user;
     }
 
     @Path("updateUser")
     @PUT
     public UserDTO updateUser(UserDTO user){
-        return userController.updateUser(user);
+        return userController.opdaterUser(user);
     }
 }

@@ -7,46 +7,46 @@ import dal.dto.RaavareDTO;
 import java.util.List;
 
 public class RaavareController {
-    private RaavareDAOSQL raavareDAOSQL;
+    private RaavareDAOSQL RVDAO;
 
     public RaavareController (){
-        raavareDAOSQL = new RaavareDAOSQL();
+        RVDAO = new RaavareDAOSQL();
     }
 
-    public List<RaavareDTO> getData()  {
+    public List<RaavareDTO> getRVList()  {
         try {
-            return raavareDAOSQL.getRVList();
+            return RVDAO.getRVList();
         }catch (IDALException.DALException e){
             e.printStackTrace();
         }
         return null;
     }
 
-    public RaavareDTO getRaavare(int id) {
+    public RaavareDTO gerRV(int id) {
         try {
-            return raavareDAOSQL.getRV(id);
+            return RVDAO.getRV(id);
         }catch (IDALException.DALException e){
             e.printStackTrace();
         }
         return null;
     }
 
-    public RaavareDTO opretRaavare (RaavareDTO raavareDTO) {
+    public RaavareDTO opretRV(RaavareDTO rv) {
         try {
-            raavareDAOSQL.opretRV(raavareDTO);
+            RVDAO.opretRV(rv);
         }catch (IDALException.DALException e){
             e.printStackTrace();
         }
-        return raavareDTO;
+        return rv;
     }
 
-    public RaavareDTO updateRaavare(RaavareDTO raavareDTO) {
+    public RaavareDTO opdaterRV(RaavareDTO rv) {
         try {
-            raavareDAOSQL.opdaterRV(raavareDTO);
+            RVDAO.opdaterRV(rv);
         }catch (IDALException.DALException e){
             e.printStackTrace();
         }
-        return raavareDTO;
+        return rv;
     }
 
 

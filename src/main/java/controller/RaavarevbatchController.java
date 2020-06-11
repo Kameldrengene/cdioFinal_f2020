@@ -8,27 +8,25 @@ import java.util.List;
 
 public class RaavarevbatchController {
 
-    private RaavarebatchDAOSQL DAOSQL;
+    private RaavarebatchDAOSQL RVBDAO;
 
 
     //Konstruktør
     public RaavarevbatchController() {
-        DAOSQL = new RaavarebatchDAOSQL();
+        RVBDAO = new RaavarebatchDAOSQL();
     }
 
-    public List<RaavarebatchDTO> getData() throws IDALException.DALException {
-        return DAOSQL.getRVBList();
+    public List<RaavarebatchDTO> getRVBList() throws IDALException.DALException {
+        return RVBDAO.getRVBList();
     }
 
 
-    public List<RaavarebatchDTO> getAktuelle() throws IDALException.DALException {
-        return DAOSQL.getAktuelRVBList();
+    public List<RaavarebatchDTO> getAktuelRVBList() throws IDALException.DALException {
+        return RVBDAO.getAktuelRVBList();
     }
 
-    public RaavarebatchDTO getBatch(String batchID) throws IDALException.DALException{
-
-        int batchIDint = Integer.parseInt(batchID);
-        return DAOSQL.getRBV(batchIDint);
+    public RaavarebatchDTO getRVB(int RVBID) throws IDALException.DALException{
+        return RVBDAO.getRBV(RVBID);
     }
 
 }

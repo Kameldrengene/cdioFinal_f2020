@@ -1,8 +1,6 @@
 package API;
 
 import controller.ReceptController;
-import dal.IDALException;
-import dal.ReceptDAOSQL;
 import dal.dto.ReceptDTO;
 
 import javax.ws.rs.*;
@@ -18,25 +16,25 @@ public class ReceptService {
     @Path("getRecepts")
     @GET
     public List<ReceptDTO> getData() {
-       return receptController.getData();
+       return receptController.getRCList();
     }
 
 
     @GET
     @Path("getRecept/{receptId}")
     public ReceptDTO getRecept (@PathParam("receptId") int receptId){
-        return receptController.getRecept(receptId);
+        return receptController.getRC(receptId);
     }
 
     @POST
     @Path("opretRecept")
     public ReceptDTO opretRecept (ReceptDTO receptDTO){
-        return receptController.opretRecept(receptDTO);
+        return receptController.opretRC(receptDTO);
     }
 
     @PUT
     @Path("opdaterRecept")
     public ReceptDTO updateRecept (ReceptDTO receptDTO){
-        return receptController.updateRecept(receptDTO);
+        return receptController.opdaterRC(receptDTO);
     }
 }

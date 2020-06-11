@@ -18,25 +18,25 @@ public class RaavareService {
     @Path("getRaavarer")
     @GET
     public List<RaavareDTO> getData() throws IDALException.DALException {
-        return raavareController.getData();
+        return raavareController.getRVList();
     }
 
     @GET
     @Path("getRaavare/{raavareID}")
     public RaavareDTO getRaavare (@PathParam("raavareID") int raavareID){
-        return raavareController.getRaavare(raavareID);
+        return raavareController.gerRV(raavareID);
     }
 
     @POST
     @Path("opretRaavare")
     public RaavareDTO opretRaavare (RaavareDTO raavareDTO){
-        return raavareController.opretRaavare(raavareDTO);
+        return raavareController.opretRV(raavareDTO);
     }
 
     @PUT
     @Path("updaterRaavare")
     public RaavareDTO updateRaavare (RaavareDTO raavareDTO){
-        return raavareController.updateRaavare(raavareDTO);
+        return raavareController.opdaterRV(raavareDTO);
     }
 
 }

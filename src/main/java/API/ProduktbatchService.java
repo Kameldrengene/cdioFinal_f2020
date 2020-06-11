@@ -1,10 +1,8 @@
 package API;
 
 import controller.ProduktbatchController;
-import controller.RaavarevbatchController;
 import dal.IDALException;
 import dal.dto.ProduktbatchDTO;
-import dal.dto.RaavarebatchDTO;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
@@ -22,6 +20,6 @@ public class ProduktbatchService {
     @Path("getProduktbatch")
     @GET
     public List<ProduktbatchDTO> getData() throws IDALException.DALException {
-        return produktbatchController.getData();
+        return produktbatchController.getPBList();
     }
 }
