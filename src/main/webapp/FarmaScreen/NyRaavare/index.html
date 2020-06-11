@@ -26,7 +26,7 @@
 </div>
 
 
-<input type="submit" class="hvr-buzz screenbtn" value="Retur" onclick="switchP('FarmaScreen/index.html'); return false">
+<input type="submit" class="hvr-buzz screenbtn" value="Retur" onclick="((document.getElementById('raavareHeader').textContent === 'Opret ny Råvare') ? switchP('FarmaScreen/index.html') : switchP('FarmaScreen/VisRaavare/index.html')) ; return false">
 
 </body>
 </html>
