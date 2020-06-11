@@ -77,7 +77,7 @@ async function PersonList(role) {
     var tabelData = "";
 
     //Get all the persons
-    await $.getJSON("/BoilerPlate_war_exploded/rest/user/getRole?role=" + role, function (data) {
+    await $.getJSON("/BoilerPlate_war_exploded/rest/user/getRoleList?role=" + role, function (data) {
 
         //Loop through
         $.each(data, function (key, value) {
