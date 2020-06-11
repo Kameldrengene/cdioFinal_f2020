@@ -2,7 +2,7 @@ $.ajaxSetup({async: false});
 
 localStorage.setItem('loginID', 'None');
 var ID = 'delete';
-function Personslist() {
+function loadUserTable() {
     $(document).ready(function () {
         $.getJSON("/BoilerPlate_war_exploded/rest/user/getUserList",function (data) {
             var person_data = '<tr>\n' +
@@ -17,7 +17,6 @@ function Personslist() {
                 '                <th>ActiveSwitch</th>\n' +
                 '            </tr>';
             $.each(data,function (key,value) {
-                //console.log(value);
                 var userID = value.userID;
                 person_data += '<tr>';
                 person_data += '<td>'+userID+'</td>';
@@ -26,8 +25,6 @@ function Personslist() {
                 person_data += '<td>'+value.cpr+'</td>';
                 person_data += '<td>'+value.password+'</td>';
                 person_data += '<td>'+value.job+'</td>';
-                //if (value.aktiv)
-
                 person_data += '<td>'+ ((value.aktiv) ? "Aktiv" : "Ikke aktiv") +'</td>';
                 person_data += "<td><input id='updateuser' class='update' type='button' onclick='confirmUserUpdate("+userID+")' value='Update'/> </td>";
                 person_data += "<td><input id='deleteuser' class='slet' type='button' value='Switch Activity' onclick='testalert("+userID+")'/> </td>";
@@ -44,7 +41,7 @@ function checkIfNew() {
         if (JSON.stringify(x) !== JSON.stringify(data)) {
             localStorage.setItem("userTable", JSON.stringify(data));
             console.log("Updated");
-            Personslist();
+            loadUserTable();
         } else{
             console.log("Not updated");
         }
@@ -53,10 +50,10 @@ function checkIfNew() {
 setInterval(checkIfNew, 3000);
 
 var currentactivity = "";
-function getcurrentActivity(ID) { //opdatere brugerens aktivitet
+function opdaterActivity(ID) { //opdatere brugerens aktivitet
     $(document).ready(function () {
-        if(confirm("are you sure, you want to update user " + ID+"?")) {
-            $.getJSON("/BoilerPlate_war_exploded/rest/user/getActivity/" + ID + "", function (data) {
+        if(confirm("are you sure, you want to update user " + ID +"?")) {
+            $.getJSON("/BoilerPlate_war_exploded/rest/user/switchActivity/" + ID + "", function (data) {
                 currentactivity = data;
             });
             var USERID = ID;
@@ -67,19 +64,19 @@ function getcurrentActivity(ID) { //opdatere brugerens aktivitet
             if (currentactivity === "true") {
                 bool = 0;
             }
-            var jsondata = {userID: USERID, aktiv: bool};
-            if(jsondata.userID.toString() !== localStorage.getItem("loginID").toString()){
+            var jsonData = {userID: USERID, aktiv: bool};
+            if(jsonData.userID.toString() !== localStorage.getItem("loginID").toString()){
                 $.ajax({
                     url: "/BoilerPlate_war_exploded/rest/user/activeUser",
                     type: 'PUT',
                     contentType: "application/json",
                     dataType: 'json',
-                    data: JSON.stringify(jsondata),
+                    data: JSON.stringify(jsonData),
                     success: function (data) {
-                        Personslist();
+                        loadUserTable();
                     },
                     error: function (jqXHR, text, error) {
-                        alert(JSON.stringify(jsondata));
+                        alert(JSON.stringify(jsonData));
                     }
                 });
             } else{
@@ -91,7 +88,7 @@ function getcurrentActivity(ID) { //opdatere brugerens aktivitet
 
 //updatere brugerens aktivitet
 function testalert(ID) {
-    getcurrentActivity(ID);
+    opdaterActivity(ID);
 }
 
 
