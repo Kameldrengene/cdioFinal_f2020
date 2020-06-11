@@ -5,19 +5,19 @@
     <title>raavareEdit</title>
 </head>
 <body>
-<div id="content"><h1 id="raavareHeader">Opret ny Råvare</h1>
+<div id="content"><h1 id="RVHeader">Opret ny Råvare</h1>
     <br>
 
 
-    <input type="text" id="raavareNummer" placeholder="RåvareNummer" value=""><br>
-    <input type="text" id="raavareNavn" placeholder="RåvareNavn" value=""><br>
+    <input type="text" id="RVNummer" placeholder="RåvareNummer" value=""><br>
+    <input type="text" id="RVNavn" placeholder="RåvareNavn" value=""><br>
     <input type="text" id="leverandoer"  placeholder="Leverandør" value=""><br>
 
 
     <input id="confirmbtn" type="button" onclick="
         if (confirm('Er du sikker?')) {
-            if(document.getElementById('raavareNummer').value != '' || document.getElementById('raavareNavn').value != '' ||document.getElementById('leverandør').value != ''){
-                (document.getElementById('raavareHeader').textContent === 'Opret ny Råvare') ? postRaavareData() : postRaavareUpdate()
+            if(document.getElementById('RVNummer').value != '' || document.getElementById('RVNavn').value != '' ||document.getElementById('leverandør').value != ''){
+                (document.getElementById('RVHeader').textContent === 'Opret ny Råvare') ? postRaavareData() : postRaavareUpdate()
             } else {
                 alert('Ikke alt udfyldt')
             }
@@ -26,7 +26,7 @@
 </div>
 
 
-<input type="submit" class="hvr-buzz screenbtn" value="Retur" onclick="((document.getElementById('raavareHeader').textContent === 'Opret ny Råvare') ? switchP('FarmaScreen/index.html') : switchP('FarmaScreen/VisRaavare/index.html')) ; return false">
+<input type="submit" class="hvr-buzz screenbtn" value="Retur" onclick="((document.getElementById('RVHeader').textContent === 'Opret ny Råvare') ? switchP('FarmaScreen/index.html') : switchP('FarmaScreen/VisRaavare/index.html')) ; return false">
 
 </body>
 </html>
