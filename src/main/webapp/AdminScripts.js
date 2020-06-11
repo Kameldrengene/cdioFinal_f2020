@@ -2,9 +2,10 @@ $.ajaxSetup({async: false});
 
 localStorage.setItem('loginID', 'None');
 var ID = 'delete';
+
 function Personslist() {
     $(document).ready(function () {
-        $.getJSON("/BoilerPlate_war_exploded/rest/user/getUsers",function (data) {
+        $.getJSON("/BoilerPlate_war_exploded/rest/user/getUsers", function (data) {
             var person_data = '<tr>\n' +
                 '                <th>ID</th>\n' +
                 '                <th>Name</th>\n' +
@@ -16,34 +17,49 @@ function Personslist() {
                 '                <th>Update</th>\n' +
                 '                <th>ActiveSwitch</th>\n' +
                 '            </tr>';
-            $.each(data,function (key,value) {
+            $.each(data, function (key, value) {
                 //console.log(value);
                 var userID = value.userID;
                 person_data += '<tr>';
-                person_data += '<td>'+userID+'</td>';
-                person_data += '<td>'+value.userName+'</td>';
-                person_data += '<td>'+value.ini+'</td>';
-                person_data += '<td>'+value.cpr+'</td>';
-                person_data += '<td>'+value.password+'</td>';
-                person_data += '<td>'+value.job+'</td>';
+                person_data += '<td>' + userID + '</td>';
+                person_data += '<td>' + value.userName + '</td>';
+                person_data += '<td>' + value.ini + '</td>';
+                person_data += '<td>' + value.cpr + '</td>';
+                person_data += '<td>' + value.password + '</td>';
+                person_data += '<td>' + value.job + '</td>';
                 //if (value.aktiv)
 
-                person_data += '<td>'+ ((value.aktiv) ? "Aktiv" : "Ikke aktiv") +'</td>';
-                person_data += "<td><input id='updateuser' class='update' type='button' onclick='confirmUserUpdate("+userID+")' value='Update'/> </td>";
-                person_data += "<td><input id='deleteuser' class='slet' type='button' value='Switch Activity' onclick='testalert("+userID+")'/> </td>";
-                person_data +=  '</tr>';
+                person_data += '<td>' + ((value.aktiv) ? "Aktiv" : "Ikke aktiv") + '</td>';
+                person_data += "<td><input id='updateuser' class='update' type='button' onclick='confirmUserUpdate(" + userID + ")' value='Update'/> </td>";
+                person_data += "<td><input id='deleteuser' class='slet' type='button' value='Switch Activity' onclick='testalert(" + userID + ")'/> </td>";
+                person_data += '</tr>';
             });
             $('#Person_table').html(person_data);
+            return person_data;
+
         });
     });
 }
 
-setInterval(Personslist, 3000);
+function checkIfNew() {
+    $.get("/BoilerPlate_war_exploded/rest/user/getUsers", function (data) {
+        var x = JSON.parse(localStorage.getItem("userTable"));
+        if (JSON.stringify(x) !== JSON.stringify(data)) {
+            localStorage.setItem("userTable", JSON.stringify(data));
+            console.log("Updated");
+            Personslist();
+        } else{
+            console.log("Not updated");
+        }
+    });
+}
+setInterval(checkIfNew, 3000);
 
 var currentactivity = "";
+
 function getcurrentActivity(ID) { //opdatere brugerens aktivitet
     $(document).ready(function () {
-        if(confirm("are you sure, you want to update user " + ID+"?")) {
+        if (confirm("are you sure, you want to update user " + ID + "?")) {
             $.getJSON("/BoilerPlate_war_exploded/rest/user/getactivity/" + ID + "", function (data) {
                 currentactivity = data;
             });
@@ -82,29 +98,29 @@ function testalert(ID) {
 var updatedID; //gemmer ID'et
 function confirmUserUpdate(ID) { //metoden sender videre til update html siden.
     $(document).ready(function () {
-        if(confirm("are you sure, you want to update user " + ID + "?")){
+        if (confirm("are you sure, you want to update user " + ID + "?")) {
             updatedID = ID;
             switchP('Brugeroversigt/Updatebruger/index.html')
             //load info from user into page
             $(document).ready(function () {
                 $.getJSON("/BoilerPlate_war_exploded/rest/user/getUser/" + updatedID, function (data) {
                     document.getElementById("UpUsername").value = data.userName;
-                    document.getElementById("Upini").value =  data.ini;
-                    document.getElementById("Upcpr").value =  data.cpr;
-                    document.getElementById("Uppass").value =  data.password;
+                    document.getElementById("Upini").value = data.ini;
+                    document.getElementById("Upcpr").value = data.cpr;
+                    document.getElementById("Uppass").value = data.password;
                     if (data.job === "Administrator") {
                         document.getElementById("Uprole1").checked = "checked";
-                    }else if (data.job === "Farmaceut") {
+                    } else if (data.job === "Farmaceut") {
                         document.getElementById("Uprole2").checked = "checked";
-                    }else if (data.job === "Produktionsleder") {
+                    } else if (data.job === "Produktionsleder") {
                         document.getElementById("Uprole3").checked = "checked";
-                    }else if (data.job === "Laborant") {
+                    } else if (data.job === "Laborant") {
                         document.getElementById("Uprole4").checked = "checked";
-                    }else {
+                    } else {
                         alert("Error: No or wrong role");
                     }
 
-                    if (data.aktiv){
+                    if (data.aktiv) {
                         document.getElementById("Upyes").checked = "checked";
                     } else {
                         document.getElementById("Upno").checked = "checked";
@@ -113,17 +129,16 @@ function confirmUserUpdate(ID) { //metoden sender videre til update html siden.
 
                 })
             });
-        }
-        else {
+        } else {
             alert("no worries!");
         }
     });
 }
 
 function postUserUpdate() { // metoden bliver kaldt når man trykker på opret knappen
-    if(confirm("are sure?")){
+    if (confirm("are sure?")) {
         updateUser(); // opdatere brugeren
-    }else {
+    } else {
         alert("no changes, you're back!");
         adminHomepage();
     }
@@ -136,25 +151,32 @@ function updateUser() {
     var UPini = $("#Upini").val();
     var UPcpr = $("#Upcpr").val();
     var UPpass = $("#Uppass").val();
-    var UPjob ="" ;
+    var UPjob = "";
     var UPboolean = 0;      //todo update boolean in backend
-    if($('#Uprole1').is(":checked")){   //todo update job in backend
+    if ($('#Uprole1').is(":checked")) {   //todo update job in backend
         UPjob = "Administrator";
-    }else if ($('#Uprole2').is(":checked")){
+    } else if ($('#Uprole2').is(":checked")) {
         UPjob = "Farmaceut";
-    }else if ($('#Uprole3').is(":checked")){
+    } else if ($('#Uprole3').is(":checked")) {
         UPjob = "Produktionsleder";
-    }
-    else if ($('#Uprole4').is(":checked")) {
+    } else if ($('#Uprole4').is(":checked")) {
         UPjob = "Laborant";
     }
-    if ($('#Upyes').is(":checked")){
+    if ($('#Upyes').is(":checked")) {
         UPboolean = 1;
-    }else if ($('#Upno').is(":checked")){
+    } else if ($('#Upno').is(":checked")) {
         UPboolean = 0;
     }
     var statuscode;
-    var UPjsondata = {userID: UPid, userName: UPuser, ini: UPini, cpr: UPcpr, password: UPpass, job: UPjob, aktiv: UPboolean};
+    var UPjsondata = {
+        userID: UPid,
+        userName: UPuser,
+        ini: UPini,
+        cpr: UPcpr,
+        password: UPpass,
+        job: UPjob,
+        aktiv: UPboolean
+    };
     $.ajax({
         url: "/BoilerPlate_war_exploded/rest/user/updateUser",
         type: 'PUT',
@@ -176,28 +198,27 @@ function postdata() {
         var Iini = $("#ini").val();
         var Icpr = $("#cpr").val();
         var Ipass = $("#pass").val();
-        var Ijob ="" ;
+        var Ijob = "";
         var boolean = 0;
-        if($('#role1').is(":checked")){
+        if ($('#role1').is(":checked")) {
             Ijob = "Administrator";
-        }else if ($('#role2').is(":checked")){
+        } else if ($('#role2').is(":checked")) {
             Ijob = "Farmaceut";
-        }else if ($('#role3').is(":checked")){
+        } else if ($('#role3').is(":checked")) {
             Ijob = "Produktionsleder";
-        }
-        else if ($('#role4').is(":checked")) {
+        } else if ($('#role4').is(":checked")) {
             Ijob = "Laborant";
         }
-        if ($('#aktivcheckbox').is(":checked")){   //todo fix aktiv værdier i backend
+        if ($('#aktivcheckbox').is(":checked")) {   //todo fix aktiv værdier i backend
             boolean = 1;
-        }else if ($('#aktivcheckboxno').is(":checked")){
+        } else if ($('#aktivcheckboxno').is(":checked")) {
             boolean = 0;
         }
         alert(Ijob);
         alert(boolean);
-        if(confirm("Are you sure?")){
+        if (confirm("Are you sure?")) {
             successTest();
-        }else
+        } else
             alert("Try again!");
     });
 }
@@ -207,21 +228,20 @@ function successTest() {
     var Iini = $("#ini").val();
     var Icpr = $("#cpr").val();
     var Ipass = $("#pass").val();
-    var Ijob ="" ;
+    var Ijob = "";
     var boolean = 0;
-    if($('#role1').is(":checked")){
+    if ($('#role1').is(":checked")) {
         Ijob = "Administrator";
-    }else if ($('#role2').is(":checked")){
+    } else if ($('#role2').is(":checked")) {
         Ijob = "Farmaceut";
-    }else if ($('#role3').is(":checked")){
+    } else if ($('#role3').is(":checked")) {
         Ijob = "Produktionsleder";
-    }
-    else if ($('#role4').is(":checked")) {
+    } else if ($('#role4').is(":checked")) {
         Ijob = "Laborant";
     }
-    if ($('#aktivcheckbox').is(":checked")){
+    if ($('#aktivcheckbox').is(":checked")) {
         boolean = 1;
-    }else if ($('#aktivcheckboxno').is(":checked")){
+    } else if ($('#aktivcheckboxno').is(":checked")) {
         boolean = 0;
     }
     var statuscode;
@@ -241,7 +261,7 @@ function successTest() {
     });
 }
 
-function adminHomepage () {
+function adminHomepage() {
     $(function () {
         function switchPage(page) {
             return $("body").load(page);
