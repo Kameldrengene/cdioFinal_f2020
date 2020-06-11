@@ -2,6 +2,7 @@ package dal;
 
 import dal.dto.RaavareDTO;
 import dal.dto.ReceptDTO;
+import dal.dto.UserDTO;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -58,6 +59,10 @@ public class RaavareDAOSQL implements IRaavareDAO{
     @Override
     public void createRaavare(RaavareDTO raavare) throws IDALException.DALException{
         db.connect();
+        List<RaavareDTO> users = getRaavareList();
+        db.connect();
+        int idIndex = users.get(users.size()-1).getRaavareId()+1;
+        raavare.setRaavareId(idIndex);
         db.update("insert into Raavarer (raavareID, raavareNavn, leverandoer) VALUE ('" + raavare.getRaavareId() + "','" + raavare.getRaavareNavn() + "','" + raavare.getLeverandoer()  + "')");
         db.close();
     }
