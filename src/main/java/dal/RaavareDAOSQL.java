@@ -58,7 +58,6 @@ public class RaavareDAOSQL implements IRaavareDAO{
 
     @Override
     public void createRaavare(RaavareDTO raavare) throws IDALException.DALException{
-        db.connect();
         List<RaavareDTO> users = getRaavareList();
         db.connect();
         int idIndex = users.get(users.size()-1).getRaavareId()+1;
