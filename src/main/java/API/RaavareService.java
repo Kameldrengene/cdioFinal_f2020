@@ -3,6 +3,7 @@ package API;
 import controller.RaavareController;
 import dal.IDALException;
 import dal.dto.RaavareDTO;
+import dal.dto.UserDTO;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
