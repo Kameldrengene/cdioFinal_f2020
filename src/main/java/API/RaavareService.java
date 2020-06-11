@@ -19,4 +19,22 @@ public class RaavareService {
         return raavareController.getData();
     }
 
+    @GET
+    @Path("getRaavare/{raavareID}")
+    public RaavareDTO getRaavare (@PathParam("raavareID") int raavareID){
+        return raavareController.getRaavare(raavareID);
+    }
+
+    @POST
+    @Path("opretRaavare")
+    public RaavareDTO opretRaavare (RaavareDTO raavareDTO){
+        return raavareController.opretRaavare(raavareDTO);
+    }
+
+    @PUT
+    @Path("updaterRaavare")
+    public RaavareDTO updateRaavare (RaavareDTO raavareDTO){
+        return raavareController.updateRaavare(raavareDTO);
+    }
+
 }

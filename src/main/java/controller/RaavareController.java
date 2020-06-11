@@ -7,20 +7,46 @@ import dal.dto.RaavareDTO;
 import java.util.List;
 
 public class RaavareController {
-    public List<RaavareDTO> getData() throws IDALException.DALException {
-        return new RaavareDAOSQL().getRaavareList();
+    private RaavareDAOSQL raavareDAOSQL;
+
+    public RaavareController (){
+        raavareDAOSQL = new RaavareDAOSQL();
+    }
+
+    public List<RaavareDTO> getData()  {
+        try {
+            return raavareDAOSQL.getRaavareList();
+        }catch (IDALException.DALException e){
+            e.printStackTrace();
+        }
+        return null;
     }
 
     public RaavareDTO getRaavare(int id) {
-        return new RaavareDTO();
+        try {
+            return raavareDAOSQL.getRaavare(id);
+        }catch (IDALException.DALException e){
+            e.printStackTrace();
+        }
+        return null;
     }
 
-    public RaavareDTO createRaavare() {
-        return new RaavareDTO();
+    public RaavareDTO opretRaavare (RaavareDTO raavareDTO) {
+        try {
+            raavareDAOSQL.createRaavare(raavareDTO);
+        }catch (IDALException.DALException e){
+            e.printStackTrace();
+        }
+        return raavareDTO;
     }
 
-    public RaavareDTO updateRaavare() {
-        return new RaavareDTO();
+    public RaavareDTO updateRaavare(RaavareDTO raavareDTO) {
+        try {
+            raavareDAOSQL.updateRaavare(raavareDTO);
+        }catch (IDALException.DALException e){
+            e.printStackTrace();
+        }
+        return raavareDTO;
     }
 
 

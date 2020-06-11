@@ -23,7 +23,7 @@ public class ReceptService {
 
 
     @GET
-    @Path("/{receptId}")
+    @Path("getRecept/{receptId}")
     public ReceptDTO getRecept (@PathParam("receptId") int receptId){
         return receptController.getRecept(receptId);
     }
