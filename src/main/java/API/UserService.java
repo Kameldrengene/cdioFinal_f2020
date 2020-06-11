@@ -53,7 +53,7 @@ public class UserService {
     public UserDTO activitySwitchUser(UserDTO user){
         return userController.activitySwitchUser(user);
     }
-    
+
     @Path("createUser")
     @POST
     public UserDTO createUser(UserDTO user){

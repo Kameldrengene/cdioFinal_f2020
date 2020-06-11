@@ -17,6 +17,19 @@
 </head>
 <body>
     <h1>Råvarebatches</h1>
+    <input  type="checkbox">Vis tomme batces</input>
+
+    <script>viewlist
+    (["Nummer", "Navn", "Leverandør", "Lagerbehold", "Update"],
+        "/BoilerPlate_war_exploded/rest/Raavare/getRaavarer",
+        "raavare_table",
+        function (value) {
+            const id = value.raavareId
+            let msg = "";
+            msg += "<td><input id='updateuser' class='update' type='button' onclick='confirmRaavareUpdate("+ id +")' value='Update'/> </td>";
+            return msg
+        });
+    </script>
 
 
     <input  type="checkbox" type=text id="visTomme">
