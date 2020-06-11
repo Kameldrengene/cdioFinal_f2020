@@ -14,7 +14,7 @@
     <input type="text" id="leverandoer"  placeholder="Leverandør" value=""><br>
 
 
-    <input type="button" onclick="
+    <input id="confirmbtn" type="button" onclick="
         if (confirm('Er du sikker?')) {
             if(document.getElementById('raavareNummer').value != '' || document.getElementById('raavareNavn').value != '' ||document.getElementById('leverandør').value != ''){
                 (document.getElementById('raavareHeader').textContent === 'Opret ny Råvare') ? postRaavareData() : postRaavareUpdate()

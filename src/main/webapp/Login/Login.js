@@ -43,12 +43,12 @@ $("document").ready(function () {
         $('#personer').html(labos);
     });
 
-//Saves the ID of the selected user in localStorage
+    //Saves the ID of the selected user in localStorage
     $(".brugertable").on("click", "input", function () {
         localStorage.setItem("loginID", this.id);
     })
 
-//Switches to the right page when "sing in" button is pressed
+    //Switches tjo the right page when "sing in" button is pressed
     $(".hvr-buzz").click(function () {
         var loginRole = localStorage.getItem("loginRole");
         var ID = localStorage.getItem("loginID");

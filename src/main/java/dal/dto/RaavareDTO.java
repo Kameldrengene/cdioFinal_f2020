@@ -3,7 +3,9 @@ package dal.dto;
 public class RaavareDTO {
 
     /** raavare id i området 1-99999999 vælges af brugerne */
-    private int raavareId;
+    private int raavareID;
+
+    private int raavareNummer;
     /** min. 2 max. 20 karakterer */
     private String raavareNavn;
     /** min. 2 max. 20 karakterer */
@@ -11,7 +13,7 @@ public class RaavareDTO {
     //Lagerbeholdning DECIMAL(4,4)
     private double lagerBeholdning;
 
-    private int raavareNummer;
+
 
     public int getRaavareNummer() {return raavareNummer;}
 
@@ -25,8 +27,8 @@ public class RaavareDTO {
         this.lagerBeholdning = lagerBeholdning;
     }
 
-    public void setRaavareId(int raavareId) {
-        this.raavareId = raavareId;
+    public void setRaavareID(int raavareID) {
+        this.raavareID = raavareID;
     }
 
     public void setRaavareNavn(String raavareNavn) {
@@ -37,8 +39,8 @@ public class RaavareDTO {
         this.leverandoer = leverandoer;
     }
 
-    public int getRaavareId() {
-        return raavareId;
+    public int getRaavareID() {
+        return raavareID;
     }
 
     public String getRaavareNavn() {

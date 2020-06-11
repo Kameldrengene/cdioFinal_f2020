@@ -60,6 +60,7 @@ public class RaavarebatchDAOSQL implements IRaavarebatchDAO {
         List<RaavarebatchDTO> oldRBList = getRaavarebatchList();
         List<RaavarebatchDTO> newRBList = new ArrayList<>();
 
+
         for (int i = 0; i < oldRBList.size(); i++) {
             if(oldRBList.get(i).getAktuelMaengde() > 0)
                 newRBList.add(oldRBList.get(i));
