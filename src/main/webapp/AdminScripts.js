@@ -137,8 +137,8 @@ function updateUser() {
     var UPcpr = $("#Upcpr").val();
     var UPpass = $("#Uppass").val();
     var UPjob ="" ;
-    var UPboolean = 0;      //todo update boolean in backend
-    if($('#Uprole1').is(":checked")){   //todo update job in backend
+    var UPboolean = 0;
+    if($('#Uprole1').is(":checked")){
         UPjob = "Administrator";
     }else if ($('#Uprole2').is(":checked")){
         UPjob = "Farmaceut";

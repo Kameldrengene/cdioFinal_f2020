@@ -1,9 +1,8 @@
 package API;
 
-import controller.RaavareController;
+import controller.*;
 import dal.IDALException;
 import dal.dto.RaavareDTO;
-import dal.dto.UserDTO;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
@@ -13,24 +12,31 @@ import java.util.List;
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
 public class RaavareService {
-    public RaavareController raavareController = new RaavareController();
+
+
+    private RaavareController raavareController = new RaavareController();
     @Path("getRaavarer")
     @GET
     public List<RaavareDTO> getData() throws IDALException.DALException {
         return raavareController.getData();
     }
 
-    @Path("createRaavare")
-    @POST
-    public RaavareDTO createUser(RaavareDTO raavare){
-        raavareController.createRaavare(raavare);
-        return raavare;
+    @GET
+    @Path("getRaavare/{raavareID}")
+    public RaavareDTO getRaavare (@PathParam("raavareID") int raavareID){
+        return raavareController.getRaavare(raavareID);
     }
 
-    @Path("updateUser")
+    @POST
+    @Path("opretRaavare")
+    public RaavareDTO opretRaavare (RaavareDTO raavareDTO){
+        return raavareController.opretRaavare(raavareDTO);
+    }
+
     @PUT
-    public RaavareDTO updateUser(RaavareDTO raavare){
-        return raavareController.updateRaavare(raavare);
+    @Path("updaterRaavare")
+    public RaavareDTO updateRaavare (RaavareDTO raavareDTO){
+        return raavareController.updateRaavare(raavareDTO);
     }
 
 }
