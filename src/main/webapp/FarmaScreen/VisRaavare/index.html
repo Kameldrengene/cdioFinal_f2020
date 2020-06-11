@@ -3,7 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <title>Farma Screen</title>
-    <link rel="stylesheet" type="text/css" href="../../default.css">
 </head>
 <body>
 <h1>Råvare oversigt</h1>
@@ -20,10 +19,11 @@
 <input type="submit" class="hvr-buzz screenbtn" value="Retur" onclick="switchP('FarmaScreen/index.html'); return false">
 
 <script>viewlist
-(["ID", "Navn", "Leverandør", "Lagerbehold", "Update"],
+(["Nummer", "Navn", "Leverandør", "Lagerbehold[kg]", "Update"],
 "/BoilerPlate_war_exploded/rest/Raavare/getRaavarer",
 "raavare_table",
 function (value) {
+    //console.log(value);
     const id = value.raavareId
     let msg = "";
     msg += "<td><input id='updateuser' class='update' type='button' onclick='confirmRaavareUpdate("+ id +")' value='Update'/> </td>";

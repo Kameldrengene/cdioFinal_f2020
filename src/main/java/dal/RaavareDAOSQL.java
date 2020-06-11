@@ -1,8 +1,6 @@
 package dal;
 
 import dal.dto.RaavareDTO;
-import dal.dto.ReceptDTO;
-import dal.dto.UserDTO;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -19,9 +17,11 @@ public class RaavareDAOSQL implements IRaavareDAO{
         RaavareDTO raavare = new RaavareDTO();
         try {
             rs.next();
-            raavare.setRaavareId(rs.getInt("raavareID"));
+            raavare.setRaavareID(rs.getInt("raavareID"));
+            raavare.setRaavareNummer(rs.getInt("raavareNummer"));
             raavare.setRaavareNavn(rs.getString("raavareNavn"));
             raavare.setLeverandoer(rs.getString("leverandoer"));
+            raavare.setLagerBeholdning(rs.getDouble("lagerbeholdning"));
             rs.close();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -40,7 +40,7 @@ public class RaavareDAOSQL implements IRaavareDAO{
             //We do as in getUser, except we make new user until rs is empty
             while (rs.next()) {
                 RaavareDTO raavare = new RaavareDTO();
-                raavare.setRaavareId(rs.getInt("raavareID"));
+                raavare.setRaavareID(rs.getInt("raavareID"));
                 raavare.setRaavareNummer(rs.getInt("raavareNummer"));
                 raavare.setRaavareNavn(rs.getString("raavareNavn"));
                 raavare.setLeverandoer(rs.getString("leverandoer"));
@@ -61,9 +61,9 @@ public class RaavareDAOSQL implements IRaavareDAO{
     public void createRaavare(RaavareDTO raavare) throws IDALException.DALException{
         List<RaavareDTO> users = getRaavareList();
         db.connect();
-        int idIndex = users.get(users.size()-1).getRaavareId()+1;
-        raavare.setRaavareId(idIndex);
-        db.update("insert into Raavarer (raavareID, raavareNummer, raavareNavn, leverandoer) VALUE ('" + raavare.getRaavareId() + "','" + raavare.getRaavareNummer() + "','" + raavare.getRaavareNavn() + "','" + raavare.getLeverandoer()  + "')");
+        int idIndex = users.get(users.size()-1).getRaavareID()+1;
+        raavare.setRaavareID(idIndex);
+        db.update("insert into Raavarer (raavareID, raavareNummer, raavareNavn, leverandoer) VALUE ('" + raavare.getRaavareID() + "','" + raavare.getRaavareNummer() + "','" + raavare.getRaavareNavn() + "','" + raavare.getLeverandoer()  + "')");
         db.close();
     }
 
@@ -71,12 +71,12 @@ public class RaavareDAOSQL implements IRaavareDAO{
     public void updateRaavare(RaavareDTO raavare) throws IDALException.DALException{
         db.connect();
         try {
-            ResultSet rs = db.query("SELECT * FROM raavareLager where raavareID=" + raavare.getRaavareId());
+            ResultSet rs = db.query("SELECT * FROM raavareLager where raavareID=" + raavare.getRaavareID());
             rs.next();
-            if (rs.getInt("raavareID") == raavare.getRaavareId()) {
-                db.update("UPDATE Raavarer SET raavareNummer = '" + raavare.getRaavareNavn() + "' WHERE (raavareID = '" + raavare.getRaavareId() + "');");
-                db.update("UPDATE Raavarer SET raavareNavn = '" + raavare.getRaavareNavn() + "' WHERE (raavareID = '" + raavare.getRaavareId() + "');");
-                db.update("UPDATE Raavarer SET leverandoer = '" + raavare.getLeverandoer() + "' WHERE (raavareID = '" + raavare.getRaavareId() + "');");
+            if (rs.getInt("raavareID") == raavare.getRaavareID()) {
+                db.update("UPDATE Raavarer SET raavareNummer = '" + raavare.getRaavareNavn() + "' WHERE (raavareID = '" + raavare.getRaavareID() + "');");
+                db.update("UPDATE Raavarer SET raavareNavn = '" + raavare.getRaavareNavn() + "' WHERE (raavareID = '" + raavare.getRaavareID() + "');");
+                db.update("UPDATE Raavarer SET leverandoer = '" + raavare.getLeverandoer() + "' WHERE (raavareID = '" + raavare.getRaavareID() + "');");
             }
             rs.close();
         } catch (SQLException e) {
