@@ -11,15 +11,15 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import java.util.List;
 
-@Path("produktbatch")
+@Path("PB")
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
 public class ProduktbatchService {
     public ProduktbatchController produktbatchController = new ProduktbatchController();
 
-    @Path("getProduktbatch")
+    @Path("getPBList")
     @GET
-    public List<ProduktbatchDTO> getData() throws IDALException.DALException {
+    public List<ProduktbatchDTO> getPBList() throws IDALException.DALException {
         return produktbatchController.getPBList();
     }
 }
