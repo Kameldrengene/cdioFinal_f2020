@@ -2,6 +2,7 @@ package dal;
 
 import dal.dto.RaavareDTO;
 import dal.dto.ReceptDTO;
+import dal.dto.UserDTO;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -40,6 +41,7 @@ public class RaavareDAOSQL implements IRaavareDAO{
             while (rs.next()) {
                 RaavareDTO raavare = new RaavareDTO();
                 raavare.setRaavareId(rs.getInt("raavareID"));
+                raavare.setRaavareNummer(rs.getInt("raavareNummer"));
                 raavare.setRaavareNavn(rs.getString("raavareNavn"));
                 raavare.setLeverandoer(rs.getString("leverandoer"));
                 raavare.setLagerBeholdning(rs.getDouble("lagerbeholdning"));
@@ -57,8 +59,11 @@ public class RaavareDAOSQL implements IRaavareDAO{
 
     @Override
     public void createRaavare(RaavareDTO raavare) throws IDALException.DALException{
+        List<RaavareDTO> users = getRaavareList();
         db.connect();
-        db.update("insert into Raavarer (raavareID, raavareNavn, leverandoer) VALUE ('" + raavare.getRaavareId() + "','" + raavare.getRaavareNavn() + "','" + raavare.getLeverandoer()  + "')");
+        int idIndex = users.get(users.size()-1).getRaavareId()+1;
+        raavare.setRaavareId(idIndex);
+        db.update("insert into Raavarer (raavareID, raavareNummer, raavareNavn, leverandoer) VALUE ('" + raavare.getRaavareId() + "','" + raavare.getRaavareNummer() + "','" + raavare.getRaavareNavn() + "','" + raavare.getLeverandoer()  + "')");
         db.close();
     }
 
@@ -69,6 +74,7 @@ public class RaavareDAOSQL implements IRaavareDAO{
             ResultSet rs = db.query("SELECT * FROM raavareLager where raavareID=" + raavare.getRaavareId());
             rs.next();
             if (rs.getInt("raavareID") == raavare.getRaavareId()) {
+                db.update("UPDATE Raavarer SET raavareNummer = '" + raavare.getRaavareNavn() + "' WHERE (raavareID = '" + raavare.getRaavareId() + "');");
                 db.update("UPDATE Raavarer SET raavareNavn = '" + raavare.getRaavareNavn() + "' WHERE (raavareID = '" + raavare.getRaavareId() + "');");
                 db.update("UPDATE Raavarer SET leverandoer = '" + raavare.getLeverandoer() + "' WHERE (raavareID = '" + raavare.getRaavareId() + "');");
             }

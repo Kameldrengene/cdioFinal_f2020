@@ -14,14 +14,29 @@ import java.util.List;
 @Produces(MediaType.APPLICATION_JSON)
 public class ReceptService {
     public ReceptController receptController = new ReceptController();
+
     @Path("getRecepts")
     @GET
     public List<ReceptDTO> getData() {
-        try {
-            return receptController.getData();
-        } catch (IDALException.DALException e) {
-            e.printStackTrace();
-        }
-        return null;
+       return receptController.getData();
+    }
+
+
+    @GET
+    @Path("getRecept/{receptId}")
+    public ReceptDTO getRecept (@PathParam("receptId") int receptId){
+        return receptController.getRecept(receptId);
+    }
+
+    @POST
+    @Path("opretRecept")
+    public ReceptDTO opretRecept (ReceptDTO receptDTO){
+        return receptController.opretRecept(receptDTO);
+    }
+
+    @PUT
+    @Path("opdaterRecept")
+    public ReceptDTO updateRecept (ReceptDTO receptDTO){
+        return receptController.updateRecept(receptDTO);
     }
 }

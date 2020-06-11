@@ -38,7 +38,19 @@ function Personslist() {
     });
 }
 
-setInterval(Personslist, 3000);
+function checkIfNew() {
+    $.get("/BoilerPlate_war_exploded/rest/user/getUsers", function (data) {
+        var x = JSON.parse(localStorage.getItem("userTable"));
+        if (JSON.stringify(x) !== JSON.stringify(data)) {
+            localStorage.setItem("userTable", JSON.stringify(data));
+            console.log("Updated");
+            Personslist();
+        } else{
+            console.log("Not updated");
+        }
+    });
+}
+setInterval(checkIfNew, 3000);
 
 var currentactivity = "";
 function getcurrentActivity(ID) { //opdatere brugerens aktivitet
@@ -121,10 +133,10 @@ function confirmUserUpdate(ID) { //metoden sender videre til update html siden.
 }
 
 function postUserUpdate() { // metoden bliver kaldt når man trykker på opret knappen
-    if(confirm("are sure?")){
+    if(confirm("Are you sure?")){
         updateUser(); // opdatere brugeren
     }else {
-        alert("no changes, you're back!");
+        alert("No changes, you're back!");
         adminHomepage();
     }
 
@@ -137,8 +149,8 @@ function updateUser() {
     var UPcpr = $("#Upcpr").val();
     var UPpass = $("#Uppass").val();
     var UPjob ="" ;
-    var UPboolean = 0;      //todo update boolean in backend
-    if($('#Uprole1').is(":checked")){   //todo update job in backend
+    var UPboolean = 0;
+    if($('#Uprole1').is(":checked")){
         UPjob = "Administrator";
     }else if ($('#Uprole2').is(":checked")){
         UPjob = "Farmaceut";
@@ -170,7 +182,7 @@ function updateUser() {
     });
 }
 
-function postdata() {
+function postUserData() {
     $(document).ready(function () {
         var Iuser = $("#username").val();
         var Iini = $("#ini").val();
@@ -188,7 +200,7 @@ function postdata() {
         else if ($('#role4').is(":checked")) {
             Ijob = "Laborant";
         }
-        if ($('#aktivcheckbox').is(":checked")){   //todo fix aktiv værdier i backend
+        if ($('#aktivcheckbox').is(":checked")){
             boolean = 1;
         }else if ($('#aktivcheckboxno').is(":checked")){
             boolean = 0;
