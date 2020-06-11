@@ -1,4 +1,4 @@
-async function createUser() {
+async function createUser() { //TODO AGAIN not used..
     var user = {
         username: document.getElementById("username").value,
         ini: document.getElementById("ini").value,

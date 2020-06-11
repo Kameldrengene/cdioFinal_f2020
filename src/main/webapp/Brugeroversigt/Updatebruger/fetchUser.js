@@ -1,4 +1,4 @@
-async function fetchUser() {
+async function fetchUser() { //TODO Probably not used aswell
     const response = await fetch("/BoilerPlate_war_exploded/rest/live/mysql_json");
     const json = await response.json();
     var foundUser;

@@ -1,7 +1,9 @@
-async function deleteUser(ID) {
+//TODO Not used??
+
+async function deleteUser(userID) {
     //console.log("Delete user:" + ID);
-    if(confirm("Do you sure you want to delete user: "+ID+"?")){
-        await fetch("/BoilerPlate_war_exploded/rest/live/mysql_json/deleteUser/"+ID);
+    if(confirm("Do you sure you want to delete user: "+userID+"?")){
+        await fetch("/BoilerPlate_war_exploded/rest/live/mysql_json/deleteUser/"+userID);
         loadUserTable();
     }
 }
