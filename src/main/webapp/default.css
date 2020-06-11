@@ -258,6 +258,11 @@ form{
     color: var(--col-textsecondary)
 }
 
+#brugerInfo{
+    text-align: right;
+    color: #E9E9EA;
+
+}
 
 .screenbtn{
     margin-left: auto;

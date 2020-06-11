@@ -6,6 +6,9 @@
     <link rel="stylesheet" type="text/css" href="../default.css">
 </head>
 <body>
+<h5 id="brugerInfo">Loading</h5>
+<script src="currentUserScript.js"></script>
+
 <h1>Farmaceut</h1>
 <div style="width: 30%; margin: auto">
 <div style="width: 50%; float: left;">
@@ -20,6 +23,9 @@
     <input type="submit" class="hvr-buzz screenbtn" value="Vis recepter" onclick="switchP('FarmaScreen/VisRecept/index.html'); return false">
 </div>
 </div>
+
+<input type="submit" class="hvr-buzz screenbtn" value="Log ud" onclick="localStorage.setItem('loginID', 'None'); switchP('index.html'); return false">
+
 
 
 </body>

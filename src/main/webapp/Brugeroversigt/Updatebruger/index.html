@@ -23,33 +23,47 @@
 
 
     <!-- En <div> (gruppe) der indeholder en serie labels og 'radio'-knapper -->
-    <div class="roller">
+    <div class="radiogroup">
+        <form>
+        <h3>Vælg Job</h3>
+
         <!-- Kun én knap af dem med "name=gender" kan vælges -->
-        <label id="subject">Vælg job:</label><br>
-
-        <input type="radio" id="Uprole1" name="jobs" class="jobsradio"  value="Administrator">
-        <label for="Uprole1"> Administrators </label><br>
-
-        <input type="radio" id="Uprole2" name="jobs" class="jobsradio" value="Farmaceut">
-        <label for="Uprole2"> Farmaceut </label><br>
-
-        <input type="radio" id="Uprole3" name="jobs" class="jobsradio" value="Produktionsleder">
-        <label for="Uprole3"> Produktionsleder</label><br>
-
-        <input type="radio" id="Uprole4" name="jobs" class="jobsradio" value="Laborant">
-        <label for="Uprole4"> Laborant </label><br><br>
-
+        <table class="rolletabel">
+        <tr>
+        <td><input type="radio" id="Uprole1" name="jobs" class="jobsradio"  value="Administrator"></td>
+        <td><label for="Uprole1"> Administrators </label></td>
+        </tr>
+        <tr>
+        <td><input type="radio" id="Uprole2" name="jobs" class="jobsradio" value="Farmaceut"></td>
+        <td><label for="Uprole2"> Farmaceut </label><br></td>
+        </tr>
+        <tr>
+        <td><input type="radio" id="Uprole3" name="jobs" class="jobsradio" value="Produktionsleder"></td>
+        <td><label for="Uprole3"> Produktionsleder</label><br></td>
+        </tr>
+        <tr>
+        <td><input type="radio" id="Uprole4" name="jobs" class="jobsradio" value="Laborant"></td>
+        <td><label for="Uprole4"> Laborant </label><br></td>
+        </tr>
+        </table>
+        </form>
     </div>
 
-    <label id="Upaktiv"> aktiv: </label><br>
+    <div class="aktivgroup">
+        <table class="rolletabel">
+            <h3>Vælg aktivitet</h3>
+            <tr>
+                <td><input type="radio" id="Upyes" name="aktive" class="jobs" value="true"></td>
+                <td><label for="Upyes"> yes </label><br></td>
+            </tr>
+            <tr>
+                <td><input type="radio" id="Upno" name="aktive" class="jobs" value="false"></td>
+                <td><label for="Upno"> no </label><br></td>
+            </tr>
+        </table>
+    </div>
 
-    <input type="radio" id="Upyes" name="aktive" class="jobs" value="true" checked="checked">
-    <label for="Upyes"> yes </label><br>
-
-    <input type="radio" id="Upno" name="aktive" class="jobs" value="false">
-    <label for="Upno"> no </label><br>
-
-    <input type="button" onclick="postUpdate()" class="hvr-pop" value="Ret">
+    <input type="button" onclick="postUserUpdate()" class="hvr-pop" value="Ret">
 </div>
 </body>
 </html>
