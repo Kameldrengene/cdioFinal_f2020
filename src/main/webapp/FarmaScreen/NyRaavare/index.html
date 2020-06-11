@@ -16,8 +16,8 @@
 
     <input id="confirmbtn" type="button" onclick="
         if (confirm('Er du sikker?')) {
-            if(document.getElementById('RVNummer').value != '' || document.getElementById('RVNavn').value != '' ||document.getElementById('leverandør').value != ''){
-                (document.getElementById('RVHeader').textContent === 'Opret ny Råvare') ? postRaavareData() : postRaavareUpdate()
+            if(document.getElementById('RVNummer').value != '' || document.getElementById('RVNavn').value != '' ||document.getElementById('leverandoer').value != ''){
+                (document.getElementById('RVHeader').textContent === 'Opret ny Råvare') ? postRVData() : postRVOpdatering()
             } else {
                 alert('Ikke alt udfyldt')
             }
