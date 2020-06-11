@@ -4,6 +4,14 @@ $("document").ready(function(){
     $("#visTomme").click(function () {
         updateTable();
     })
+
+    $("#raavarebatches").on("click", "button", function () {
+        localStorage.setItem("activeRBId", this.id);
+        switchP("PLeadScreen/Raavarebatches/RedigerRaavarebatches.html");
+    })
+
+
+
 });
 
 function updateTable(){
@@ -20,9 +28,8 @@ function updateTable(){
         "/BoilerPlate_war_exploded/rest/Raavarebatch/" + path,
         "raavarebatches",
         function (value) {
-            const id = value.rBID;
             let msg = "";
-            msg += "<td> <button class = hvr-buzz>Halo</button>  </td>";
+            msg += "<td> <button class = hvr-buzz id =" + value.rbId + ">Rediger</button>  </td>";
             return msg
         }
     )
