@@ -16,9 +16,18 @@ import java.util.List;
 @Produces(MediaType.APPLICATION_JSON)
 public class RaavarebatchService {
     public RaavarevbatchController raavarebatchController = new RaavarevbatchController();
-    @Path("getRaavarebatch")
+
+    @Path("getAlle")
     @GET
     public List<RaavarebatchDTO> getData() throws IDALException.DALException {
         return raavarebatchController.getData();
     }
+
+    @Path("getAktuelle")
+    @GET
+    public List<RaavarebatchDTO> getAktuelle() throws IDALException.DALException {
+        return raavarebatchController.getAktuelle();
+    }
+
+
 }

@@ -2,7 +2,6 @@ $.ajaxSetup({async: false});
 
 $("document").ready(function () {
 
-
     //Keeps the different users stored, so they don't have to be reloaded multiple times
     PersonList("Administrator");
     PersonList("Farmaceut");
@@ -14,9 +13,7 @@ $("document").ready(function () {
     //
     // });
 
-
     $("#login").load("Login/PickRole.html");
-
 
     $("#administrator").click(function () {
         localStorage.setItem("loginRole", "admin");
@@ -51,7 +48,7 @@ $("document").ready(function () {
         localStorage.setItem("loginID", this.id);
     })
 
-    //Switches to the right page when "sing in" button is pressed
+    //Switches tjo the right page when "sing in" button is pressed
     $(".hvr-buzz").click(function () {
         var loginRole = localStorage.getItem("loginRole");
         var ID = localStorage.getItem("loginID");
@@ -70,6 +67,7 @@ $("document").ready(function () {
         }
 
     });
+
 });
 
 
@@ -97,5 +95,4 @@ async function PersonList(role) {
     });
 
     localStorage.setItem(role, tabelData);
-
-}
+};

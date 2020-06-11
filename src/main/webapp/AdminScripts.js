@@ -38,7 +38,19 @@ function Personslist() {
     });
 }
 
-setInterval(Personslist, 3000);
+function checkIfNew() {
+    $.get("/BoilerPlate_war_exploded/rest/user/getUsers", function (data) {
+        var x = JSON.parse(localStorage.getItem("userTable"));
+        if (JSON.stringify(x) !== JSON.stringify(data)) {
+            localStorage.setItem("userTable", JSON.stringify(data));
+            console.log("Updated");
+            Personslist();
+        } else{
+            console.log("Not updated");
+        }
+    });
+}
+setInterval(checkIfNew, 3000);
 
 var currentactivity = "";
 function getcurrentActivity(ID) { //opdatere brugerens aktivitet
@@ -56,19 +68,23 @@ function getcurrentActivity(ID) { //opdatere brugerens aktivitet
                 bool = 0;
             }
             var jsondata = {userID: USERID, aktiv: bool};
-            $.ajax({
-                url: "/BoilerPlate_war_exploded/rest/user/activeUser",
-                type: 'PUT',
-                contentType: "application/json",
-                dataType: 'json',
-                data: JSON.stringify(jsondata),
-                success: function (data) {
-                    Personslist();
-                },
-                error: function (jqXHR, text, error) {
-                    alert(JSON.stringify(jsondata));
-                }
-            });
+            if(jsondata.userID.toString() !== localStorage.getItem("loginID").toString()){
+                $.ajax({
+                    url: "/BoilerPlate_war_exploded/rest/user/activeUser",
+                    type: 'PUT',
+                    contentType: "application/json",
+                    dataType: 'json',
+                    data: JSON.stringify(jsondata),
+                    success: function (data) {
+                        Personslist();
+                    },
+                    error: function (jqXHR, text, error) {
+                        alert(JSON.stringify(jsondata));
+                    }
+                });
+            } else{
+                alert("Unable to change activity on self");
+            }
         }
     });
 }
@@ -121,10 +137,10 @@ function confirmUserUpdate(ID) { //metoden sender videre til update html siden.
 }
 
 function postUserUpdate() { // metoden bliver kaldt når man trykker på opret knappen
-    if(confirm("are sure?")){
+    if(confirm("Are you sure?")){
         updateUser(); // opdatere brugeren
     }else {
-        alert("no changes, you're back!");
+        alert("No changes, you're back!");
         adminHomepage();
     }
 
