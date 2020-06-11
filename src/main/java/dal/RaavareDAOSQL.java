@@ -74,7 +74,7 @@ public class RaavareDAOSQL implements IRaavareDAO{
             ResultSet rs = db.query("SELECT * FROM raavareLager where raavareID=" + raavare.getRaavareID());
             rs.next();
             if (rs.getInt("raavareID") == raavare.getRaavareID()) {
-                db.update("UPDATE Raavarer SET raavareNummer = '" + raavare.getRaavareNavn() + "' WHERE (raavareID = '" + raavare.getRaavareID() + "');");
+                db.update("UPDATE Raavarer SET raavareNummer = '" + raavare.getRaavareNummer() + "' WHERE (raavareID = '" + raavare.getRaavareID() + "');");
                 db.update("UPDATE Raavarer SET raavareNavn = '" + raavare.getRaavareNavn() + "' WHERE (raavareID = '" + raavare.getRaavareID() + "');");
                 db.update("UPDATE Raavarer SET leverandoer = '" + raavare.getLeverandoer() + "' WHERE (raavareID = '" + raavare.getRaavareID() + "');");
             }

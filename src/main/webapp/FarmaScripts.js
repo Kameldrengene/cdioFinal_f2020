@@ -1,8 +1,8 @@
 
 
-function confirmRaavareUpdate(id){
+function confirmRaavareUpdate(id, nummer){
     $(document).ready(function () {
-        if(confirm("are you sure, you want to update this råvare "+ id +"?")){
+        if(confirm("are you sure, you want to update this råvare "+ nummer +"?")){
             switchP('FarmaScreen/NyRaavare/index.html')
             localStorage.setItem("raavareUpdateID", id);
             $(document).ready(function () {
@@ -51,6 +51,8 @@ function postRaavareUpdate() {
     const INavn = $("#raavareNavn").val();
     const ILeve = $("#leverandoer").val();
     const jsonData = {raavareID: Iid, raavareNummer: INummer, raavareNavn: INavn, leverandoer: ILeve};
+
+    console.log(jsonData);
     $.ajax({
         url: "/BoilerPlate_war_exploded/rest/Raavare/updaterRaavare",
         type: 'PUT',
@@ -58,7 +60,7 @@ function postRaavareUpdate() {
         dataType: 'json',
         data: JSON.stringify(jsonData),
         success: function (data) {
-            switchP("FarmaScreen/index.html")
+            switchP("FarmaScreen/VisRaavarer/index.html")
             alert("Succes!")
         },
         error: function (jqXHR, text, error) {
