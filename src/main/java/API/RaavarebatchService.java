@@ -4,10 +4,7 @@ import controller.RaavarevbatchController;
 import dal.IDALException;
 import dal.dto.RaavarebatchDTO;
 
-import javax.ws.rs.Consumes;
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
+import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import java.util.List;
 
@@ -27,6 +24,12 @@ public class RaavarebatchService {
     @GET
     public List<RaavarebatchDTO> getAktuelle() throws IDALException.DALException {
         return raavarebatchController.getAktuelle();
+    }
+
+    @Path("getBatch/{batchID}")
+    @GET
+    public RaavarebatchDTO getBatch(@PathParam("batchID") String batchID) throws IDALException.DALException {
+        return raavarebatchController.getBatch(batchID);
     }
 
 

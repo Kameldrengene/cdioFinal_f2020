@@ -33,7 +33,7 @@ public class SQLDatabaseIO {
             try{
                 conn = DriverManager.getConnection(DatabaseURL, USER, PASS);
                 connected = true;
-                System.out.println("connected");
+                //System.out.println("connected");
             }catch(SQLException e){
                 //System.out.println("Connecting failed");
                 connected=false;
@@ -77,7 +77,7 @@ public class SQLDatabaseIO {
             try {
                 conn.close();
                 connected=false;
-                System.out.println("closed");
+                //System.out.println("closed");
             } catch (SQLException e) {
                 connected=true;
                 e.printStackTrace();
