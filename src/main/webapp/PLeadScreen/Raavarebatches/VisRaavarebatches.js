@@ -14,6 +14,14 @@ $("document").ready(function(){
 
 });
 
+function confirmRaavarebatchUpdate(id, nummer) {
+    if (confirm("Er du sikker på at redigere Råvarebatch nummer " + nummer + "?")) {
+        switchP("PLeadScreen/RaavareBatches/RedigerRaavarebatches.html");
+    } else {
+        alert("Returnerer")
+    }
+}
+
 function updateTable(){
 
     let path;
@@ -24,12 +32,12 @@ function updateTable(){
         path = "getAktuelle"
 
     viewlist(
-        ["Batch ID", "Råvare ID", "Aktuel mængde", "Oprindelig mængde"],
+        ["Batch Nummer", "Råvare ID", "Aktuel mængde", "Oprindelig mængde"],
         "/BoilerPlate_war_exploded/rest/Raavarebatch/" + path,
         "raavarebatches",
-        function (value) {
+        function (valuea) {
             let msg = "";
-            msg += "<td> <button class = hvr-buzz id =" + value.rbId + ">Rediger</button>  </td>";
+            msg += "<td> <button class = hvr-buzz onclick='confirmRaavarebatchUpdate("+ valuea.rbId + ", " + valuea.rbNummer +")'>Rediger</button>  </td>";
             return msg
         }
     )

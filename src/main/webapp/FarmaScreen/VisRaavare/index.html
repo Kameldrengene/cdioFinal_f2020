@@ -23,10 +23,9 @@
 "/BoilerPlate_war_exploded/rest/Raavare/getRaavarer",
 "raavare_table",
 function (value) {
-    //console.log(value);
-    const id = value.raavareId
+    const id = value.raavareID
     let msg = "";
-    msg += "<td><input id='updateuser' class='update' type='button' onclick='confirmRaavareUpdate("+ id +")' value='Update'/> </td>";
+    msg += "<td><input id='updateuser' class='update' type='button' onclick='confirmRaavareUpdate("+ id + ", " + value.raavareNummer + ")' value='Update'/> </td>";
     return msg
 });</script>
 
