@@ -15,11 +15,11 @@ public class RaavareController {
         return new RaavareDTO();
     }
 
-    public RaavareDTO createRaavare() {
+    public RaavareDTO createRaavare(RaavareDTO raavare) {
         return new RaavareDTO();
     }
 
-    public RaavareDTO updateRaavare() {
+    public RaavareDTO updateRaavare(RaavareDTO raavare) {
         return new RaavareDTO();
     }
 
