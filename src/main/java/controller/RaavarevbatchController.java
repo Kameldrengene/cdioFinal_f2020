@@ -25,4 +25,10 @@ public class RaavarevbatchController {
         return DAOSQL.getAktuelRaavarebatchList();
     }
 
+    public RaavarebatchDTO getBatch(String batchID) throws IDALException.DALException{
+
+        int batchIDint = Integer.parseInt(batchID);
+        return DAOSQL.getRaavarebatch(batchIDint);
+    }
+
 }

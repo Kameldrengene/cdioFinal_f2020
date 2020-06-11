@@ -25,6 +25,9 @@ public class RaavarebatchDAOSQL implements IRaavarebatchDAO {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+
+        System.out.println(rs);
+
         db.close();
         return rb;
     }
