@@ -11,6 +11,12 @@ public class RaavareDTO {
     //Lagerbeholdning DECIMAL(4,4)
     private double lagerBeholdning;
 
+    private int raavareNummer;
+
+    public int getRaavareNummer() {return raavareNummer;}
+
+    public void setRaavareNummer(int raavareNummer) {this.raavareNummer = raavareNummer;}
+
     public double getLagerBeholdning() {
         return lagerBeholdning;
     }
