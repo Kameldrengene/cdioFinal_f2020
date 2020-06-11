@@ -3,6 +3,7 @@ package API;
 import controller.RaavareController;
 import dal.IDALException;
 import dal.dto.RaavareDTO;
+import dal.dto.UserDTO;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
@@ -17,6 +18,19 @@ public class RaavareService {
     @GET
     public List<RaavareDTO> getData() throws IDALException.DALException {
         return raavareController.getData();
+    }
+
+    @Path("createRaavare")
+    @POST
+    public RaavareDTO createUser(RaavareDTO raavare){
+        raavareController.createRaavare(raavare);
+        return raavare;
+    }
+
+    @Path("updateUser")
+    @PUT
+    public RaavareDTO updateUser(RaavareDTO raavare){
+        return raavareController.updateRaavare(raavare);
     }
 
 }

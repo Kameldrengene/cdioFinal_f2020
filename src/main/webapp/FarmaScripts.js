@@ -16,11 +16,12 @@ function postRaavareData() {
     const UPnavn = $("#raavareNavn").val();
     const UPleve = $("#Leverandoer").val();
 
+
 }
 
 function postRaavareUpdate() {
 
-    const UPid = localStorage.getItem("");
+    const UPid = localStorage.getItem("raavareUpdateID");
     const UPnavn = $("#raavareNavn").val();
     const UPleve = $("#Leverandoer").val();
 
