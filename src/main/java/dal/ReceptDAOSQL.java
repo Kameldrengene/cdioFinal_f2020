@@ -12,40 +12,40 @@ public class ReceptDAOSQL implements IReceptDAO{
 
 
     @Override
-    public ReceptDTO getRecept(int receptId) throws IDALException.DALException {
+    public ReceptDTO getRC(int RCID) throws IDALException.DALException {
         db.connect();
-        ResultSet rs = db.query("SELECT * FROM Recepter where RID=" + receptId); //Select all columns from recept where receptID is input
-        ReceptDTO recept = new ReceptDTO();
+        ResultSet rs = db.query("SELECT * FROM Recepter where RCID=" + RCID); //Select all columns from recept where receptID is input
+        ReceptDTO rc = new ReceptDTO();
         try {
             rs.next();
-            recept.setReceptId(rs.getInt("RID"));
-            recept.setReceptNavn(rs.getString("RName"));
-            recept.setRaavareId(rs.getInt("raavareID"));
-            recept.setNonNetto(rs.getDouble("nonNetto"));
-            recept.setTolerance(rs.getDouble("Tolerance"));
+            rc.setRCID(rs.getInt("RCID"));
+            rc.setRCNavn(rs.getString("RCName"));
+            rc.setRVID(rs.getInt("RVID"));
+            rc.setNonNetto(rs.getDouble("nonNetto"));
+            rc.setTolerance(rs.getDouble("tolerance"));
             rs.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
         db.close();
-        return recept;
+        return rc;
     }
 
     @Override
-    public List<ReceptDTO> getReceptList() throws IDALException.DALException {
+    public List<ReceptDTO> getRCList() throws IDALException.DALException {
         db.connect();
         ResultSet rs = db.query("SELECT * FROM Recepter"); //Select all data from userdto
-        List<ReceptDTO> receptList = new ArrayList<>();
+        List<ReceptDTO> rcList = new ArrayList<>();
         try {
             //We do as in getUser, except we make new user until rs is empty
             while (rs.next()) {
                 ReceptDTO recept = new ReceptDTO();
-                recept.setReceptId(rs.getInt("RID"));
-                recept.setReceptNavn(rs.getString("RName"));
-                recept.setRaavareId(rs.getInt("raavareID"));
+                recept.setRCID(rs.getInt("RCID"));
+                recept.setRCNavn(rs.getString("RCName"));
+                recept.setRVID(rs.getInt("RVID"));
                 recept.setNonNetto(rs.getDouble("nonNetto"));
-                recept.setTolerance(rs.getDouble("Tolerance"));
-                receptList.add(recept);
+                recept.setTolerance(rs.getDouble("tolerance"));
+                rcList.add(recept);
             }
             rs.close();
 
@@ -54,28 +54,28 @@ public class ReceptDAOSQL implements IReceptDAO{
             e.printStackTrace();
         }
         db.close();
-        return receptList;
+        return rcList;
     }
 
     @Override
-    public void createRecept(ReceptDTO recept) throws IDALException.DALException {
+    public void opretRC(ReceptDTO rc) throws IDALException.DALException {
         db.connect();
-        db.update("insert into Recepter (RID, RName, raavareID, nonNetto, Tolerance) VALUE ('" + recept.getReceptId() + "','" + recept.getReceptNavn() + "','" + recept.getRaavareId() + "','" + recept.getNonNetto() + "','" + recept.getTolerance() + "')");
+        db.update("insert into Recepter (RCID, RCName, RVID, nonNetto, Tolerance) VALUE ('" + rc.getRCID() + "','" + rc.getRCNavn() + "','" + rc.getRVID() + "','" + rc.getNonNetto() + "','" + rc.getTolerance() + "')");
         db.close();
 
     }
 
     @Override
-    public void updateRecept(ReceptDTO recept) throws IDALException.DALException {
+    public void opdaterRC(ReceptDTO rc) throws IDALException.DALException {
         db.connect();
         try {
-            ResultSet rs = db.query("SELECT * FROM Recepter where RID=" + recept.getReceptId());
+            ResultSet rs = db.query("SELECT * FROM Recepter where RCID=" + rc.getRCID());
             rs.next();
-            if (rs.getInt("RID") == recept.getReceptId()) {
-                db.update("UPDATE Recepter SET RName = '" + recept.getReceptNavn() + "' WHERE (RID = '" + recept.getReceptId() + "');");
-                db.update("UPDATE Recepter SET raavareID = '" + recept.getRaavareId() + "' WHERE (RID = '" + recept.getReceptId() + "');");
-                db.update("UPDATE Recepter SET nonNetto = '" + recept.getNonNetto() + "' WHERE (RID = '" + recept.getReceptId() + "');");
-                db.update("UPDATE Recepter SET Tolerance = '" + recept.getTolerance() + "' WHERE (RID = '" + recept.getReceptId() + "');");
+            if (rs.getInt("RCID") == rc.getRCID()) {
+                db.update("UPDATE Recepter SET RCName = '" + rc.getRCNavn() + "' WHERE (RCID = '" + rc.getRCID() + "');");
+                db.update("UPDATE Recepter SET RVID = '" + rc.getRVID() + "' WHERE (RCID = '" + rc.getRCID() + "');");
+                db.update("UPDATE Recepter SET nonNetto = '" + rc.getNonNetto() + "' WHERE (RCID = '" + rc.getRCID() + "');");
+                db.update("UPDATE Recepter SET Tolerance = '" + rc.getTolerance() + "' WHERE (RCID = '" + rc.getRCID() + "');");
             }
             rs.close();
         } catch (SQLException e) {

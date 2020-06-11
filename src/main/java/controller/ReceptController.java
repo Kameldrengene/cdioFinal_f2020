@@ -2,9 +2,7 @@ package controller;
 
 import dal.IDALException;
 import dal.ReceptDAOSQL;
-import dal.UserDAOSQL;
 import dal.dto.ReceptDTO;
-import dal.dto.UserDTO;
 
 import java.util.List;
 
@@ -16,7 +14,7 @@ public class ReceptController {
     }
     public List<ReceptDTO> getData()  {
         try {
-            return receptDAOSQL.getReceptList();
+            return receptDAOSQL.getRCList();
         }catch (IDALException.DALException e){
             e.printStackTrace();
         }
@@ -25,7 +23,7 @@ public class ReceptController {
 
     public ReceptDTO getRecept (int receptId) {
         try {
-            return receptDAOSQL.getRecept(receptId);
+            return receptDAOSQL.getRC(receptId);
         }catch (IDALException.DALException e){
             e.printStackTrace();
         }
@@ -34,7 +32,7 @@ public class ReceptController {
 
     public ReceptDTO opretRecept (ReceptDTO recept){
         try {
-             receptDAOSQL.createRecept(recept);
+             receptDAOSQL.opretRC(recept);
         }catch (IDALException.DALException e){
             e.printStackTrace();
         }
@@ -43,7 +41,7 @@ public class ReceptController {
 
     public ReceptDTO updateRecept (ReceptDTO recept){
         try {
-            receptDAOSQL.updateRecept(recept);
+            receptDAOSQL.opdaterRC(recept);
         }catch (IDALException.DALException e){
             e.printStackTrace();
         }
