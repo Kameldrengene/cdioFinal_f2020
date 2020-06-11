@@ -1,5 +1,6 @@
 package controller;
 
+import Funktionalitet.UserFunc;
 import dal.IDALException;
 import dal.IUserDAO;
 import dal.UserDAOSQL;
@@ -61,8 +62,11 @@ public class UserController {
 
     public UserDTO createUser(UserDTO user) {
         UserDAOSQL db = new UserDAOSQL();
+        UserFunc userF = new UserFunc();
         try {
-            db.createUser(user);
+            if(userF.isUserOk(user)){
+                db.createUser(user);
+            }
         } catch (IDALException.DALException e) {
             e.printStackTrace();
         }
@@ -72,8 +76,11 @@ public class UserController {
 
     public UserDTO updateUser(UserDTO user) {
         UserDAOSQL db = new UserDAOSQL();
+        UserFunc userF = new UserFunc();
         try {
-            db.updateUser(user);
+            if(userF.isUserOk(user)) {
+                db.updateUser(user);
+            }
         } catch (IDALException.DALException e) {
             e.printStackTrace();
         }
