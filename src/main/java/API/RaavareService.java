@@ -1,9 +1,8 @@
 package API;
 
-import controller.RaavareController;
+import controller.*;
 import dal.IDALException;
 import dal.dto.RaavareDTO;
-import dal.dto.UserDTO;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
@@ -13,7 +12,9 @@ import java.util.List;
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
 public class RaavareService {
-    public RaavareController raavareController = new RaavareController();
+
+
+    private RaavareController raavareController = new RaavareController();
     @Path("getRaavarer")
     @GET
     public List<RaavareDTO> getData() throws IDALException.DALException {
