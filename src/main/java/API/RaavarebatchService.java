@@ -20,7 +20,7 @@ public class RaavarebatchService {
         return RVBController.getRVBList();
     }
 
-    @Path("getaktuelRVBList")
+    @Path("getAktuelRVBList")
     @GET
     public List<RaavarebatchDTO> getAktuelRVBList() throws IDALException.DALException {
         return RVBController.getAktuelRVBList();
