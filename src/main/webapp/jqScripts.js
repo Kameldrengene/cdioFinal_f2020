@@ -4,7 +4,7 @@ $.ajaxSetup({async: false}); //this file is for general scripts used all over th
 
 function viewlist(headers, link, tableName, btnHtmlfunc) {
     $(document).ready(function () {
-        $.getJSON(link /*"/BoilerPlate_war_exploded/rest/Raavare/getRaavarer"*/,function (BEdata) {
+        $.getJSON(link ,function (BEdata) {
             var data = '<tr>\n';
             for (let i = 0; i < headers.length; i++){
                 data += '<th>'+ headers[i] +'</th>';
@@ -22,18 +22,6 @@ function viewlist(headers, link, tableName, btnHtmlfunc) {
             });
             $('#' + tableName).html(data);
         });
-    });
-}
-
-function confirmRaavareUpdate(id){
-    $(document).ready(function () {
-        if(confirm("are you sure, you want to update this råvare "+ id +"?")){
-            switchP('FarmaScreen/VisRaavare/UpdateRaavare/index.html')
-            updatedID = id;
-        }
-        else {
-            alert("no worries!");
-        }
     });
 }
 

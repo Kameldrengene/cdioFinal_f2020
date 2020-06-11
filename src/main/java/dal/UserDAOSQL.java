@@ -99,7 +99,6 @@ public class UserDAOSQL implements IUserDAO {
 
     @Override
     public UserDTO createUser(UserDTO user) throws IDALException.DALException { //We make a new user
-        db.connect();
         List<UserDTO> users = getData();
         db.connect();
         int idIndex = users.get(users.size()-1).getUserID()+1;

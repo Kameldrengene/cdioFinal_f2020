@@ -2,14 +2,29 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Farma Screen</title>
-    <link rel="stylesheet" type="text/css" href="../default.css">
+    <title>raavareEdit</title>
 </head>
 <body>
-<h1>Ny Råvare</h1>
-<div style="width: 100%; margin: auto">
+<div id="content"><h1 id="raavareHeader">Opret ny Råvare</h1>
+    <br>
 
+
+    <input type="text" id="raavareNummer" placeholder="RåvareNummer" value=""><br>
+    <input type="text" id="raavareNavn" placeholder="RåvareNavn" value=""><br>
+    <input type="text" id="leverandoer"  placeholder="Leverandør" value=""><br>
+
+
+    <input type="button" onclick="
+        if (confirm('Er du sikker?')) {
+            if(document.getElementById('raavareNummer').value != '' || document.getElementById('raavareNavn').value != '' ||document.getElementById('leverandør').value != ''){
+                (document.getElementById('raavareHeader').textContent === 'Opret ny Råvare') ? postRaavareData() : postRaavareUpdate()
+            } else {
+                alert('Ikke alt udfyldt')
+            }
+        }"
+    class="hvr-pop" value="Opret">
 </div>
+
 
 <input type="submit" class="hvr-buzz screenbtn" value="Retur" onclick="switchP('FarmaScreen/index.html'); return false">
 
