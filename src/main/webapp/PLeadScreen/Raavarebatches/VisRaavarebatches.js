@@ -15,7 +15,11 @@ $("document").ready(function(){
 });
 
 function confirmRaavarebatchUpdate(id, nummer) {
-    switchP("PLeadScreen/RaavareBatches/RedigerRaavarebatches.html");
+    if (confirm("Er du sikker på at redigere Råvarebatch nummer " + nummer + "?")) {
+        switchP("PLeadScreen/RaavareBatches/RedigerRaavarebatches.html");
+    } else {
+        alert("Returnerer")
+    }
 }
 
 function updateTable(){
