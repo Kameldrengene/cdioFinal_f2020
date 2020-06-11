@@ -68,19 +68,23 @@ function getcurrentActivity(ID) { //opdatere brugerens aktivitet
                 bool = 0;
             }
             var jsondata = {userID: USERID, aktiv: bool};
-            $.ajax({
-                url: "/BoilerPlate_war_exploded/rest/user/activeUser",
-                type: 'PUT',
-                contentType: "application/json",
-                dataType: 'json',
-                data: JSON.stringify(jsondata),
-                success: function (data) {
-                    Personslist();
-                },
-                error: function (jqXHR, text, error) {
-                    alert(JSON.stringify(jsondata));
-                }
-            });
+            if(jsondata.userID.toString() !== localStorage.getItem("loginID").toString()){
+                $.ajax({
+                    url: "/BoilerPlate_war_exploded/rest/user/activeUser",
+                    type: 'PUT',
+                    contentType: "application/json",
+                    dataType: 'json',
+                    data: JSON.stringify(jsondata),
+                    success: function (data) {
+                        Personslist();
+                    },
+                    error: function (jqXHR, text, error) {
+                        alert(JSON.stringify(jsondata));
+                    }
+                });
+            } else{
+                alert("Unable to change activity on self");
+            }
         }
     });
 }
