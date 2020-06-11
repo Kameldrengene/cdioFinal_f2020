@@ -4,7 +4,7 @@ $.ajaxSetup({async: false}); //this file is for general scripts used all over th
 
 function viewlist(headers, link, tableName, btnHtmlfunc) {
     $(document).ready(function () {
-        $.getJSON(link /*"/BoilerPlate_war_exploded/rest/Raavare/getRaavarer"*/,function (BEdata) {
+        $.getJSON(link ,function (BEdata) {
             var data = '<tr>\n';
             for (let i = 0; i < headers.length; i++){
                 data += '<th>'+ headers[i] +'</th>';
