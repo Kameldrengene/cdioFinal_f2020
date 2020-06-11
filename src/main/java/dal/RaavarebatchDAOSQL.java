@@ -55,6 +55,20 @@ public class RaavarebatchDAOSQL implements IRaavarebatchDAO {
     }
 
     @Override
+    public List<RaavarebatchDTO> getAktuelRaavarebatchList() throws IDALException.DALException{
+
+        List<RaavarebatchDTO> oldRBList = getRaavarebatchList();
+        List<RaavarebatchDTO> newRBList = new ArrayList<>();
+
+        for (int i = 0; i < oldRBList.size(); i++) {
+            if(oldRBList.get(i).getAktuelMaengde() > 0)
+                newRBList.add(oldRBList.get(i));
+        }
+
+        return newRBList;
+    }
+
+    @Override
     public void createRaavarebatch(RaavarebatchDTO raavarebatch) throws IDALException.DALException{
         db.connect();
         db.update("insert into RaavareBatches (rBID, raavareID, maengde, aktuelMaengde) VALUE ('" + raavarebatch.getRbId() + "','" + raavarebatch.getRaavareId() + "','" + raavarebatch.getStartMaengde() + "','" + raavarebatch.getAktuelMaengde()  + "')");
