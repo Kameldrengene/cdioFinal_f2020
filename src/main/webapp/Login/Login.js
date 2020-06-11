@@ -2,11 +2,20 @@ $.ajaxSetup({async: false});
 
 $("document").ready(function () {
 
+
     //Keeps the different users stored, so they don't have to be reloaded multiple times
     PersonList("Administrator");
     PersonList("Farmaceut");
     PersonList("Produktionsleder");
     PersonList("Laborant");
+
+    // $(document).ajaxComplete(function(){
+    //     $(".loader").css("display", "none");
+    //
+    // });
+
+
+    $("#login").load("Login/PickRole.html");
 
 
     $("#administrator").click(function () {
@@ -55,13 +64,14 @@ $("document").ready(function () {
             else if (loginRole == "farma")
                 switchP("FarmaScreen/index.html");
             else if (loginRole == "prodLeder")
-                switchP("PLeadScreen/index.html")
+                switchP("PLeadScreen/PLeadScreen.html")
             else if (loginRole == "laborant")
                 switchP("LabScreen/index.html");
         }
 
     });
 });
+
 
 async function PersonList(role) {
 
