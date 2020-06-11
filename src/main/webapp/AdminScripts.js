@@ -170,7 +170,7 @@ function updateUser() {
     });
 }
 
-function postdata() {
+function postUserData() {
     $(document).ready(function () {
         var Iuser = $("#username").val();
         var Iini = $("#ini").val();
@@ -188,7 +188,7 @@ function postdata() {
         else if ($('#role4').is(":checked")) {
             Ijob = "Laborant";
         }
-        if ($('#aktivcheckbox').is(":checked")){   //todo fix aktiv værdier i backend
+        if ($('#aktivcheckbox').is(":checked")){
             boolean = 1;
         }else if ($('#aktivcheckboxno').is(":checked")){
             boolean = 0;
