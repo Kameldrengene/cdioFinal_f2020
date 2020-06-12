@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>Farma Screen</title>
     <link rel="stylesheet" type="text/css" href="default.css">
+    <link rel="stylesheet" type="text/css" href="FarmaScreen/index.css">
     <script src="FarmaScripts.js"></script>
 </head>
 <body>
@@ -11,19 +12,27 @@
 <script src="currentUserScript.js"></script>
 
 <h1>Farmaceut</h1>
-<div style="width: 30%; margin: auto">
-<div style="width: 50%; float: left;">
-    <h2>Råvarer</h2>
-    <input type="submit" class="hvr-buzz screenbtn" value="Opret ny Råvare" onclick="switchP('FarmaScreen/NyRaavare/index.html'); return false"><br>
-    <input type="submit" class="hvr-buzz screenbtn" value="Vis råvarer" onclick="switchP('FarmaScreen/VisRaavare/index.html'); return false">
-</div>
-
-<div style="width: 50%; float: right;">
-    <h2>Recepter</h2>
-    <input type="submit" class="hvr-buzz screenbtn" value="Opret ny Recept" onclick="switchP('FarmaScreen/NyRecept/index.html'); return false"><br>
-    <input type="submit" class="hvr-buzz screenbtn" value="Vis recepter" onclick="switchP('FarmaScreen/VisRecept/index.html'); return false">
-</div>
-</div>
+<table>
+    <thead>
+    <tr>
+        <th><h2>Råvarer</h2></th>
+        <th></th>
+        <th><h2>Recepter</h2></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td> <input type="submit" class="hvr-buzz screenbtn" value="Opret ny Råvare" onclick="switchP('FarmaScreen/NyRaavare/index.html'); return false"> </td>
+        <td></td>
+        <td><input type="submit" class="hvr-buzz screenbtn" value="Opret ny Recept" onclick="switchP('FarmaScreen/NyRecept/index.html'); return false"></td>
+    </tr>
+    <tr>
+        <td><input type="submit" class="hvr-buzz screenbtn" value="Vis råvarer" onclick="switchP('FarmaScreen/VisRaavare/index.html'); return false"> <br> </td>
+        <td></td>
+        <td> <input type="submit" class="hvr-buzz screenbtn" value="Vis recepter" onclick="switchP('FarmaScreen/VisRecept/index.html'); return false"> </td>
+    </tr>
+    </tbody>
+</table>
 
 <input type="submit" class="hvr-buzz screenbtn" value="Log ud" onclick="localStorage.setItem('loginID', 'None'); switchP('index.html'); return false">
 
