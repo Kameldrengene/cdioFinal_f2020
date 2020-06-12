@@ -18,7 +18,6 @@ public class RaavareDAOSQL implements IRaavareDAO{
         try {
             rs.next();
             raavare.setRaavareID(rs.getInt("raavareID"));
-            raavare.setRaavareNummer(rs.getInt("raavareNummer"));
             raavare.setRaavareNavn(rs.getString("raavareNavn"));
             raavare.setLeverandoer(rs.getString("leverandoer"));
             raavare.setLagerBeholdning(rs.getDouble("lagerbeholdning"));
@@ -41,7 +40,6 @@ public class RaavareDAOSQL implements IRaavareDAO{
             while (rs.next()) {
                 RaavareDTO raavare = new RaavareDTO();
                 raavare.setRaavareID(rs.getInt("raavareID"));
-                raavare.setRaavareNummer(rs.getInt("raavareNummer"));
                 raavare.setRaavareNavn(rs.getString("raavareNavn"));
                 raavare.setLeverandoer(rs.getString("leverandoer"));
                 raavare.setLagerBeholdning(rs.getDouble("lagerbeholdning"));
@@ -58,12 +56,9 @@ public class RaavareDAOSQL implements IRaavareDAO{
     }
 
     @Override
-    public void createRaavare(RaavareDTO raavare) throws IDALException.DALException{
-        List<RaavareDTO> users = getRaavareList();
+    public void createRaavare(RaavareDTO raavare) throws IDALException.DALException{ //TODO take care of exception if ID alredy exists
         db.connect();
-        int idIndex = users.get(users.size()-1).getRaavareID()+1;
-        raavare.setRaavareID(idIndex);
-        db.update("insert into Raavarer (raavareID, raavareNummer, raavareNavn, leverandoer) VALUE ('" + raavare.getRaavareID() + "','" + raavare.getRaavareNummer() + "','" + raavare.getRaavareNavn() + "','" + raavare.getLeverandoer()  + "')");
+        db.update("insert into Raavarer (raavareID, raavareNavn, leverandoer) VALUE ('" + raavare.getRaavareID() + "','" + raavare.getRaavareNavn() + "','" + raavare.getLeverandoer()  + "')");
         db.close();
     }
 
@@ -74,7 +69,6 @@ public class RaavareDAOSQL implements IRaavareDAO{
             ResultSet rs = db.query("SELECT * FROM raavareLager where raavareID=" + raavare.getRaavareID());
             rs.next();
             if (rs.getInt("raavareID") == raavare.getRaavareID()) {
-                db.update("UPDATE Raavarer SET raavareNummer = '" + raavare.getRaavareNummer() + "' WHERE (raavareID = '" + raavare.getRaavareID() + "');");
                 db.update("UPDATE Raavarer SET raavareNavn = '" + raavare.getRaavareNavn() + "' WHERE (raavareID = '" + raavare.getRaavareID() + "');");
                 db.update("UPDATE Raavarer SET leverandoer = '" + raavare.getLeverandoer() + "' WHERE (raavareID = '" + raavare.getRaavareID() + "');");
             }

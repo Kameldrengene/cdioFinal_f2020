@@ -5,11 +5,12 @@
     <title>Title</title>
 
     <script src="PLeadScreen/Raavarebatches/RedigerRaavarebatches.js"></script>
+    <script src="jqScripts.js"></script>
 </head>
 <body>
     <h1>Rediger råvarebatch</h1>
 
-    <table class = "brugertable" id="test">
+    <table class = "brugertable">
         <thead>
         <tr>
             <th>Batch ID</th>
@@ -20,16 +21,14 @@
         </thead>
         <tbody>
         <tr>
-            <td id="batchID"></td>
-            <td id="raavareID"></td>
-            <td id="actualAmount"></td>
-            <td id="oriAmount"></td>
-            <td><button class = hvr-buzz>Gem</button></td>
+            <td contenteditable="true" id="batchID"></td>
+            <td contenteditable="true" id="raavareID"></td>
+            <td contenteditable="true" id="actualAmount"></td>
+            <td contenteditable="true" id="oriAmount"></td>
+            <td><button class = hvr-buzz id="gem">Gem</button></td>
         </tr>
         </tbody>
     </table>
-
-
 
 </body>
 </html>

@@ -18,7 +18,6 @@ public class RaavarebatchDAOSQL implements IRaavarebatchDAO {
         try {
             rs.next();
             rb.setRbId(rs.getInt("rBID"));
-            rb.setRbNummer(rs.getInt("rBNummer"));
             rb.setRaavareId(rs.getInt("raavareID"));
             rb.setStartMaengde(rs.getDouble("maengde"));
             rb.setAktuelMaengde(rs.getDouble("aktuelMaengde"));
@@ -43,7 +42,6 @@ public class RaavarebatchDAOSQL implements IRaavarebatchDAO {
             while (rs.next()) {
                 RaavarebatchDTO rb = new RaavarebatchDTO();
                 rb.setRbId(rs.getInt("rBID"));
-                rb.setRbNummer(rs.getInt("rBNummer"));
                 rb.setRaavareId(rs.getInt("raavareID"));
                 rb.setStartMaengde(rs.getDouble("maengde"));
                 rb.setAktuelMaengde(rs.getDouble("aktuelMaengde"));
@@ -77,7 +75,7 @@ public class RaavarebatchDAOSQL implements IRaavarebatchDAO {
     @Override
     public void createRaavarebatch(RaavarebatchDTO raavarebatch) throws IDALException.DALException{
         db.connect();
-        db.update("insert into RaavareBatches (rBID, rBNummer, raavareID, maengde, aktuelMaengde) VALUE ('" + raavarebatch.getRbId() + "','" + raavarebatch.getRbNummer() + "','" + raavarebatch.getRaavareId() + "','" + raavarebatch.getStartMaengde() + "','" + raavarebatch.getAktuelMaengde()  + "')");
+        db.update("insert into RaavareBatches (rBID, raavareID, maengde, aktuelMaengde) VALUE ('" + raavarebatch.getRbId() + "','" + raavarebatch.getRaavareId() + "','" + raavarebatch.getStartMaengde() + "','" + raavarebatch.getAktuelMaengde()  + "')");
         db.close();
     }
 
@@ -88,7 +86,6 @@ public class RaavarebatchDAOSQL implements IRaavarebatchDAO {
             ResultSet rs = db.query("SELECT * FROM RaavareBatches where rBID=" + raavarebatch.getRbId());
             rs.next();
             if (rs.getInt("rBID") == raavarebatch.getRbId()) {
-                db.update("UPDATE RaavareBatches SET rBNummer = '" + raavarebatch.getRbNummer() + "' WHERE (rBID = '" + raavarebatch.getRbId() + "');");
                 db.update("UPDATE RaavareBatches SET raavareID = '" + raavarebatch.getRaavareId() + "' WHERE (rBID = '" + raavarebatch.getRbId() + "');");
                 db.update("UPDATE RaavareBatches SET maengde = '" + raavarebatch.getStartMaengde() + "' WHERE (rBID = '" + raavarebatch.getRbId() + "');");
                 db.update("UPDATE RaavareBatches SET aktuelMaengde = '" + raavarebatch.getAktuelMaengde() + "' WHERE (rBID = '" + raavarebatch.getRbId() + "');");

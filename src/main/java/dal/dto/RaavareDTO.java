@@ -4,8 +4,6 @@ public class RaavareDTO {
 
     /** raavare id i området 1-99999999 vælges af brugerne */
     private int raavareID;
-
-    private int raavareNummer;
     /** min. 2 max. 20 karakterer */
     private String raavareNavn;
     /** min. 2 max. 20 karakterer */
@@ -14,10 +12,6 @@ public class RaavareDTO {
     private double lagerBeholdning;
 
 
-
-    public int getRaavareNummer() {return raavareNummer;}
-
-    public void setRaavareNummer(int raavareNummer) {this.raavareNummer = raavareNummer;}
 
     public double getLagerBeholdning() {
         return lagerBeholdning;

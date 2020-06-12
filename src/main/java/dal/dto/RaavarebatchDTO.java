@@ -33,20 +33,13 @@ public class RaavarebatchDTO {
         this.startMaengde = startMaengde;
     }
 
-    public int getRbNummer() {
-        return rbNummer;
-    }
-
-    public void setRbNummer(int rbNummer) {
-        this.rbNummer = rbNummer;
-    }
 
     /** raavare batch id i området 1-99999999. Vælges af brugerne */
     int rbId;
 
-    int rbNummer;
     /** raavare id i området 1-99999999 vælges af brugerne */
     int raavareId;
+
     /** mængde på lager */
     double aktuelMaengde;
     /** Start mængde */
