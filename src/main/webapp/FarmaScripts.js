@@ -42,7 +42,7 @@ function confirmOpdaterRC(RVID, RVNummer){ //TODO Make for RC
     });
 }
 
-function postRVData() {
+function postRaavareData() {
     const INummer = $("#RVNummer").val();
     const INavn = $("#RVNavn").val();
     const ILeve = $("#leverandoer").val();
@@ -65,7 +65,7 @@ function postRVData() {
 
 }
 
-function postRVOpdatering() {
+function postRaavareUpdate() {
 
     const Iid = localStorage.getItem("opdaterRVID");
     const INummer = $("#RVNummer").val();
