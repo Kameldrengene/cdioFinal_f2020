@@ -2,12 +2,12 @@ package dal.dto;
 
 public class ReceptDTO {
     /** recept id i området 1-99999999 */
-    int RCID;
+    int receptId;
     /** Receptnavn min. 2 max. 20 karakterer */
-    String RCNavn;
+    String receptNavn;
     /** raavare id i området 1-99999999. Vælges af brugerne
      *  i opgaver står der (1..N) derfor er det en array */
-    int RVID;
+    int raavareId;
     /** nonnetto i kilogram med 4 decimaler */
     double nonNetto;
     /** tolerance i kilogram med 4 decimaler */
@@ -17,20 +17,20 @@ public class ReceptDTO {
 
     }
 
-    public String getRCNavn() {
-        return RCNavn;
+    public String getReceptNavn() {
+        return receptNavn;
     }
 
-    public void setRCNavn(String RCNavn) {
-        this.RCNavn = RCNavn;
+    public void setReceptNavn(String receptNavn) {
+        this.receptNavn = receptNavn;
     }
 
-    public int getRVID() {
-        return RVID;
+    public int getRaavareId() {
+        return raavareId;
     }
 
-    public void setRVID(int RVID) {
-        this.RVID = RVID;
+    public void setRaavareId(int raavareId) {
+        this.raavareId = raavareId;
     }
 
     public double getNonNetto() {
@@ -49,11 +49,11 @@ public class ReceptDTO {
         this.tolerance = tolerance;
     }
 
-    public int getRCID() {
-        return RCID;
+    public int getReceptId() {
+        return receptId;
     }
 
-    public void setRCID(int RCID) {
-        this.RCID = RCID;
+    public void setReceptId(int receptId) {
+        this.receptId = receptId;
     }
 }
