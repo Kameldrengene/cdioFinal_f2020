@@ -1,5 +1,6 @@
 package controller;
 
+import Funktionalitet.RaavareFunc;
 import dal.IDALException;
 import dal.RaavareDAOSQL;
 import dal.dto.RaavareDTO;
@@ -32,8 +33,11 @@ public class RaavareController {
     }
 
     public RaavareDTO opretRaavare (RaavareDTO raavareDTO) {
+        RaavareFunc rvFunc = new RaavareFunc();
         try {
-            raavareDAOSQL.createRaavare(raavareDTO);
+            if (rvFunc.isNewRaavareOk(raavareDTO)) {
+                raavareDAOSQL.createRaavare(raavareDTO);
+            }
         }catch (IDALException.DALException e){
             e.printStackTrace();
         }
@@ -41,8 +45,11 @@ public class RaavareController {
     }
 
     public RaavareDTO updateRaavare(RaavareDTO raavareDTO) {
+        RaavareFunc rvFunc = new RaavareFunc();
         try {
-            raavareDAOSQL.updateRaavare(raavareDTO);
+            if (rvFunc.isUpdateRaavareOk(raavareDTO)) {
+                raavareDAOSQL.updateRaavare(raavareDTO);
+            }
         }catch (IDALException.DALException e){
             e.printStackTrace();
         }
