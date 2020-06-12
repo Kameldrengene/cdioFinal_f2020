@@ -6,7 +6,7 @@ function confirmRaavareUpdate(id, nummer){
             switchP('FarmaScreen/NyRaavare/index.html')
             localStorage.setItem("raavareUpdateID", id);
             $(document).ready(function () {
-                $.getJSON("/BoilerPlate_war_exploded/rest/RV/getRV/"+ localStorage.getItem("raavareUpdateID"), function (data) {
+                $.getJSON("/BoilerPlate_war_exploded/rest/Raavare/getRaavare/"+ localStorage.getItem("raavareUpdateID"), function (data) {
                     document.getElementById("raavareHeader").textContent = "Update Råvare";
                     document.getElementById("confirmbtn").value = "Update";
                     document.getElementById("raavareNummer").value = data.raavareNummer;
@@ -27,7 +27,7 @@ function postRaavareData() {
     const ILeve = $("#leverandoer").val();
     const jsonData = {raavareNummer: INummer, raavareNavn: INavn, leverandoer: ILeve};
     $.ajax({
-        url: "/BoilerPlate_war_exploded/rest/RV/opretRV",
+        url: "/BoilerPlate_war_exploded/rest/Raavare/opretRaavare",
         type: 'POST',
         contentType: "application/json",
         dataType: 'json',
@@ -54,7 +54,7 @@ function postRaavareUpdate() {
 
     console.log(jsonData);
     $.ajax({
-        url: "/BoilerPlate_war_exploded/rest/RV/opdaterRV",
+        url: "/BoilerPlate_war_exploded/rest/Raavare/updaterRaavare",
         type: 'PUT',
         contentType: "application/json",
         dataType: 'json',

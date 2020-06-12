@@ -8,35 +8,35 @@ import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import java.util.List;
 
-@Path("RV")
+@Path("Raavare")
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
 public class RaavareService {
 
-    private RaavareController RVController = new RaavareController();
 
-    @Path("getRVList")
+    private RaavareController raavareController = new RaavareController();
+    @Path("getRaavarer")
     @GET
-    public List<RaavareDTO> getRVList() throws IDALException.DALException {
-        return RVController.getRVList();
+    public List<RaavareDTO> getData() throws IDALException.DALException {
+        return raavareController.getRVList();
     }
 
     @GET
-    @Path("getRV/{RVID}")
-    public RaavareDTO getRV (@PathParam("RVID") int RVID){
-        return RVController.gerRV(RVID);
+    @Path("getRaavare/{raavareID}")
+    public RaavareDTO getRaavare (@PathParam("raavareID") int raavareID){
+        return raavareController.gerRV(raavareID);
     }
 
     @POST
-    @Path("opretRV")
-    public RaavareDTO opretRV(RaavareDTO rv){
-        return RVController.opretRV(rv);
+    @Path("opretRaavare")
+    public RaavareDTO opretRaavare (RaavareDTO raavareDTO){
+        return raavareController.opretRV(raavareDTO);
     }
 
     @PUT
-    @Path("opdaterRV")
-    public RaavareDTO opdaterRV(RaavareDTO rv){
-        return RVController.opdaterRV(rv);
+    @Path("updaterRaavare")
+    public RaavareDTO updateRaavare (RaavareDTO raavareDTO){
+        return raavareController.opdaterRV(raavareDTO);
     }
 
 }
