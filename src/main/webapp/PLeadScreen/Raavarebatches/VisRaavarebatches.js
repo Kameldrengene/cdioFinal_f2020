@@ -2,12 +2,11 @@
 $("document").ready(function(){
 
     updateTable();
+    console.log("her");
 
     $("#visTomme").click(function () {
         updateTable();
     })
-
-
 
 });
 
@@ -33,6 +32,7 @@ function updateTable(){
         "raavarebatches",
         function (value) {
             let msg = "";
+            let parameters = value.rbId + ", " + value.rbNummer;
             msg += "<td> <button class = hvr-buzz onclick='switchPage("+ parameters +")'>Rediger</button>  </td>";
             return msg;
         }
