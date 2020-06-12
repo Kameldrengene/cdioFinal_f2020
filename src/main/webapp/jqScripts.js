@@ -14,13 +14,8 @@ function viewlist(headers, link, tableName, btnHtmlfunc) {
             $.each(BEdata,function (key,value) {
                 //console.log(value);
                 data += '<tr>';
-                var rmID = true;
                 $.each(value, function (key2, inner) {
-                    if (rmID) {
-                        rmID = false;
-                    } else {
-                        data += '<td>' + inner + '</td>'
-                    }
+                    data += '<td>' + inner + '</td>'
                 });
                 data += btnHtmlfunc(value);
                 data +=  '</tr>';
