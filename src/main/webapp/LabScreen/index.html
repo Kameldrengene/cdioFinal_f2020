@@ -4,14 +4,29 @@
     <meta charset="UTF-8">
     <title>Lab Screen</title>
     <link rel="stylesheet" type="text/css" href="../default.css">
+    <link rel="stylesheet" type="text/css" href="LabScreen/index.css">
 </head>
 <body>
 <h5 id="brugerInfo">Loading</h5>
 <script src="currentUserScript.js"></script>
 
-<h1>Lab Screen</h1>
+<h1>Laborant Screen</h1>
 
+<table>
+    <thead>
+    <tr>
+        <th><h2> Afvejning </h2></th>
 
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>
+            <input type="submit" class="hvr-buzz screenbtn" value="Lav afvejning" onclick="switchP('LabScreen/VaelgProduktbatch/index.html'); return false">
+        </td>
+    </tr>
+    </tbody>
+</table>
 
 <input type="submit" class="hvr-buzz screenbtn" value="Log ud" onclick="localStorage.setItem('loginID', 'None'); switchP('index.html'); return false">
 
