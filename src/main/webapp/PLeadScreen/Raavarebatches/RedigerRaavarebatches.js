@@ -4,7 +4,7 @@ $("document").ready(function () {
 
     $("#batchID").html(batchID);
 
-    $.getJSON("/BoilerPlate_war_exploded/rest/RVB/getRVB/" + batchID,function (data) {
+    $.getJSON("/BoilerPlate_war_exploded/rest/Raavarebatch/getBatch/" + batchID,function (data) {
         $("#raavareID").html(data.raavareId);
         $("#actualAmount").html(
             "<form> " +

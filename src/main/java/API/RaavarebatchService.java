@@ -8,28 +8,28 @@ import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import java.util.List;
 
-@Path("RVB")
+@Path("Raavarebatch")
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
 public class RaavarebatchService {
-    public RaavarevbatchController RVBController = new RaavarevbatchController();
+    public RaavarevbatchController raavarebatchController = new RaavarevbatchController();
 
-    @Path("getRVBList")
+    @Path("getAlle")
     @GET
-    public List<RaavarebatchDTO> getRVBList() throws IDALException.DALException {
-        return RVBController.getRVBList();
+    public List<RaavarebatchDTO> getData() throws IDALException.DALException {
+        return raavarebatchController.getRVBList();
     }
 
-    @Path("getaktuelRVBList")
+    @Path("getAktuelle")
     @GET
-    public List<RaavarebatchDTO> getAktuelRVBList() throws IDALException.DALException {
-        return RVBController.getAktuelRVBList();
+    public List<RaavarebatchDTO> getAktuelle() throws IDALException.DALException {
+        return raavarebatchController.getAktuelRVBList();
     }
 
-    @Path("getRVB/{RVBID}")
+    @Path("getBatch/{RVBID}")
     @GET
-    public RaavarebatchDTO getRVB(@PathParam("RVBID") int RVBID) throws IDALException.DALException {
-        return RVBController.getRVB(RVBID);
+    public RaavarebatchDTO getBatch(@PathParam("RVBID") int RVBID) throws IDALException.DALException {
+        return raavarebatchController.getRVB(RVBID);
     }
 
 

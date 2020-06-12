@@ -27,13 +27,13 @@ function updateTable(){
     let path;
 
     if($("#visTomme").is(":checked"))
-        path = "getRVBList";
+        path = "getAlle";
     else
-        path = "getaktuelRVBList"
+        path = "getAktuelle"
 
     viewlist(
         ["Batch Nummer", "Råvare ID", "Aktuel mængde", "Oprindelig mængde"],
-        "/BoilerPlate_war_exploded/rest/RVB/" + path,
+        "/BoilerPlate_war_exploded/rest/Raavarebatch/" + path,
         "raavarebatches",
         function (valuea) {
             let msg = "";
