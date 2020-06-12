@@ -19,16 +19,7 @@
 
 <input type="submit" class="hvr-buzz screenbtn" value="Retur" onclick="switchP('FarmaScreen/index.html'); return false">
 
-<script>viewlist
-(["ID", "Navn", "RåvareID", "Lagerbehold", "Tolerance"],
-    "/BoilerPlate_war_exploded/rest/Raavare/getRaavarer",
-    "recept_table",
-    function (value) {
-        const id = value.RID;
-        let msg = "";
-        msg += "<td><input id='updateuser' class='update' type='button' onclick='confirmRaavareUpdate("+ id +")' value='Update'/> </td>";
-        return msg
-    });</script>
+<script>visRecept();</script>
 
 </body>
 </html>
