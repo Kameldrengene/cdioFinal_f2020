@@ -8,18 +8,15 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans" > -->
 
     <!-- Linker vores stylesheet -->
-    <link rel="stylesheet" type="text/css" href="../../default.css">
-    <link rel="stylesheet" type="text/css" href="index.css">
+    <link rel="stylesheet" type="text/css" href="Brugeroversigt/Opretbruger/index.css">
 </head>
 <body>
 <div id="content"><h1>Opret ny bruger</h1>
     <br>
-
-
-    <input type="text" id="username" placeholder="Brugernavn" value=""><br>
-    <input type="text" id="ini"  placeholder="Initialer" value=""><br>
-    <input type="text" id="cpr"  placeholder="CPR-Nummer" value=""><br>
-    <input type="text" id="pass"  placeholder="Password" value=""><br>
+    
+    <input type="text" id="username" placeholder="Brugernavn" value="" minlength="2" maxlength="20"><br>
+    <input type="text" id="ini"  placeholder="Initialer" value="" minlength="2" maxlength="4"><br>
+    <input type="text" id="pass"  placeholder="Password" value=""  minlength="2" maxlength="20"><br>
 
 
     <!-- En <div> (gruppe) der indeholder en serie labels og 'radio'-knapper -->
@@ -30,19 +27,19 @@
 
             <table class="rolletabel">
                 <tr>
-                    <td><input type="radio" id="role1" name="jobs" class="jobsradio"  value="Administrator"></td>
+                    <td><input type="radio" id="role1" name="jobs" class="jobsradio"  value="Administrator" required></td>
                     <td><label for="role1"> Administrators </label><br></td>
                 </tr>
                 <tr>
-                    <td><input type="radio" id="role2" name="jobs" class="jobsradio" value="Farmaceut"></td>
+                    <td><input type="radio" id="role2" name="jobs" class="jobsradio" value="Farmaceut" required></td>
                     <td><label for="role2"> Farmaceut </label><br></td>
                 </tr>
                 <tr>
-                    <td><input type="radio" id="role3" name="jobs" class="jobsradio" value="Produktionsleder"></td>
+                    <td><input type="radio" id="role3" name="jobs" class="jobsradio" value="Produktionsleder" required></td>
                     <td><label for="role3"> Produktionsleder</label><br></td>
                 </tr>
                 <tr>
-                    <td><input type="radio" id="role4" name="jobs" class="jobsradio" value="Laborant"></td>
+                    <td><input type="radio" id="role4" name="jobs" class="jobsradio" value="Laborant" required></td>
                     <td><label for="role4"> Laborant </label><br></td>
                 </tr>
             </table>
@@ -52,11 +49,11 @@
         <table class="rolletabel">
         <h3>Vælg om aktiv</h3>
         <tr>
-            <td><input type="radio" id="aktivcheckbox" name="aktive" class="jobs" value="true"></td>
+            <td><input type="radio" id="aktivcheckbox" name="aktive" class="jobs" value="true" required></td>
             <td><label for="aktivcheckbox"> yes </label><br></td>
         </tr>
         <tr>
-            <td><input type="radio" id="aktivcheckboxno" name="aktive" class="jobs" value="false"></td>
+            <td><input type="radio" id="aktivcheckboxno" name="aktive" class="jobs" value="false" required></td>
             <td><label for="aktivcheckboxno"> no </label><br></td>
         </tr>
         </table>

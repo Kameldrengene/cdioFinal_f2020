@@ -61,7 +61,7 @@ $("document").ready(function () {
             else if (loginRole == "farma")
                 switchP("FarmaScreen/index.html");
             else if (loginRole == "prodLeder")
-                switchP("PLeadScreen/PLeadScreen.html")
+                switchP("PLeadScreen/index.html")
             else if (loginRole == "laborant")
                 switchP("LabScreen/index.html");
         }
@@ -80,9 +80,17 @@ async function PersonList(role) {
     await $.getJSON("/BoilerPlate_war_exploded/rest/user/getRole?role=" + role, function (data) {
 
         //Loop through
+        if(role === "Administrator"){
+            tabelData += "<tr>";
+            tabelData += "<td><input type = 'radio' name = 'rolle' id ='0'></td>";
+            tabelData += "<td><Label for ='0'>0</Label></td>";
+            tabelData += "<td><Label for ='0'>root</Label></td>";
+            tabelData += "</tr>";
+        }
         $.each(data, function (key, value) {
             if (value.aktiv) {
                 var userID = value.userID;
+
 
                 //Uses userID for label reference
                 tabelData += "<tr>";
