@@ -4,7 +4,7 @@ localStorage.setItem('loginID', 'None');
 var ID = 'delete';
 function Personslist() {
     $(document).ready(function () {
-        $.getJSON("/BoilerPlate_war_exploded/rest/user/getUserList",function (data) {
+        $.getJSON("/BoilerPlate_war_exploded/rest/user/getUsers",function (data) {
             var person_data = '<tr>\n' +
                 '                <th>ID</th>\n' +
                 '                <th>Name</th>\n' +
@@ -39,7 +39,7 @@ function Personslist() {
 }
 
 function checkIfNew() {
-    $.get("/BoilerPlate_war_exploded/rest/user/getUserList", function (data) {
+    $.get("/BoilerPlate_war_exploded/rest/user/getUsers", function (data) {
         var x = JSON.parse(localStorage.getItem("userTable"));
         if (JSON.stringify(x) !== JSON.stringify(data)) {
             localStorage.setItem("userTable", JSON.stringify(data));
@@ -56,7 +56,7 @@ var currentactivity = "";
 function getcurrentActivity(ID) { //opdatere brugerens aktivitet
     $(document).ready(function () {
         if(confirm("are you sure, you want to update user " + ID+"?")) {
-            $.getJSON("/BoilerPlate_war_exploded/rest/user/getActivity/" + ID + "", function (data) {
+            $.getJSON("/BoilerPlate_war_exploded/rest/user/getactivity/" + ID + "", function (data) {
                 currentactivity = data;
             });
             var USERID = ID;
@@ -172,7 +172,7 @@ function updateUser() {
     var statuscode;
     var UPjsondata = {userID: UPid, userName: UPuser, ini: UPini, cpr: UPcpr, password: UPpass, job: UPjob, aktiv: UPboolean};
     $.ajax({
-        url: "/BoilerPlate_war_exploded/rest/user/opdaterUser",
+        url: "/BoilerPlate_war_exploded/rest/user/updateUser",
         type: 'PUT',
         contentType: "application/json",
         dataType: 'json',
@@ -243,7 +243,7 @@ function successTest() {
     var statuscode;
     var jsondata = {userName: Iuser, ini: Iini, cpr: Icpr, password: Ipass, job: Ijob, aktiv: boolean};
     $.ajax({
-        url: "/BoilerPlate_war_exploded/rest/user/opretUser",
+        url: "/BoilerPlate_war_exploded/rest/user/createUser",
         type: 'POST',
         contentType: "application/json",
         dataType: 'json',

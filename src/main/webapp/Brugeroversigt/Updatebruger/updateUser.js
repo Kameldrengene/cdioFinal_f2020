@@ -1,4 +1,4 @@
-async function updateUser() {//TODO not in use?
+async function updateUser() {
     //const updateID = await fetch("/BoilerPlate_war_exploded/rest/live/update");
     var updateID = localStorage.getItem("userID"); //TODO: FIX for update number find
     var user = {

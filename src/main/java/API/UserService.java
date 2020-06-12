@@ -15,7 +15,7 @@ public class UserService {
 
     public UserController userController = new UserController();
 
-    @Path("getUserList")
+    @Path("getUsers")
     @GET
     public List<UserDTO> getData() {
         try {
@@ -34,14 +34,14 @@ public class UserService {
     }
 
     // -Mikkel
-    @Path("getRoleList")
+    @Path("getRole")
     @Produces(MediaType.APPLICATION_JSON)
     @GET
     public List<UserDTO> getRole(@QueryParam("role") String role){
         return userController.getRole(role);
     }
 
-    @Path("getActivity/{id}")
+    @Path("getactivity/{id}")
     @Produces(MediaType.APPLICATION_JSON)
     @GET
     public boolean getUserActivity (@PathParam("id") int id){
@@ -54,14 +54,14 @@ public class UserService {
         return userController.activitySwitchUser(user);
     }
 
-    @Path("opretUser")
+    @Path("createUser")
     @POST
     public UserDTO createUser(UserDTO user){
         userController.opretUser(user);
         return user;
     }
 
-    @Path("opdaterUser")
+    @Path("updateUser")
     @PUT
     public UserDTO updateUser(UserDTO user){
         return userController.opdaterUser(user);
