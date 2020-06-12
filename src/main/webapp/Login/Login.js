@@ -75,14 +75,24 @@ async function PersonList(role) {
 
     //Variable to hold all the tabel rows
     var tabelData = "";
+    console.log(role);
 
     //Get all the persons
     await $.getJSON("/BoilerPlate_war_exploded/rest/user/getRole?role=" + role, function (data) {
 
         //Loop through
+        if(role === "Administrator"){
+            tabelData += "<tr>";
+            tabelData += "<td><input type = 'radio' name = 'rolle' id ='0'></td>";
+            tabelData += "<td><Label for ='0'>0</Label></td>";
+            tabelData += "<td><Label for ='0'>root</Label></td>";
+            tabelData += "</tr>";
+            console.log("We here");
+        }
         $.each(data, function (key, value) {
             if (value.aktiv) {
                 var userID = value.userID;
+
 
                 //Uses userID for label reference
                 tabelData += "<tr>";
