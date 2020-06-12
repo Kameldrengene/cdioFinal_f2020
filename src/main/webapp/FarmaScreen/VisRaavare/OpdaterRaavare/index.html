@@ -8,25 +8,24 @@
 <div id="content"><h1>Opret ny Råvare</h1>
     <br>
 
-
-    <input type="number" id="raavareID" placeholder="RåvareID" value="" minlength="1" maxlength="8"><br>
+    <label id="raavareID" ></label><br>
     <input type="text" id="raavareNavn" placeholder="RåvareNavn" value="" minlength="2" maxlength="20"><br>
     <input type="text" id="leverandoer"  placeholder="Leverandør" value="" minlength="2" maxlength="20"><br>
 
 
     <input id="confirmbtn" type="button" onclick="
         if (confirm('Er du sikker?')) {
-            if(document.getElementById('raavareID').value != '' && document.getElementById('raavareNavn').value != '' && document.getElementById('leverandoer').value != ''){
-                postRaavareData()
+            if(document.getElementById('raavareNavn').value != '' && document.getElementById('leverandoer').value != ''){
+                postRaavareUpdate()
             } else {
                 alert('Ikke alt udfyldt')
             }
         }"
-    class="hvr-pop" value="Opret">
+           class="hvr-pop" value="Opdater">
 </div>
 
 
-<input type="submit" class="hvr-buzz screenbtn" value="Retur" onclick="switchP('FarmaScreen/index.html') ; return false">
+<input type="submit" class="hvr-buzz screenbtn" value="Retur" onclick="switchP('FarmaScreen/VisRaavare/index.html'); return false">
 
 </body>
 </html>
