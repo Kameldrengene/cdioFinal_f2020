@@ -12,6 +12,19 @@
 
 <h1>Indtast ID på produktbatch</h1>
 
+<br>
+<input type="number" id="produktbatchID" placeholder="ProduktbatchID" value="" minlength="1" maxlength="8"><br>
+
+<input id="confirmbtn" type="button" onclick="
+        if (confirm('Er du sikker?')) {
+            if(document.getElementbyId('produktbatchID').value != ''){
+                alert('halløjsovs') //her skal kode ind som kan sende en videre samt finder det rigtige produktbatch som man kan arbejde på
+            } else {
+                alert('udfyld feltet')
+            }
+        }"
+       >
+
 <input type="submit" class="hvr-buzz screenbtn" value="Log ud" onclick="localStorage.setItem('loginID', 'None'); switchP('index.html'); return false">
 </body>
 </html>
