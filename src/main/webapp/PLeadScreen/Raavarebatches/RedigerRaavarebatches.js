@@ -1,32 +1,32 @@
 $("document").ready(function () {
 
     const batchID = localStorage.getItem("activeRBId");
-    console.log("batchID : " + batchID);
 
     $("#batchID").html(batchID);
 
     $.getJSON("/BoilerPlate_war_exploded/rest/Raavarebatch/getBatch/" + batchID, function(data) {
         $("#raavareID").html(data.raavareId);
-        $("#actualAmount").html(
-            "<form onsubmit='return false;'> " +
-            "<input type='text' id='newAmount' value=" + data.aktuelMaengde + ">" +
-            "</form>"
-        );
+        $("#actualAmount").html(data.aktuelMaengde);
         $("#oriAmount").html(data.startMaengde);
 
     })
 
     $("#gem").click(function () {
-        const newAmount = $("#newAmount").val();
+
+        const newAmount = $(".brugertable").find("td").eq(0).text();
         console.log(newAmount);
 
     })
 
-    $('input').keyup(function(e){
-        if(e.keyCode == 13) {
-            const newAmount = $("#newAmount").val();
-            console.log(newAmount);
-        }
+    $("table").keypress(function(e){
+        const newAmount = $(".brugertable").find("td").eq(0).text();
+        console.log(newAmount);
+        return e.which != 13;
     });
 
+
 });
+
+// function save(){
+//     const newAmount = $(".brugertable").find("td").eq(0).text();
+// }

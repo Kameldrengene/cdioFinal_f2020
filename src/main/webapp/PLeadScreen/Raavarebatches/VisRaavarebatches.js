@@ -2,20 +2,17 @@
 $("document").ready(function(){
 
     updateTable();
-    console.log("her");
 
     $("#visTomme").click(function () {
         updateTable();
     })
 
+    $("#raavarebatches").on("click", "button", function () {
+        localStorage.setItem("activeRBId", this.id);
+        switchP("PLeadScreen/Raavarebatches/RedigerRaavarebatches.html");
+    })
+
 });
-
-function switchPage(id, nummer) {
-
-    localStorage.setItem("activeRBId", id);
-    switchP('PLeadScreen/Raavarebatches/RedigerRaavarebatches.html');
-
-}
 
 function updateTable(){
 
@@ -27,16 +24,14 @@ function updateTable(){
         path = "getAktuelle"
 
     viewlist(
-        ["Batch Nummer", "Råvare ID", "Aktuel mængde", "Oprindelig mængde"],
+        ["Batch ID", "Råvare ID", "Aktuel mængde", "Oprindelig mængde"],
         "/BoilerPlate_war_exploded/rest/Raavarebatch/" + path,
         "raavarebatches",
         function (value) {
             let msg = "";
-            let parameters = value.rbId + ", " + value.rbNummer;
-            msg += "<td> <button class = hvr-buzz onclick='switchPage("+ parameters +")'>Rediger</button>  </td>";
-            return msg;
+            msg += "<td> <button class = hvr-buzz id =" + value.rbId + ">Rediger</button>  </td>";
+            return msg
         }
     )
-
 };
 
