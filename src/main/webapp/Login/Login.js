@@ -61,7 +61,7 @@ $("document").ready(function () {
             else if (loginRole == "farma")
                 switchP("FarmaScreen/index.html");
             else if (loginRole == "prodLeder")
-                switchP("PLeadScreen/PLeadScreen.html")
+                switchP("PLeadScreen/index.html")
             else if (loginRole == "laborant")
                 switchP("LabScreen/index.html");
         }
