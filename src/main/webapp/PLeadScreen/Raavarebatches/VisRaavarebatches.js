@@ -1,6 +1,8 @@
 
 $("document").ready(function(){
+
     updateTable();
+
     $("#visTomme").click(function () {
         updateTable();
     })
@@ -9,8 +11,6 @@ $("document").ready(function(){
         localStorage.setItem("activeRBId", this.id);
         switchP("PLeadScreen/Raavarebatches/RedigerRaavarebatches.html");
     })
-
-
 
 });
 
@@ -21,6 +21,7 @@ function confirmRaavarebatchUpdate(id) {
         alert("Returnerer")
     }
 }
+
 
 function updateTable(){
 
@@ -38,9 +39,9 @@ function updateTable(){
         function (value) {
             let msg = "";
             msg += "<td> <button class = hvr-buzz onclick='confirmRaavarebatchUpdate("+ value.rbId + ")'>Rediger</button>  </td>";
+
             return msg
         }
     )
-
 };
 
