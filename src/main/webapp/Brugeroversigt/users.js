@@ -17,7 +17,6 @@ function create_attributes() {
     tr.appendChild(createTD("Bruger ID"));
     tr.appendChild(createTD("Brugernavn"));
     tr.appendChild(createTD("Initialer"));
-    tr.appendChild(createTD("CPR-Nummer"));
     tr.appendChild(createTD("Password"));
     tr.appendChild(createTD("Roller"));
 
@@ -30,7 +29,6 @@ function create_row(user) {
     tr.appendChild(createCell(user.userID));
     tr.appendChild(createCell(user.userName));
     tr.appendChild(createCell(user.ini));
-    tr.appendChild(createCell(user.cpr));
     tr.appendChild(createCell(user.password));
     tr.appendChild(createCell(user.rolesToString));
 
