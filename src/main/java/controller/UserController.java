@@ -2,62 +2,70 @@ package controller;
 
 import Funktionalitet.UserFunc;
 import dal.IDALException;
+import dal.IUserDAO;
 import dal.UserDAOSQL;
 import dal.dto.UserDTO;
 
+import javax.ws.rs.*;
+import javax.ws.rs.core.MediaType;
 import java.util.List;
 
 
 public class UserController {
 
-    private UserDAOSQL userDAO;
+    private UserDAOSQL userDAOSQL;
 
     //Constructor
     public UserController(){
-        userDAO = new UserDAOSQL();
+        userDAOSQL = new UserDAOSQL();
     }
 
     public List<UserDTO> getData() throws IDALException.DALException {
-        return userDAO.getData();
+        return userDAOSQL.getData();
     }
 
+
     public List<UserDTO> getRole(String role){
-        return userDAO.getRole(role);
+        return userDAOSQL.getRole(role);
     }
 
 
     public UserDTO activitySwitchUser(UserDTO user) {
+        UserDAOSQL db = new UserDAOSQL();
         try {
-            userDAO.aktivitySwitchUser(user.getUserID());
+            db.aktivitySwitchUser(user.getUserID());
         } catch (IDALException.DALException e) {
             e.printStackTrace();
         }
         return user;
     }
 
-    public boolean getActivity(int userID){
+    public boolean CurrentActivity (int id){
+        UserDAOSQL db = new UserDAOSQL();
         try {
-            return userDAO.getActivity(userID);
+            return db.getActivity(id);
         } catch (IDALException.DALException e) {
             e.printStackTrace();
         }
         return false;
     }
 
-    public UserDTO getUser(int userID) {
+    public UserDTO getUser(int id) {
+        UserDAOSQL db = new UserDAOSQL();
         try {
-            return userDAO.getUser(userID);
+            return db.getUser(id);
         } catch (IDALException.DALException e) {
             e.printStackTrace();
         }
         return null;
     }
 
-    public UserDTO opretUser(UserDTO user) {
+    public UserDTO createUser(UserDTO user) {
+        UserDAOSQL db = new UserDAOSQL();
         UserFunc userF = new UserFunc();
         try {
             if(userF.isUserOk(user)){
-                userDAO.createUser(user);
+                db.createUser(user);
             }
         } catch (IDALException.DALException e) {
             e.printStackTrace();
@@ -66,11 +74,12 @@ public class UserController {
     }
 
 
-    public UserDTO opdaterUser(UserDTO user) {
+    public UserDTO updateUser(UserDTO user) {
+        UserDAOSQL db = new UserDAOSQL();
         UserFunc userF = new UserFunc();
         try {
             if(userF.isUserOk(user)) {
-                userDAO.updateUser(user);
+                db.updateUser(user);
             }
         } catch (IDALException.DALException e) {
             e.printStackTrace();

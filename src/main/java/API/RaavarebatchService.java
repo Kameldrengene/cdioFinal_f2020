@@ -17,19 +17,19 @@ public class RaavarebatchService {
     @Path("getAlle")
     @GET
     public List<RaavarebatchDTO> getData() throws IDALException.DALException {
-        return raavarebatchController.getRVBList();
+        return raavarebatchController.getData();
     }
 
     @Path("getAktuelle")
     @GET
     public List<RaavarebatchDTO> getAktuelle() throws IDALException.DALException {
-        return raavarebatchController.getAktuelRVBList();
+        return raavarebatchController.getAktuelle();
     }
 
-    @Path("getBatch/{RVBID}")
+    @Path("getBatch/{batchID}")
     @GET
-    public RaavarebatchDTO getBatch(@PathParam("RVBID") int RVBID) throws IDALException.DALException {
-        return raavarebatchController.getRVB(RVBID);
+    public RaavarebatchDTO getBatch(@PathParam("batchID") String batchID) throws IDALException.DALException {
+        return raavarebatchController.getBatch(batchID);
     }
 
 
