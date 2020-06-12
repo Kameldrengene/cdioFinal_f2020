@@ -19,13 +19,13 @@
 <input type="submit" class="hvr-buzz screenbtn" value="Retur" onclick="switchP('FarmaScreen/index.html'); return false">
 
 <script>viewlist
-(["Nummer", "Navn", "Leverandør", "Lagerbehold[kg]", "Update"],
+(["ID", "Navn", "Leverandør", "Lagerbehold[kg]", "Update"],
 "/BoilerPlate_war_exploded/rest/Raavare/getRaavarer",
 "raavare_table",
 function (value) {
     const id = value.raavareID
     let msg = "";
-    msg += "<td><input id='updateraavare' class='update' type='button' onclick='confirmRaavareUpdate("+ id + ", " + value.raavareNummer + ")' value='Update'/> </td>";
+    msg += "<td><input id='updateraavare' class='update' type='button' onclick='confirmRaavareUpdate("+ id + ")' value='Update'/> </td>";
     return msg
 });</script>
 
