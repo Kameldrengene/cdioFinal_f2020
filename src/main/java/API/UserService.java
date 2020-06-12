@@ -41,7 +41,7 @@ public class UserService {
         return userController.getRole(role);
     }
 
-    @Path("switchActivity/{id}")
+    @Path("getActivity/{id}")
     @Produces(MediaType.APPLICATION_JSON)
     @GET
     public boolean getUserActivity (@PathParam("id") int id){
