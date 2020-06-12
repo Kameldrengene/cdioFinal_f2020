@@ -9,7 +9,6 @@ function Personslist() {
                 '                <th>ID</th>\n' +
                 '                <th>Name</th>\n' +
                 '                <th>Initials</th>\n' +
-                '                <th>CPR</th>\n' +
                 '                <th>Password</th>\n' +
                 '                <th>Role</th>\n' +
                 '                <th>Activivity</th>\n' +
@@ -23,7 +22,6 @@ function Personslist() {
                 person_data += '<td>'+userID+'</td>';
                 person_data += '<td>'+value.userName+'</td>';
                 person_data += '<td>'+value.ini+'</td>';
-                person_data += '<td>'+value.cpr+'</td>';
                 person_data += '<td>'+value.password+'</td>';
                 person_data += '<td>'+value.job+'</td>';
                 //if (value.aktiv)
@@ -106,7 +104,6 @@ function confirmUserUpdate(ID) { //metoden sender videre til update html siden.
                 $.getJSON("/BoilerPlate_war_exploded/rest/user/getUser/" + updatedID, function (data) {
                     document.getElementById("UpUsername").value = data.userName;
                     document.getElementById("Upini").value =  data.ini;
-                    document.getElementById("Upcpr").value =  data.cpr;
                     document.getElementById("Uppass").value =  data.password;
                     if (data.job === "Administrator") {
                         document.getElementById("Uprole1").checked = "checked";
@@ -147,11 +144,14 @@ function postUserUpdate() { // metoden bliver kaldt når man trykker på opret k
 }
 
 function updateUser() {
+    var errorMsg = "";
     var UPid = updatedID;
     var UPuser = $("#UpUsername").val();
+    if(!(UPuser.length < 1 || UPuser.length > 20)) {errorMsg += "Please enter a username between 2-20 characters \n";}
     var UPini = $("#Upini").val();
-    var UPcpr = $("#Upcpr").val();
+    if(!(UPini.length < 1 || UPini.length > 4)) {errorMsg += "Please enter initials between 2-4 characters \n";}
     var UPpass = $("#Uppass").val();
+    if(!(UPpass.length < 5 || UPpass.length > 50)) {errorMsg += "Please enter a password between 6-50 characters \n";}
     var UPjob ="" ;
     var UPboolean = 0;
     if($('#Uprole1').is(":checked")){
@@ -163,34 +163,38 @@ function updateUser() {
     }
     else if ($('#Uprole4').is(":checked")) {
         UPjob = "Laborant";
+    } else {
+        errorMsg += "No role selected \n";
     }
     if ($('#Upyes').is(":checked")){
         UPboolean = 1;
     }else if ($('#Upno').is(":checked")){
         UPboolean = 0;
     }
-    var statuscode;
-    var UPjsondata = {userID: UPid, userName: UPuser, ini: UPini, cpr: UPcpr, password: UPpass, job: UPjob, aktiv: UPboolean};
-    $.ajax({
-        url: "/BoilerPlate_war_exploded/rest/user/updateUser",
-        type: 'PUT',
-        contentType: "application/json",
-        dataType: 'json',
-        data: JSON.stringify(UPjsondata),
-        success: function (data) {
-            adminHomepage();
-        },
-        error: function (jqXHR, text, error) {
-            alert(JSON.stringify(UPjsondata));
-        }
-    });
+    var UPjsondata = {userID: UPid, userName: UPuser, ini: UPini, password: UPpass, job: UPjob, aktiv: UPboolean};
+    if(errorMsg.length > 1){
+        alert(errorMsg);
+    } else {
+        $.ajax({
+            url: "/BoilerPlate_war_exploded/rest/user/updateUser",
+            type: 'PUT',
+            contentType: "application/json",
+            dataType: 'json',
+            data: JSON.stringify(UPjsondata),
+            success: function () {
+                adminHomepage();
+            },
+            error: function () {
+                alert(JSON.stringify(UPjsondata));
+            }
+        });
+    }
 }
 
 function postUserData() {
     $(document).ready(function () {
         var Iuser = $("#username").val();
         var Iini = $("#ini").val();
-        var Icpr = $("#cpr").val();
         var Ipass = $("#pass").val();
         var Ijob ="" ;
         var boolean = 0;
@@ -221,7 +225,6 @@ function postUserData() {
 function successTest() {
     var Iuser = $("#username").val();
     var Iini = $("#ini").val();
-    var Icpr = $("#cpr").val();
     var Ipass = $("#pass").val();
     var Ijob ="" ;
     var boolean = 0;
@@ -241,7 +244,7 @@ function successTest() {
         boolean = 0;
     }
     var statuscode;
-    var jsondata = {userName: Iuser, ini: Iini, cpr: Icpr, password: Ipass, job: Ijob, aktiv: boolean};
+    var jsondata = {userName: Iuser, ini: Iini, password: Ipass, job: Ijob, aktiv: boolean};
     $.ajax({
         url: "/BoilerPlate_war_exploded/rest/user/createUser",
         type: 'POST',

@@ -21,7 +21,6 @@ public class UserDAOSQL implements IUserDAO {
             user.setUserID(rs.getInt("userID"));
             user.setUserName(rs.getString("userName"));
             user.setIni(rs.getString("ini"));
-            user.setCpr(rs.getString("cpr"));
             user.setPassword(rs.getString("password"));
             user.setJob(rs.getString("job"));
             user.setAktiv(rs.getBoolean("aktiv"));
@@ -47,7 +46,6 @@ public class UserDAOSQL implements IUserDAO {
                 user.setUserID(rs.getInt("userID"));
                 user.setUserName(rs.getString("userName"));
                 user.setIni(rs.getString("ini"));
-                user.setCpr(rs.getString("cpr"));
                 user.setPassword(rs.getString("password"));
                 user.setJob(rs.getString("job"));
                 user.setAktiv(rs.getBoolean("aktiv"));
@@ -81,7 +79,6 @@ public class UserDAOSQL implements IUserDAO {
                 user.setUserID(rs.getInt("userID"));
                 user.setUserName(rs.getString("userName"));
                 user.setIni(rs.getString("ini"));
-                user.setCpr(rs.getString("cpr"));
                 user.setPassword(rs.getString("password"));
                 user.setJob(rs.getString("job"));
                 user.setAktiv(rs.getBoolean("aktiv"));
@@ -103,7 +100,7 @@ public class UserDAOSQL implements IUserDAO {
         db.connect();
         int idIndex = users.get(users.size()-1).getUserID()+1;
         user.setUserID(idIndex);
-        db.update("insert into userdto (userID, userName, ini, cpr, password, job, aktiv) VALUES ('" + user.getUserID() + "', '" + user.getUserName() + "','" + user.getIni() + "','" + user.getCpr() + "','" + user.getPassword() + "','" + user.getJob() + "'," + user.getAktiv() + ")");
+        db.update("insert into userdto (userID, userName, ini, password, job, aktiv) VALUES ('" + user.getUserID() + "', '" + user.getUserName() + "','" + user.getIni() + "','" + user.getPassword() + "','" + user.getJob() + "'," + user.getAktiv() + ")");
         db.close();
         return user;
     }
@@ -118,7 +115,6 @@ public class UserDAOSQL implements IUserDAO {
                 db.update("UPDATE userdto SET userID = '" + user.getUserID() + "' WHERE (userID = '" + user.getUserID() + "');");
                 db.update("UPDATE userdto SET userName = '" + user.getUserName() + "' WHERE (userID = '" + user.getUserID() + "');");
                 db.update("UPDATE userdto SET ini = '" + user.getIni() + "' WHERE (userID = '" + user.getUserID() + "');");
-                db.update("UPDATE userdto SET cpr = '" + user.getCpr() + "' WHERE (userID = '" + user.getUserID() + "');");
                 db.update("UPDATE userdto SET password = '" + user.getPassword() + "' WHERE (userID = '" + user.getUserID() + "');");
                 db.update("UPDATE userdto SET job = '" + user.getJob() + "' WHERE (userID = '" + user.getUserID() + "');");
                 boolean b = user.getAktiv();
@@ -168,7 +164,6 @@ public class UserDAOSQL implements IUserDAO {
             user.setUserID(rs.getInt("userID"));
             user.setUserName(rs.getString("userName"));
             user.setIni(rs.getString("ini"));
-            user.setCpr(rs.getString("cpr"));
             user.setPassword(rs.getString("password"));
             user.setJob(rs.getString("job"));
             user.setAktiv(rs.getBoolean("aktiv"));

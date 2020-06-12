@@ -10,7 +10,7 @@ public class UserDTO implements Serializable{
 	private int userID;
 	private String userName;                
 	private String ini;
-	private String cpr;
+	//private String cpr;
 	private String password;
 	private String job;
 	private boolean aktiv;
@@ -47,12 +47,10 @@ public class UserDTO implements Serializable{
 	public void setIni(String ini) {
 		this.ini = ini;
 	}
-	public String getCpr() {
-		return cpr;
-	}
-	public void setCpr(String cpr) {
-		this.cpr = cpr;
-	}
+//	public String getCpr() { return cpr;}
+//	public void setCpr(String cpr) {
+//		this.cpr = cpr;
+//	}
 
 	public String getJob() {
 		return job;
@@ -82,7 +80,7 @@ public class UserDTO implements Serializable{
 				"userID=" + userID +
 				", userName='" + userName + '\'' +
 				", ini='" + ini + '\'' +
-				", cpr='" + cpr + '\'' +
+//				", cpr='" + cpr + '\'' +
 				", password='" + password + '\'' +
 				", job='" + job + '\'' +
 				", aktiv=" + aktiv +
