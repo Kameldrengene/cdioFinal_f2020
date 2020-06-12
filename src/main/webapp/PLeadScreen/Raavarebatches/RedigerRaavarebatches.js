@@ -1,6 +1,7 @@
 $("document").ready(function () {
 
     const batchID = localStorage.getItem("activeRBId");
+    console.log("batchID : " + batchID);
 
     $("#batchID").html(batchID);
 
@@ -32,4 +33,5 @@ $("document").ready(function () {
 
 
 
-})
+
+});
