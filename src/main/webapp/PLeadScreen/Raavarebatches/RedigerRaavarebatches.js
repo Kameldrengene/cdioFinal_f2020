@@ -1,18 +1,18 @@
 $("document").ready(function () {
 
-    const activeRVBID = localStorage.getItem("activeRVBID");
+    const batchID = localStorage.getItem("activeRBId");
 
-    $("#RVBID").html(activeRVBID);
+    $("#batchID").html(batchID);
 
-    $.getJSON("/BoilerPlate_war_exploded/rest/RVB/getRVB/" + activeRVBID,function (data) {
-        $("#RVID").html(data.RVBID);
+    $.getJSON("/BoilerPlate_war_exploded/rest/RVB/getRVB/" + batchID,function (data) {
+        $("#raavareID").html(data.raavareId);
         $("#actualAmount").html(
             "<form> " +
             "<input type='text' id='newAmount' value=" + data.aktuelMaengde + ">" +
             "</form>"
 
         );
-        $("#oriAmount").html(data.maengde);
+        $("#oriAmount").html(data.startMaengde);
 
     })
 

@@ -5,8 +5,8 @@ $("document").ready(function(){
         updateTable();
     })
 
-    $("#RVB_table").on("click", "button", function () {
-        localStorage.setItem("activeRVBID", this.id);
+    $("#raavarebatches").on("click", "button", function () {
+        localStorage.setItem("activeRBId", this.id);
         switchP("PLeadScreen/Raavarebatches/RedigerRaavarebatches.html");
     })
 
@@ -29,15 +29,15 @@ function updateTable(){
     if($("#visTomme").is(":checked"))
         path = "getRVBList";
     else
-        path = "getAktuelRVBList"
+        path = "getaktuelRVBList"
 
     viewlist(
         ["Batch Nummer", "Råvare ID", "Aktuel mængde", "Oprindelig mængde"],
         "/BoilerPlate_war_exploded/rest/RVB/" + path,
-        "RVB_table",
-        function (value) {
+        "raavarebatches",
+        function (valuea) {
             let msg = "";
-            msg += "<td> <button class = hvr-buzz onclick='confirmRaavarebatchUpdate("+ value.RVBID + ", " + value.RVBNummer +")'>Rediger</button>  </td>";
+            msg += "<td> <button class = hvr-buzz onclick='confirmRaavarebatchUpdate("+ valuea.rbId + ", " + valuea.rbNummer +")'>Rediger</button>  </td>";
             return msg
         }
     )
