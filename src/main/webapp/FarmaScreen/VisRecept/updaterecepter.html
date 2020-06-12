@@ -2,9 +2,23 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Farma Screen</title>
+    <link rel="stylesheet" type="text/css" href="../../default.css">
 </head>
 <body>
+<h1 id="receptheader"></h1>
+<div>
+    <div id="list" class="container" className="brugertable">
+        <br/>
+        <table class="brugertable" id="nyrecept_table">
+
+        </table>
+        <h1 id="error"></h1>
+    </div>
+</div>
+
+<input type="submit" class="hvr-buzz screenbtn" value="Retur" onclick="switchP('FarmaScreen/index.html'); return false">
+<script>visRecept();</script>
 
 </body>
 </html>

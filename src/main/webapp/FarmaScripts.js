@@ -69,4 +69,79 @@ function postRaavareUpdate() {
     });
 
 }
+function visRecept() {
+    $(document).ready(function () {
+        $.getJSON("/BoilerPlate_war_exploded/rest/Recept/getRecepts",function (data) {
+            var person_data = '<tr>\n' +
+                '                <th>ID</th>\n' +
+                '                <th>Navn</th>\n' +
+                '            </tr>';
+            $.each(data,function (key,value) {
+                //console.log(value);
+                person_data += '<tr>';
+                person_data += '<td>'+value.receptId+'</td>';
+                person_data += '<td>'+value.receptNavn+'</td>';
+                person_data += "<td><input id='updateuser' class='update' type='button'  value='Update'/> </td>";
+                person_data += "<td><input id='deleteuser' class='slet' type='button' onclick='visAlle("+value.receptId+")' value='vis'/> </td>";
+                person_data +=  '</tr>';
+            });
+            $('#recept_table').html(person_data);
+        });
+    });
+}
+
+function visAlle(id) {
+    localStorage.setItem("vistID", id);
+    visBestemtRecepter(id);
+}
+
+
+function visBestemtRecepter(id) {
+    $(document).ready(function () {
+        switchP('FarmaScreen/VisRecept/recept.html');
+        $.getJSON("/BoilerPlate_war_exploded/rest/Recept/getRecept/"+id,function (data) {
+            document.getElementById("receptheader").textContent = "Vis Recept med ID: "+id;
+            var person_data = '<tr>\n' +
+                '                <th>ID</th>\n' +
+                '                <th>Navn</th>\n' +
+                '                <th>RåvareID</th>\n' +
+                '                <th>nonNetto</th>\n' +
+                '                <th>Tolerance</th>\n' +
+                '            </tr>';
+            $.each(data,function (key,value) {
+                //console.log(value);
+                person_data += '<tr>';
+                person_data += '<td>'+value.receptId+'</td>';
+                person_data += '<td>'+value.receptNavn+'</td>';
+                person_data += '<td>'+value.raavareId+'</td>';
+                person_data += '<td contenteditable="true">'+value.nonNetto+'</td>';
+                person_data += '<td contenteditable="true">'+value.tolerance+'</td>';
+                person_data += "<td><input id='updateuser' class='update' type='button'  value='Update'/> </td>";
+                person_data +=  '</tr>';
+            });
+            $('#nyrecept_table').html(person_data);
+        });
+    });
+
+}
+
+function updateRecept(Rid, Rnavn, RaaID, nonNetto, tolerance) {
+
+    const jsonData = {receptId: Rid, receptNavn: Rnavn, raavareId:RaaID, nonNetto: nonNetto, tolerance: tolerance};
+    $.ajax({
+        url: "/BoilerPlate_war_exploded/rest/Raavare/opretRaavare",
+        type: 'POST',
+        contentType: "application/json",
+        dataType: 'json',
+        data: JSON.stringify(jsonData),
+        success: function (data) {
+           visBestemtRecepter(Rid);
+            alert("Succes!");
+        },
+        error: function (jqXHR, text, error) {
+            alert(JSON.stringify(jsonData));
+        }
+    });
+}
+
 //postRaavareData() : postRaavareUpdate()
