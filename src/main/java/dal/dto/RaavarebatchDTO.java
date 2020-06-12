@@ -1,20 +1,20 @@
 package dal.dto;
 
 public class RaavarebatchDTO {
-    public int getRVBID() {
-        return RVBID;
+    public int getRbId() {
+        return rbId;
     }
 
-    public void setRVBID(int RVBID) {
-        this.RVBID = RVBID;
+    public void setRbId(int rbId) {
+        this.rbId = rbId;
     }
 
-    public int getRVID() {
-        return RVID;
+    public int getRaavareId() {
+        return raavareId;
     }
 
-    public void setRVID(int RVID) {
-        this.RVID = RVID;
+    public void setRaavareId(int raavareId) {
+        this.raavareId = raavareId;
     }
 
     public double getAktuelMaengde() {
@@ -25,30 +25,30 @@ public class RaavarebatchDTO {
         this.aktuelMaengde = aktuelMaengde;
     }
 
-    public double getMaengde() {
-        return maengde;
+    public double getStartMaengde() {
+        return startMaengde;
     }
 
-    public void setMaengde(double maengde) {
-        this.maengde = maengde;
+    public void setStartMaengde(double startMaengde) {
+        this.startMaengde = startMaengde;
     }
 
-    public int getRVBNummer() {
-        return RVBNummer;
+    public int getRbNummer() {
+        return rbNummer;
     }
 
-    public void setRVBNummer(int RVBNummer) {
-        this.RVBNummer = RVBNummer;
+    public void setRbNummer(int rbNummer) {
+        this.rbNummer = rbNummer;
     }
 
     /** raavare batch id i området 1-99999999. Vælges af brugerne */
-    int RVBID;
+    int rbId;
 
-    int RVBNummer;
+    int rbNummer;
     /** raavare id i området 1-99999999 vælges af brugerne */
-    int RVID;
+    int raavareId;
     /** mængde på lager */
     double aktuelMaengde;
     /** Start mængde */
-    double maengde;
+    double startMaengde;
 }

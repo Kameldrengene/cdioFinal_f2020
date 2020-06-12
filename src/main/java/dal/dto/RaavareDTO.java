@@ -3,11 +3,11 @@ package dal.dto;
 public class RaavareDTO {
 
     /** raavare id i området 1-99999999 vælges af brugerne */
-    private int RVID;
+    private int raavareID;
 
-    private int RVNummer;
+    private int raavareNummer;
     /** min. 2 max. 20 karakterer */
-    private String RVNavn;
+    private String raavareNavn;
     /** min. 2 max. 20 karakterer */
     private String leverandoer;
     //Lagerbeholdning DECIMAL(4,4)
@@ -15,9 +15,9 @@ public class RaavareDTO {
 
 
 
-    public int getRVNummer() {return RVNummer;}
+    public int getRaavareNummer() {return raavareNummer;}
 
-    public void setRVNummer(int RVNummer) {this.RVNummer = RVNummer;}
+    public void setRaavareNummer(int raavareNummer) {this.raavareNummer = raavareNummer;}
 
     public double getLagerBeholdning() {
         return lagerBeholdning;
@@ -27,24 +27,24 @@ public class RaavareDTO {
         this.lagerBeholdning = lagerBeholdning;
     }
 
-    public void setRVID(int RVID) {
-        this.RVID = RVID;
+    public void setRaavareID(int raavareID) {
+        this.raavareID = raavareID;
     }
 
-    public void setRVNavn(String RVNavn) {
-        this.RVNavn = RVNavn;
+    public void setRaavareNavn(String raavareNavn) {
+        this.raavareNavn = raavareNavn;
     }
 
     public void setLeverandoer(String leverandoer) {
         this.leverandoer = leverandoer;
     }
 
-    public int getRVID() {
-        return RVID;
+    public int getRaavareID() {
+        return raavareID;
     }
 
-    public String getRVNavn() {
-        return RVNavn;
+    public String getRaavareNavn() {
+        return raavareNavn;
     }
 
     public String getLeverandoer() {

@@ -1,6 +1,7 @@
 package dal;
 
 import dal.dto.ProduktbatchDTO;
+import dal.dto.RaavareDTO;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -11,17 +12,17 @@ public class ProduktbatchDAOSQL implements IProduktbatchDAO {
     SQLDatabaseIO db = new SQLDatabaseIO("kamel", "dreng", "runerne.dk", 8003); //Makes new SQLDatabaseIO object.
 
     @Override
-    public ProduktbatchDTO getPB(int pbId) throws IDALException.DALException{
+    public ProduktbatchDTO getProduktBatch(int pbId) throws IDALException.DALException{
         db.connect();
         ResultSet rs = db.query("SELECT * FROM ProduktBatches where PBID=" + pbId); //Select all columns from recept where receptID is input
         ProduktbatchDTO pb = new ProduktbatchDTO();
         try {
             rs.next();
-            pb.setPBID(rs.getInt("PBID"));
-            pb.setRCID(rs.getInt("RVID"));
+            pb.setPbId(rs.getInt("PBID"));
+            pb.setReceptId(rs.getInt("RID"));
             pb.setStatus(rs.getString("Standing"));
-            pb.setUserID(rs.getInt("UserID"));
-            pb.setRVBID(rs.getInt("RVBID"));
+            pb.setUserId(rs.getInt("UserID"));
+            pb.setRbID(rs.getInt("RBID"));
             pb.setTara(rs.getDouble("Tara"));
             pb.setNetto(rs.getDouble("Netto"));
             rs.close();
@@ -33,7 +34,7 @@ public class ProduktbatchDAOSQL implements IProduktbatchDAO {
     }
 
     @Override
-    public List<ProduktbatchDTO> getPBList() throws IDALException.DALException{
+    public List<ProduktbatchDTO> getProduktBatchList() throws IDALException.DALException{
         db.connect();
         ResultSet rs = db.query("SELECT * FROM ProduktBatches"); //Select all data from raavarer
         List<ProduktbatchDTO> pbList = new ArrayList<>();
@@ -41,11 +42,11 @@ public class ProduktbatchDAOSQL implements IProduktbatchDAO {
             //We do as in getUser, except we make new user until rs is empty
             while (rs.next()) {
                 ProduktbatchDTO pb = new ProduktbatchDTO();
-                pb.setPBID(rs.getInt("PBID"));
-                pb.setRCID(rs.getInt("RCID"));
+                pb.setPbId(rs.getInt("PBID"));
+                pb.setReceptId(rs.getInt("RID"));
                 pb.setStatus(rs.getString("Standing"));
-                pb.setUserID(rs.getInt("UserID"));
-                pb.setRVBID(rs.getInt("RVBID"));
+                pb.setUserId(rs.getInt("UserID"));
+                pb.setRbID(rs.getInt("RBID"));
                 pb.setTara(rs.getDouble("Tara"));
                 pb.setNetto(rs.getDouble("Netto"));
                 pbList.add(pb);
@@ -61,25 +62,25 @@ public class ProduktbatchDAOSQL implements IProduktbatchDAO {
     }
 
     @Override
-    public void opretPB(ProduktbatchDTO pb) throws IDALException.DALException{
+    public void createProduktBatch(ProduktbatchDTO produktbatch) throws IDALException.DALException{
         db.connect();
-        db.update("insert into ProduktBatches (PBID, RCID, Standing, UserID, RVBID, Tara, Netto) VALUE ('" + pb.getPBID() + "','" + pb.getRCID() + "','" + pb.getStatus() + "','" + pb.getUserID() + "','" + pb.getRVBID() + "','" + pb.getTara() + "','" + pb.getNetto()  + "')");
+        db.update("insert into ProduktBatches (PBID, RID, Standing, UserID, RBID, Tara, Netto) VALUE ('" + produktbatch.getPbId() + "','" + produktbatch.getReceptId() + "','" + produktbatch.getStatus() + "','" + produktbatch.getUserId() + "','" + produktbatch.getRbID() + "','" + produktbatch.getTara() + "','" + produktbatch.getNetto()  + "')");
         db.close();
     }
 
     @Override
-    public void opdaterPB(ProduktbatchDTO pb) throws IDALException.DALException{
+    public void updateProduktBatch(ProduktbatchDTO produktbatch) throws IDALException.DALException{
         db.connect();
         try {
-            ResultSet rs = db.query("SELECT * FROM ProduktBatches where PBID=" + pb.getPBID());
+            ResultSet rs = db.query("SELECT * FROM ProduktBatches where PBID=" + produktbatch.getPbId());
             rs.next();
-            if (rs.getInt("PBID") == pb.getPBID()) {
-                db.update("UPDATE ProduktBatches SET RCID = '" + pb.getRCID() + "' WHERE (PBID = '" + pb.getPBID() + "');");
-                db.update("UPDATE ProduktBatches SET Standing = '" + pb.getStatus() + "' WHERE (PBID = '" + pb.getPBID() + "');");
-                db.update("UPDATE ProduktBatches SET UserID = '" + pb.getUserID() + "' WHERE (PBID = '" + pb.getPBID() + "');");
-                db.update("UPDATE ProduktBatches SET RVBID = '" + pb.getRVBID() + "' WHERE (PBID = '" + pb.getPBID() + "');");
-                db.update("UPDATE ProduktBatches SET Tara = '" + pb.getTara() + "' WHERE (PBID = '" + pb.getPBID() + "');");
-                db.update("UPDATE ProduktBatches SET Netto = '" + pb.getNetto() + "' WHERE (PBID = '" + pb.getPBID() + "');");
+            if (rs.getInt("PBID") == produktbatch.getPbId()) {
+                db.update("UPDATE ProduktBatches SET RID = '" + produktbatch.getReceptId() + "' WHERE (PBID = '" + produktbatch.getPbId() + "');");
+                db.update("UPDATE ProduktBatches SET Standing = '" + produktbatch.getStatus() + "' WHERE (PBID = '" + produktbatch.getPbId() + "');");
+                db.update("UPDATE ProduktBatches SET UserID = '" + produktbatch.getUserId() + "' WHERE (PBID = '" + produktbatch.getPbId() + "');");
+                db.update("UPDATE ProduktBatches SET RBID = '" + produktbatch.getRbID() + "' WHERE (PBID = '" + produktbatch.getPbId() + "');");
+                db.update("UPDATE ProduktBatches SET Tara = '" + produktbatch.getTara() + "' WHERE (PBID = '" + produktbatch.getPbId() + "');");
+                db.update("UPDATE ProduktBatches SET Netto = '" + produktbatch.getNetto() + "' WHERE (PBID = '" + produktbatch.getPbId() + "');");
             }
             rs.close();
         } catch (SQLException e) {

@@ -15,7 +15,7 @@ public class RaavareController {
 
     public List<RaavareDTO> getData()  {
         try {
-            return raavareDAOSQL.getRVList();
+            return raavareDAOSQL.getRaavareList();
         }catch (IDALException.DALException e){
             e.printStackTrace();
         }
@@ -24,7 +24,7 @@ public class RaavareController {
 
     public RaavareDTO getRaavare(int id) {
         try {
-            return raavareDAOSQL.getRV(id);
+            return raavareDAOSQL.getRaavare(id);
         }catch (IDALException.DALException e){
             e.printStackTrace();
         }
@@ -33,7 +33,7 @@ public class RaavareController {
 
     public RaavareDTO opretRaavare (RaavareDTO raavareDTO) {
         try {
-            raavareDAOSQL.opretRV(raavareDTO);
+            raavareDAOSQL.createRaavare(raavareDTO);
         }catch (IDALException.DALException e){
             e.printStackTrace();
         }
@@ -42,7 +42,7 @@ public class RaavareController {
 
     public RaavareDTO updateRaavare(RaavareDTO raavareDTO) {
         try {
-            raavareDAOSQL.opdaterRV(raavareDTO);
+            raavareDAOSQL.updateRaavare(raavareDTO);
         }catch (IDALException.DALException e){
             e.printStackTrace();
         }

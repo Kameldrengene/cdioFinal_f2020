@@ -2,27 +2,27 @@ package dal.dto;
 
 public class ProduktbatchDTO {
     /** produkt batch id i området 1-99999999. Vælges af brugerne */
-    int PBID;
+    int pbId;
     /** status 0: ikke påbegyndt, 1: under produktion, 2: afsluttet */
     String status;
     /** recept id i området 1-99999999. Vælges af brugerne */
-    int RCID;
+    int receptId;
     /** user id i området 1-99999999. Vælges af brugerne
      *  i opgaver står der (1..N) derfor er det en array */
-    int userID;
+    int userId;
     /** raavarebatch id  1-99999999. vælges af brugere */
-    int RVBID;
+    int rbID;
     /** tara i kilogram med 4 decimaler */
     double tara;
     /** netto i kilogram med 4 decimaler */
     double netto;
 
-    public int getPBID() {
-        return PBID;
+    public int getPbId() {
+        return pbId;
     }
 
-    public void setPBID(int PBID) {
-        this.PBID = PBID;
+    public void setPbId(int pbId) {
+        this.pbId = pbId;
     }
 
     public String getStatus() {
@@ -33,28 +33,28 @@ public class ProduktbatchDTO {
         this.status = status;
     }
 
-    public int getRCID() {
-        return RCID;
+    public int getReceptId() {
+        return receptId;
     }
 
-    public void setRCID(int RCID) {
-        this.RCID = RCID;
+    public void setReceptId(int receptId) {
+        this.receptId = receptId;
     }
 
-    public int getUserID() {
-        return userID;
+    public int getUserId() {
+        return userId;
     }
 
-    public void setUserID(int userID) {
-        this.userID = userID;
+    public void setUserId(int userId) {
+        this.userId = userId;
     }
 
-    public int getRVBID() {
-        return RVBID;
+    public int getRbID() {
+        return rbID;
     }
 
-    public void setRVBID(int RVBID) {
-        this.RVBID = RVBID;
+    public void setRbID(int rbID) {
+        this.rbID = rbID;
     }
 
     public double getTara() {
