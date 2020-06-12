@@ -12,21 +12,42 @@ $("document").ready(function () {
     })
 
     $("#gem").click(function () {
-
-        const newAmount = $(".brugertable").find("td").eq(0).text();
-        console.log(newAmount);
-
+        save();
     })
 
     $("table").keypress(function(e){
-        const newAmount = $(".brugertable").find("td").eq(0).text();
-        console.log(newAmount);
+        save();
         return e.which != 13;
     });
 
 
 });
 
-// function save(){
-//     const newAmount = $(".brugertable").find("td").eq(0).text();
-// }
+function save(){
+
+    const batchID = $(".brugertable").find("td").eq(0).text();
+    const raavareID = $(".brugertable").find("td").eq(1).text();
+    const mængde = $(".brugertable").find("td").eq(2).text();
+    const OprindeligMaengde = $(".brugertable").find("td").eq(3).text();
+
+    var obj = { rbId: batchID, raavareId: raavareID, aktuelMaengde: mængde, startMaengde: OprindeligMaengde };
+    var myJson = JSON.stringify(obj);
+    console.log(myJson);
+
+    /*
+        var request = new XMLHttpRequest();
+        request.open("POST","/Training_war_exploded/rest/person",true);
+        request.setRequestHeader('Content-Type','application/json; charset=UTF-8');
+        request.send(myJson);
+
+     */
+    $.ajax({
+        type: "POST",
+        url: "/BoilerPlate_war_exploded/Raavarebatch",
+        data: myJson,
+        dataType: "json",
+        contentType: "application/json; charset=UTF-8"
+    });
+
+
+}
