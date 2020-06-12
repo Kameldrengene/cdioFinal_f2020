@@ -78,4 +78,18 @@ public class RaavareDAOSQL implements IRaavareDAO{
         }
         db.close();
     }
+
+    public boolean raavareExists(int raavareID) {
+        db.connect();
+        try {
+            ResultSet rs = db.query("SELECT count(raavareID) AS fundet FROM Raavarer where raavareID=" + raavareID);
+            rs.next();
+            if (rs.getInt("fundet") == 1) {return true;}
+            return false;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
 }

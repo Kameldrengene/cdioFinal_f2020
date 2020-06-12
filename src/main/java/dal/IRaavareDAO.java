@@ -10,6 +10,7 @@ public interface IRaavareDAO {
     List<RaavareDTO> getRaavareList() throws IDALException.DALException;
     void createRaavare(RaavareDTO raavare) throws IDALException.DALException;
     void updateRaavare(RaavareDTO raavare) throws IDALException.DALException;
+    boolean raavareExists(int raavareID);
 
 
 }
