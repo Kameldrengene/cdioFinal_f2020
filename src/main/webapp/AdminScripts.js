@@ -147,11 +147,15 @@ function postUserUpdate() { // metoden bliver kaldt når man trykker på opret k
 }
 
 function updateUser() {
+    var errorMsg = "";
     var UPid = updatedID;
     var UPuser = $("#UpUsername").val();
+    if(!(UPuser.length < 1 || UPuser.length > 20)) {errorMsg += "Please enter a username between 2-20 characters \n";}
     var UPini = $("#Upini").val();
+    if(!(UPini.length < 1 || UPini.length > 4)) {errorMsg += "Please enter initials between 2-4 characters \n";}
     var UPcpr = $("#Upcpr").val();
     var UPpass = $("#Uppass").val();
+    if(!(UPpass.length < 5 || UPpass.length > 50)) {errorMsg += "Please enter a password between 6-50 characters \n";}
     var UPjob ="" ;
     var UPboolean = 0;
     if($('#Uprole1').is(":checked")){
@@ -163,27 +167,32 @@ function updateUser() {
     }
     else if ($('#Uprole4').is(":checked")) {
         UPjob = "Laborant";
+    } else {
+        errorMsg += "No role selected \n";
     }
     if ($('#Upyes').is(":checked")){
         UPboolean = 1;
     }else if ($('#Upno').is(":checked")){
         UPboolean = 0;
     }
-    var statuscode;
     var UPjsondata = {userID: UPid, userName: UPuser, ini: UPini, cpr: UPcpr, password: UPpass, job: UPjob, aktiv: UPboolean};
-    $.ajax({
-        url: "/BoilerPlate_war_exploded/rest/user/updateUser",
-        type: 'PUT',
-        contentType: "application/json",
-        dataType: 'json',
-        data: JSON.stringify(UPjsondata),
-        success: function (data) {
-            adminHomepage();
-        },
-        error: function (jqXHR, text, error) {
-            alert(JSON.stringify(UPjsondata));
-        }
-    });
+    if(errorMsg.length > 1){
+        alert(errorMsg);
+    } else {
+        $.ajax({
+            url: "/BoilerPlate_war_exploded/rest/user/updateUser",
+            type: 'PUT',
+            contentType: "application/json",
+            dataType: 'json',
+            data: JSON.stringify(UPjsondata),
+            success: function () {
+                adminHomepage();
+            },
+            error: function () {
+                alert(JSON.stringify(UPjsondata));
+            }
+        });
+    }
 }
 
 function postUserData() {
