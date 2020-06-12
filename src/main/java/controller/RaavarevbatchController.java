@@ -40,4 +40,13 @@ public class RaavarevbatchController {
         return raavarebatchDTO;
     }
 
+    public RaavarebatchDTO opretRaavarebatch(RaavarebatchDTO raavarebatchDTO){
+        try {
+            DAOSQL.createRaavarebatch(raavarebatchDTO);
+        } catch (IDALException.DALException e) {
+            e.printStackTrace();
+        }
+        return raavarebatchDTO;
+    }
+
 }

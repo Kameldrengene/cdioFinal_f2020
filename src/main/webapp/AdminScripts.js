@@ -98,7 +98,7 @@ function confirmUserUpdate(ID) { //metoden sender videre til update html siden.
     $(document).ready(function () {
         if(confirm("are you sure, you want to update user " + ID + "?")){
             updatedID = ID;
-            switchP('Brugeroversigt/Updatebruger/index.html')
+            switchP('Brugeroversigt/Updatebruger/PLeadScreen.html')
             //load info from user into page
             $(document).ready(function () {
                 $.getJSON("/BoilerPlate_war_exploded/rest/user/getUser/" + updatedID, function (data) {
@@ -266,6 +266,6 @@ function adminHomepage () {
             return $("body").load(page);
         }
 
-        window.setTimeout(switchPage('AdminScreen/index.html'), 5000);
+        window.setTimeout(switchPage('AdminScreen/PLeadScreen.html'), 5000);
     });
 }

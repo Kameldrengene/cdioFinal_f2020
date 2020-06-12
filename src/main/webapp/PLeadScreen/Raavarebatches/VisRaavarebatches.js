@@ -14,15 +14,6 @@ $("document").ready(function(){
 
 });
 
-function confirmRaavarebatchUpdate(id) {
-    if (confirm("Er du sikker på at redigere Råvarebatch nummer " + id + "?")) {
-        switchP("PLeadScreen/RaavareBatches/RedigerRaavarebatches.html");
-    } else {
-        alert("Returnerer")
-    }
-}
-
-
 function updateTable(){
 
     let path;
@@ -38,8 +29,7 @@ function updateTable(){
         "raavarebatches",
         function (value) {
             let msg = "";
-            msg += "<td> <button class = hvr-buzz onclick='confirmRaavarebatchUpdate("+ value.rbId + ")'>Rediger</button>  </td>";
-
+            msg += "<td> <button class = hvr-buzz id =" + value.rbId + ">Rediger</button>  </td>";
             return msg
         }
     )

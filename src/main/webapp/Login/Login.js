@@ -57,13 +57,13 @@ $("document").ready(function () {
             alert("Vælg venligst en rolle")
         } else {
             if (loginRole == "admin")
-                switchP("AdminScreen/index.html");
+                switchP("AdminScreen/PLeadScreen.html");
             else if (loginRole == "farma")
-                switchP("FarmaScreen/index.html");
+                switchP("FarmaScreen/PLeadScreen.html");
             else if (loginRole == "prodLeder")
-                switchP("PLeadScreen/index.html")
+                switchP("PLeadScreen/PLeadScreen.html")
             else if (loginRole == "laborant")
-                switchP("LabScreen/index.html");
+                switchP("LabScreen/PLeadScreen.html");
         }
 
     });

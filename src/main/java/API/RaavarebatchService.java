@@ -32,10 +32,16 @@ public class RaavarebatchService {
         return raavarebatchController.getBatch(batchID);
     }
 
+    @Path("opdaterRaavarebatch")
     @POST
     public RaavarebatchDTO updateRaavarebatch(RaavarebatchDTO raavarebatchDTO) {
         return raavarebatchController.updateRaavarebatch(raavarebatchDTO);
     }
 
+    @Path("opretRaavarebatch")
+    @POST
+    public RaavarebatchDTO opretRaavarebatch(RaavarebatchDTO raavarebatchDTO){
+        return raavarebatchController.opretRaavarebatch(raavarebatchDTO);
+    }
 
 }
