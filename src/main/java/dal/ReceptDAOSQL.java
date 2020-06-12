@@ -39,13 +39,13 @@ public class ReceptDAOSQL implements IReceptDAO{
         try {
             //We do as in getUser, except we make new user until rs is empty
             while (rs.next()) {
-                ReceptDTO rc = new ReceptDTO();
-                rc.setRCID(rs.getInt("RCID"));
-                rc.setRCNavn(rs.getString("RCName"));
-                rc.setRVID(rs.getInt("RVID"));
-                rc.setNonNetto(rs.getDouble("nonNetto"));
-                rc.setTolerance(rs.getDouble("tolerance"));
-                rcList.add(rc);
+                ReceptDTO recept = new ReceptDTO();
+                recept.setRCID(rs.getInt("RCID"));
+                recept.setRCNavn(rs.getString("RCName"));
+                recept.setRVID(rs.getInt("RVID"));
+                recept.setNonNetto(rs.getDouble("nonNetto"));
+                recept.setTolerance(rs.getDouble("tolerance"));
+                rcList.add(recept);
             }
             rs.close();
 
