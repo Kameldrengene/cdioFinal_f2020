@@ -7,34 +7,34 @@ import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import java.util.List;
 
-@Path("RC")
+@Path("Recept")
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
 public class ReceptService {
     public ReceptController receptController = new ReceptController();
 
-    @Path("getRCList")
+    @Path("getRecepts")
     @GET
-    public List<ReceptDTO> getRCList() {
+    public List<ReceptDTO> getData() {
        return receptController.getRCList();
     }
 
 
     @GET
-    @Path("getRC/{RCID}")
-    public ReceptDTO getRC(@PathParam("RCID") int RCID){
-        return receptController.getRC(RCID);
+    @Path("getRecept/{receptId}")
+    public ReceptDTO getRecept (@PathParam("receptId") int receptId){
+        return receptController.getRC(receptId);
     }
 
     @POST
-    @Path("opretRC")
-    public ReceptDTO opretRC(ReceptDTO rc){
-        return receptController.opretRC(rc);
+    @Path("opretRecept")
+    public ReceptDTO opretRecept (ReceptDTO receptDTO){
+        return receptController.opretRC(receptDTO);
     }
 
     @PUT
-    @Path("opdaterRC")
-    public ReceptDTO opdaterRC(ReceptDTO rc){
-        return receptController.opdaterRC(rc);
+    @Path("opdaterRecept")
+    public ReceptDTO updateRecept (ReceptDTO receptDTO){
+        return receptController.opdaterRC(receptDTO);
     }
 }
