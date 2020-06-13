@@ -12,6 +12,9 @@ public class SQLDatabaseIO {
     private Connection conn = null;
     private Statement stmt = null;
 
+    public boolean isConnected() {
+        return connected;
+    }
 
     public SQLDatabaseIO(String USER, String PASSWORD, String URL, int PORT) {
         this.USER = USER;
