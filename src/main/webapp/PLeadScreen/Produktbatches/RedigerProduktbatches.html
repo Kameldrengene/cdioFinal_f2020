@@ -3,8 +3,41 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+
+    <script src="PLeadScreen/Produktbatches/RedigerProduktbatches.js"></script>
+    <script src="jqScripts.js"></script>
+
 </head>
 <body>
-    testrststs
+    <h1>Rediger produktbatches</h1>
+
+    <table class = "brugertable">
+        <thead>
+        <tr>
+            <th>Batch ID</th>
+            <th>Status</th>
+            <th>Recept ID</th>
+            <th>Bruger ID</th>
+            <th>Råvarebatch ID</th>
+            <th>Tara</th>
+            <th>Netto</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td id="batchID"></td>
+            <td contenteditable="true" id="status"></td>
+            <td id="receptID"></td>
+            <td id="brugerID"></td>
+            <td id="råvarebatchID"></td>
+            <td contenteditable="true" id="tara"></td>
+            <td contenteditable="true" id="netto"></td>
+            <td><button class = hvr-buzz id="gem">Gem</button></td>
+        </tr>
+        </tbody>
+    </table>
+
+    <input type="submit" class="hvr-buzz screenbtn" value="Retur" onclick="switchP('PLeadScreen/Produktbatches/VisProduktbatches.html'); return false">
+
 </body>
 </html>
