@@ -4,10 +4,13 @@ $("document").ready(function () {
 
     $("#batchID").html(batchID);
 
-    $.getJSON("/BoilerPlate_war_exploded/rest/Raavarebatch/getBatch/" + batchID, function(data) {
-        $("#raavareID").html(data.raavareId);
-        $("#actualAmount").html(data.aktuelMaengde);
-        $("#oriAmount").html(data.startMaengde);
+    $.getJSON("/BoilerPlate_war_exploded/rest/produktbatch/getBatch/" + batchID, function(data) {
+        $("#status").html(data.status);
+        $("#receptID").html(data.receptId);
+        $("#brugerID").html(data.userId);
+        $("#råvarebatchID").html(data.rbID);
+        $("#tara").html(data.tara);
+        $("#netto").html(data.netto);
 
     })
 

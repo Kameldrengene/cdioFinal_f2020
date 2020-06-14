@@ -28,7 +28,7 @@ function updateTable(){
         "produktbatches",
         function (value) {
             let msg = "";
-            msg += "<td> <button class = hvr-buzz id =" + value.rbId + ">Rediger</button>  </td>";
+            msg += "<td> <button class = hvr-buzz id =" + value.pbId + ">Rediger</button>  </td>";
             return msg
         }
     )
