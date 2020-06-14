@@ -8,6 +8,17 @@ $("document").ready(function () {
     //.then to ensure functionality is only added after resources are fetched
     loadUsers().then(function () {
 
+        //Saves the ID of the selected user in localStorage
+        $("#table").on("click", "input", function () {
+            localStorage.setItem("loginID", this.id);
+        });
+
+        //Only load user data and sign in button when everything is ready
+        $("#table").load("Login/BrugerTabel.html");
+        $("#login").load("Login/RolleTabel.html");
+        $("#signin").html("<button class='hvr-buzz'>Sign in</button>");
+
+        //Attach the appropiate actions to the role tabel
         $("#administrator").click(function () {
             localStorage.setItem("loginRole", "admin");
             localStorage.setItem('loginID', 'None');
@@ -36,15 +47,6 @@ $("document").ready(function () {
             $('#personer').html(labos);
         });
 
-        //Saves the ID of the selected user in localStorage
-        $("#table").on("click", "input", function () {
-            localStorage.setItem("loginID", this.id);
-        });
-
-        //Only load user data and sign in button when everything is ready
-        $("#table").load("Login/BrugerTabel.html")
-        $("#signin").html("<button class='hvr-buzz'>Sign in</button>");
-
         //Switches to the right page when "sing in" is pressed
         $(".hvr-buzz").click(function () {
             const loginRole = localStorage.getItem("loginRole");
@@ -63,9 +65,7 @@ $("document").ready(function () {
                     switchP("LabScreen/index.html");
             }
         });
-    });
-
-
+    }); //todo tilføj catch?
 });
 
 async function loadUsers(){

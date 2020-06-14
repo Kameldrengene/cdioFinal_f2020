@@ -35,7 +35,6 @@ thead, tbody{
 /* Source: https://www.w3schools.com/howto/howto_css_loader.asp */
 #loading {
     margin: 20px auto;
-
     border: 5px solid #f3f3f3;
     border-top: 5px solid #555;
     border-radius: 50%;
