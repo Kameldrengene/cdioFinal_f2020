@@ -24,8 +24,8 @@ function updateTable(){
 
     viewlist(
         ["Batch ID", "Staus", "Recept ID", "Bruger ID", "Råvarebatch ID", "Tara", "Netto"],
-        "/BoilerPlate_war_exploded/rest/Raavarebatch/" + path,
-        "raavarebatches",
+        "/BoilerPlate_war_exploded/rest/produktbatch/" + path,
+        "produktbatches",
         function (value) {
             let msg = "";
             msg += "<td> <button class = hvr-buzz id =" + value.rbId + ">Rediger</button>  </td>";
