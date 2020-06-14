@@ -62,6 +62,21 @@ public class ProduktbatchDAOSQL implements IProduktbatchDAO {
     }
 
     @Override
+    public List<ProduktbatchDTO> getAktuelProduktBatchList() throws IDALException.DALException {
+        List<ProduktbatchDTO> oldRBList = getProduktBatchList();
+        List<ProduktbatchDTO> newRBList = new ArrayList<>();
+
+
+        for (int i = 0; i < oldRBList.size(); i++) {
+            if(!(oldRBList.get(i).getStatus().equals("2")))
+                newRBList.add(oldRBList.get(i));
+        }
+
+        return newRBList;
+    }
+
+
+    @Override
     public void createProduktBatch(ProduktbatchDTO produktbatch) throws IDALException.DALException{
         db.connect();
         db.update("insert into ProduktBatches (PBID, RID, Standing, UserID, RBID, Tara, Netto) VALUE ('" + produktbatch.getPbId() + "','" + produktbatch.getReceptId() + "','" + produktbatch.getStatus() + "','" + produktbatch.getUserId() + "','" + produktbatch.getRbID() + "','" + produktbatch.getTara() + "','" + produktbatch.getNetto()  + "')");

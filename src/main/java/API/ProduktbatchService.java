@@ -19,32 +19,32 @@ public class ProduktbatchService {
 
     @Path("getAlle")
     @GET
-    public List<ProduktbatchDTO> getData() throws IDALException.DALException {
-        return produktbatchController.getData();
+    public List<ProduktbatchDTO> getAlle() throws IDALException.DALException {
+        return produktbatchController.getAlle();
     }
 
-//    @Path("getAktuelle")
-//    @GET
-//    public List<ProduktbatchDTO> getAktuelle() throws IDALException.DALException {
-//        return produktbatchController.getAktuelle();
-//    }
-//
-//    @Path("getBatch/{batchID}")
-//    @GET
-//    public ProduktbatchDTO getBatch(@PathParam("batchID") String batchID) throws IDALException.DALException {
-//        return produktbatchController.getBatch(batchID);
-//    }
-//
-//    @Path("opdaterProduktbatch")
-//    @POST
-//    public ProduktbatchDTO updateRaavarebatch(ProduktbatchDTO produktbatchDTO) {
-//        return produktbatchController.updateRaavarebatch(produktbatchDTO);
-//    }
-//
-//    @Path("opretProduktbatch")
-//    @POST
-//    public RaavarebatchDTO opretRaavarebatch(ProduktbatchDTO produktbatchDTO){
-//        return produktbatchController.opretRaavarebatch(produktbatchDTO);
-//    }
+    @Path("getAktuelle")
+    @GET
+    public List<ProduktbatchDTO> getAktuelle() throws IDALException.DALException {
+        return produktbatchController.getAktuelle();
+    }
+
+    @Path("getBatch/{batchID}")
+    @GET
+    public ProduktbatchDTO getBatch(@PathParam("batchID") String batchID) throws IDALException.DALException {
+        return produktbatchController.getBatch(batchID);
+    }
+
+    @Path("opdaterProduktbatch")
+    @POST
+    public ProduktbatchDTO updateRaavarebatch(ProduktbatchDTO produktbatchDTO) {
+        return produktbatchController.opdaterProduktbatch(produktbatchDTO);
+    }
+
+    @Path("opretProduktbatch")
+    @POST
+    public ProduktbatchDTO opretRaavarebatch(ProduktbatchDTO produktbatchDTO){
+        return produktbatchController.opretProduktbatch(produktbatchDTO);
+    }
 
 }
