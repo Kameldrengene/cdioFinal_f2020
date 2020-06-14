@@ -66,6 +66,41 @@ function postRaavareUpdate() {
     });
 
 }
+function confirmOpretRecept() {
+    $(document).ready(function () {
+        if (confirm('Er du sikker?')) {
+            if(document.getElementById('receptID').value != '' && document.getElementById('receptnavn').value != '' && document.getElementById('raavareID').value != ''){
+                opretRecept();
+            } else {
+                alert('Ikke alt udfyldt')
+            }
+        }
+    });
+}
+
+function opretRecept() {
+
+    const RID = document.getElementById("receptID").value;
+    const RNavn = $("#receptnavn").val();
+    const RaaID = document.getElementById("raavareID").value;
+    const Rnetto = $("#nonnetto").val();
+    const Rtol = $("#tolerance").val();
+    const jsonData = {receptId: RID, receptNavn: RNavn, raavareId: RaaID, nonNetto: Rnetto, tolerance: Rtol};
+    $.ajax({
+        url: "/BoilerPlate_war_exploded/rest/Recept/opretRecept",
+        type: 'POST',
+        contentType: "application/json",
+        dataType: 'json',
+        data: JSON.stringify(jsonData),
+        success: function (data) {
+            switchP("FarmaScreen/index.html")
+        },
+        error: function (jqXHR, text, error) {
+            alert(jqXHR + text.status);
+        }
+    });
+}
+
 function visRecept() {
     $(document).ready(function () {
         $.getJSON("/BoilerPlate_war_exploded/rest/Recept/getRecepts",function (data) {

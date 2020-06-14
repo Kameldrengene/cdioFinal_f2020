@@ -2,26 +2,23 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Farma Screen</title>
-    <link rel="stylesheet" type="text/css" href="../default.css">
+    <title>Recept</title>
 </head>
 <body>
-<h1>Farmaceut</h1>
-<div style="width: 30%; margin: auto">
-<div style="width: 50%; float: left;">
-    <h2>Råvarer</h2>
-    <input type="submit" class="hvr-buzz screenbtn" value="Opret ny Råvare" onclick="switchP('AdminScreen/index.html'); return false"><br>
-    <input type="submit" class="hvr-buzz screenbtn" value="Vis råvarer" onclick="switchP('FarmaScreen/index.html'); return false">
+<div id=""><h1>Opret ny Recept</h1>
+    <br>
+
+    <input type="number" id="receptID" placeholder="ReceptID" value="" minlength="1" maxlength="8"><br>
+    <input type="text" id="receptnavn" placeholder="ReceptNavn" value="" minlength="2" maxlength="20"><br>
+    <input type="number" id="raavareID"  placeholder="RaavareID" value="" minlength="1" maxlength="8"><br>
+    <input type="number" id="nonnetto"  placeholder="nonNetto" value="" minlength="2" maxlength="20"><br>
+    <input type="number" id="tolerance"  placeholder="tolerance" value="" minlength="2" maxlength="20"><br>
+
+    <input id="confirmbtn" type="button" onclick="confirmOpretRecept()" class="hvr-pop" value="OpretRecept">
 </div>
 
-<div style="width: 50%; float: right;">
-    <h2>Recepter</h2>
-    <input type="submit" class="hvr-buzz screenbtn" value="Opret ny Recept" onclick="switchP('PLeadScreen/index.html'); return false"><br>
-    <input type="submit" class="hvr-buzz screenbtn" value="Vis recepter" onclick="switchP('LabScreen/index.html'); return false">
-</div>
-</div>
 
-<input type="submit" class="hvr-buzz screenbtn" value="Retur" onclick="switchP('FarmaScreen/index.html'); return false">
+<input type="submit" class="hvr-buzz screenbtn" value="Retur" onclick="switchP('FarmaScreen/index.html') ; return false">
 
 </body>
 </html>
