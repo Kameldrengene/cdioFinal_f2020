@@ -12,25 +12,25 @@ public class ReceptDAOSQL implements IReceptDAO{
     SQLDatabaseIO db = new SQLDatabaseIO("kamel", "dreng", "runerne.dk", 8003); //Makes new SQLDatabaseIO object.
 
 
-//    @Override
-//    public ReceptDTO getRecept(int receptId) throws IDALException.DALException {
-//        db.connect();
-//        ResultSet rs = db.query("SELECT * FROM Recepter where RID=" + receptId); //Select all columns from recept where receptID is input
-//        ReceptDTO recept = new ReceptDTO();
-//        try {
-//            rs.next();
-//            recept.setReceptId(rs.getInt("RID"));
-//            recept.setReceptNavn(rs.getString("RName"));
-//            recept.setRaavareId(rs.getInt("raavareID"));
-//            recept.setNonNetto(rs.getDouble("nonNetto"));
-//            recept.setTolerance(rs.getDouble("Tolerance"));
-//            rs.close();
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//        }
-//        db.close();
-//        return recept;
-//    }
+    @Override
+    public ReceptDTO getRecept(int receptId, int RaavareID) throws IDALException.DALException {
+        db.connect();
+        ResultSet rs = db.query("select * from Recepter where RID = "+receptId +" and raavareID = "+RaavareID+""); //Select all columns from recept where receptID is input
+        ReceptDTO recept = new ReceptDTO();
+        try {
+            rs.next();
+            recept.setReceptId(rs.getInt("RID"));
+            recept.setReceptNavn(rs.getString("RName"));
+            recept.setRaavareId(rs.getInt("raavareID"));
+            recept.setNonNetto(rs.getDouble("nonNetto"));
+            recept.setTolerance(rs.getDouble("Tolerance"));
+            rs.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        db.close();
+        return recept;
+    }
 
     @Override
     public List<ReceptDTO> getRecepts(int id) throws IDALException.DALException {
@@ -58,10 +58,6 @@ public class ReceptDAOSQL implements IReceptDAO{
         return receptList;
     }
 
-    @Override
-    public ReceptDTO getRecept(int receptId) throws IDALException.DALException {
-        return null;
-    }
 
     @Override
     public List<ReceptDTO> getReceptList() throws IDALException.DALException {
@@ -90,9 +86,9 @@ public class ReceptDAOSQL implements IReceptDAO{
     public void createRecept(ReceptDTO recept) throws IDALException.DALException {
         ReceptFunc receptFunc = new ReceptFunc();
         System.out.println(recept.getReceptId());
-        System.out.println(getRecept(recept.getReceptId()));
+        System.out.println(getRecept(recept.getReceptId(),recept.getRaavareId()));
         if(receptFunc.isReceptOk(recept)){
-            if(getRecept(recept.getReceptId()) == null){
+            if(getRecept(recept.getReceptId(),recept.getRaavareId()) == null){
                 db.connect();
                 db.update("insert into Recepter (RID, RName, raavareID, nonNetto, Tolerance) VALUE ('" + recept.getReceptId() + "','" + recept.getReceptNavn() + "','" + recept.getRaavareId() + "','" + recept.getNonNetto() + "','" + recept.getTolerance() + "')");
                 db.close();

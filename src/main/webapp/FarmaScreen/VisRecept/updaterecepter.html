@@ -8,7 +8,7 @@
 <body>
 <h1 id="receptheader"></h1>
 <div>
-    <div id="list" class="container" className="brugertable">
+    <div id="list"  class="brugertable">
         <br/>
         <table class="brugertable" id="nyrecept_table">
 
@@ -17,8 +17,7 @@
     </div>
 </div>
 
-<input type="submit" class="hvr-buzz screenbtn" value="Retur" onclick="switchP('FarmaScreen/index.html'); return false">
-<script></script>
-
+<input type="submit" class="hvr-buzz screenbtn" value="Retur" onclick="switchP('FarmaScreen/VisRecept/index.html'); return false">
+<script>visAlle(localStorage.getItem("vistID"));</script>
 </body>
 </html>

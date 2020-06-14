@@ -14,6 +14,15 @@ public class ReceptController {
     public ReceptController(){
         receptDAOSQL = new ReceptDAOSQL();
     }
+
+    public ReceptDTO getRecept (int receptID, int raavareID){
+        try {
+            return receptDAOSQL.getRecept(receptID,raavareID);
+        }catch (IDALException.DALException e){
+            e.printStackTrace();
+        }
+        return null;
+    }
     public List<ReceptDTO> getData()  {
         try {
             return receptDAOSQL.getReceptList();

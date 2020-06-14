@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Farma Screen</title>
+    <link rel="stylesheet" type="text/css" href="../../default.css">
+</head>
+<body>
+<h1 id="receptheader"></h1>
+<table class="Brugertable">
+    <thead>
+    <tr>
+        <th>Recept ID</th>
+        <th>Recept Navn</th>
+        <th>RåvareID</th>
+        <th>nonNetto</th>
+        <th>Tolerance</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td id="ReceptID"></td>
+        <td id="ReceptNavn"></td>
+        <td id="RåvareID"></td>
+        <td contenteditable="true" id="nonNetto"></td>
+        <td contenteditable="true" id="Tolerance"></td>
+        <td>
+            <button class="hvr-buzz" id="gem">Gem</button>
+        </td>
+    </tr>
+    </tbody>
+</table>
+<input type="submit" class="hvr-buzz screenbtn" value="Retur" onclick="switchP('FarmaScreen/VisRecept/updaterecepter.html'); return false">
+<script></script>
+</body>
+</html>

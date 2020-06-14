@@ -78,8 +78,7 @@ function visRecept() {
                 person_data += '<tr>';
                 person_data += '<td>'+value.receptId+'</td>';
                 person_data += '<td>'+value.receptNavn+'</td>';
-                person_data += "<td><input id='updateuser' class='update' type='button' onclick='visAlle("+value.receptId+")' value='Update'/> </td>";
-                person_data += "<td><input id='deleteuser' class='slet' type='button'  value='vis'/> </td>";
+                person_data += "<td><input id='updateuser' class='update' type='button' onclick='visAlle("+value.receptId+")' value='Vis Recepter'/> </td>";
                 person_data +=  '</tr>';
             });
             $('#recept_table').html(person_data);
@@ -121,49 +120,107 @@ function visBestemtRecepter(id) {
                 person_data += '<td>'+RaaID+'</td>';
                 person_data += '<td id="nonnetto"  contenteditable="true">'+Rnonnetto+'</td>';
                 person_data += '<td id="tolerance"  contenteditable="true">'+Rtolerance+'</td>';
-                person_data += "<td><input id='updateRecept' class='update' type='button' onclick='confirmUpdate("+id+","+RaaID+")' value='Update'/> </td>";
+                person_data += "<td><input id='updateRecept' class='update' type='button' onclick='gemAlt("+RaaID+")' value='Rediger'/> </td>";
                 person_data +=  '</tr>';
             });
             $('#nyrecept_table').html(person_data);
         });
-
-
 }
 
 
 
-function confirmUpdate(id){
-    $(document).ready(function () {
-        if(confirm("ReceptID" + id)){
-            updateRecept(Rid, Rnavn, RaaID, nonNetto, tolerance);
-        }else{
-            alert("no worries!");
-        }
+
+
+// function confirmUpdate(id){
+//     $(document).ready(function () {
+//         if(confirm("ReceptID" + id)){
+//             updateRecept(Rid, Rnavn, RaaID, nonNetto, tolerance);
+//         }else{
+//             alert("no worries!");
+//         }
+//     });
+// }
+//
+// function updateRecept(Rid, RaaID, nonNetto, tolerance) {
+//
+//             const jsonData = {
+//                 receptId: Rid,
+//                 raavareId: RaaID,
+//                 nonNetto: nonNetto,
+//                 tolerance: tolerance
+//             };
+//             $.ajax({
+//                 url: "/BoilerPlate_war_exploded/rest/Recept/opdaterRecept",
+//                 type: 'PUT',
+//                 contentType: "application/json",
+//                 dataType: 'json',
+//                 data: JSON.stringify(jsonData),
+//                 success: function (data) {
+//                     visBestemtRecepter(Rid);
+//                     alert("Succes!");
+//                 },
+//                 error: function (jqXHR, text, error) {
+//                     alert(JSON.stringify(jsonData));
+//                 }
+//             });
+// }
+
+//postRaavareData() : postRaavareUpdate()
+
+function gemAlt(raavareID) {
+    $("document").ready(function () {
+        switchP("FarmaScreen/VisRecept/updateRecept.html");
+        const ReceptId = localStorage.getItem("vistID");
+
+        document.getElementById("receptheader").textContent = "Opdater Recept med ReceptID: " + ReceptId + "og RaavareID: "+ raavareID;
+        $("#ReceptID").html(ReceptId);
+
+        $.getJSON("/BoilerPlate_war_exploded/rest/Recept/getRecept/" + ReceptId + "/" + raavareID, function (data) {
+            $("#ReceptNavn").html(data.receptNavn);
+            $("#RåvareID").html(data.raavareId);
+            $("#nonNetto").html(data.nonNetto);
+            $("#Tolerance").html(data.tolerance);
+
+        });
+
+        $("#gem").click(function () {
+            gemopdatering();
+        });
+
+        $("table").keypress(function (e) {
+            gemopdatering();
+            return e.which != 13;
+        });
+
     });
 }
 
-function updateRecept(Rid, RaaID, nonNetto, tolerance) {
+function gemopdatering(){
 
-            const jsonData = {
-                receptId: Rid,
-                raavareId: RaaID,
-                nonNetto: nonNetto,
-                tolerance: tolerance
-            };
-            $.ajax({
-                url: "/BoilerPlate_war_exploded/rest/Recept/opdaterRecept",
-                type: 'PUT',
-                contentType: "application/json",
-                dataType: 'json',
-                data: JSON.stringify(jsonData),
-                success: function (data) {
-                    visBestemtRecepter(Rid);
-                    alert("Succes!");
-                },
-                error: function (jqXHR, text, error) {
-                    alert(JSON.stringify(jsonData));
-                }
-            });
+    const ReceptID = $(".Brugertable").find("td").eq(0).text();
+    const ReceptNavn = $(".Brugertable").find("td").eq(1).text();
+    const RaavareID = $(".Brugertable").find("td").eq(2).text();
+    const nonNetto = $(".Brugertable").find("td").eq(3).text();
+    const tolerance = $(".Brugertable").find("td").eq(4).text();
+    const jsonData = {
+        receptId: ReceptID,
+        receptNavn: ReceptNavn,
+        raavareId: RaavareID,
+        nonNetto: nonNetto,
+        tolerance: tolerance
+    };
+    $.ajax({
+        url: "/BoilerPlate_war_exploded/rest/Recept/opdaterRecept",
+        type: 'PUT',
+        contentType: "application/json",
+        dataType: 'json',
+        data: JSON.stringify(jsonData),
+        success: function (data) {
+            visBestemtRecepter(ReceptID);
+            alert("Succes!");
+        },
+        error: function (jqXHR, text, error) {
+            alert(JSON.stringify(jsonData));
+        }
+    });
 }
-
-//postRaavareData() : postRaavareUpdate()
