@@ -31,4 +31,22 @@ public class RaavarevbatchController {
         return DAOSQL.getRaavarebatch(batchIDint);
     }
 
+    public RaavarebatchDTO updateRaavarebatch(RaavarebatchDTO raavarebatchDTO) {
+        try {
+            DAOSQL.updateRaavarebatch(raavarebatchDTO);
+        } catch (IDALException.DALException e) {
+            e.printStackTrace();
+        }
+        return raavarebatchDTO;
+    }
+
+    public RaavarebatchDTO opretRaavarebatch(RaavarebatchDTO raavarebatchDTO){
+        try {
+            DAOSQL.createRaavarebatch(raavarebatchDTO);
+        } catch (IDALException.DALException e) {
+            e.printStackTrace();
+        }
+        return raavarebatchDTO;
+    }
+
 }

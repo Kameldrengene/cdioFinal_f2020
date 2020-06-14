@@ -12,21 +12,32 @@ $("document").ready(function () {
     })
 
     $("#gem").click(function () {
-
-        const newAmount = $(".brugertable").find("td").eq(0).text();
-        console.log(newAmount);
-
+        save();
     })
 
     $("table").keypress(function(e){
-        const newAmount = $(".brugertable").find("td").eq(0).text();
-        console.log(newAmount);
+        save();
         return e.which != 13;
     });
 
 
 });
 
-// function save(){
-//     const newAmount = $(".brugertable").find("td").eq(0).text();
-// }
+function save(){
+
+    const batchID = $(".brugertable").find("td").eq(0).text();
+    const raavareID = $(".brugertable").find("td").eq(1).text();
+    const mængde = $(".brugertable").find("td").eq(2).text();
+    const oprindeligMaengde = $(".brugertable").find("td").eq(3).text();
+
+    var obj = { rbId: batchID, raavareId: raavareID, aktuelMaengde: mængde, startMaengde: oprindeligMaengde };
+    var myJson = JSON.stringify(obj);
+
+    $.ajax({
+        type: "POST",
+        url: "/BoilerPlate_war_exploded/rest/Raavarebatch/opdaterRaavarebatch",
+        data: myJson,
+        dataType: "json",
+        contentType: "application/json; charset=UTF-8"
+    });
+}

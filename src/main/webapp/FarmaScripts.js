@@ -3,7 +3,7 @@
 function confirmRaavareUpdate(id){
     $(document).ready(function () {
         if(confirm("are you sure, you want to update this råvare "+ id +"?")){
-            switchP('FarmaScreen/VisRaavare/OpdaterRaavare/index.html')
+            switchP('FarmaScreen/VisRaavare/OpdaterRaavare/PLeadScreen.html')
             localStorage.setItem("raavareUpdateID", id);
             $(document).ready(function () {
                 $.getJSON("/BoilerPlate_war_exploded/rest/Raavare/getRaavare/"+ localStorage.getItem("raavareUpdateID"), function (data) {
@@ -31,7 +31,7 @@ function postRaavareData() {
         dataType: 'json',
         data: JSON.stringify(jsonData),
         success: function (data) {
-            switchP("FarmaScreen/index.html")
+            switchP("FarmaScreen/PLeadScreen.html")
             alert("Succes!")
         },
         error: function (jqXHR, text, error) {
@@ -57,7 +57,7 @@ function postRaavareUpdate() {
         dataType: 'json',
         data: JSON.stringify(jsonData),
         success: function (data) {
-            switchP("FarmaScreen/VisRaavare/index.html")
+            switchP("FarmaScreen/VisRaavare/PLeadScreen.html")
             alert("Succes!")
         },
         error: function (jqXHR, text, error) {

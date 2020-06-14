@@ -1,6 +1,8 @@
-$.ajaxSetup({async: false});
+// $.ajaxSetup({async: false});
 
 $("document").ready(function () {
+
+    localStorage.setItem('loginID', 'None');
 
     //Keeps the different users stored, so they don't have to be reloaded multiple times
     PersonList("Administrator");
@@ -61,7 +63,7 @@ $("document").ready(function () {
             else if (loginRole == "farma")
                 switchP("FarmaScreen/index.html");
             else if (loginRole == "prodLeder")
-                switchP("PLeadScreen/index.html")
+                switchP("PLeadScreen/PLeadScreen.html")
             else if (loginRole == "laborant")
                 switchP("LabScreen/index.html");
         }
@@ -77,9 +79,10 @@ async function PersonList(role) {
     var tabelData = "";
 
     //Get all the persons
-    await $.getJSON("/BoilerPlate_war_exploded/rest/user/getRole?role=" + role, function (data) {
+    await $.getJSON("/BoilerPlate_war_exploded/rest/user/getRole?role=" + role).then(function (data) {
 
         //Loop through
+
         if(role === "Administrator"){
             tabelData += "<tr>";
             tabelData += "<td><input type = 'radio' name = 'rolle' id ='0'></td>";
@@ -100,7 +103,7 @@ async function PersonList(role) {
                 tabelData += "</tr>";
             }
         });
-    });
+    })
 
     localStorage.setItem(role, tabelData);
 };
