@@ -97,7 +97,7 @@ function visAlle(id) {
 
 function visBestemtRecepter(id) {
 
-        $.getJSON("/BoilerPlate_war_exploded/rest/Recept/getRecept/"+id,function (data) {
+        $.getJSON("/BoilerPlate_war_exploded/rest/Recept/getRecepts/"+id,function (data) {
             document.getElementById("receptheader").textContent = "Recept med ID: "+id;
             var person_data = '<tr>\n' +
                 '                <th>ID</th>\n' +
@@ -118,8 +118,8 @@ function visBestemtRecepter(id) {
                 person_data += '<td>'+RID+'</td>';
                 person_data += '<td>'+Rname+'</td>';
                 person_data += '<td>'+RaaID+'</td>';
-                person_data += '<td id="nonnetto"  contenteditable="true">'+Rnonnetto+'</td>';
-                person_data += '<td id="tolerance"  contenteditable="true">'+Rtolerance+'</td>';
+                person_data += '<td id="nonnetto" >'+Rnonnetto+'</td>';
+                person_data += '<td id="tolerance" >'+Rtolerance+'</td>';
                 person_data += "<td><input id='updateRecept' class='update' type='button' onclick='gemAlt("+RaaID+")' value='Rediger'/> </td>";
                 person_data +=  '</tr>';
             });
@@ -184,7 +184,11 @@ function gemAlt(raavareID) {
         });
 
         $("#gem").click(function () {
-            gemopdatering();
+            if(confirm("gem ændringer?")){
+                gemopdatering();
+            }else{
+                alert("ingen problem")
+            }
         });
 
         $("table").keypress(function (e) {
@@ -217,7 +221,6 @@ function gemopdatering(){
         data: JSON.stringify(jsonData),
         success: function (data) {
             visBestemtRecepter(ReceptID);
-            alert("Succes!");
         },
         error: function (jqXHR, text, error) {
             alert(JSON.stringify(jsonData));
