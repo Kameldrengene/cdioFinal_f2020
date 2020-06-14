@@ -63,12 +63,13 @@ public class ProduktbatchDAOSQL implements IProduktbatchDAO {
 
     @Override
     public List<ProduktbatchDTO> getAktuelProduktBatchList() throws IDALException.DALException {
+
         List<ProduktbatchDTO> oldRBList = getProduktBatchList();
         List<ProduktbatchDTO> newRBList = new ArrayList<>();
 
 
         for (int i = 0; i < oldRBList.size(); i++) {
-            if(!(oldRBList.get(i).getStatus().equals("2")))
+            if(!(oldRBList.get(i).getStatus().equals("Afsluttet")))
                 newRBList.add(oldRBList.get(i));
         }
 
