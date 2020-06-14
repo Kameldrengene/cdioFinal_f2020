@@ -78,8 +78,8 @@ function visRecept() {
                 person_data += '<tr>';
                 person_data += '<td>'+value.receptId+'</td>';
                 person_data += '<td>'+value.receptNavn+'</td>';
-                person_data += "<td><input id='updateuser' class='update' type='button'  value='Update'/> </td>";
-                person_data += "<td><input id='deleteuser' class='slet' type='button' onclick='visAlle("+value.receptId+")' value='vis'/> </td>";
+                person_data += "<td><input id='updateuser' class='update' type='button' onclick='visAlle("+value.receptId+")' value='Update'/> </td>";
+                person_data += "<td><input id='deleteuser' class='slet' type='button'  value='vis'/> </td>";
                 person_data +=  '</tr>';
             });
             $('#recept_table').html(person_data);
@@ -88,16 +88,18 @@ function visRecept() {
 }
 
 function visAlle(id) {
-    localStorage.setItem("vistID", id);
-    visBestemtRecepter(id);
+    $(document).ready(function () {
+        localStorage.setItem("vistID", id);
+            switchP('FarmaScreen/VisRecept/updaterecepter.html');
+            visBestemtRecepter(id);
+    });
 }
 
 
 function visBestemtRecepter(id) {
-    $(document).ready(function () {
-        switchP('FarmaScreen/VisRecept/recept.html');
+
         $.getJSON("/BoilerPlate_war_exploded/rest/Recept/getRecept/"+id,function (data) {
-            document.getElementById("receptheader").textContent = "Vis Recept med ID: "+id;
+            document.getElementById("receptheader").textContent = "Recept med ID: "+id;
             var person_data = '<tr>\n' +
                 '                <th>ID</th>\n' +
                 '                <th>Navn</th>\n' +
@@ -105,40 +107,63 @@ function visBestemtRecepter(id) {
                 '                <th>nonNetto</th>\n' +
                 '                <th>Tolerance</th>\n' +
                 '            </tr>';
+            var intid = 0;
             $.each(data,function (key,value) {
                 //console.log(value);
+                var RID = value.receptId;
+                var Rname = value.receptNavn;
+                var RaaID = value.raavareId;
+                var Rnonnetto = value.nonNetto;
+                var Rtolerance = value.tolerance;
                 person_data += '<tr>';
-                person_data += '<td>'+value.receptId+'</td>';
-                person_data += '<td>'+value.receptNavn+'</td>';
-                person_data += '<td>'+value.raavareId+'</td>';
-                person_data += '<td contenteditable="true">'+value.nonNetto+'</td>';
-                person_data += '<td contenteditable="true">'+value.tolerance+'</td>';
-                person_data += "<td><input id='updateuser' class='update' type='button'  value='Update'/> </td>";
+                person_data += '<td>'+RID+'</td>';
+                person_data += '<td>'+Rname+'</td>';
+                person_data += '<td>'+RaaID+'</td>';
+                person_data += '<td id="nonnetto"  contenteditable="true">'+Rnonnetto+'</td>';
+                person_data += '<td id="tolerance"  contenteditable="true">'+Rtolerance+'</td>';
+                person_data += "<td><input id='updateRecept' class='update' type='button' onclick='confirmUpdate("+id+","+RaaID+")' value='Update'/> </td>";
                 person_data +=  '</tr>';
             });
             $('#nyrecept_table').html(person_data);
         });
-    });
+
 
 }
 
-function updateRecept(Rid, Rnavn, RaaID, nonNetto, tolerance) {
 
-    const jsonData = {receptId: Rid, receptNavn: Rnavn, raavareId:RaaID, nonNetto: nonNetto, tolerance: tolerance};
-    $.ajax({
-        url: "/BoilerPlate_war_exploded/rest/Raavare/opretRaavare",
-        type: 'POST',
-        contentType: "application/json",
-        dataType: 'json',
-        data: JSON.stringify(jsonData),
-        success: function (data) {
-           visBestemtRecepter(Rid);
-            alert("Succes!");
-        },
-        error: function (jqXHR, text, error) {
-            alert(JSON.stringify(jsonData));
+
+function confirmUpdate(id){
+    $(document).ready(function () {
+        if(confirm("ReceptID" + id)){
+            updateRecept(Rid, Rnavn, RaaID, nonNetto, tolerance);
+        }else{
+            alert("no worries!");
         }
     });
+}
+
+function updateRecept(Rid, RaaID, nonNetto, tolerance) {
+
+            const jsonData = {
+                receptId: Rid,
+                raavareId: RaaID,
+                nonNetto: nonNetto,
+                tolerance: tolerance
+            };
+            $.ajax({
+                url: "/BoilerPlate_war_exploded/rest/Recept/opdaterRecept",
+                type: 'PUT',
+                contentType: "application/json",
+                dataType: 'json',
+                data: JSON.stringify(jsonData),
+                success: function (data) {
+                    visBestemtRecepter(Rid);
+                    alert("Succes!");
+                },
+                error: function (jqXHR, text, error) {
+                    alert(JSON.stringify(jsonData));
+                }
+            });
 }
 
 //postRaavareData() : postRaavareUpdate()

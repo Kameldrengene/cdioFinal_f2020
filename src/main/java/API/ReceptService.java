@@ -15,17 +15,22 @@ import java.util.List;
 public class ReceptService {
     public ReceptController receptController = new ReceptController();
 
-    @Path("getRecepts")
+    @Path("getRecepts/data")
     @GET
     public List<ReceptDTO> getData() {
-       return receptController.getData();
+        return receptController.getData();
     }
 
+    @Path("getRecepts")
+    @GET
+    public List<ReceptDTO> getRecepts() {
+        return receptController.getData();
+    }
 
     @GET
     @Path("getRecept/{receptId}")
-    public ReceptDTO getRecept (@PathParam("receptId") int receptId){
-        return receptController.getRecept(receptId);
+    public List<ReceptDTO> getReceptlist (@PathParam("receptId") int receptId){
+        return receptController.getuniqueRecept(receptId);
     }
 
     @POST

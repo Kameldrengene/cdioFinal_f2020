@@ -23,9 +23,9 @@ public class ReceptController {
         return null;
     }
 
-    public ReceptDTO getRecept (int receptId) {
+    public List<ReceptDTO> getuniqueRecept (int receptId) {
         try {
-            return receptDAOSQL.getRecept(receptId);
+            return receptDAOSQL.getRecepts(receptId);
         }catch (IDALException.DALException e){
             e.printStackTrace();
         }
@@ -34,7 +34,7 @@ public class ReceptController {
 
     public ReceptDTO opretRecept (ReceptDTO recept){
         try {
-             receptDAOSQL.createRecept(recept);
+            receptDAOSQL.createRecept(recept);
         }catch (IDALException.DALException e){
             e.printStackTrace();
         }
