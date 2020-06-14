@@ -19,10 +19,37 @@
 <!--    <div class="loader"></div>-->
 
     <div id="login">
+        <form>
+            <h3>Vælg rolle</h3>
+            <table class="rolletabel">
+                <tr>
+                    <td> <input type="radio" name="rolle" id="administrator"> </td>
+                    <td> <Label for="administrator">Administrator</Label> </td>
+                </tr>
+                <tr>
+                    <td> <input type="radio" name="rolle" id="farmaceut"> </td>
+                    <td> <Label for="farmaceut">Farmaceut</Label> </td>
+                </tr>
+                <tr>
+                    <td><input type="radio" name="rolle" id="produktionsleder"></td>
+                    <td><Label for="produktionsleder">Produktionsleder</Label></td>
+                </tr>
+                <tr>
+                    <td><input type="radio" name="rolle" id="laborant"></td>
+                    <td><Label for="laborant">Laborant</Label></td>
+                </tr>
+            </table>
+        </form>
+
+
+        <div id="loader"></div>
+        <div id="table"></div>
+        <div id="signin"></div>
 
     </div>
 
     <!-- Logo med style defineret direkte i HTML -->
+
     <img id="logo" src="dtu_logo.png" style="margin-top: 2%" width="50" height="72.5">
 
     <script src="Login/login.js"></script>
