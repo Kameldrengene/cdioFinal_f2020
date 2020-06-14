@@ -120,12 +120,13 @@ function visBestemtRecepter(id) {
                 person_data += '<td>'+RaaID+'</td>';
                 person_data += '<td id="nonnetto" >'+Rnonnetto+'</td>';
                 person_data += '<td id="tolerance" >'+Rtolerance+'</td>';
-                person_data += "<td><input id='updateRecept' class='update' type='button' onclick='gemAlt("+RaaID+")' value='Rediger'/> </td>";
+                person_data += "<td><input id='updateRecept' class='update' type='button' onclick='confirmReceptupdate("+RaaID+")' value='Rediger'/> </td>";
                 person_data +=  '</tr>';
             });
             $('#nyrecept_table').html(person_data);
         });
 }
+
 
 
 
@@ -167,15 +168,33 @@ function visBestemtRecepter(id) {
 
 //postRaavareData() : postRaavareUpdate()
 
+function confirmReceptupdate(raavareID) {
+    $(document).ready(function () {
+        switchP("FarmaScreen/VisRecept/updateRecept.html");
+        const ReceptId = localStorage.getItem("vistID");
+        const RaavarID = localStorage.setItem("raavarid",raavareID);
+
+        document.getElementById("receptheader").textContent = "Opdater Recept med ReceptID: " + ReceptId + "og RaavareID: " + raavareID;
+        $("#ReceptID").html(ReceptId);
+
+        $.getJSON("/BoilerPlate_war_exploded/rest/Recept/getRecept/" + ReceptId + "/" + raavareID, function (data) {
+            $("#ReceptNavn").html(data.receptNavn);
+            $("#RåvareID").html(data.raavareId);
+            $("#nonNetto").html(data.nonNetto);
+            $("#Tolerance").html(data.tolerance);
+        });
+    });
+}
+
 function gemAlt(raavareID) {
     $("document").ready(function () {
         switchP("FarmaScreen/VisRecept/updateRecept.html");
         const ReceptId = localStorage.getItem("vistID");
+        const RaavarID = localStorage.getItem("raavarid");
 
-        document.getElementById("receptheader").textContent = "Opdater Recept med ReceptID: " + ReceptId + "og RaavareID: "+ raavareID;
         $("#ReceptID").html(ReceptId);
 
-        $.getJSON("/BoilerPlate_war_exploded/rest/Recept/getRecept/" + ReceptId + "/" + raavareID, function (data) {
+        $.getJSON("/BoilerPlate_war_exploded/rest/Recept/getRecept/" + ReceptId + "/" + RaavarID, function (data) {
             $("#ReceptNavn").html(data.receptNavn);
             $("#RåvareID").html(data.raavareId);
             $("#nonNetto").html(data.nonNetto);
@@ -192,20 +211,29 @@ function gemAlt(raavareID) {
         });
 
         $("table").keypress(function (e) {
-            gemopdatering();
             return e.which != 13;
         });
 
     });
 }
 
+function postReceptUpdate() {
+    $(document).ready(function () {
+        if (confirm("gem ændringer?")) {
+            gemopdatering();
+        } else {
+            alert("ingen problem")
+        }
+    });
+}
+
 function gemopdatering(){
 
-    const ReceptID = $(".Brugertable").find("td").eq(0).text();
-    const ReceptNavn = $(".Brugertable").find("td").eq(1).text();
-    const RaavareID = $(".Brugertable").find("td").eq(2).text();
-    const nonNetto = $(".Brugertable").find("td").eq(3).text();
-    const tolerance = $(".Brugertable").find("td").eq(4).text();
+    const ReceptID = $(".brugertable").find("td").eq(0).text();
+    const ReceptNavn = $(".brugertable").find("td").eq(1).text();
+    const RaavareID = $(".brugertable").find("td").eq(2).text();
+    const nonNetto = $(".brugertable").find("td").eq(3).text();
+    const tolerance = $(".brugertable").find("td").eq(4).text();
     const jsonData = {
         receptId: ReceptID,
         receptNavn: ReceptNavn,
@@ -220,10 +248,18 @@ function gemopdatering(){
         dataType: 'json',
         data: JSON.stringify(jsonData),
         success: function (data) {
-            visBestemtRecepter(ReceptID);
+            tilbage();
         },
         error: function (jqXHR, text, error) {
             alert(JSON.stringify(jsonData));
         }
+    });
+}
+
+function tilbage() {
+    $(document).ready(function () {
+        var receptID = localStorage.getItem("vistID");
+        switchP("FarmaScreen/VisRecept/updaterecepter.html");
+        visBestemtRecepter(receptID);
     });
 }

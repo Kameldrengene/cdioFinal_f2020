@@ -25,12 +25,16 @@
         <td contenteditable="true" id="nonNetto"></td>
         <td contenteditable="true" id="Tolerance"></td>
         <td>
-            <button class="hvr-buzz" id="gem">Gem</button>
+            <button class="hvr-buzz" onclick="postReceptUpdate();" id="gem">Gem</button>
         </td>
     </tr>
     </tbody>
 </table>
-<input type="submit" class="hvr-buzz screenbtn" value="Retur" onclick="switchP('FarmaScreen/VisRecept/updaterecepter.html'); return false">
-<script></script>
+<input type="submit" class="hvr-buzz screenbtn" value="Retur" onclick="tilbage(); return false">
+<script>$(document).ready(function () {
+    $("table").keypress(function (e) {
+        return e.which != 13;
+    });
+});</script>
 </body>
 </html>
