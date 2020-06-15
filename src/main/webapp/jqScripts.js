@@ -31,6 +31,9 @@ function viewlist(headers, link, tableName, btnHtmlfunc) {
                 data +=  '</tr>';
             });
             $('#' + tableName).html(data);
+        },
+        function (data) {
+            alert("Error loading list: ERR.NO.01")
         })
     );
 }
