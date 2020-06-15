@@ -6,10 +6,7 @@ import dal.IDALException;
 import dal.dto.ProduktbatchDTO;
 import dal.dto.RaavarebatchDTO;
 
-import javax.ws.rs.Consumes;
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
+import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import java.util.List;
 
@@ -17,11 +14,37 @@ import java.util.List;
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
 public class ProduktbatchService {
+
     public ProduktbatchController produktbatchController = new ProduktbatchController();
 
-    @Path("getProduktbatch")
+    @Path("getAlle")
     @GET
-    public List<ProduktbatchDTO> getData() throws IDALException.DALException {
-        return produktbatchController.getData();
+    public List<ProduktbatchDTO> getAlle() throws IDALException.DALException {
+        return produktbatchController.getAlle();
     }
+
+    @Path("getAktuelle")
+    @GET
+    public List<ProduktbatchDTO> getAktuelle() throws IDALException.DALException {
+        return produktbatchController.getAktuelle();
+    }
+
+    @Path("getBatch/{batchID}")
+    @GET
+    public ProduktbatchDTO getBatch(@PathParam("batchID") String batchID) throws IDALException.DALException {
+        return produktbatchController.getBatch(batchID);
+    }
+
+    @Path("opdaterProduktbatch")
+    @POST
+    public ProduktbatchDTO updateRaavarebatch(ProduktbatchDTO produktbatchDTO) {
+        return produktbatchController.opdaterProduktbatch(produktbatchDTO);
+    }
+
+    @Path("opretProduktbatch")
+    @POST
+    public ProduktbatchDTO opretRaavarebatch(ProduktbatchDTO produktbatchDTO){
+        return produktbatchController.opretProduktbatch(produktbatchDTO);
+    }
+
 }

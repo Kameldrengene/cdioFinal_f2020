@@ -5,7 +5,7 @@ $("document").ready(function () {
     $("#batchID").html(batchID);
 
     $.getJSON("/BoilerPlate_war_exploded/rest/Raavarebatch/getBatch/" + batchID, function(data) {
-        $("#raavareID").html(data.raavareId);
+        $("#raavareID").html(data.rbId);
         $("#actualAmount").html(data.aktuelMaengde);
         $("#oriAmount").html(data.startMaengde);
 
@@ -15,8 +15,8 @@ $("document").ready(function () {
         save();
     })
 
+    //Disable enter
     $("table").keypress(function(e){
-        save();
         return e.which != 13;
     });
 

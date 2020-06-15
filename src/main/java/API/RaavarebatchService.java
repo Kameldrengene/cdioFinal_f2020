@@ -12,6 +12,7 @@ import java.util.List;
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
 public class RaavarebatchService {
+
     public RaavarevbatchController raavarebatchController = new RaavarevbatchController();
 
     @Path("getAlle")
