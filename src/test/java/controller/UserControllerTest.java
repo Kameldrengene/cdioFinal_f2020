@@ -41,8 +41,8 @@ class UserControllerTest {
     @Order(3)
     void getRole() {
         int expected = 2;
-        List<UserDTO> lederList = userController.getRole("Produktionsleder");
-        assertEquals(expected,lederList.size());
+        testList = userController.getRole("Produktionsleder");
+        assertEquals(expected,testList.size());
     }
 
     @Test
