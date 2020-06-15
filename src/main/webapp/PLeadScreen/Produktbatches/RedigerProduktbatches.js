@@ -23,7 +23,6 @@ $("document").ready(function () {
         return e.which != 13;
     });
 
-
 });
 
 function save(){
