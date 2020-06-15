@@ -1,14 +1,15 @@
 $("document").ready(function () {
 
     const batchID = localStorage.getItem("activePBId");
+    const RBID = localStorage.getItem("activeRBId");
 
     $("#batchID").html(batchID);
+    $("#råvarebatchID").html(RBID);
 
-    $.getJSON("/BoilerPlate_war_exploded/rest/produktbatch/getBatch/" + batchID, function(data) {
+    $.getJSON("/BoilerPlate_war_exploded/rest/produktbatch/getBatch/" + batchID +"/"+ RBID, function(data) {
         $("#status").html(data.status);
         $("#receptID").html(data.receptId);
         $("#brugerID").html(data.userId);
-        $("#råvarebatchID").html(data.rbID);
         $("#tara").html(data.tara);
         $("#netto").html(data.netto);
 
@@ -23,7 +24,6 @@ $("document").ready(function () {
         return e.which != 13;
     });
 
-
 });
 
 function save(){
@@ -36,10 +36,8 @@ function save(){
     const tara = $(".brugertable").find("td").eq(5).text();
     const netto = $(".brugertable").find("td").eq(6).text();
 
-
     var obj = { pbId: batchID, status: status, receptId: receptID, userId: brugerID, rbID: råvarebatchID, tara: tara, netto: netto };
     var myJson = JSON.stringify(obj);
-
 
     $.ajax({
         type: "POST",
