@@ -4,33 +4,34 @@ localStorage.setItem('loginID', 'None');
 var ID = 'delete';
 function Personslist() {
     $(document).ready(sendAjax("/BoilerPlate_war_exploded/rest/user/getUsers", function (data) {
-            var person_data = '<tr>\n' +
-                '                <th>ID</th>\n' +
-                '                <th>Name</th>\n' +
-                '                <th>Initials</th>\n' +
-                '                <th>Password</th>\n' +
-                '                <th>Role</th>\n' +
-                '                <th>Activivity</th>\n' +
-                '                <th>Update</th>\n' +
-                '                <th>ActiveSwitch</th>\n' +
-                '            </tr>';
-            $.each(data,function (key,value) {
-                //console.log(value);
-                var userID = value.userID;
-                person_data += '<tr>';
-                person_data += '<td>'+userID+'</td>';
-                person_data += '<td>'+value.userName+'</td>';
-                person_data += '<td>'+value.ini+'</td>';
-                person_data += '<td>'+value.password+'</td>';
-                person_data += '<td>'+value.job+'</td>';
-                //if (value.aktiv)
+        console.log(data);
+        var person_data = '<tr>\n' +
+            '                <th>ID</th>\n' +
+            '                <th>Name</th>\n' +
+            '                <th>Initials</th>\n' +
+            '                <th>Password</th>\n' +
+            '                <th>Role</th>\n' +
+            '                <th>Activivity</th>\n' +
+            '                <th>Update</th>\n' +
+            '                <th>ActiveSwitch</th>\n' +
+            '            </tr>';
+        $.each(data,function (key,value) {
+            //console.log(value);
+            var userID = value.userID;
+            person_data += '<tr>';
+            person_data += '<td>'+userID+'</td>';
+            person_data += '<td>'+value.userName+'</td>';
+            person_data += '<td>'+value.ini+'</td>';
+            person_data += '<td>'+value.password+'</td>';
+            person_data += '<td>'+value.job+'</td>';
+            //if (value.aktiv)
 
-                person_data += '<td>'+ ((value.aktiv) ? "Aktiv" : "Ikke aktiv") +'</td>';
-                person_data += "<td><input id='updateuser' class='update' type='button' onclick='confirmUserUpdate("+userID+")' value='Update'/> </td>";
-                person_data += "<td><input id='deleteuser' class='slet' type='button' value='Switch Activity' onclick='testalert("+userID+")'/> </td>";
-                person_data +=  '</tr>';
-            });
-            $('#Person_table').html(person_data);
+            person_data += '<td>'+ ((value.aktiv) ? "Aktiv" : "Ikke aktiv") +'</td>';
+            person_data += "<td><input id='updateuser' class='update' type='button' onclick='confirmUserUpdate("+userID+")' value='Update'/> </td>";
+            person_data += "<td><input id='deleteuser' class='slet' type='button' value='Switch Activity' onclick='testalert("+userID+")'/> </td>";
+            person_data +=  '</tr>';
+        });
+        $('#Person_table').html(person_data);
         },
         function (data) {
             alert("Error making personList: ERR.NO.02");
@@ -62,16 +63,13 @@ function getcurrentActivity(ID) { //opdatere brugerens aktivitet
         if(confirm("are you sure, you want to update user " + ID+"?")) {
             sendAjax("/BoilerPlate_war_exploded/rest/user/getactivity/" + ID, function (data) {
                 currentactivity = data;
+                console.log(currentactivity);
+            }, function (data) {
+                alert("Error getting activity: ERR.NO.05");
+                console.log(data);
             });
             var USERID = ID;
-            var bool = 1;
-            if (currentactivity === "false") {
-                bool = 1;
-            }
-            if (currentactivity === "true") {
-                bool = 0;
-            }
-            var jsondata = {userID: USERID, aktiv: bool};
+            const jsondata = {userID: USERID + "", aktiv: !currentactivity + ""};
             if(jsondata.userID.toString() !== localStorage.getItem("loginID").toString()){
                 sendAjax("/BoilerPlate_war_exploded/rest/user/activeUser",function (data) {
                     Personslist();
@@ -79,7 +77,7 @@ function getcurrentActivity(ID) { //opdatere brugerens aktivitet
                     alert("Error changing activity: ERR.NO.04");
                     console.log(data);
                     console.log(jsondata)
-                }, "PUT");
+                }, "PUT", JSON.stringify(jsondata));
             } else{
                 alert("Unable to change activity on self");
             }

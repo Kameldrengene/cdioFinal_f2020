@@ -1,12 +1,13 @@
 $.ajaxSetup({async: false}); //this file is for general scripts used all over the site
 
-function sendAjax(link, successFunc, errorFunc=function (data) {console.log(data);}, type="GET"){
+function sendAjax(link, successFunc, errorFunc=function (data) {console.log(data);}, type="GET", jsonData="None"){
     $.ajax({
         url: link,
         type: type,
         async: true,
         contentType: "application/json",
         dataType: "json",
+        data: ((jsonData==="None") ? "" : jsonData),
         success: function (data) {successFunc(data)},
         error: function (data) {errorFunc(data)}
     });
