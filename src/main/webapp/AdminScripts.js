@@ -3,8 +3,7 @@ $.ajaxSetup({async: false});
 localStorage.setItem('loginID', 'None');
 var ID = 'delete';
 function Personslist() {
-    $(document).ready(function () {
-        $.getJSON("/BoilerPlate_war_exploded/rest/user/getUsers",function (data) {
+    $(document).ready(sendAjax("/BoilerPlate_war_exploded/rest/user/getUsers", function (data) {
             var person_data = '<tr>\n' +
                 '                <th>ID</th>\n' +
                 '                <th>Name</th>\n' +
@@ -32,8 +31,12 @@ function Personslist() {
                 person_data +=  '</tr>';
             });
             $('#Person_table').html(person_data);
-        });
-    });
+        },
+        function (data) {
+            alert("Error making personList: ERR.NO.02");
+            console.log(data);
+        })
+    );
 }
 
 function checkIfNew() {
