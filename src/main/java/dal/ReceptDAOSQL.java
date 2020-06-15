@@ -84,16 +84,16 @@ public class ReceptDAOSQL implements IReceptDAO{
 
     @Override
     public void createRecept(ReceptDTO recept) throws IDALException.DALException {
-//        ReceptFunc receptFunc = new ReceptFunc();
-//        System.out.println(recept.getReceptId());
-//        System.out.println(getRecept(recept.getReceptId(),recept.getRaavareId()));
-//        if(receptFunc.isReceptOk(recept)){
-        //    if(getRecept(recept.getReceptId(),recept.getRaavareId()) == null){
+        ReceptFunc receptFunc = new ReceptFunc();
+        System.out.println(recept.getReceptId());
+        System.out.println(getRecept(recept.getReceptId()));
+        if(receptFunc.isReceptOk(recept,getReceptList())){
+            if(!getReceptList().contains(recept)){
                 db.connect();
                 db.update("insert into Recepter (RID, RName, raavareID, nonNetto, Tolerance) VALUE ('" + recept.getReceptId() + "','" + recept.getReceptNavn() + "','" + recept.getRaavareId() + "','" + recept.getNonNetto() + "','" + recept.getTolerance() + "')");
                 db.close();
-            //}
-       // }
+            }
+        }
     }
 
     @Override

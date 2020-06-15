@@ -1,5 +1,10 @@
 package dal;
 
+
+
+import javax.ws.rs.WebApplicationException;
+import javax.ws.rs.core.Response;
+import javax.ws.rs.core.Response.Status;
 import java.sql.*;
 
 public class SQLDatabaseIO {
@@ -12,6 +17,9 @@ public class SQLDatabaseIO {
     private Connection conn = null;
     private Statement stmt = null;
 
+    public boolean isConnected() {
+        return connected;
+    }
 
     public SQLDatabaseIO(String USER, String PASSWORD, String URL, int PORT) {
         this.USER = USER;
@@ -84,6 +92,10 @@ public class SQLDatabaseIO {
             }
 
         }
+    }
+
+    public WebApplicationException buildError(Status status, String msg){
+        return new WebApplicationException(Response.status(status).entity(msg).build());
     }
 
 }
