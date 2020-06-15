@@ -25,7 +25,7 @@ public class UserController {
     }
 
 
-    public List<UserDTO> getRole(String role){
+    public List<UserDTO> getRole(String role) throws WebApplicationException {
         return userDAOSQL.getRole(role);
     }
 

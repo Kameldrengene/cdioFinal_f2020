@@ -2,6 +2,8 @@ package dal;
 
 import dal.dto.UserDTO;
 
+import javax.ws.rs.WebApplicationException;
+import javax.ws.rs.core.Response;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -33,7 +35,7 @@ public class UserDAOSQL implements IUserDAO {
     }
 
     // -Mikkel
-    public List<UserDTO> getRole(String role){
+    public List<UserDTO> getRole(String role) throws WebApplicationException {
 
         List<UserDTO> userList = new ArrayList<>();
 
@@ -59,6 +61,7 @@ public class UserDAOSQL implements IUserDAO {
         //todo skal det håndteres anderledes?
         }catch(Exception e){
             e.printStackTrace();
+            throw db.buildError(Response.Status.INTERNAL_SERVER_ERROR, "Forbindelsen til Databasen kunne ikke blive oprettet. prøver at genloade");
         }
 
         return userList;

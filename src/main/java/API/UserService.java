@@ -37,7 +37,7 @@ public class UserService {
     @Path("getRole")
     @Produces(MediaType.APPLICATION_JSON)
     @GET
-    public List<UserDTO> getRole(@QueryParam("role") String role){
+    public List<UserDTO> getRole(@QueryParam("role") String role) throws WebApplicationException {
         return userController.getRole(role);
     }
 

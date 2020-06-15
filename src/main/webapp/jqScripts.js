@@ -25,6 +25,10 @@ function viewlist(headers, link, tableName, btnHtmlfunc) {
     });
 }
 
+async function sleep(ms){
+    await new Promise(resolve => setTimeout(resolve, ms))
+}
+
 
 function switchP(page) {
     $("body").load(page);

@@ -84,7 +84,7 @@ async function loadUsers(){
 
 }
 
-async function loadUser(role) {
+async function loadUser(role, redo=0) {
 
     await $.ajax({
         url: "/BoilerPlate_war_exploded/rest/user/getRole?role=" + role,
@@ -92,7 +92,19 @@ async function loadUser(role) {
         async: true,
         contentType: "application/json",
         dataType: "json",
-        success: data => createTable(data, role)
+        success: function(data){ createTable(data, role)},
+        error: async function (response, error) {
+            if (redo==0) {
+                alert(response.responseText);
+                await loadUser(role, 1)
+            }else if (redo < 4) {
+                await sleep(500);
+                await loadUser(role, redo + 1);
+
+            } else {
+                alert("Fejlede 5 forsøg i træk. Kontakt System administratoren.")
+            }
+        }
     });
 
 }
