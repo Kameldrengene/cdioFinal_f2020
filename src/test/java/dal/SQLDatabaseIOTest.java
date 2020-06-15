@@ -1,28 +1,66 @@
 package dal;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
-import static org.junit.Assert.*;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
-public class SQLDatabaseIOTest {
+import static org.junit.jupiter.api.Assertions.*;
+
+class SQLDatabaseIOTest {
+    SQLDatabaseIO sqlDatabaseIO = new SQLDatabaseIO("kamel", "dreng", "runerne.dk", 8003);
+
 
     @Test
-    public void setDB() {
+    void close() {
+        sqlDatabaseIO.close();
+        assertFalse(sqlDatabaseIO.isConnected());
+    }
+    @Test
+    void query() {
+        int expected = 10;
+        int actual = 0;
+        sqlDatabaseIO.connect();
+        ResultSet rs = sqlDatabaseIO.query("SELECT * FROM Recepter WHERE RID=10");
+        try {
+            rs.next();
+            actual = rs.getInt("RID");
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+        assertEquals(expected,actual,0);
+        sqlDatabaseIO.close();
     }
 
     @Test
-    public void connect() {
+    void setDB() {
     }
 
     @Test
-    public void update() {
+    void connect() {
+        sqlDatabaseIO.connect();
+        assertTrue(sqlDatabaseIO.isConnected());
+
+        sqlDatabaseIO.close();
     }
 
     @Test
-    public void query() {
-    }
+    void update() {
+        int expected = 99;
+        int actual = 0;
 
-    @Test
-    public void close() {
+        sqlDatabaseIO.connect();
+        sqlDatabaseIO.update("insert into Recepter (RID, RName, raavareID, nonNetto, Tolerance) VALUE ('" + "99" + "','" + "Mojito" + "','" + "1" + "','" + "6.2" + "','" + "1.5" + "')");
+        ResultSet rs = sqlDatabaseIO.query("SELECT * FROM Recepter WHERE RID=99");
+        try {
+            rs.next();
+            actual = rs.getInt("RID");
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+        assertEquals(expected,actual,0);
+        sqlDatabaseIO.update("DELETE FROM cdioFinal_2020.Recepter WHERE RID = 99 AND raavareID = 1");
+
+        sqlDatabaseIO.close();
     }
 }
