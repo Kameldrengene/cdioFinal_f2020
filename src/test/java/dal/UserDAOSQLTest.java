@@ -33,12 +33,9 @@ class UserDAOSQLTest {
     @Test
     @Order(2)
     void getRole() {
-        try {
-            testUser = userDAOSQL.getUser(11);
-        }catch (IDALException.DALException e){
-            e.printStackTrace();
-        }
-        assertEquals("Administrator",testUser.getJob());
+        int expected = 1;
+        testList = userDAOSQL.getRole("Administrator");
+        assertEquals(expected,testList.size());
     }
 
     @Test
