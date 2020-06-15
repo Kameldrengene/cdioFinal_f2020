@@ -8,6 +8,7 @@ $("document").ready(function(){
 
     $("#produktbatches").on("click", "button", function () {
         localStorage.setItem("activePBId", this.id);
+        localStorage.setItem("activeRBId", this.name);
         switchP("PLeadScreen/Produktbatches/RedigerProduktbatches.html");
     })
 
@@ -57,7 +58,7 @@ function viewTable(data){
         tabelData += "<tr>";
         tabelData += "<td>"+value.pbId+"</td>";
         tabelData += "<td>"+value.status+"</td>";
-        tabelData += "<td> <button class = hvr-buzz id =" + value.pbId + ">Rediger</button>  </td>"
+        tabelData += "<td> <button class = hvr-buzz name=" + value.rbID + " id =" + value.pbId + " >Rediger</button>  </td>"
         tabelData += "</tr>";
 
     });
