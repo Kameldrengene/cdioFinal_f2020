@@ -119,7 +119,7 @@ class UserDAOSQLTest {
 
     @Test
     @Order(8)
-    public void cleanUP(){
+    void cleanUP(){
         try {
             SQLDatabaseIO sqlDatabaseIO = new SQLDatabaseIO("kamel", "dreng", "runerne.dk", 8003);
             sqlDatabaseIO.connect();
