@@ -75,8 +75,10 @@ function getcurrentActivity(ID) { //opdatere brugerens aktivitet
             if(jsondata.userID.toString() !== localStorage.getItem("loginID").toString()){
                 sendAjax("/BoilerPlate_war_exploded/rest/user/activeUser",function (data) {
                     Personslist();
-                },function (jqXHR, text, error) {
-                    alert(JSON.stringify(jsondata));
+                },function (data) {
+                    alert("Error changing activity: ERR.NO.04");
+                    console.log(data);
+                    console.log(jsondata)
                 }, "PUT");
             } else{
                 alert("Unable to change activity on self");
