@@ -39,8 +39,7 @@ function Personslist() {
     );
 }
 
-function checkIfNew() {
-    $.get("/BoilerPlate_war_exploded/rest/user/getUsers", function (data) {
+function checkIfNew() {sendAjax("/BoilerPlate_war_exploded/rest/user/getUsers", function (data) {
         var x = JSON.parse(localStorage.getItem("userTable"));
         if (JSON.stringify(x) !== JSON.stringify(data)) {
             localStorage.setItem("userTable", JSON.stringify(data));
@@ -49,6 +48,10 @@ function checkIfNew() {
         } else{
             console.log("Not updated");
         }
+    },
+    function (data) {
+        alert("Error Checking if new User Data: ERR.NO.03");
+        console.log(data);
     });
 }
 setInterval(checkIfNew, 3000);
