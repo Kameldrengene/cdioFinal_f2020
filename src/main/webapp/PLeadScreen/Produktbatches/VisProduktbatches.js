@@ -22,12 +22,12 @@ function updateTable(){
     else
         path = "getAktuelle"
 
-    loadBatch(path);
+    loadBatches(path);
 
 };
 
 
-async function loadBatch(path) {
+async function loadBatches(path) {
 
     await $.ajax({
         url: "/BoilerPlate_war_exploded/rest/produktbatch/" + path,
