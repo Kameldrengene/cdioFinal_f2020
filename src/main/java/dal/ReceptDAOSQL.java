@@ -64,7 +64,7 @@ public class ReceptDAOSQL implements IReceptDAO{
         System.out.println(recept.getReceptId());
         System.out.println(getRecept(recept.getReceptId()));
         if(receptFunc.isReceptOk(recept)){
-            if(getRecept(recept.getReceptId()) == null){
+            if(!getReceptList().contains(recept)){
                 db.connect();
                 db.update("insert into Recepter (RID, RName, raavareID, nonNetto, Tolerance) VALUE ('" + recept.getReceptId() + "','" + recept.getReceptNavn() + "','" + recept.getRaavareId() + "','" + recept.getNonNetto() + "','" + recept.getTolerance() + "')");
                 db.close();
