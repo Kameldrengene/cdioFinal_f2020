@@ -37,7 +37,7 @@ public class ProduktbatchService {
 
     @Path("getBatchLine/{batchID}/{RBID}")
     @GET
-    public ProduktbatchDTO getBatch(@PathParam("batchID") String batchID, @PathParam("RBID") String RBID) throws IDALException.DALException {
+    public ProduktbatchDTO getBatchLine(@PathParam("batchID") String batchID, @PathParam("RBID") String RBID) throws IDALException.DALException {
         return produktbatchController.getBatchLine(batchID, RBID);
     }
 

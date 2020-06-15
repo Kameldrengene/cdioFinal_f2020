@@ -7,9 +7,19 @@ $("document").ready(function(){
     })
 
     $("#produktbatches").on("click", "button", function () {
+
         localStorage.setItem("activePBId", this.id);
-        localStorage.setItem("activeRBId", this.name);
-        switchP("PLeadScreen/Produktbatches/AabenProduktbatches.html");
+
+        //Get content of table
+        const currentRow = $(this).closest("tr");
+        const receptID = currentRow.find("td:eq(1)").text();
+        const status = currentRow.find("td:eq(2)").text();
+
+        //Save content
+        localStorage.setItem("activeStatus", status);
+        localStorage.setItem("activeReceptID", receptID);
+
+        switchP("PLeadScreen/Produktbatches/AabenProduktbatch.html");
     })
 
 });
@@ -48,6 +58,7 @@ function viewTable(data){
 
     tabelData += "<tr>";
     tabelData += "<th>Batch ID</th>";
+    tabelData += "<th>Recept ID</th>";
     tabelData += "<th>Status</th>";
     tabelData += "</tr>";
 
@@ -57,6 +68,7 @@ function viewTable(data){
         //Uses userID for label reference
         tabelData += "<tr>";
         tabelData += "<td>"+value.pbId+"</td>";
+        tabelData += "<td>"+value.receptId+"</td>";
         tabelData += "<td>"+value.status+"</td>";
         tabelData += "<td> <button class = hvr-buzz id =" + value.pbId + " >Åben</button>  </td>"
         tabelData += "</tr>";
