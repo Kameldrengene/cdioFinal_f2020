@@ -8,6 +8,7 @@ $("document").ready(function(){
 
     $("#produktbatches").on("click", "button", function () {
         localStorage.setItem("activePBId", this.id);
+        localStorage.setItem("activeRBId", this.name);
         switchP("PLeadScreen/Produktbatches/RedigerProduktbatches.html");
     })
 
@@ -28,7 +29,7 @@ function updateTable(){
         "produktbatches",
         function (value) {
             let msg = "";
-            msg += "<td> <button class = hvr-buzz id =" + value.pbId + ">Rediger</button>  </td>";
+            msg += "<td> <button class = hvr-buzz name=" + value.rbID + " id =" + value.pbId + " >Rediger</button>  </td>";
             return msg
         }
     )

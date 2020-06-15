@@ -1,14 +1,15 @@
 $("document").ready(function () {
 
     const batchID = localStorage.getItem("activePBId");
+    const RBID = localStorage.getItem("activeRBId");
 
     $("#batchID").html(batchID);
+    $("#råvarebatchID").html(RBID);
 
-    $.getJSON("/BoilerPlate_war_exploded/rest/produktbatch/getBatch/" + batchID, function(data) {
+    $.getJSON("/BoilerPlate_war_exploded/rest/produktbatch/getBatch/" + batchID +"/"+ RBID, function(data) {
         $("#status").html(data.status);
         $("#receptID").html(data.receptId);
         $("#brugerID").html(data.userId);
-        $("#råvarebatchID").html(data.rbID);
         $("#tara").html(data.tara);
         $("#netto").html(data.netto);
 
