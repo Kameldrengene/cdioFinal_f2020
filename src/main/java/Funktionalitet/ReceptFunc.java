@@ -20,7 +20,7 @@ public class ReceptFunc {
     private boolean doesIdExist(ReceptDTO recept, List<ReceptDTO> receptDTOList){
         boolean doesIdExist = false;
         for (int i = 0; i < receptDTOList.size() ; i++) {
-            if (receptDTOList.get(i).getReceptId()==recept.getReceptId())
+            if (receptDTOList.get(i).getReceptId()==recept.getReceptId() && receptDTOList.get(i).getRaavareId()==recept.getRaavareId())
                 doesIdExist = true;
         }
         return doesIdExist;
