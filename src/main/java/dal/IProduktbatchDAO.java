@@ -11,5 +11,6 @@ public interface IProduktbatchDAO {
     List<ProduktbatchDTO> getAktuelProduktBatchList() throws IDALException.DALException;
     void createProduktBatch(ProduktbatchDTO produktbatch) throws IDALException.DALException;
     void updateProduktBatch(ProduktbatchDTO produktbatch) throws IDALException.DALException;
+    void eraseProduktBatch(int pbId, int RBID) throws IDALException.DALException;
 
 }
