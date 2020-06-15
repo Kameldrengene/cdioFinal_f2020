@@ -32,4 +32,5 @@ async function sleep(ms){
 
 function switchP(page) {
     $("body").load(page);
+    $("#addRaavare").hide();
 }

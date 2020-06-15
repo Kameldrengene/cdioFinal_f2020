@@ -85,8 +85,8 @@ public class ReceptDAOSQL implements IReceptDAO{
     @Override
     public void createRecept(ReceptDTO recept) throws IDALException.DALException {
         ReceptFunc receptFunc = new ReceptFunc();
-        System.out.println(recept.getReceptId());
-        System.out.println(getRecept(recept.getReceptId()));
+        //System.out.println(recept.getReceptId());
+        //System.out.println(getRecept(recept.getReceptId()));
         if(receptFunc.isReceptOk(recept,getReceptList())){
             if(!getReceptList().contains(recept)){
                 db.connect();

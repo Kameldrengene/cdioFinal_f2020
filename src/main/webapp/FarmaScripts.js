@@ -66,6 +66,10 @@ function postRaavareUpdate() {
     });
 
 }
+
+
+
+
 function confirmOpretRecept() {
     $(document).ready(function () {
         if (confirm('Er du sikker?')) {
@@ -164,46 +168,6 @@ function visBestemtRecepter(id) {
         });
 }
 
-
-
-
-
-
-// function confirmUpdate(id){
-//     $(document).ready(function () {
-//         if(confirm("ReceptID" + id)){
-//             updateRecept(Rid, Rnavn, RaaID, nonNetto, tolerance);
-//         }else{
-//             alert("no worries!");
-//         }
-//     });
-// }
-//
-// function updateRecept(Rid, RaaID, nonNetto, tolerance) {
-//
-//             const jsonData = {
-//                 receptId: Rid,
-//                 raavareId: RaaID,
-//                 nonNetto: nonNetto,
-//                 tolerance: tolerance
-//             };
-//             $.ajax({
-//                 url: "/BoilerPlate_war_exploded/rest/Recept/opdaterRecept",
-//                 type: 'PUT',
-//                 contentType: "application/json",
-//                 dataType: 'json',
-//                 data: JSON.stringify(jsonData),
-//                 success: function (data) {
-//                     visBestemtRecepter(Rid);
-//                     alert("Succes!");
-//                 },
-//                 error: function (jqXHR, text, error) {
-//                     alert(JSON.stringify(jsonData));
-//                 }
-//             });
-// }
-
-//postRaavareData() : postRaavareUpdate()
 
 function confirmReceptupdate(raavareID) {
     $(document).ready(function () {
@@ -380,7 +344,7 @@ function listofRaavare() {
     });
 
 }
-let alleMap = new Map();
+let alleMap = new Map();  //indeholder alle rååvare med navn som key.
 function ledeligeRaavare() {
 $(document).ready(function () {
     var alleRaavare = [];
@@ -447,5 +411,39 @@ function getledeligeRaavare() {
     });
 }
 
+function getReceptIDNavn() {
+    $(document).ready(function () {
+        var RID = document.getElementById("recepID").value;
+        var Rnavn = document.getElementById("recepnavn").value;
+        var listraavare = [];
+        localStorage.setItem("vistID",RID);
+        localStorage.setItem("Orecepnavn",Rnavn);
+    });
+        listofRaavare();
+        ledeligeRaavare();
+        checkRaavareID();
 
+    $(document).ready(function () {
+        // var select = document.getElementById('ledeligeID');
+        var selectNavn = document.getElementById('ledeligeNavn');
+        var ledeliglist = localStorage.getItem("ledeligeRaavarID").split(",");
+        var ledeligNavnList = localStorage.getItem("ledeligeRaavarNavn").split(",");
+        for (i = 0; i < ledeliglist.length; i++){
+            //   var option = document.createElement('option');
+            var option2 = document.createElement('option');
+            //  option.value = option.text = ledeliglist[i];
+            option2.value = option2.text = ledeligNavnList[i];
+            //  select.add(option);
+            selectNavn.add(option2);
+        }
+        localStorage.setItem("ledeligeRaavarID","");
+        localStorage.setItem("ledeligeRaavarNavn","");
+        document.getElementById("recepID").readOnly = true;
+        document.getElementById("recepnavn").readOnly = true;
+        $("#addRaavare").show();
+        $("#videre").hide();
+    });
+
+
+}
 
