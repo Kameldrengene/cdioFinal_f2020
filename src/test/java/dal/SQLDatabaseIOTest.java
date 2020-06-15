@@ -10,6 +10,13 @@ import static org.junit.jupiter.api.Assertions.*;
 class SQLDatabaseIOTest {
     SQLDatabaseIO sqlDatabaseIO = new SQLDatabaseIO("kamel", "dreng", "runerne.dk", 8003);
 
+    @Test
+    void connect() {
+        sqlDatabaseIO.connect();
+        assertTrue(sqlDatabaseIO.isConnected());
+
+        sqlDatabaseIO.close();
+    }
 
     @Test
     void close() {
@@ -36,13 +43,7 @@ class SQLDatabaseIOTest {
     void setDB() {
     }
 
-    @Test
-    void connect() {
-        sqlDatabaseIO.connect();
-        assertTrue(sqlDatabaseIO.isConnected());
 
-        sqlDatabaseIO.close();
-    }
 
     @Test
     void update() {
