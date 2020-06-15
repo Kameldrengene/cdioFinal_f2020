@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Recept</title>
+    <link rel="stylesheet" type="text/css" href="FarmaScreen/NyRecept/addrecept.css">
+
+</head>
+<body>
+<div id="">
+    <h1 id="addReceptmedID"></h1>
+    <br>
+
+    <input type="text" id="recID" placeholder="ReceptID" value="" minlength="1" maxlength="8" pattern="[0-9]+" readonly="readonly"><br>
+    <input type="text" id="recnavn" placeholder="ReceptNavn" value="" minlength="2" maxlength="20" readonly="readonly"><br>
+    <input type="number" id="raaID"  placeholder="RaavareID" value="" min="1" max="99999999" readonly="readonly">
+    <select name="RaavarID" id="ledeligeID"></select><br>
+    <input type="number" id="netto"  placeholder="1.0000" value="" step="0.0001" max="20" min="0.05"><br>
+    <input type="number" id="tol"  placeholder="5.00" value="" step="0.01" max="10" min="0.1"><br>
+    <input id="confirmbtn" type="button" onclick="confirmaddRecept()" class="hvr-pop" value="OpretRecept">
+</div>
+
+
+<input type="submit" class="hvr-buzz screenbtn" value="Retur" onclick="tilbage(); return false">
+
+</body>
+<script>getledeligeRaavare();</script>
+<script>
+    $(document).ready(function()
+    {
+        var raavareid = $("#ledeligeID").val();
+        $("#raaID").html(raavareid);
+    });
+</script>
+</html>

@@ -112,8 +112,8 @@ function visRecept() {
                 //console.log(value);
                 person_data += '<tr>';
                 person_data += '<td>'+value.receptId+'</td>';
-                person_data += '<td>'+value.receptNavn+'</td>';
-                person_data += "<td><input id='updateuser' class='update' type='button' onclick='visAlle("+value.receptId+")' value='Vis Recepter'/> </td>";
+                person_data += '<td>'+value.receptNavn+'</td>';                                     //visalle(12,'Ipren'
+                person_data += "<td><input id='updateuser' class='update' type='button' onclick='visAlle("+value.receptId+", \"" + value.receptNavn +"\")' value='Vis Recepter'/> </td>";
                 person_data +=  '</tr>';
             });
             $('#recept_table').html(person_data);
@@ -121,9 +121,10 @@ function visRecept() {
     });
 }
 
-function visAlle(id) {
+function visAlle(id,navn) {
     $(document).ready(function () {
         localStorage.setItem("vistID", id);
+        localStorage.setItem("vistNavn",navn);
             switchP('FarmaScreen/VisRecept/updaterecepter.html');
             visBestemtRecepter(id);
     });
@@ -133,6 +134,7 @@ function visAlle(id) {
 function visBestemtRecepter(id) {
 
         $.getJSON("/BoilerPlate_war_exploded/rest/Recept/getRecepts/"+id,function (data) {
+            console.log("test5");
             document.getElementById("receptheader").textContent = "Recept med ID: "+id;
             var person_data = '<tr>\n' +
                 '                <th>ID</th>\n' +
@@ -241,7 +243,7 @@ function gemAlt(raavareID) {
             if(confirm("gem ændringer?")){
                 gemopdatering();
             }else{
-                alert("ingen problem")
+                alert("ingen problem");
             }
         });
 
@@ -257,7 +259,7 @@ function postReceptUpdate() {
         if (confirm("gem ændringer?")) {
             gemopdatering();
         } else {
-            alert("ingen problem")
+            alert("ingen problem");
         }
     });
 }
@@ -298,3 +300,125 @@ function tilbage() {
         visBestemtRecepter(receptID);
     });
 }
+
+function confirmaddRecept() {
+    $(document).ready(function () {
+        if (confirm('Er du sikker?')) {
+            console.log("test1");
+            if(document.getElementById('recID').value != '' && document.getElementById('recnavn').value != '' && document.getElementById('raaID').value != ''){
+                console.log("test2");
+                addRecept();
+            } else {
+                alert('Ikke alt udfyldt');
+            }
+        }
+    });
+}
+
+function addRecept() {
+
+    const RID = document.getElementById("recID").value = localStorage.getItem("vistID");
+    const RNavn = document.getElementById("recnavn").value = localStorage.getItem("vistNavn");
+    console.log("test3");
+    const RaaID = document.getElementById("raaID").value;
+    console.log("test4");
+    const Rnetto = $("#netto").val();
+    const Rtol = $("#tol").val();
+    const jsonData = {receptId: RID, receptNavn: RNavn, raavareId: RaaID, nonNetto: Rnetto, tolerance: Rtol};
+    $.ajax({
+        url: "/BoilerPlate_war_exploded/rest/Recept/opretRecept",
+        type: 'POST',
+        contentType: "application/json",
+        dataType: 'json',
+        data: JSON.stringify(jsonData),
+        success: function (data) {
+            tilbage();
+        },
+        error: function (jqXHR, text, error) {
+            alert(jqXHR + text.status);
+        }
+    });
+}
+
+function tiladdReceptHtml() {
+    $(document).ready(function () {
+        // console.log("test1");
+        switchP("FarmaScreen/NyRecept/addRecept.html");
+        // console.log("test2")
+        document.getElementById("addReceptmedID").textContent = "Tilføje ny Recept med ID: " + localStorage.getItem("vistID");
+        //console.log("test3");
+        document.getElementById("recID").value = localStorage.getItem("vistID");
+       // console.log("test4");
+        document.getElementById("recnavn").value = localStorage.getItem("vistNavn");
+       // console.log("test5");
+
+    });
+
+}
+
+function listofRaavare() {
+    $(document).ready(function () {
+        var listraavare = [];
+        var RID = localStorage.getItem("vistID");
+        $.getJSON("/BoilerPlate_war_exploded/rest/Recept/getRecepts/"+ RID,function (data) {
+            $.each(data,function (key,value) {
+                console.log(value);
+                var raavarID = value.raavareId;
+                listraavare.push(raavarID);
+            });
+        });
+        localStorage.setItem("idList" ,listraavare);
+    });
+
+}
+
+function ledeligeRaavare() {
+$(document).ready(function () {
+    var alleRaavare = [];
+    $.getJSON("/BoilerPlate_war_exploded/rest/Raavare/getRaavarer",function (data) {
+        $.each(data,function (key,value) {
+            //console.log(value);
+            var raavarID = value.raavareID;
+            alleRaavare.push(raavarID);
+        });
+    });
+    localStorage.setItem("ledeligeRaavarID",alleRaavare);
+});
+}
+
+function checkRaavareID() {
+    $(document).ready(function () {
+        var currentraavarlist = localStorage.getItem("idList").split(",");
+        var alleRaavare = localStorage.getItem("ledeligeRaavarID").split(",");
+        var index = 0;
+        for (x = 0; x < currentraavarlist.length; x++){
+            for (i = 0; i < alleRaavare.length; i++){
+                if(currentraavarlist[x]===alleRaavare[i]){
+                    index++;
+                    alleRaavare.splice(i,1);
+                }
+            }
+        }
+        localStorage.setItem("ledeligeRaavarID",alleRaavare);
+        localStorage.setItem("index",index);
+    });
+}
+
+function getledeligeRaavare() {
+    listofRaavare();
+    ledeligeRaavare();
+    checkRaavareID();
+    $(document).ready(function () {
+        var select = document.getElementById('ledeligeID');
+        var ledeliglist = localStorage.getItem("ledeligeRaavarID").split(",");
+        for (i = 0; i<ledeliglist.length; i++){
+            var option = document.createElement('option');
+            option.value = option.text = ledeliglist[i];
+            select.add(option);
+        }
+        localStorage.setItem("ledeligeRaavarID","");
+    });
+}
+
+
+

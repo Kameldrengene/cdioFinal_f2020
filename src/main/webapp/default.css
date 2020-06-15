@@ -14,6 +14,10 @@
     font-family: Open Sans, Verdana, sans-serif;
 }
 
+select {
+    width: 300px;
+}
+
 /* Selector på flere tags */
 h1, h2, h3 {
     color: var(--color-primary);
