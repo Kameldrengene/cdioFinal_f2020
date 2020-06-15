@@ -1,10 +1,20 @@
 $.ajaxSetup({async: false}); //this file is for general scripts used all over the site
 
+function sendAjax(link, successFunc, errorFunc=function (data) {console.log(data);}, type="GET"){
+    $.ajax({
+        url: link,
+        type: type,
+        async: true,
+        contentType: "application/json",
+        dataType: "json",
+        success: function (data) {successFunc(data)},
+        error: function (data) {errorFunc(data)}
+    });
+}
 
 
 function viewlist(headers, link, tableName, btnHtmlfunc) {
-    $(document).ready(function () {
-        $.getJSON(link ,function (BEdata) {
+    $(document).ready(sendAjax(link ,function (BEdata) {
             var data = '<tr>\n';
             for (let i = 0; i < headers.length; i++){
                 data += '<th>'+ headers[i] +'</th>';
@@ -21,8 +31,8 @@ function viewlist(headers, link, tableName, btnHtmlfunc) {
                 data +=  '</tr>';
             });
             $('#' + tableName).html(data);
-        });
-    });
+        })
+    );
 }
 
 async function sleep(ms){
