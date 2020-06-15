@@ -45,6 +45,17 @@ class ReceptControllerTest {
         testRecept = receptController.getRecept(99);
         assertEquals(expected,testRecept.getReceptId());
 
+        ReceptDTO neRecept = new ReceptDTO();
+        neRecept.setNonNetto(5.5);
+        neRecept.setRaavareId(2);
+        neRecept.setReceptId(99);
+        neRecept.setReceptNavn("Morfin");
+        neRecept.setTolerance(9.5);
+        receptController.opretRecept(neRecept);
+        testRecept = receptController.getRecept(99);
+        assertEquals(expected,testRecept.getReceptId());
+
+
     }
 
     @Test
@@ -69,7 +80,7 @@ class ReceptControllerTest {
         try {
             SQLDatabaseIO sqlDatabaseIO = new SQLDatabaseIO("kamel", "dreng", "runerne.dk", 8003);
             sqlDatabaseIO.connect();
-            sqlDatabaseIO.update("DELETE FROM cdioFinal_2020.Recepter WHERE RID = 99 AND raavareID = 3");
+            sqlDatabaseIO.update("DELETE FROM cdioFinal_2020.Recepter WHERE RID = 99");
         } catch (Exception e){
             e.printStackTrace();
         }
