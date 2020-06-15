@@ -305,7 +305,7 @@ function confirmaddRecept() {
     $(document).ready(function () {
         if (confirm('Er du sikker?')) {
             console.log("test1");
-            if(document.getElementById('recID').value != '' && document.getElementById('recnavn').value != '' && document.getElementById('raaID').value != ''){
+            if(document.getElementById('recID').value != '' && document.getElementById('recnavn').value != '' && document.getElementById('ledeligeNavn').value != ''){
                 console.log("test2");
                 addRecept();
             } else {
@@ -317,14 +317,16 @@ function confirmaddRecept() {
 
 function addRecept() {
 
+  //  const raaID = localStorage.getItem("ledeligeMap");
     const RID = document.getElementById("recID").value = localStorage.getItem("vistID");
     const RNavn = document.getElementById("recnavn").value = localStorage.getItem("vistNavn");
     console.log("test3");
-    const RaaID = document.getElementById("raaID").value;
-    console.log("test4");
+    const RaaNavn = document.getElementById("ledeligeNavn").value;
+    const raID = alleMap.get(RaaNavn);
+    console.log(raID);
     const Rnetto = $("#netto").val();
     const Rtol = $("#tol").val();
-    const jsonData = {receptId: RID, receptNavn: RNavn, raavareId: RaaID, nonNetto: Rnetto, tolerance: Rtol};
+    const jsonData = {receptId: RID, receptNavn: RNavn, raavareId: raID, nonNetto: Rnetto, tolerance: Rtol};
     $.ajax({
         url: "/BoilerPlate_war_exploded/rest/Recept/opretRecept",
         type: 'POST',
@@ -345,7 +347,7 @@ function tiladdReceptHtml() {
         // console.log("test1");
         switchP("FarmaScreen/NyRecept/addRecept.html");
         // console.log("test2")
-        document.getElementById("addReceptmedID").textContent = "Tilføje ny Recept med ID: " + localStorage.getItem("vistID");
+        document.getElementById("addReceptmedID").textContent = "Tilføje ny Råvare i Recept med ID: " + localStorage.getItem("vistID");
         //console.log("test3");
         document.getElementById("recID").value = localStorage.getItem("vistID");
        // console.log("test4");
@@ -358,31 +360,46 @@ function tiladdReceptHtml() {
 
 function listofRaavare() {
     $(document).ready(function () {
+        var listraavarenavn = [];
         var listraavare = [];
+        let map = new Map();
         var RID = localStorage.getItem("vistID");
         $.getJSON("/BoilerPlate_war_exploded/rest/Recept/getRecepts/"+ RID,function (data) {
             $.each(data,function (key,value) {
                 console.log(value);
                 var raavarID = value.raavareId;
+                var raavarNavn = value.raavareNavn;
                 listraavare.push(raavarID);
+                listraavarenavn.push(raavarNavn);
+                map.set(raavarNavn,raavarID);
             });
         });
+        localStorage.setItem("map",map);
         localStorage.setItem("idList" ,listraavare);
+        localStorage.setItem("navnList",listraavarenavn);
     });
 
 }
-
+let alleMap = new Map();
 function ledeligeRaavare() {
 $(document).ready(function () {
     var alleRaavare = [];
+    var alleRaavareNavn = [];
+
     $.getJSON("/BoilerPlate_war_exploded/rest/Raavare/getRaavarer",function (data) {
         $.each(data,function (key,value) {
             //console.log(value);
             var raavarID = value.raavareID;
+            var raavarNavn = value.raavareNavn;
+
             alleRaavare.push(raavarID);
+            alleRaavareNavn.push(raavarNavn);
+            alleMap.set(raavarNavn,raavarID);
         });
     });
     localStorage.setItem("ledeligeRaavarID",alleRaavare);
+    localStorage.setItem("ledeligeRaavarNavn",alleRaavareNavn);
+    localStorage.setItem("ledeligeMap", alleMap);
 });
 }
 
@@ -390,16 +407,20 @@ function checkRaavareID() {
     $(document).ready(function () {
         var currentraavarlist = localStorage.getItem("idList").split(",");
         var alleRaavare = localStorage.getItem("ledeligeRaavarID").split(",");
+        var currentraavarNavn = localStorage.getItem("navnList").split(",");
+        var alleRaavarNavn = localStorage.getItem("ledeligeRaavarNavn").split(",");
         var index = 0;
         for (x = 0; x < currentraavarlist.length; x++){
             for (i = 0; i < alleRaavare.length; i++){
                 if(currentraavarlist[x]===alleRaavare[i]){
                     index++;
                     alleRaavare.splice(i,1);
+                    alleRaavarNavn.splice(i,1);
                 }
             }
         }
         localStorage.setItem("ledeligeRaavarID",alleRaavare);
+        localStorage.setItem("ledeligeRaavarNavn",alleRaavarNavn);
         localStorage.setItem("index",index);
     });
 }
@@ -409,14 +430,20 @@ function getledeligeRaavare() {
     ledeligeRaavare();
     checkRaavareID();
     $(document).ready(function () {
-        var select = document.getElementById('ledeligeID');
+       // var select = document.getElementById('ledeligeID');
+        var selectNavn = document.getElementById('ledeligeNavn');
         var ledeliglist = localStorage.getItem("ledeligeRaavarID").split(",");
-        for (i = 0; i<ledeliglist.length; i++){
-            var option = document.createElement('option');
-            option.value = option.text = ledeliglist[i];
-            select.add(option);
+        var ledeligNavnList = localStorage.getItem("ledeligeRaavarNavn").split(",");
+        for (i = 0; i < ledeliglist.length; i++){
+         //   var option = document.createElement('option');
+            var option2 = document.createElement('option');
+          //  option.value = option.text = ledeliglist[i];
+            option2.value = option2.text = ledeligNavnList[i];
+          //  select.add(option);
+            selectNavn.add(option2);
         }
         localStorage.setItem("ledeligeRaavarID","");
+        localStorage.setItem("ledeligeRaavarNavn","");
     });
 }
 
