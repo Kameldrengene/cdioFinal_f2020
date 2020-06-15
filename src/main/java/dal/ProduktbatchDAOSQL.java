@@ -9,10 +9,37 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ProduktbatchDAOSQL implements IProduktbatchDAO {
-    SQLDatabaseIO db = new SQLDatabaseIO("kamel", "dreng", "runerne.dk", 8003); //Makes new SQLDatabaseIO object.
+
+    //Makes new SQLDatabaseIO object.
+    SQLDatabaseIO db = new SQLDatabaseIO("kamel", "dreng", "runerne.dk", 8003);
 
     @Override
-    public ProduktbatchDTO getProduktBatch(int pbId, int RBID) throws IDALException.DALException{
+    public List<ProduktbatchDTO> getProduktBatch(int pbId) throws IDALException.DALException{
+        db.connect();
+        ResultSet rs = db.query("SELECT * FROM ProduktBatches where PBID = " + pbId);
+        List<ProduktbatchDTO> pbList = new ArrayList<>();
+        try {
+            while(rs.next()){
+                ProduktbatchDTO pb = new ProduktbatchDTO();
+                pb.setPbId(rs.getInt("PBID"));
+                pb.setReceptId(rs.getInt("RID"));
+                pb.setStatus(rs.getString("Standing"));
+                pb.setUserId(rs.getInt("UserID"));
+                pb.setRbID(rs.getInt("RBID"));
+                pb.setTara(rs.getDouble("Tara"));
+                pb.setNetto(rs.getDouble("Netto"));
+                pbList.add(pb);
+            }
+            rs.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        db.close();
+        return pbList;
+    }
+
+    @Override
+    public ProduktbatchDTO getProduktBatchLine(int pbId, int RBID) throws IDALException.DALException{
         db.connect();
         ResultSet rs = db.query("SELECT * FROM ProduktBatches where PBID = " + pbId + " AND RBID = " + RBID); //Select all columns from recept where receptID is input
         ProduktbatchDTO pb = new ProduktbatchDTO();
@@ -36,7 +63,7 @@ public class ProduktbatchDAOSQL implements IProduktbatchDAO {
     @Override
     public List<ProduktbatchDTO> getProduktBatchList() throws IDALException.DALException{
         db.connect();
-        ResultSet rs = db.query("SELECT * FROM ProduktBatches"); //Select all data from raavarer
+        ResultSet rs = db.query("SELECT * FROM ProduktBatches GROUP BY PBID"); //Select all data from raavarer
         List<ProduktbatchDTO> pbList = new ArrayList<>();
         try {
             //We do as in getUser, except we make new user until rs is empty
