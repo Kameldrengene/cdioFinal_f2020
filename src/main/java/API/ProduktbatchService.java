@@ -29,10 +29,10 @@ public class ProduktbatchService {
         return produktbatchController.getAktuelle();
     }
 
-    @Path("getBatch/{batchID}")
+    @Path("getBatch/{batchID}/{RBID}")
     @GET
-    public ProduktbatchDTO getBatch(@PathParam("batchID") String batchID) throws IDALException.DALException {
-        return produktbatchController.getBatch(batchID);
+    public ProduktbatchDTO getBatch(@PathParam("batchID") String batchID, @PathParam("RBID") String RBID) throws IDALException.DALException {
+        return produktbatchController.getBatch(batchID, RBID);
     }
 
     @Path("opdaterProduktbatch")
