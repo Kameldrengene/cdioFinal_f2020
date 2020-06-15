@@ -88,13 +88,12 @@ public class ProduktbatchDAOSQL implements IProduktbatchDAO {
     public void updateProduktBatch(ProduktbatchDTO produktbatch) throws IDALException.DALException{
         db.connect();
         try {
-            ResultSet rs = db.query("SELECT * FROM ProduktBatches where PBID=" + produktbatch.getPbId());
+            ResultSet rs = db.query("SELECT * FROM ProduktBatches where PBID=" + produktbatch.getPbId() + " AND RBID = " produktbatch.getRbID());
             rs.next();
             if (rs.getInt("PBID") == produktbatch.getPbId()) {
                 db.update("UPDATE ProduktBatches SET RID = '" + produktbatch.getReceptId() + "' WHERE (PBID = '" + produktbatch.getPbId() + "');");
                 db.update("UPDATE ProduktBatches SET Standing = '" + produktbatch.getStatus() + "' WHERE (PBID = '" + produktbatch.getPbId() + "');");
                 db.update("UPDATE ProduktBatches SET UserID = '" + produktbatch.getUserId() + "' WHERE (PBID = '" + produktbatch.getPbId() + "');");
-                db.update("UPDATE ProduktBatches SET RBID = '" + produktbatch.getRbID() + "' WHERE (PBID = '" + produktbatch.getPbId() + "');");
                 db.update("UPDATE ProduktBatches SET Tara = '" + produktbatch.getTara() + "' WHERE (PBID = '" + produktbatch.getPbId() + "');");
                 db.update("UPDATE ProduktBatches SET Netto = '" + produktbatch.getNetto() + "' WHERE (PBID = '" + produktbatch.getPbId() + "');");
             }
