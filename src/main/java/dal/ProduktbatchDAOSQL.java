@@ -130,4 +130,15 @@ public class ProduktbatchDAOSQL implements IProduktbatchDAO {
         }
         db.close();
     }
+
+    // -Mikkel
+    @Override
+    public void eraseProduktBatch(int pbId, int RBID) throws IDALException.DALException{
+
+        db.connect();
+        db.update("DELETE FROM ProduktBatches WHERE PBID = " + pbId + " AND RBID = " + RBID);
+        db.close();
+
+    }
+
 }

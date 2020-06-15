@@ -20,6 +20,11 @@ $("document").ready(function () {
     $("#gem").click(function () {
         save(batchID, receptID, status, raavarebatchID);
     })
+    
+    $("#slet").click(function () {
+        erase(batchID, raavarebatchID);
+        switchP('PLeadScreen/Produktbatches/AabenProduktbatch.html');
+    })
 
     //Disable enter
     $("table").keypress(function(e){
@@ -49,4 +54,18 @@ function save(activePBId, activeReceptID, activeStatus, activeRBId){
         },
         contentType: "application/json; charset=UTF-8"
     });
+}
+
+function erase(batchID, raavarebatchID){
+
+    $.ajax({
+        type: "POST",
+        url: "/BoilerPlate_war_exploded/rest/produktbatch/sletProduktBatch/" + batchID + "/" + raavarebatchID,
+        success: function() {
+            alert("Produktbatch successfuldt slettet");
+            $("#gem").removeAttr("hover");
+        },
+        contentType: "application/json; charset=UTF-8"
+    });
+
 }

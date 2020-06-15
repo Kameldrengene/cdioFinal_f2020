@@ -70,5 +70,12 @@ public class ProduktbatchController {
         return produktbatchDTO;
     }
 
+    public void eraseProduktBatch(String pbId, String RBID) throws IDALException.DALException{
+        int pbIdint = Integer.parseInt(pbId);
+        int RBIDint = Integer.parseInt(RBID);
+        DAOSQL.eraseProduktBatch(pbIdint, RBIDint);
+    }
+
+
 
 }
