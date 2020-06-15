@@ -60,7 +60,7 @@ var currentactivity = "";
 function getcurrentActivity(ID) { //opdatere brugerens aktivitet
     $(document).ready(function () {
         if(confirm("are you sure, you want to update user " + ID+"?")) {
-            $.getJSON("/BoilerPlate_war_exploded/rest/user/getactivity/" + ID + "", function (data) {
+            sendAjax("/BoilerPlate_war_exploded/rest/user/getactivity/" + ID, function (data) {
                 currentactivity = data;
             });
             var USERID = ID;
@@ -73,19 +73,11 @@ function getcurrentActivity(ID) { //opdatere brugerens aktivitet
             }
             var jsondata = {userID: USERID, aktiv: bool};
             if(jsondata.userID.toString() !== localStorage.getItem("loginID").toString()){
-                $.ajax({
-                    url: "/BoilerPlate_war_exploded/rest/user/activeUser",
-                    type: 'PUT',
-                    contentType: "application/json",
-                    dataType: 'json',
-                    data: JSON.stringify(jsondata),
-                    success: function (data) {
-                        Personslist();
-                    },
-                    error: function (jqXHR, text, error) {
-                        alert(JSON.stringify(jsondata));
-                    }
-                });
+                sendAjax("/BoilerPlate_war_exploded/rest/user/activeUser",function (data) {
+                    Personslist();
+                },function (jqXHR, text, error) {
+                    alert(JSON.stringify(jsondata));
+                }, "PUT");
             } else{
                 alert("Unable to change activity on self");
             }
