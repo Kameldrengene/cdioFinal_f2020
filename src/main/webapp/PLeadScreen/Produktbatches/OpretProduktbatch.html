@@ -6,10 +6,24 @@
 
     <link rel="stylesheet" type="text/css" href="PLeadScreen/Raavarebatches/OpretRaavarebatch.css">
 
-    <script src="PLeadScreen/Raavarebatches/OpretRaavarebatch.js"></script>
+    <script src="PLeadScreen/Produktbatches/OpretProduktbatch.js"></script>
 
 </head>
 <body>
+
+    <form>
+        <input type="text" id="batchID" placeholder="Batch ID" value=""><br>
+        <input type="text" id="status"  placeholder="Status" value=""><br>
+        <input type="text" id="receptID"  placeholder="Recept ID" value=""><br>
+        <input type="text" id="brugerID"  placeholder="Bruger ID" value=""><br>
+        <input type="text" id="raavarebatchID"  placeholder="Råvarebatch ID" value=""><br>
+        <input type="text" id="tara"  placeholder="Tara" value=""><br>
+        <input type="text" id="netto"  placeholder="Netto" value=""><br>
+        <input type="reset" class="hvr-buzz screenbtn" value="Gem" id="gem">
+    </form>
+
+    <input type="submit" class="hvr-buzz screenbtn" value="Retur" id="retur" onclick="switchP('PLeadScreen/PLeadScreen.html'); return false">
+
 
 </body>
 </html>

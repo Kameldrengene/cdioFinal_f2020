@@ -35,10 +35,8 @@ function save(){
     const tara = $(".brugertable").find("td").eq(5).text();
     const netto = $(".brugertable").find("td").eq(6).text();
 
-
     var obj = { pbId: batchID, status: status, receptId: receptID, userId: brugerID, rbID: råvarebatchID, tara: tara, netto: netto };
     var myJson = JSON.stringify(obj);
-
 
     $.ajax({
         type: "POST",
