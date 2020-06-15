@@ -1,21 +1,25 @@
 package dal;
 
-import org.junit.Test;
+import dal.dto.UserDTO;
+import org.junit.jupiter.api.MethodOrderer;
+import org.junit.jupiter.api.Order;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestMethodOrder;
 
-import static org.junit.Assert.*;
-import dal.dto.*;
-
-import java.sql.SQLException;
 import java.util.List;
 
-public class UserDAOSQLTest {
+
+import static org.junit.jupiter.api.Assertions.*;
+
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
+class UserDAOSQLTest {
     UserDAOSQL userDAOSQL = new UserDAOSQL();
     UserDTO testUser;
     List<UserDTO> testList;
 
     @Test
-
-    public void getUser() {
+    @Order(1)
+    void getUser() {
         try {
             testUser = userDAOSQL.getUser(11);
         }catch (IDALException.DALException e){
@@ -27,7 +31,8 @@ public class UserDAOSQLTest {
     }
 
     @Test
-    public void getRole() {
+    @Order(2)
+    void getRole() {
         try {
             testUser = userDAOSQL.getUser(11);
         }catch (IDALException.DALException e){
@@ -37,7 +42,8 @@ public class UserDAOSQLTest {
     }
 
     @Test
-    public void getData() {
+    @Order(3)
+    void getData() {
         try {
             testList = userDAOSQL.getData();
         }catch (IDALException.DALException e){
@@ -45,11 +51,11 @@ public class UserDAOSQLTest {
         }
         assertEquals("FD",testList.get(1).getIni());
         assertEquals("Lasse",testList.get(4).getUserName());
-
     }
 
     @Test
-    public void createUser() {
+    @Order(4)
+    void createUser() {
         UserDTO newUser = new UserDTO();
         newUser.setAktiv(false);
         newUser.setUserName("Test");
@@ -64,12 +70,11 @@ public class UserDAOSQLTest {
         }catch (IDALException.DALException e){
             e.printStackTrace();
         }
-
-
     }
 
     @Test
-    public void updateUser() {
+    @Order(5)
+    void updateUser() {
         UserDTO newUser = new UserDTO();
         newUser.setAktiv(false);
         newUser.setUserName("Test");
@@ -86,8 +91,10 @@ public class UserDAOSQLTest {
             e.printStackTrace();
         }
     }
+
     @Test
-    public void getActivity() {
+    @Order(6)
+    void getActivity() {
         try {
             boolean aktual = userDAOSQL.getUser(19).getAktiv();
             assertFalse(aktual);
@@ -97,7 +104,8 @@ public class UserDAOSQLTest {
     }
 
     @Test
-    public void aktivitySwitchUser() {
+    @Order(7)
+    void aktivitySwitchUser() {
         try{
             userDAOSQL.aktivitySwitchUser(19);
             boolean aktual = userDAOSQL.getUser(19).getAktiv();
@@ -105,11 +113,12 @@ public class UserDAOSQLTest {
         }catch (IDALException.DALException e){
             e.printStackTrace();
         }
-
-
     }
 
+
+
     @Test
+    @Order(8)
     public void cleanUP(){
         try {
             SQLDatabaseIO sqlDatabaseIO = new SQLDatabaseIO("kamel", "dreng", "runerne.dk", 8003);
@@ -119,6 +128,5 @@ public class UserDAOSQLTest {
             e.printStackTrace();
         }
     }
-
 
 }
