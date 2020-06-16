@@ -4,7 +4,6 @@ localStorage.setItem('loginID', 'None');
 var ID = 'delete';
 function Personslist() {
     $(document).ready(sendAjax("/BoilerPlate_war_exploded/rest/user/getUsers", function (data) {
-        console.log(data);
         var person_data = '<tr>\n' +
             '                <th>ID</th>\n' +
             '                <th>Name</th>\n' +
