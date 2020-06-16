@@ -21,7 +21,7 @@ async function loadBatch(batchID) {
     sendAjax("/BoilerPlate_war_exploded/rest/produktbatch/getBatch/" + batchID, function (data) {
         viewTable(data);
     }, function (data) {
-        alert("Error loading produktbatches: ERR.No.11");
+        alert("Error loading produktbatches: ERR.NO.11");
         console.log(data);
     })
 
