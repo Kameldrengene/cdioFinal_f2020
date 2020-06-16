@@ -119,7 +119,7 @@ function confirmUserUpdate(ID) { //metoden sender videre til update html siden.
 
 
             }, function (data) {
-                alert("Error getting user by ID: ERR:NO.08")
+                alert("Error getting user by ID: ERR.NO.08")
                 console.log(data);
             })});
         }
