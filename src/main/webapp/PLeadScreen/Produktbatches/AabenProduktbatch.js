@@ -89,11 +89,17 @@ function viewTable(data){
         tabelData += "<tr>";
         tabelData += "<td> &nbsp; </td>";
         tabelData += "</tr>";
-
-
-
-
     });
+
+    tabelData += "<tr>";
+    tabelData += "<th align='left'>Sum Tara: </th>"
+    tabelData += "</tr>";
+    tabelData += "<tr>";
+    tabelData += "<th align='left'>Sum Netto: </th>"
+    tabelData += "</tr>";
+    tabelData += "<tr>";
+    tabelData += "<th align='left'>Produktion Slut: </th>"
+    tabelData += "</tr>";
 
     $("#produktbatch").html(tabelData);
 
