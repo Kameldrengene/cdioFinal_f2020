@@ -1,16 +1,15 @@
 
 $("document").ready(async function(){
 
-    await updateTable().then(function () {
+    await updateTable()
 
-        $("#visTomme").click(function () {
-            updateTable();
-        });
+    $("#visTomme").click(function () {
+        updateTable();
+    });
 
-        $("#raavarebatches").on("click", "button", function () {
-            localStorage.setItem("activeRBId", this.id);
-            switchP("PLeadScreen/Raavarebatches/RedigerRaavarebatches.html");
-        });
+    $("#raavarebatches").on("click", "button", function () {
+        localStorage.setItem("activeRBId", this.id);
+        switchP("PLeadScreen/Raavarebatches/RedigerRaavarebatches.html");
     });
 
 });
