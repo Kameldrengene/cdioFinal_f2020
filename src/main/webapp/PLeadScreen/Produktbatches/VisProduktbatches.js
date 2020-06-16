@@ -1,10 +1,10 @@
-$("document").ready(function(){
+$("document").ready(async function(){
 
-    updateTable();
+    await updateTable();
 
-    $("#visAfsluttede").click(function () {
-        updateTable();
-    })
+    $("#visAfsluttede").click(async function () {
+        await updateTable();
+    });
 
     $("#produktbatches").on("click", "button", function () {
 
@@ -14,17 +14,23 @@ $("document").ready(function(){
         const currentRow = $(this).closest("tr");
         const receptID = currentRow.find("td:eq(1)").text();
         const status = currentRow.find("td:eq(2)").text();
+        const dato = currentRow.find("td:eq(3)").text();
 
         //Save content
         localStorage.setItem("activeStatus", status);
         localStorage.setItem("activeReceptID", receptID);
+        localStorage.setItem("activeDato", dato);
 
         switchP("PLeadScreen/Produktbatches/AabenProduktbatch.html");
-    })
+    });
 
 });
 
-function updateTable(){
+async function updateTable(){
+
+    //Hide table and display loader while updating
+    $("#produktbatches").hide();
+    $("#loading").show();
 
     let path;
 
@@ -33,12 +39,16 @@ function updateTable(){
     else
         path = "getAktuelle"
 
-    sendAjax("/BoilerPlate_war_exploded/rest/produktbatch/" + path, function (data) {
+    await sendAjax("/BoilerPlate_war_exploded/rest/produktbatch/" + path, function (data) {
         viewTable(data)
     }, function (data) {
         alert("Error getting all/actual produktbatches: ERR.NO.16");
         console.log(data);
     })
+
+    //Remove loader and reveal table
+    $("#loading").hide();
+    $("#produktbatches").show();
 
 };
 

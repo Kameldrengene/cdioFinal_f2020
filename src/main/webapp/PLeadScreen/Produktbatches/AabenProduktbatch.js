@@ -1,12 +1,14 @@
 $("document").ready(function () {
 
     const batchID = localStorage.getItem("activePBId");
-    const receptID = localStorage.getItem("receptID");
-    const status = localStorage.getItem("status");
+    const receptID = localStorage.getItem("activeReceptID");
+    const status = localStorage.getItem("activeStatus");
+    const dato = localStorage.getItem("activeDato");
 
     $("#batchID").html("Batch ID: " + batchID);
     $("#receptID").html("Recept ID: " + receptID);
     $("#status").html("Status: " + status);
+    $("#dato").html("Oprettelses dato: " + dato);
 
     loadBatch(batchID);
 
@@ -18,7 +20,9 @@ $("document").ready(function () {
 });
 
 async function loadBatch(batchID) {
-    sendAjax("/BoilerPlate_war_exploded/rest/produktbatch/getBatch/" + batchID, function (data) {
+    sendAjax(
+        "/BoilerPlate_war_exploded/rest/produktbatch/getBatch/" + batchID,
+        function (data) {
         viewTable(data);
     }, function (data) {
         alert("Error loading produktbatches: ERR.NO.11");

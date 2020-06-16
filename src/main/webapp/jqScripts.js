@@ -1,7 +1,7 @@
 $.ajaxSetup({async: false}); //this file is for general scripts used all over the site
 
-function sendAjax(link, successFunc, errorFunc=function (data) {console.log(data);}, type="GET", jsonData="None"){
-    $.ajax({
+async function sendAjax(link, successFunc, errorFunc=function (data) {console.log(data);}, type="GET", jsonData="None"){
+    await $.ajax({
         url: link,
         type: type,
         async: true,
@@ -14,8 +14,9 @@ function sendAjax(link, successFunc, errorFunc=function (data) {console.log(data
 }
 
 
-function viewlist(headers, link, tableName, btnHtmlfunc) {
-    $(document).ready(sendAjax(link ,function (BEdata) {
+async function viewlist(headers, link, tableName, btnHtmlfunc) {
+    $(document).ready(
+        await sendAjax(link ,function (BEdata) {
             var data = '<tr>\n';
             for (let i = 0; i < headers.length; i++){
                 data += '<th>'+ headers[i] +'</th>';

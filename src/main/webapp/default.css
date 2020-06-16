@@ -161,6 +161,7 @@ input[type=text]:focus, input[type=password]:focus, input[type=number]:focus {
     }
 }
 .hvr-pop,.slet, .update {
+    font-size: 100%;
     color: var(--col-background);
     font-weight: bold;
     background-color: var(--color-primary);
@@ -211,6 +212,9 @@ input[type=text]:focus, input[type=password]:focus, input[type=number]:focus {
     border-radius: 10px;
     background: var(--col-secondarybackground);
     color: var(--col-textthird);
+    display: inline-block;
+    max-height: 600px;
+    overflow: scroll;
 }
 
 /* Giver padding på alle headers og celler i tabellen.
@@ -282,8 +286,24 @@ form{
 h5{
     color: var(--col-textsecondary);
     font-weight: normal;
-    line-height: 1.45;
+    line-height: 0.8;
     font-size: 100%;
     margin-top: 5px;
     margin-bottom: 10px;
+}
+
+/* Source: https://www.w3schools.com/howto/howto_css_loader.asp */
+#loading {
+    margin: 20px auto;
+    border: 5px solid #f3f3f3;
+    border-top: 5px solid #555;
+    border-radius: 50%;
+    width: 35px;
+    height: 35px;
+    animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
 }
