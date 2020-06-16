@@ -8,15 +8,13 @@ $("document").ready(function () {
     //.then to ensure functionality is only added after resources are fetched
     loadUsers().then(function () {
 
+        //Only load user data and sign in button when everything is ready
+        $("#login").load("Login/LoginTable.html");
+
         //Saves the ID of the selected user in localStorage
-        $("#table").on("click", "input", function () {
+        $("#personer").on("click", "input", function () {
             localStorage.setItem("loginID", this.id);
         });
-
-        //Only load user data and sign in button when everything is ready
-        $("#table").load("Login/BrugerTabel.html");
-        $("#login").load("Login/RolleTabel.html");
-        $("#signin").html("<button class='hvr-buzz'>Sign in</button>");
 
         //Attach the appropiate actions to the role tabel
         $("#administrator").click(function () {
@@ -118,7 +116,7 @@ function createTable(data, role){
 
     if(role === "Administrator"){
         tabelData += "<tr>";
-        tabelData += "<td><input type = 'radio' name = 'rolle' id ='" + 0 + "'></td>";
+        tabelData += "<td><input type = 'radio' name = 'bruger' id ='" + 0 + "'></td>";
         tabelData += "<td><Label for ='" + 0 + "'>" + 0 + "</Label></td>";
         tabelData += "<td><Label for ='" + 0 + "'>root</Label></td>";
         tabelData += "</tr>";
@@ -131,7 +129,7 @@ function createTable(data, role){
 
             //Uses userID for label reference
             tabelData += "<tr>";
-            tabelData += "<td><input type = 'radio' name = 'rolle' id ='" + userID + "'></td>";
+            tabelData += "<td><input type = 'radio' name = 'bruger' id ='" + userID + "'></td>";
             tabelData += "<td><Label for ='" + userID + "'>" + userID + "</Label></td>";
             tabelData += "<td><Label for ='" + userID + "'>" + value.userName + "</Label></td>";
             tabelData += "</tr>";
