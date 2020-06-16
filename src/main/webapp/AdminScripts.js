@@ -98,32 +98,33 @@ function confirmUserUpdate(ID) { //metoden sender videre til update html siden.
             updatedID = ID;
             switchP('Brugeroversigt/Updatebruger/index.html')
             //load info from user into page
-            $(document).ready(function () {
-                $.getJSON("/BoilerPlate_war_exploded/rest/user/getUser/" + updatedID, function (data) {
-                    document.getElementById("username").value = data.userName;
-                    document.getElementById("ini").value =  data.ini;
-                    document.getElementById("pass").value =  data.password;
-                    if (data.job === "Administrator") {
-                        document.getElementById("role1").checked = "checked";
-                    }else if (data.job === "Farmaceut") {
-                        document.getElementById("role2").checked = "checked";
-                    }else if (data.job === "Produktionsleder") {
-                        document.getElementById("role3").checked = "checked";
-                    }else if (data.job === "Laborant") {
-                        document.getElementById("role4").checked = "checked";
-                    }else {
-                        alert("Error: No or wrong role");
-                    }
+            $(document).ready(function () {sendAjax("/BoilerPlate_war_exploded/rest/user/getUser/" + updatedID, function (data) {
+                document.getElementById("username").value = data.userName;
+                document.getElementById("ini").value =  data.ini;
+                document.getElementById("pass").value =  data.password;
+                if (data.job === "Administrator") {
+                    document.getElementById("role1").checked = "checked";
+                }else if (data.job === "Farmaceut") {
+                    document.getElementById("role2").checked = "checked";
+                }else if (data.job === "Produktionsleder") {
+                    document.getElementById("role3").checked = "checked";
+                }else if (data.job === "Laborant") {
+                    document.getElementById("role4").checked = "checked";
+                }else {
+                    alert("Error: No or wrong role");
+                }
 
-                    if (data.aktiv){
-                        document.getElementById("yes").checked = "checked";
-                    } else {
-                        document.getElementById("no").checked = "checked";
-                    }
+                if (data.aktiv){
+                    document.getElementById("yes").checked = "checked";
+                } else {
+                    document.getElementById("no").checked = "checked";
+                }
 
 
-                })
-            });
+            }, function (data) {
+                alert("Error getting user by ID: ERR:NO:08")
+                console.log(data);
+            })});
         }
         else {
             alert("no worries!");
