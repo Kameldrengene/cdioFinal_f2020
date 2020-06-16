@@ -4,7 +4,6 @@ localStorage.setItem('loginID', 'None');
 var ID = 'delete';
 function Personslist() {
     $(document).ready(sendAjax("/BoilerPlate_war_exploded/rest/user/getUsers", function (data) {
-        console.log(data);
         var person_data = '<tr>\n' +
             '                <th>ID</th>\n' +
             '                <th>Name</th>\n' +
@@ -115,9 +114,9 @@ function confirmUserUpdate(ID) { //metoden sender videre til update html siden.
                 }
 
                 if (data.aktiv){
-                    document.getElementById("yes").checked = "checked";
+                    document.getElementById("aktivcheckbox").checked = "checked";
                 } else {
-                    document.getElementById("no").checked = "checked";
+                    document.getElementById("aktivcheckboxno").checked = "checked";
                 }
 
 
@@ -156,7 +155,7 @@ function userCheck(){
 function updateUser() {
     var errorMsg = userCheck();
     var UPid = updatedID;
-    var UPuser = $("#Username").val();
+    var UPuser = $("#username").val();
     var UPini = $("#ini").val();
     var UPpass = $("#pass").val();
     var UPjob ="" ;
