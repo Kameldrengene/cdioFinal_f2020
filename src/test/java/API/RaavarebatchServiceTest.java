@@ -1,4 +1,4 @@
-package controller;
+package API;
 
 import dal.IDALException;
 import dal.SQLDatabaseIO;
@@ -12,23 +12,24 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
-class RaavarevbatchControllerTest {
-    RaavarevbatchController raavarevbatchController = new RaavarevbatchController();
+class RaavarebatchServiceTest {
+    RaavarebatchService raavarebatchService = new RaavarebatchService();
     RaavarebatchDTO testRaavarebatch;
     List<RaavarebatchDTO> listRaavarebatch;
+
     @Test
     @Order(1)
     void getData() {
         int expected = 2;
         int expectedSize = 19;
+
         try {
-            listRaavarebatch = raavarevbatchController.getData();
+            listRaavarebatch = raavarebatchService.getData();
             assertEquals(expected,listRaavarebatch.get(1).getRbId());
             assertEquals(expectedSize,listRaavarebatch.size());
         } catch (IDALException.DALException e) {
             e.printStackTrace();
         }
-
     }
 
     @Test
@@ -37,13 +38,12 @@ class RaavarevbatchControllerTest {
         int expected = 3;
         int expectedSize = 17;
         try {
-            listRaavarebatch = raavarevbatchController.getAktuelle();
+            listRaavarebatch = raavarebatchService.getAktuelle();
             assertEquals(expected,listRaavarebatch.get(2).getRbId());
             assertEquals(expectedSize,listRaavarebatch.size());
         } catch (IDALException.DALException e) {
             e.printStackTrace();
         }
-
     }
 
     @Test
@@ -51,14 +51,12 @@ class RaavarevbatchControllerTest {
     void getBatch() {
         int expected = 1;
         try {
-            testRaavarebatch = raavarevbatchController.getBatch("1");
+            testRaavarebatch = raavarebatchService.getBatch("1");
             assertEquals(expected,testRaavarebatch.getRbId());
         } catch (IDALException.DALException e) {
             e.printStackTrace();
         }
     }
-
-
 
     @Test
     @Order(4)
@@ -69,16 +67,15 @@ class RaavarevbatchControllerTest {
         newRaavarebatch.setRaavareId(2);
         newRaavarebatch.setRbId(99);
         newRaavarebatch.setStartMaengde(100.0);
-        raavarevbatchController.opretRaavarebatch(newRaavarebatch);
+
+        raavarebatchService.opretRaavarebatch(newRaavarebatch);
 
         try {
-            testRaavarebatch = raavarevbatchController.getBatch("99");
+            testRaavarebatch = raavarebatchService.getBatch("99");
             assertEquals(expected,testRaavarebatch.getRbId());
         } catch (IDALException.DALException e) {
             e.printStackTrace();
         }
-
-
     }
 
     @Test
@@ -91,10 +88,10 @@ class RaavarevbatchControllerTest {
         newRaavarebatch.setRbId(99);
         newRaavarebatch.setStartMaengde(100.0);
 
-        raavarevbatchController.updateRaavarebatch(newRaavarebatch);
+        raavarebatchService.updateRaavarebatch(newRaavarebatch);
 
         try {
-            testRaavarebatch=raavarevbatchController.getBatch("99");
+            testRaavarebatch = raavarebatchService.getBatch("99");
             assertEquals(expected,testRaavarebatch.getAktuelMaengde());
         } catch (IDALException.DALException e) {
             e.printStackTrace();
@@ -111,4 +108,5 @@ class RaavarevbatchControllerTest {
             e.printStackTrace();
         }
     }
+
 }

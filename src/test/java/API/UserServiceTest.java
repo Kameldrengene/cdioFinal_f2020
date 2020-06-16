@@ -1,6 +1,5 @@
-package controller;
+package API;
 
-import dal.IDALException;
 import dal.SQLDatabaseIO;
 import dal.dto.UserDTO;
 import org.junit.jupiter.api.MethodOrderer;
@@ -12,8 +11,8 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
-class UserControllerTest {
-    UserController userController = new UserController();
+class UserServiceTest {
+    UserService userService = new UserService();
     UserDTO testUser;
     List<UserDTO> testList;
 
@@ -21,36 +20,33 @@ class UserControllerTest {
     @Order(1)
     void getData() {
         String name = "Mark";
-        try {
-            testList = userController.getData();
-            assertEquals(name,testList.get(0).getUserName());
-        } catch (IDALException.DALException e) {
-            e.printStackTrace();
-        }
+        testList = userService.getData();
+        assertEquals(name, testList.get(0).getUserName());
     }
 
     @Test
     @Order(2)
     void getUser() {
-        String initial ="FD";
-        testUser = userController.getUser(12);
-        assertEquals(initial,testUser.getIni());
+        String initial = "FD";
+        testUser = userService.getUser(12);
+        assertEquals(initial, testUser.getIni());
     }
 
     @Test
     @Order(3)
     void getRole() {
         int expected = 2;
-        testList = userController.getRole("Produktionsleder");
-        assertEquals(expected,testList.size());
+        testList = userService.getRole("Produktionsleder");
+        assertEquals(expected, testList.size());
     }
 
     @Test
     @Order(4)
-    void currentActivity() {
-        boolean aktual = userController.CurrentActivity(11);
+    void getUserActivity() {
+        boolean aktual = userService.getUserActivity(11);
         assertTrue(aktual);
     }
+
 
     @Test
     @Order(5)
@@ -63,17 +59,17 @@ class UserControllerTest {
         newUser.setJob("Laborant");
         newUser.setPassword("passNew");
 
-        userController.createUser(newUser);
-        testUser = userController.getUser(19);
-        assertEquals(expected,testUser.getUserName());
+        userService.createUser(newUser);
+        testUser = userService.getUser(19);
+        assertEquals(expected, testUser.getUserName());
     }
 
     @Test
     @Order(6)
     void activitySwitchUser() {
-        testUser = userController.getUser(19);
-        userController.activitySwitchUser(testUser);
-        boolean aktual = userController.CurrentActivity(19);
+        testUser = userService.getUser(19);
+        userService.activitySwitchUser(testUser);
+        boolean aktual = userService.getUserActivity(19);
         assertTrue(aktual);
 
     }
@@ -91,23 +87,20 @@ class UserControllerTest {
         newUser.setPassword("passNew");
         newUser.setUserID(19);
 
-        userController.updateUser(newUser);
-        testUser = userController.getUser(19);
-        assertEquals(expected,testUser.getJob());
-
+        userService.updateUser(newUser);
+        testUser = userService.getUser(19);
+        assertEquals(expected, testUser.getJob());
     }
 
     @Test
     @Order(8)
-   void cleanUP(){
+    void cleanUP() {
         try {
             SQLDatabaseIO sqlDatabaseIO = new SQLDatabaseIO("kamel", "dreng", "runerne.dk", 8003);
             sqlDatabaseIO.connect();
             sqlDatabaseIO.update("DELETE FROM cdioFinal_2020.userdto WHERE userName = 'Test'");
-        } catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
-
-
 }

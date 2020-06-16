@@ -33,12 +33,9 @@ class UserDAOSQLTest {
     @Test
     @Order(2)
     void getRole() {
-        try {
-            testUser = userDAOSQL.getUser(11);
-        }catch (IDALException.DALException e){
-            e.printStackTrace();
-        }
-        assertEquals("Administrator",testUser.getJob());
+        int expected = 1;
+        testList = userDAOSQL.getRole("Administrator");
+        assertEquals(expected,testList.size());
     }
 
     @Test
@@ -119,7 +116,7 @@ class UserDAOSQLTest {
 
     @Test
     @Order(8)
-    public void cleanUP(){
+    void cleanUP(){
         try {
             SQLDatabaseIO sqlDatabaseIO = new SQLDatabaseIO("kamel", "dreng", "runerne.dk", 8003);
             sqlDatabaseIO.connect();

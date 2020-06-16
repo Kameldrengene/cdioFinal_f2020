@@ -1,5 +1,6 @@
-package controller;
+package API;
 
+import dal.IDALException;
 import dal.SQLDatabaseIO;
 import dal.dto.RaavareDTO;
 import org.junit.jupiter.api.MethodOrderer;
@@ -11,8 +12,8 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
-class RaavareControllerTest {
-    RaavareController raavareController = new RaavareController();
+class RaavareServiceTest {
+    RaavareService raavareService = new RaavareService();
     RaavareDTO testraavare;
     List<RaavareDTO> listRaavare;
 
@@ -20,16 +21,18 @@ class RaavareControllerTest {
     @Order(1)
     void getData() {
         int expected = 2;
-        listRaavare = raavareController.getData();
-        assertEquals(expected,listRaavare.get(1).getRaavareID());
-
+        try {
+            listRaavare = raavareService.getData();
+        } catch (IDALException.DALException e){
+            e.printStackTrace();
+        }
     }
 
     @Test
     @Order(2)
     void getRaavare() {
         int expected = 1;
-        testraavare = raavareController.getRaavare(1);
+        testraavare = raavareService.getRaavare(1);
         assertEquals(expected,testraavare.getRaavareID());
     }
 
@@ -42,8 +45,9 @@ class RaavareControllerTest {
         newRaavare.setLeverandoer("Leo");
         newRaavare.setRaavareID(99);
         newRaavare.setRaavareNavn("Vodka");
-        raavareController.opretRaavare(newRaavare);
-        testraavare=raavareController.getRaavare(99);
+
+        raavareService.opretRaavare(newRaavare);
+        testraavare = raavareService.getRaavare(99);
         assertEquals(expected,testraavare.getRaavareID());
     }
 
@@ -56,8 +60,9 @@ class RaavareControllerTest {
         newRaavare.setLeverandoer("Novo");
         newRaavare.setRaavareID(99);
         newRaavare.setRaavareNavn("Vodka");
-        raavareController.updateRaavare(newRaavare);
-        testraavare=raavareController.getRaavare(99);
+
+        raavareService.updateRaavare(newRaavare);
+        testraavare=raavareService.getRaavare(99);
         assertEquals(expected,testraavare.getLeverandoer());
     }
 

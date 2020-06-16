@@ -38,6 +38,10 @@ function save(){
         url: "/BoilerPlate_war_exploded/rest/Raavarebatch/opdaterRaavarebatch",
         data: myJson,
         dataType: "json",
+        success: function() {
+            alert("Råvarebatch successfuldt opdateret");
+            $("#gem").removeAttr("hover");
+        },
         contentType: "application/json; charset=UTF-8"
     });
 }

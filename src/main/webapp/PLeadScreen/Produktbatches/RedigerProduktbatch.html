@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <script src="PLeadScreen/Produktbatches/RedigerProduktbatch.js"></script>
+    <script src="jqScripts.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="PLeadScreen/Produktbatches/RedigerProduktbatch.css">
+
+</head>
+<body>
+    <h1>Produktbatch-linje</h1>
+
+    <h5 id="batchID"></h5>
+    <h5 id="receptID"></h5>
+    <h5 id="status"></h5>
+    <h5 id="raavarebatchID"></h5>
+
+    <table class = "brugertable">
+        <thead>
+            <tr>
+                <th>Bruger ID</th>
+                <th>Tara</th>
+                <th>Netto</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td contenteditable="true" id="brugerID"></td>
+                <td contenteditable="true" id="tara"></td>
+                <td contenteditable="true" id="netto"></td>
+                <td><button class = hvr-buzz id="gem">Gem</button></td>
+                <td><button class = hvr-buzz id="slet">Slet</button></td>
+            </tr>
+        </tbody>
+    </table>
+
+<input type="submit" class="hvr-buzz screenbtn" value="Retur" onclick="switchP('PLeadScreen/Produktbatches/AabenProduktbatch.html'); return false">
+
+</body>
+</html>
