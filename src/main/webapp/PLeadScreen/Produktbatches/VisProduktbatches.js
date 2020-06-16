@@ -33,23 +33,14 @@ function updateTable(){
     else
         path = "getAktuelle"
 
-    loadBatches(path);
+    sendAjax("/BoilerPlate_war_exploded/rest/produktbatch/" + path, function (data) {
+        viewTable(data)
+    }, function (data) {
+        alert("Error getting all/actual produktbatches: ERR.NO.16");
+        console.log(data);
+    })
 
 };
-
-
-async function loadBatches(path) {
-
-    await $.ajax({
-        url: "/BoilerPlate_war_exploded/rest/produktbatch/" + path,
-        type: "GET",
-        async: true,
-        contentType: "application/json",
-        dataType: "json",
-        success: data => viewTable(data)
-    });
-
-}
 
 function viewTable(data){
 
