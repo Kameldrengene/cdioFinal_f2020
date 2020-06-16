@@ -1,32 +1,40 @@
-$("document").ready(function(){
+$("document").ready(async function(){
 
-    updateTable();
+    await updateTable().then(function () {
 
-    $("#visAfsluttede").click(function () {
-        updateTable();
-    })
+        $("#visAfsluttede").click(function () {
+            updateTable();
+        });
 
-    $("#produktbatches").on("click", "button", function () {
+        $("#produktbatches").on("click", "button", function () {
 
-        localStorage.setItem("activePBId", this.id);
+            localStorage.setItem("activePBId", this.id);
 
-        //Get content of table
-        const currentRow = $(this).closest("tr");
-        const receptID = currentRow.find("td:eq(1)").text();
-        const status = currentRow.find("td:eq(2)").text();
-        const dato = currentRow.find("td:eq(3)").text();
+            //Get content of table
+            const currentRow = $(this).closest("tr");
+            const receptID = currentRow.find("td:eq(1)").text();
+            const status = currentRow.find("td:eq(2)").text();
+            const dato = currentRow.find("td:eq(3)").text();
 
-        //Save content
-        localStorage.setItem("activeStatus", status);
-        localStorage.setItem("activeReceptID", receptID);
-        localStorage.setItem("activeDato", dato);
+            //Save content
+            localStorage.setItem("activeStatus", status);
+            localStorage.setItem("activeReceptID", receptID);
+            localStorage.setItem("activeDato", dato);
 
-        switchP("PLeadScreen/Produktbatches/AabenProduktbatch.html");
-    })
+            switchP("PLeadScreen/Produktbatches/AabenProduktbatch.html");
+        });
+
+    });
 
 });
 
-function updateTable(){
+async function updateTable(){
+
+    //Hide table while updating
+    $("#produktbatches").hide();
+
+    //Display loader
+    $("#loading").show();
 
     let path;
 
@@ -35,12 +43,17 @@ function updateTable(){
     else
         path = "getAktuelle"
 
-    sendAjax("/BoilerPlate_war_exploded/rest/produktbatch/" + path, function (data) {
+    await sendAjax("/BoilerPlate_war_exploded/rest/produktbatch/" + path, function (data) {
         viewTable(data)
     }, function (data) {
         alert("Error getting all/actual produktbatches: ERR.NO.16");
         console.log(data);
     })
+
+    //Remove loader and reveal table
+    $("#loading").hide();
+    $("#produktbatches").show();
+
 
 };
 

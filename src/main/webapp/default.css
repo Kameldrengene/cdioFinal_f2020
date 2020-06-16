@@ -212,6 +212,9 @@ input[type=text]:focus, input[type=password]:focus, input[type=number]:focus {
     border-radius: 10px;
     background: var(--col-secondarybackground);
     color: var(--col-textthird);
+    display: inline-block;
+    max-height: 600px;
+    overflow: scroll;
 }
 
 /* Giver padding på alle headers og celler i tabellen.

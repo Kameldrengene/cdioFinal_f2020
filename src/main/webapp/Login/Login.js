@@ -10,6 +10,11 @@ $("document").ready(function () {
 
         //Only load user data and sign in button when everything is ready
         $("#login").load("Login/LoginTable.html");
+        $(".brugertable").hide();
+
+        $(".rolletabel").click(function () {
+            $(".brugertable").show();
+        })
 
         //Saves the ID of the selected user in localStorage
         $("#personer").on("click", "input", function () {
@@ -69,7 +74,7 @@ $("document").ready(function () {
 async function loadUsers(){
 
     //Display loader
-    $("#loader").html("<div id='loading'><\div")
+    $("#loader").html("<div id='loading'></div>")
 
     //fetch and save user data
     await loadUser("Administrator");
@@ -84,7 +89,7 @@ async function loadUsers(){
 
 async function loadUser(role, redo=0) {
 
-    await $.ajax({
+     await $.ajax({
         url: "/BoilerPlate_war_exploded/rest/user/getRole?role=" + role,
         type: "GET",
         async: true,
