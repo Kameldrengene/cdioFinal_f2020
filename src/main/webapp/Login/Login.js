@@ -113,6 +113,14 @@ function createTable(data, role){
     //Variable to hold all the tabel rows
     let tabelData = "";
 
+    if(role === "Administrator"){
+        tabelData += "<tr>";
+        tabelData += "<td><input type = 'radio' name = 'rolle' id ='" + 0 + "'></td>";
+        tabelData += "<td><Label for ='" + 0 + "'>" + 0 + "</Label></td>";
+        tabelData += "<td><Label for ='" + 0 + "'>root</Label></td>";
+        tabelData += "</tr>";
+    }
+
     //Loop through
     $.each(data, function (key, value) {
         if (value.aktiv) {
