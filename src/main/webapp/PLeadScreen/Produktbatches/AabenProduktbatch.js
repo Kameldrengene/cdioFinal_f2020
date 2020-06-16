@@ -32,17 +32,20 @@ function viewTable(data){
     //Variable to hold all the tabel rows
     let tabelData = "";
 
-    tabelData += "<tr>";
-    tabelData += "<th>Råvarebatch ID</th>";
-    tabelData += "<th>Bruger ID</th>";
-    tabelData += "<th>Tara</th>";
-    tabelData += "<th>Netto</th>";
-    tabelData += "</tr>";
+    // tabelData += "<tr>";
+    // tabelData += "<th>Råvarebatch ID</th>";
+    // tabelData += "<th>Bruger ID</th>";
+    // tabelData += "<th>Tara</th>";
+    // tabelData += "<th>Netto</th>";
+    // tabelData += "</tr>";
 
     //Loop through
     $.each(data, function (key, value) {
 
         //Uses userID for label reference
+        tabelData += "<tr>";
+        tabelData += "<td>Råvare nr.</td>";
+        tabelData += "</tr>";
         tabelData += "<tr>";
         tabelData += "<td>"+value.rbID+"</td>";
         tabelData += "<td>"+value.userId+"</td>";
@@ -56,3 +59,13 @@ function viewTable(data){
     $("#produktbatch").html(tabelData);
 
 }
+function printDiv(divName) {
+    var printContents = document.getElementById(divName).innerHTML;
+    var originalContents = document.body.innerHTML;
+
+    document.body.innerHTML = printContents;
+
+    window.print();
+
+    document.body.innerHTML = originalContents;
+};
