@@ -51,6 +51,7 @@ function viewTable(data){
     tabelData += "<th>Batch ID</th>";
     tabelData += "<th>Recept ID</th>";
     tabelData += "<th>Status</th>";
+    tabelData += "<th>Oprettelses dato</th>";
     tabelData += "</tr>";
 
     //Loop through
@@ -61,6 +62,7 @@ function viewTable(data){
         tabelData += "<td>"+value.pbId+"</td>";
         tabelData += "<td>"+value.receptId+"</td>";
         tabelData += "<td>"+value.status+"</td>";
+        tabelData += "<td>"+value.dato+"</td>";
         tabelData += "<td> <button class = hvr-buzz id =" + value.pbId + " >Åben</button>  </td>"
         tabelData += "</tr>";
 
