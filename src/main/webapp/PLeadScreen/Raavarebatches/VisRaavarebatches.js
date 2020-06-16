@@ -24,14 +24,10 @@ function updateTable(){
         path = "getAktuelle"
 
     viewlist(
-        ["Batch ID", "Råvare ID", "Aktuel mængde", "Oprindelig mængde"],
+        ["Batch ID", "Råvare ID", "Oprindelig mængde", "Aktuel mængde", "Råvarenavn", "Leverandør"],
         "/BoilerPlate_war_exploded/rest/Raavarebatch/" + path,
         "raavarebatches",
-        function (value) {
-            let msg = "";
-            msg += "<td> <button class = hvr-buzz id =" + value.rbId + ">Rediger</button>  </td>";
-            return msg
-        }
+        function () {}
     )
 };
 

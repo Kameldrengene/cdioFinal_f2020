@@ -35,7 +35,7 @@ public class RaavareController {
     public RaavareDTO opretRaavare (RaavareDTO raavareDTO) {
         RaavareFunc rvFunc = new RaavareFunc();
         try {
-            if (rvFunc.isNewRaavareOk(raavareDTO)) {
+            if (rvFunc.isNewRaavareOk(raavareDTO,getData())) {
                 raavareDAOSQL.createRaavare(raavareDTO);
             }
         }catch (IDALException.DALException e){
@@ -47,7 +47,7 @@ public class RaavareController {
     public RaavareDTO updateRaavare(RaavareDTO raavareDTO) {
         RaavareFunc rvFunc = new RaavareFunc();
         try {
-            if (rvFunc.isUpdateRaavareOk(raavareDTO)) {
+            if (rvFunc.isUpdateRaavareOk(raavareDTO,getData())) {
                 raavareDAOSQL.updateRaavare(raavareDTO);
             }
         }catch (IDALException.DALException e){

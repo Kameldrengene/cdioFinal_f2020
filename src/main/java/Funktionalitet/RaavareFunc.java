@@ -1,23 +1,24 @@
 package Funktionalitet;
 
-import dal.RaavareDAOSQL;
 import dal.dto.RaavareDTO;
 
+import java.util.List;
+
 public class RaavareFunc {
-    public boolean isNewRaavareOk(RaavareDTO rv) {
-        return (!IDExists(rv) && isIDOk(rv) && isNavnOk(rv) && isleverandoerOk(rv));
+    public boolean isNewRaavareOk(RaavareDTO rv, List<RaavareDTO> rvList) {
+        return (!IDExists(rv, rvList) && isIDOk(rv) && isNavnOk(rv) && isleverandoerOk(rv));
     }
 
-    public boolean isUpdateRaavareOk(RaavareDTO rv) {
-        return (IDExists(rv) && isIDOk(rv) && isNavnOk(rv) && isleverandoerOk(rv));
+    public boolean isUpdateRaavareOk(RaavareDTO rv, List<RaavareDTO> rvList) {
+        return (IDExists(rv,rvList) && isIDOk(rv) && isNavnOk(rv) && isleverandoerOk(rv));
     }
 
-    private boolean IDExists(RaavareDTO rv) {
-        RaavareDAOSQL dao = new RaavareDAOSQL();
-        if (dao.raavareExists(rv.getRaavareID())) {
-            return true;
+    private boolean IDExists(RaavareDTO rv, List<RaavareDTO> rvList) {
+        for(int i = 0; i < rvList.size(); i++){
+            if(rv.getRaavareID() == rvList.get(i).getRaavareID()){
+                return true;
+            }
         }
-
         return false;
     }
 

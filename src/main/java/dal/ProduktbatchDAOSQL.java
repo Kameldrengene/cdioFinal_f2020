@@ -76,6 +76,7 @@ public class ProduktbatchDAOSQL implements IProduktbatchDAO {
                 pb.setRbID(rs.getInt("RBID"));
                 pb.setTara(rs.getDouble("Tara"));
                 pb.setNetto(rs.getDouble("Netto"));
+                pb.setDato((rs.getString("Dato")));
                 pbList.add(pb);
             }
             rs.close();
