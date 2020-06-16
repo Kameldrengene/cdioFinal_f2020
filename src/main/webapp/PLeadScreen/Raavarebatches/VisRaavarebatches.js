@@ -24,10 +24,10 @@ function updateTable(){
         path = "getAktuelle"
 
     viewlist(
-        ["Batch ID", "Råvare ID", "Oprindelig mængde", "Aktuel mængde", "Råvarenavn", "Leverandør", ],
+        ["Batch ID", "Råvare ID", "Oprindelig mængde", "Aktuel mængde", "Råvarenavn", "Leverandør"],
         "/BoilerPlate_war_exploded/rest/Raavarebatch/" + path,
         "raavarebatches",
-        function (value) {}
+        function () {}
     )
 };
 

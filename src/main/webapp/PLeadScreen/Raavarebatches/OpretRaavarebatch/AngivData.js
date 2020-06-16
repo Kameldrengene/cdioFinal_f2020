@@ -1,4 +1,17 @@
+$("document").ready(function () {
 
+    const raavareID = localStorage.getItem("activeRaavare");
+
+    $("#raavareID").html("Råvare ID: " + raavareID);
+
+    // loadBatch(batchID);
+    //
+    // $("#produktbatch").on("click", "button", function () {
+    //     localStorage.setItem("activeRBId", this.id);
+    //     switchP("PLeadScreen/Produktbatches/RedigerProduktbatch.html");
+    // })
+
+})
 
 
 
@@ -32,4 +45,3 @@ $("#gem").click(function () {
     });
 
 })
-

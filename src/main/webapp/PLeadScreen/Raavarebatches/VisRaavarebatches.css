@@ -5,7 +5,3 @@ label:hover{
 label{
     color: var(--col-textsecondary);
 }
-
-.hvr-buzz{
-    margin: 20px;
-}
