@@ -7,14 +7,28 @@ public class ReceptDTO {
     String receptNavn;
     /** raavare id i området 1-99999999. Vælges af brugerne
      *  i opgaver står der (1..N) derfor er det en array */
+
+    String raavarNavn;
+    /** raavare Navn tilføjes for at gøre hjemmesiden brugervenligt Vælges af brugerne*/
+
     int raavareId;
+
     /** nonnetto i kilogram med 4 decimaler */
     double nonNetto;
     /** tolerance i kilogram med 4 decimaler */
     double tolerance;
 
+
     public ReceptDTO(){
 
+    }
+
+    public String getRaavarNavn() {
+        return raavarNavn;
+    }
+
+    public void setRaavarNavn(String raavarNavn) {
+        this.raavarNavn = raavarNavn;
     }
 
     public String getReceptNavn() {

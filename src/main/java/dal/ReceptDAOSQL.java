@@ -35,7 +35,7 @@ public class ReceptDAOSQL implements IReceptDAO{
     @Override
     public List<ReceptDTO> getRecepts(int id) throws IDALException.DALException {
         db.connect();
-        ResultSet rs = db.query("SELECT * FROM Recepter where RID=" + id); //Select all data from userdto
+        ResultSet rs = db.query("SELECT * FROM receptRaavare where RID=" + id); //Select all data from userdto
         List<ReceptDTO> receptList = new ArrayList<>();
         try {
             //We do as in getUser, except we make new user until rs is empty

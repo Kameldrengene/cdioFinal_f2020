@@ -11,20 +11,24 @@
     <br>
 
     <div id="nyRecept">
-    <input type="number" id="recepID" placeholder="ReceptID" value="" minlength="1" maxlength="8" ><br>
-    <input type="text" id="recepnavn" placeholder="ReceptNavn" value="" minlength="2" maxlength="20" ><br>
+        <input type="number" id="recepID" placeholder="ReceptID" value="" minlength="1" maxlength="8" ><br>
+        <input type="text" id="recepnavn" placeholder="ReceptNavn" value="" minlength="2" maxlength="20" ><br>
     </div>
-    <div id="addRaavare">
-        <select name="RaavarID" id="ledeligeNavn">
-            <option value="" disabled selected>Vælg Råvare</option>
-        </select><br>
-        <input type="number" id="netto"  placeholder="Mængde 1.0001" value="" step="0.0001" max="20" min="0.05"><br>
-        <input type="number" id="tol"  placeholder="Tolerance 0.1" value="" step="0.01" max="10" min="0.1"><br>
-    <input id="confirmbtn" type="button" onclick="confirmOpretRecept()" class="hvr-pop" value="OpretRecept">
+    <div id="alleRaavare">
+        <div id="addRaavare">
+            <div id="raavareLinjer1">
+                <!--                <select name="RaavarID" id="ledeligeNavn">-->
+                <!--                    <option value="" disabled selected>Vælg Råvare</option>-->
+                <!--                </select><br>-->
+                <!--                <input type="number" id="netto"  placeholder="Mængde 1.0001" value="" step="0.0001" max="20" min="0.05"><br>-->
+                <!--                <input type="number" id="tol"  placeholder="Tolerance 0.1" value="" step="0.01" max="10" min="0.1"><br>-->
+            </div>
+            <input id="confirmbtn" type="button" onclick="confirmOpretRecept()" class="hvr-pop" value="OpretRecept">
+        </div>
     </div>
 </div>
 
-<input type="submit" id="videre" class="hvr-buzz screenbtn" onclick="getReceptIDNavn(); return false" value="videre" ><br>
+<input type="submit" id="videre" class="hvr-buzz screenbtn" onclick="addLinje(); return false" value="TilføjeRåvare" ><br>
 <input type="submit" class="hvr-buzz screenbtn" value="Retur" onclick="switchP('FarmaScreen/index.html') ; return false">
 
 </body>
