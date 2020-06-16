@@ -95,14 +95,17 @@ async function loadUser(role, redo=0) {
         success: function(data){ createTable(data, role)},
         error: async function (response, error) {
             if (redo==0) {
-                alert(response.responseText);
-                await loadUser(role, 1)
+                alert("Kunne ikke forbinde til databasen. Prøver igen");
+                console.log(response);
+                await loadUser(role, 1);
             }else if (redo < 4) {
+                console.log(response);
                 await sleep(500);
                 await loadUser(role, redo + 1);
 
             } else {
                 alert("Fejlede 5 forsøg i træk. Kontakt System administratoren.")
+                console.log(response);
             }
         }
     });
@@ -112,6 +115,14 @@ async function loadUser(role, redo=0) {
 function createTable(data, role){
     //Variable to hold all the tabel rows
     let tabelData = "";
+
+    if(role === "Administrator"){
+        tabelData += "<tr>";
+        tabelData += "<td><input type = 'radio' name = 'rolle' id ='" + 0 + "'></td>";
+        tabelData += "<td><Label for ='" + 0 + "'>" + 0 + "</Label></td>";
+        tabelData += "<td><Label for ='" + 0 + "'>root</Label></td>";
+        tabelData += "</tr>";
+    }
 
     //Loop through
     $.each(data, function (key, value) {

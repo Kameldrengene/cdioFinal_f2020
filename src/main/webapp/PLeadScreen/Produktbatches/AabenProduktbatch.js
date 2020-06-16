@@ -18,15 +18,12 @@ $("document").ready(function () {
 });
 
 async function loadBatch(batchID) {
-
-    await $.ajax({
-        url: "/BoilerPlate_war_exploded/rest/produktbatch/getBatch/" + batchID,
-        type: "GET",
-        async: true,
-        contentType: "application/json",
-        dataType: "json",
-        success: data => viewTable(data)
-    });
+    sendAjax("/BoilerPlate_war_exploded/rest/produktbatch/getBatch/" + batchID, function (data) {
+        viewTable(data);
+    }, function (data) {
+        alert("Error loading produktbatches: ERR.No.11");
+        console.log(data);
+    })
 
 }
 

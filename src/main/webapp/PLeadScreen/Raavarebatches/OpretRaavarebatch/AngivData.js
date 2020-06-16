@@ -30,18 +30,11 @@ $("#gem").click(function () {
 
     var obj = { rbId: batchID, raavareId: raavareID, aktuelMaengde: mængde, startMaengde: oprindeligMaengde };
     var myJson = JSON.stringify(obj);
-
-    $.ajax({
-        type: "POST",
-        url: "/BoilerPlate_war_exploded/rest/Raavarebatch/opretRaavarebatch",
-        data: myJson,
-        //todo - giver altid sucess
-        success: function() {
-            alert("Råvarebatch oprettet succesfuldt");
-            $("#gem").removeAttr("hover");
-        },
-        dataType: "json",
-        contentType: "application/json; charset=UTF-8"
-    });
-
+    sendAjax("/BoilerPlate_war_exploded/rest/Raavarebatch/opretRaavarebatch", function (data) {
+        alert("Råvarebatch oprettet succesfuldt");
+        $("#gem").removeAttr("hover");
+    }, function (data) {
+        alert("Error making RaavareBatch: ERR.NO.08");
+        console.log(data);
+    }, "POST", myJson);
 })

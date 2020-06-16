@@ -10,11 +10,13 @@ $("document").ready(function () {
     $("#status").html("Status: " + status);
     $("#raavarebatchID").html("Råvarebatch ID: " + raavarebatchID);
 
-    $.getJSON("/BoilerPlate_war_exploded/rest/produktbatch/getBatchLine/" + batchID + "/" + raavarebatchID, function(data) {
+    sendAjax("/BoilerPlate_war_exploded/rest/produktbatch/getBatchLine/" + batchID + "/" + raavarebatchID, function(data) {
         $("#brugerID").html(data.userId);
         $("#tara").html(data.tara);
         $("#netto").html(data.netto);
-
+    }, function (data) {
+        alert("Error getting produktbatch line: ERR.NO.13")
+        console.log(data)
     })
 
     $("#gem").click(function () {
@@ -43,29 +45,21 @@ function save(activePBId, activeReceptID, activeStatus, activeRBId){
     const obj = { pbId: activePBId, status: activeStatus, receptId: activeReceptID, userId: activeBrugerID, rbID: activeRBId, tara: activeTara, netto: activeNetto };
     const myJson = JSON.stringify(obj);
 
-    $.ajax({
-        type: "POST",
-        url: "/BoilerPlate_war_exploded/rest/produktbatch/opdaterProduktbatch",
-        data: myJson,
-        dataType: "json",
-        success: function() {
-            alert("Produktbatch successfuldt opdateret");
-            $("#gem").removeAttr("hover");
-        },
-        contentType: "application/json; charset=UTF-8"
-    });
+    sendAjax("/BoilerPlate_war_exploded/rest/produktbatch/opdaterProduktbatch", function(data) {
+        alert("Produktbatch successfuldt opdateret");
+        $("#gem").removeAttr("hover");
+    }, function (data) {
+        alert("Error updating produktbatch: ERR.NO.14")
+        console.log(data)
+    }, "POST", myJson);
 }
 
 function erase(batchID, raavarebatchID){
-
-    $.ajax({
-        type: "POST",
-        url: "/BoilerPlate_war_exploded/rest/produktbatch/sletProduktBatch/" + batchID + "/" + raavarebatchID,
-        success: function() {
-            alert("Produktbatch successfuldt slettet");
-            $("#gem").removeAttr("hover");
-        },
-        contentType: "application/json; charset=UTF-8"
-    });
-
+    sendAjax("/BoilerPlate_war_exploded/rest/produktbatch/sletProduktBatch/" + batchID + "/" + raavarebatchID, function(data) {
+        alert("Produktbatch successfuldt slettet");
+        $("#gem").removeAttr("hover");
+    }, function (data) {
+        alert("Error deleting produktbatch: ERR.NO.15")
+        console.log(data)
+    }, "POST");
 }
