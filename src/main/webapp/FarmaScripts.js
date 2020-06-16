@@ -13,57 +13,53 @@ function confirmRaavareUpdate(id){
                 })
             });
         }
-        else {
-            alert("no worries!");
-        }
     });
 }
 
-function postRaavareData() {
-    const IID = document.getElementById("raavareID").value;
+function raavareData(modType) {
+    var APILink = "/BoilerPlate_war_exploded/rest/Raavare/";
+    var httpType = "";
+    var IID;
+    switch (modType) {
+        case "Create":
+            APILink+="opretRaavare";
+            httpType="POST";
+            IID = document.getElementById("raavareID").value;
+            break;
+        case "Update":
+            APILink+="updaterRaavare";
+            httpType+="PUT";
+            IID = localStorage.getItem("raavareUpdateID");
+            break;
+    }
     const INavn = $("#raavareNavn").val();
     const ILeve = $("#leverandoer").val();
     const jsonData = {raavareID: IID, raavareNavn: INavn, leverandoer: ILeve};
     $.ajax({
-        url: "/BoilerPlate_war_exploded/rest/Raavare/opretRaavare",
-        type: 'POST',
+        url: APILink,
+        type: httpType,
         contentType: "application/json",
         dataType: 'json',
         data: JSON.stringify(jsonData),
         success: function (data) {
             switchP("FarmaScreen/PLeadScreen.html")
-            alert("Succes!")
         },
         error: function (jqXHR, text, error) {
             alert(JSON.stringify(jsonData));
         }
     });
+}
+
+function postRaavareData() {
+    raavareData("Create");
 
 
 }
 
 function postRaavareUpdate() {
 
-    const IID = localStorage.getItem("raavareUpdateID") ;
-    const INavn = $("#raavareNavn").val();
-    const ILeve = $("#leverandoer").val();
-    const jsonData = {raavareID: IID, raavareNavn: INavn, leverandoer: ILeve};
 
-    console.log(jsonData);
-    $.ajax({
-        url: "/BoilerPlate_war_exploded/rest/Raavare/updaterRaavare",
-        type: 'PUT',
-        contentType: "application/json",
-        dataType: 'json',
-        data: JSON.stringify(jsonData),
-        success: function (data) {
-            switchP("FarmaScreen/VisRaavare/PLeadScreen.html")
-            alert("Succes!")
-        },
-        error: function (jqXHR, text, error) {
-            alert(JSON.stringify(jsonData));
-        }
-    });
+    raavareData("Update");
 
 }
 //postRaavareData() : postRaavareUpdate()
