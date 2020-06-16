@@ -1,6 +1,6 @@
 package dal.dto;
 
-public class printDTO {
+public class PrintDTO {
     /** produkt batch id i området 1-99999999. Vælges af brugerne */
     int pbId;
     /** status 0: ikke påbegyndt, 1: under produktion, 2: afsluttet */
@@ -30,7 +30,7 @@ public class printDTO {
     String receptNavn;
     String dato;
 
-    public printDTO() {
+    public PrintDTO() {
     }
 
     public int getPbId() {
