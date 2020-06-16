@@ -20,8 +20,32 @@ function showPBList() {
 
 
 function getProductBatch(id){
-    $(document).ready(function () {
-        switchP('LabScreen/index.html')
-        print("hej")
+    localStorage.setItem("procesPBID", id);
+    sendAjax("/BoilerPlate_war_exploded/rest/produktbatch/getBatch/" + id, function (data) {
+        var RID = data.receptId;
+        if (RID == undefined) {
+            RID = data[0].receptId;
+        }
+        sendAjax("/BoilerPlate_war_exploded/rest/Recept/getRecept/" + RID, function (data) {
+            var RNavn = data.receptNavn;
+            if (RNavn == undefined) {
+                RNavn = data[0].receptNavn;
+            }
+            if(confirm("Arbejd med Produktbatch " + id + " (" + RNavn + ")")){
+                switchP("LabScreen/ProcesserProduktbatch/index.html");
+            }
+        }, function (data) {
+            alert("Error getting recept: ERR.NO.18");
+            console.log(data)
+        })
+    }, function (data) {
+        alert("Error getting recept: ERR.NO.19");
+        console.log(data)
     })
 }
+
+
+
+
+
+
