@@ -44,6 +44,7 @@ public class ReceptDAOSQL implements IReceptDAO{
                 recept.setReceptId(rs.getInt("RID"));
                 recept.setReceptNavn(rs.getString("RName"));
                 recept.setRaavareId(rs.getInt("raavareID"));
+                recept.setRaavarNavn(rs.getString("raavareNavn"));
                 recept.setNonNetto(rs.getDouble("nonNetto"));
                 recept.setTolerance(rs.getDouble("Tolerance"));
                 receptList.add(recept);

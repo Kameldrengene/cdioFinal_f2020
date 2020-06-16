@@ -14,8 +14,15 @@
     font-family: Open Sans, Verdana, sans-serif;
 }
 
-select {
+select{
     width: 300px;
+    height: 100px;
+    margin-bottom: 1%;
+    /* Fjerner boxen rundt om tekstfeltet  */
+    border: navy;
+    border-bottom: 1px solid var(--color-primary);
+    background-color: var(--col-background);
+    color: var(--col-textprimary);
 }
 
 /* Selector på flere tags */

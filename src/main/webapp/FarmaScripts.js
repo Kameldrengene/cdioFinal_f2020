@@ -113,34 +113,36 @@ function confirmOpretRecept() {
 function opretRecept() {
 
     for (let i = 1; i <= counter ; i++) {
-        const RID = document.getElementById("recepID").value;
-        const RNavn = $("#recepnavn").val();
-        const RaaNavn = document.getElementById('ledeligeNavn'+i+'').value;
-        const RaaID = alleMap.get(RaaNavn);
-        console.log("test3 "+ RaaID);
-        const Rnetto = $("#netto"+i+"").val();
-        console.log("test4 "+ Rnetto);
-        const Rtol = $("#tol"+i+"").val();
-        console.log("test4 "+ Rtol);
-        const jsonData = {receptId: RID, receptNavn: RNavn, raavareId: RaaID, nonNetto: Rnetto, tolerance: Rtol};
-        console.log(JSON.stringify(jsonData));
-        $.ajax({
-            url: "/BoilerPlate_war_exploded/rest/Recept/opretRecept",
-            type: 'POST',
-            contentType: "application/json",
-            dataType: 'json',
-            data: JSON.stringify(jsonData),
-            success: function (data) {
-                if(i===counter){
-                    switchP("FarmaScreen/index.html")
-                    counter=0;
+        if ($('#ledeligeNavn' + i + '').length) {
+            const RID = document.getElementById("recepID").value;
+            const RNavn = $("#recepnavn").val();
+            const RaaNavn = document.getElementById('ledeligeNavn' + i + '').value;
+            const RaaID = alleMap.get(RaaNavn);
+            console.log("test3 " + RaaID);
+            const Rnetto = $("#netto" + i + "").val();
+            console.log("test4 " + Rnetto);
+            const Rtol = $("#tol" + i + "").val();
+            console.log("test4 " + Rtol);
+            const jsonData = {receptId: RID, receptNavn: RNavn, raavareId: RaaID, nonNetto: Rnetto, tolerance: Rtol};
+            console.log(JSON.stringify(jsonData));
+            $.ajax({
+                url: "/BoilerPlate_war_exploded/rest/Recept/opretRecept",
+                type: 'POST',
+                contentType: "application/json",
+                dataType: 'json',
+                data: JSON.stringify(jsonData),
+                success: function (data) {
+                    if (i === counter) {
+                        switchP("FarmaScreen/index.html")
+                        counter = 0;
+                    }
+                },
+                error: function (jqXHR, text, error) {
+                    i = i - 1;
+                    alert('error prøver igen');
                 }
-            },
-            error: function (jqXHR, text, error) {
-                i = i-1;
-                alert(jqXHR + text.status);
-            }
-        });
+            });
+        }
     }
 }
 
