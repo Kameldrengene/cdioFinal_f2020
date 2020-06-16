@@ -14,10 +14,12 @@ $("document").ready(function(){
         const currentRow = $(this).closest("tr");
         const receptID = currentRow.find("td:eq(1)").text();
         const status = currentRow.find("td:eq(2)").text();
+        const dato = currentRow.find("td:eq(3)").text();
 
         //Save content
         localStorage.setItem("activeStatus", status);
         localStorage.setItem("activeReceptID", receptID);
+        localStorage.setItem("activeDato", dato);
 
         switchP("PLeadScreen/Produktbatches/AabenProduktbatch.html");
     })

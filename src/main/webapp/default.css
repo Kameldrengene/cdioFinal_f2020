@@ -283,7 +283,7 @@ form{
 h5{
     color: var(--col-textsecondary);
     font-weight: normal;
-    line-height: 1.45;
+    line-height: 0.8;
     font-size: 100%;
     margin-top: 5px;
     margin-bottom: 10px;
