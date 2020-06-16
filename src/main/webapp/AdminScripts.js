@@ -96,7 +96,7 @@ function confirmUserUpdate(ID) { //metoden sender videre til update html siden.
     $(document).ready(function () {
         if(confirm("are you sure, you want to update user " + ID + "?")){
             updatedID = ID;
-            switchP('Brugeroversigt/Updatebruger/PLeadScreen.html')
+            switchP('Brugeroversigt/Updatebruger/index.html')
             //load info from user into page
             $(document).ready(function () {
                 $.getJSON("/BoilerPlate_war_exploded/rest/user/getUser/" + updatedID, function (data) {
@@ -143,12 +143,12 @@ function postUserUpdate() { // metoden bliver kaldt når man trykker på opret k
 
 function userCheck(){
     var errorMsg = "";
-    var UPuser = $("#UpUsername").val();
-    if(!(UPuser.length < 1 || UPuser.length > 20)) {errorMsg += "Please enter a username between 2-20 characters \n";}
-    var UPini = $("#Upini").val();
-    if(!(UPini.length < 1 || UPini.length > 4)) {errorMsg += "Please enter initials between 2-4 characters \n";}
-    var UPpass = $("#Uppass").val();
-    if(!(UPpass.length < 5 || UPpass.length > 50)) {errorMsg += "Please enter a password between 6-50 characters \n";}
+    const UPuser = $("#UpUsername").val();
+    if(UPuser.length < 2 || UPuser.length > 20) {console.log("why in here!!!"); errorMsg += "Please enter a username between 2-20 characters \n";}
+    const UPini = $("#Upini").val();
+    if(UPini.length < 2 || UPini.length > 4) {errorMsg += "Please enter initials between 2-4 characters \n";}
+    const UPpass = $("#Uppass").val();
+    if(UPpass.length < 6  || UPpass.length > 50) {errorMsg += "Please enter a password between 6-50 characters \n";}
     return errorMsg;
 }
 
@@ -178,22 +178,17 @@ function updateUser() {
         UPboolean = 0;
     }
     var UPjsondata = {userID: UPid, userName: UPuser, ini: UPini, password: UPpass, job: UPjob, aktiv: UPboolean};
-    if(errorMsg.length > 1){
+    console.log(UPjsondata);
+    if(errorMsg != ""){
         alert(errorMsg);
     } else {
-        $.ajax({
-            url: "/BoilerPlate_war_exploded/rest/user/updateUser",
-            type: 'PUT',
-            contentType: "application/json",
-            dataType: 'json',
-            data: JSON.stringify(UPjsondata),
-            success: function () {
-                adminHomepage();
-            },
-            error: function () {
-                alert(JSON.stringify(UPjsondata));
-            }
-        });
+        sendAjax("/BoilerPlate_war_exploded/rest/user/updateUser", function (data) {
+            adminHomepage()
+            alert("Success!")
+        }, function (data) {
+            alert("Error updating user: ERR.NO.06");
+            console.log(data);
+        }, "PUT", JSON.stringify(UPjsondata));
     }
 }
 
@@ -281,6 +276,6 @@ function adminHomepage () {
             return $("body").load(page);
         }
 
-        window.setTimeout(switchPage('AdminScreen/PLeadScreen.html'), 5000);
+        window.setTimeout(switchPage('AdminScreen/index.html'), 5000);
     });
 }
