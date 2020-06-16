@@ -4,11 +4,13 @@ $("document").ready(function () {
 
     $("#batchID").html(batchID);
 
-    $.getJSON("/BoilerPlate_war_exploded/rest/Raavarebatch/getBatch/" + batchID, function(data) {
+    sendAjax("/BoilerPlate_war_exploded/rest/Raavarebatch/getBatch/" + batchID, function(data) {
         $("#raavareID").html(data.rbId);
         $("#actualAmount").html(data.aktuelMaengde);
         $("#oriAmount").html(data.startMaengde);
-
+    }, function (data) {
+        alert("Error getting RaavareBatch by ID: ERR.No.09");
+        console.log(data);
     })
 
     $("#gem").click(function () {
@@ -32,16 +34,11 @@ function save(){
 
     var obj = { rbId: batchID, raavareId: raavareID, aktuelMaengde: mængde, startMaengde: oprindeligMaengde };
     var myJson = JSON.stringify(obj);
-
-    $.ajax({
-        type: "POST",
-        url: "/BoilerPlate_war_exploded/rest/Raavarebatch/opdaterRaavarebatch",
-        data: myJson,
-        dataType: "json",
-        success: function() {
-            alert("Råvarebatch successfuldt opdateret");
-            $("#gem").removeAttr("hover");
-        },
-        contentType: "application/json; charset=UTF-8"
-    });
+    sendAjax("/BoilerPlate_war_exploded/rest/Raavarebatch/getBatch/opdaterRaavarebatch", function(data) {
+        alert("Råvarebatch successfuldt opdateret");
+        $("#gem").removeAttr("hover");
+    }, function (data) {
+        alert("Error getting RaavareBatch by ID: ERR.No.10");
+        console.log(data);
+    }, "POST", myJson)
 }

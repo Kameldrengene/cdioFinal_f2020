@@ -95,14 +95,17 @@ async function loadUser(role, redo=0) {
         success: function(data){ createTable(data, role)},
         error: async function (response, error) {
             if (redo==0) {
-                alert(response.responseText);
-                await loadUser(role, 1)
+                alert("Kunne ikke forbinde til databasen. Prøver igen");
+                console.log(response);
+                await loadUser(role, 1);
             }else if (redo < 4) {
+                console.log(response);
                 await sleep(500);
                 await loadUser(role, redo + 1);
 
             } else {
                 alert("Fejlede 5 forsøg i træk. Kontakt System administratoren.")
+                console.log(response);
             }
         }
     });
