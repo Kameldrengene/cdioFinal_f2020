@@ -53,10 +53,4 @@ public class ProduktbatchService {
         return produktbatchController.opretProduktbatch(produktbatchDTO);
     }
 
-    @Path("sletProduktBatch/{batchID}/{RBID}")
-    @POST
-    public void eraseProduktBatch(@PathParam("batchID") String batchID, @PathParam("RBID") String RBID) throws IDALException.DALException {
-        produktbatchController.eraseProduktBatch(batchID, RBID);
-    }
-
 }
