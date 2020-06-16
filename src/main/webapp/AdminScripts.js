@@ -100,25 +100,25 @@ function confirmUserUpdate(ID) { //metoden sender videre til update html siden.
             //load info from user into page
             $(document).ready(function () {
                 $.getJSON("/BoilerPlate_war_exploded/rest/user/getUser/" + updatedID, function (data) {
-                    document.getElementById("UpUsername").value = data.userName;
-                    document.getElementById("Upini").value =  data.ini;
-                    document.getElementById("Uppass").value =  data.password;
+                    document.getElementById("username").value = data.userName;
+                    document.getElementById("ini").value =  data.ini;
+                    document.getElementById("pass").value =  data.password;
                     if (data.job === "Administrator") {
-                        document.getElementById("Uprole1").checked = "checked";
+                        document.getElementById("role1").checked = "checked";
                     }else if (data.job === "Farmaceut") {
-                        document.getElementById("Uprole2").checked = "checked";
+                        document.getElementById("role2").checked = "checked";
                     }else if (data.job === "Produktionsleder") {
-                        document.getElementById("Uprole3").checked = "checked";
+                        document.getElementById("role3").checked = "checked";
                     }else if (data.job === "Laborant") {
-                        document.getElementById("Uprole4").checked = "checked";
+                        document.getElementById("role4").checked = "checked";
                     }else {
                         alert("Error: No or wrong role");
                     }
 
                     if (data.aktiv){
-                        document.getElementById("Upyes").checked = "checked";
+                        document.getElementById("yes").checked = "checked";
                     } else {
-                        document.getElementById("Upno").checked = "checked";
+                        document.getElementById("no").checked = "checked";
                     }
 
 
@@ -143,11 +143,11 @@ function postUserUpdate() { // metoden bliver kaldt når man trykker på opret k
 
 function userCheck(){
     var errorMsg = "";
-    const UPuser = $("#UpUsername").val();
+    const UPuser = $("#username").val();
     if(UPuser.length < 2 || UPuser.length > 20) {console.log("why in here!!!"); errorMsg += "Please enter a username between 2-20 characters \n";}
-    const UPini = $("#Upini").val();
+    const UPini = $("#ini").val();
     if(UPini.length < 2 || UPini.length > 4) {errorMsg += "Please enter initials between 2-4 characters \n";}
-    const UPpass = $("#Uppass").val();
+    const UPpass = $("#pass").val();
     if(UPpass.length < 6  || UPpass.length > 50) {errorMsg += "Please enter a password between 6-50 characters \n";}
     return errorMsg;
 }
@@ -155,26 +155,26 @@ function userCheck(){
 function updateUser() {
     var errorMsg = userCheck();
     var UPid = updatedID;
-    var UPuser = $("#UpUsername").val();
-    var UPini = $("#Upini").val();
-    var UPpass = $("#Uppass").val();
+    var UPuser = $("#Username").val();
+    var UPini = $("#ini").val();
+    var UPpass = $("#pass").val();
     var UPjob ="" ;
     var UPboolean = 0;
-    if($('#Uprole1').is(":checked")){
+    if($('#role1').is(":checked")){
         UPjob = "Administrator";
-    }else if ($('#Uprole2').is(":checked")){
+    }else if ($('#role2').is(":checked")){
         UPjob = "Farmaceut";
-    }else if ($('#Uprole3').is(":checked")){
+    }else if ($('#role3').is(":checked")){
         UPjob = "Produktionsleder";
     }
-    else if ($('#Uprole4').is(":checked")) {
+    else if ($('#role4').is(":checked")) {
         UPjob = "Laborant";
     } else {
         errorMsg += "No role selected \n";
     }
-    if ($('#Upyes').is(":checked")){
+    if ($('#yes').is(":checked")){
         UPboolean = 1;
-    }else if ($('#Upno').is(":checked")){
+    }else if ($('#no').is(":checked")){
         UPboolean = 0;
     }
     var UPjsondata = {userID: UPid, userName: UPuser, ini: UPini, password: UPpass, job: UPjob, aktiv: UPboolean};
@@ -253,19 +253,12 @@ function successTest() {
     if(errorMsg.length > 1){
         alert(errorMsg);
     } else {
-        $.ajax({
-            url: "/BoilerPlate_war_exploded/rest/user/createUser",
-            type: 'POST',
-            contentType: "application/json",
-            dataType: 'json',
-            data: JSON.stringify(jsondata),
-            success: function (data) {
-                adminHomepage();
-            },
-            error: function (jqXHR, text, error) {
-                alert(JSON.stringify(jsondata));
-            }
-        });
+        sendAjax("/BoilerPlate_war_exploded/rest/user/createUser", function (data) {
+            adminHomepage();
+        }, function (data) {
+            alert("Error creating user: ERR.NO.07");
+            console.log(data);
+        }, "POST", JSON.stringify(jsondata))
     }
 
 }
