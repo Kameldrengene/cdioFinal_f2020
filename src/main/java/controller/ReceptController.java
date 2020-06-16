@@ -36,7 +36,7 @@ public class ReceptController {
     public ReceptDTO opretRecept (ReceptDTO recept){
         try {
             ReceptFunc receptFunc = new ReceptFunc();
-            if(receptFunc.isReceptOk(recept,getData())){
+            if(receptFunc.isReceptOk(recept) && !receptFunc.doesIdExist(recept, getData())){
                 receptDAOSQL.createRecept(recept);
             }
         }catch (IDALException.DALException e){
@@ -48,7 +48,7 @@ public class ReceptController {
     public ReceptDTO updateRecept (ReceptDTO recept){
         try {
             ReceptFunc receptFunc = new ReceptFunc();
-            if(receptFunc.isReceptOk(recept,getData())){
+            if(receptFunc.isReceptOk(recept) && receptFunc.doesIdExist(recept,getData())){
                 receptDAOSQL.updateRecept(recept);
             }
             }catch (IDALException.DALException e){
