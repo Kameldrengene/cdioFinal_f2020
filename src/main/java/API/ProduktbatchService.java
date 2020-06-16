@@ -4,6 +4,7 @@ import controller.ProduktbatchController;
 import controller.RaavarevbatchController;
 import dal.IDALException;
 import dal.dto.ProduktbatchDTO;
+import dal.dto.ProduktbatchKompDTO;
 import dal.dto.RaavarebatchDTO;
 
 import javax.ws.rs.*;
@@ -17,36 +18,37 @@ public class ProduktbatchService {
 
     public ProduktbatchController produktbatchController = new ProduktbatchController();
 
+    //Hent alle batches
     @Path("getAlle")
     @GET
     public List<ProduktbatchDTO> getAlle() throws IDALException.DALException {
         return produktbatchController.getAlle();
     }
 
+    //Hent alle aktuelle batches
     @Path("getAktuelle")
     @GET
     public List<ProduktbatchDTO> getAktuelle() throws IDALException.DALException {
         return produktbatchController.getAktuelle();
     }
 
+    //Hent alle linjer fra ét enkelt batch
+    //todo ændres til -komp
     @Path("getBatch/{batchID}")
     @GET
-    public List<ProduktbatchDTO> getBatch(@PathParam("batchID") String batchID) throws IDALException.DALException {
+    public List<ProduktbatchKompDTO> getBatch(@PathParam("batchID") String batchID) throws IDALException.DALException {
         return produktbatchController.getBatch(batchID);
     }
 
-    @Path("getBatchLine/{batchID}/{RBID}")
-    @GET
-    public ProduktbatchDTO getBatchLine(@PathParam("batchID") String batchID, @PathParam("RBID") String RBID) throws IDALException.DALException {
-        return produktbatchController.getBatchLine(batchID, RBID);
-    }
-
+    //Opdater én enkelt linje i ét enkelt batch
+    //todo ændres til -komp
     @Path("opdaterProduktbatch")
     @POST
-    public ProduktbatchDTO updateRaavarebatch(ProduktbatchDTO produktbatchDTO) {
-        return produktbatchController.opdaterProduktbatch(produktbatchDTO);
+    public ProduktbatchKompDTO updateRaavarebatch(ProduktbatchKompDTO produktbatchKompDTO) {
+        return produktbatchController.opdaterProduktbatch(produktbatchKompDTO);
     }
 
+    //Oprettet et produktbatch
     @Path("opretProduktbatch")
     @POST
     public ProduktbatchDTO opretRaavarebatch(ProduktbatchDTO produktbatchDTO){
