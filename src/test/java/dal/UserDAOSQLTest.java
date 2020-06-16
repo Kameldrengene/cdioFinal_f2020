@@ -93,7 +93,7 @@ class UserDAOSQLTest {
     @Order(6)
     void getActivity() {
         try {
-            boolean aktual = userDAOSQL.getUser(19).getAktiv();
+            boolean aktual = userDAOSQL.getActivity(19);
             assertFalse(aktual);
         }catch (IDALException.DALException e){
             e.printStackTrace();
