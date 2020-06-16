@@ -3,8 +3,8 @@ $("document").ready(async function(){
 
     await updateTable()
 
-    $("#visTomme").click(function () {
-        updateTable();
+    $("#visTomme").click(async function () {
+        await updateTable();
     });
 
     $("#raavarebatches").on("click", "button", function () {
@@ -16,10 +16,8 @@ $("document").ready(async function(){
 
 async function updateTable(){
 
-    //Hide table while updating
+    //Hide table and display loader while updating
     $("#raavarebatches").hide();
-
-    //Display loader
     $("#loading").show();
 
     let path;
@@ -28,7 +26,6 @@ async function updateTable(){
         path = "getAlle";
     else
         path = "getAktuelle"
-
 
     await viewlist(
         ["Batch ID", "Råvare ID", "Oprindelig mængde", "Aktuel mængde", "Råvarenavn", "Leverandør"],

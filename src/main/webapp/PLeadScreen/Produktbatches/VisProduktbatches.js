@@ -2,8 +2,8 @@ $("document").ready(async function(){
 
     await updateTable();
 
-    $("#visAfsluttede").click(function () {
-        updateTable();
+    $("#visAfsluttede").click(async function () {
+        await updateTable();
     });
 
     $("#produktbatches").on("click", "button", function () {
@@ -28,10 +28,8 @@ $("document").ready(async function(){
 
 async function updateTable(){
 
-    //Hide table while updating
+    //Hide table and display loader while updating
     $("#produktbatches").hide();
-
-    //Display loader
     $("#loading").show();
 
     let path;
@@ -51,7 +49,6 @@ async function updateTable(){
     //Remove loader and reveal table
     $("#loading").hide();
     $("#produktbatches").show();
-
 
 };
 
