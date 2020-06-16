@@ -6,17 +6,26 @@
     <link rel="stylesheet" type="text/css" href="PLeadScreen/Raavarebatches/OpretRaavarebatch.css">
 
     <script src="PLeadScreen/Raavarebatches/OpretRaavarebatch.js"></script>
+    <script src="jqScripts.js"></script>
 
 </head>
 <body>
 
-    <form>
-        <input type="text" id="batchID" placeholder="Batch ID" value=""><br>
-        <input type="text" id="raavareID"  placeholder="Råvare ID" value=""><br>
-        <input type="text" id="aktuelMaengde"  placeholder="Aktuel mængde" value=""><br>
-        <input type="text" id="oprindeligMaengde"  placeholder="Oprindelig mængde" value=""><br>
-        <input type="reset" class="hvr-buzz screenbtn" value="Gem" id="gem">
-    </form>
+    <h1>Opret råvarebatch</h1>
+
+    <h3>Vælg råvare</h3>
+
+    <tabel id="raavareTable"></tabel>
+
+
+
+
+<!--    <form>-->
+<!--        <input type="text" id="batchID" placeholder="Batch ID" value=""><br>-->
+<!--        <input type="text" id="raavareID"  placeholder="Råvare ID" value=""><br>-->
+<!--        <input type="text" id="aktuelMaengde"  placeholder="Aktuel mængde" value=""><br>-->
+<!--        <input type="reset" class="hvr-buzz screenbtn" value="Gem" id="gem">-->
+<!--    </form>-->
 
     <input type="submit" class="hvr-buzz screenbtn" value="Retur" id="retur" onclick="switchP('PLeadScreen/PLeadScreen.html'); return false">
 

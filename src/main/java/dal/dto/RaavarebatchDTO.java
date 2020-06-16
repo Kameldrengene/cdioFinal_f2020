@@ -33,6 +33,22 @@ public class RaavarebatchDTO {
         this.startMaengde = startMaengde;
     }
 
+    public String getRaavareNavn() {
+        return raavareNavn;
+    }
+
+    public void setRaavareNavn(String raavareNavn) {
+        this.raavareNavn = raavareNavn;
+    }
+
+    public String getLeverandoer() {
+        return leverandoer;
+    }
+
+    public void setLeverandoer(String leverandoer) {
+        this.leverandoer = leverandoer;
+    }
+
 
     /** raavare batch id i området 1-99999999. Vælges af brugerne */
     int rbId;
@@ -40,8 +56,14 @@ public class RaavarebatchDTO {
     /** raavare id i området 1-99999999 vælges af brugerne */
     int raavareId;
 
-    /** mængde på lager */
-    double aktuelMaengde;
     /** Start mængde */
     double startMaengde;
+
+    /** mængde på lager */
+    double aktuelMaengde;
+
+    String raavareNavn;
+
+    String leverandoer;
+
 }
