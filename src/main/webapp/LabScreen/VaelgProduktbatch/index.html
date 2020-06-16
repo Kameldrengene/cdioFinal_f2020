@@ -7,20 +7,11 @@
     <link rel="stylesheet" type="text/css" href="LabScreen/VaelgProduktbatch/index.css">
     <script src="LaborantScript.js"></script>
 </head>
-<body>
+<body><div id="content">
 <h5 id="brugerInfo">Loading</h5>
 <script src="currentUserScript.js"></script>
 
-<h1>Indtast ID på produktbatch</h1>
-
-<br>
-<input type="number" id="produktbatchID" placeholder="ProduktbatchID" value="" minlength="1" maxlength="8"><br>
-
-<input id="confirmbtn" type="button" onclick="
-                const id = document.getElementbyId('produktbatchID').value;
-                getProductBatch(id)"
-class="hvr-pop" value="OK">
-
-<input type="submit" class="hvr-buzz screenbtn" value="Log ud" onclick="localStorage.setItem('loginID', 'None'); switchP('index.html'); return false">
+</div>
+<input type="submit" class="hvr-buzz screenbtn" value="retur" onclick="switchP('LabScreen/index.html'); return false">
 </body>
 </html>

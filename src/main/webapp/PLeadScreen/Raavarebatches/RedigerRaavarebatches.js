@@ -9,7 +9,7 @@ $("document").ready(function () {
         $("#actualAmount").html(data.aktuelMaengde);
         $("#oriAmount").html(data.startMaengde);
     }, function (data) {
-        alert("Error getting RaavareBatch by ID: ERR.No.09");
+        alert("Error getting RaavareBatch by ID: ERR.NO.09");
         console.log(data);
     })
 
@@ -38,7 +38,7 @@ function save(){
         alert("Råvarebatch successfuldt opdateret");
         $("#gem").removeAttr("hover");
     }, function (data) {
-        alert("Error getting RaavareBatch by ID: ERR.No.10");
+        alert("Error getting RaavareBatch by ID: ERR.NO.10");
         console.log(data);
     }, "POST", myJson)
 }

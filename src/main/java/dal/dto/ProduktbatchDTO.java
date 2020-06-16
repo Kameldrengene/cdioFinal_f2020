@@ -17,6 +17,8 @@ public class ProduktbatchDTO {
     /** netto i kilogram med 4 decimaler */
     double netto;
 
+    String dato;
+
     public int getPbId() {
         return pbId;
     }
@@ -73,6 +75,11 @@ public class ProduktbatchDTO {
         this.netto = netto;
     }
 
+    public String getDato() {
+        return dato;
+    }
 
-
+    public void setDato(String dato) {
+        this.dato = dato;
+    }
 }
