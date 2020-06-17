@@ -5,6 +5,7 @@ import dal.ProduktbatchDAOSQL;
 import dal.dto.ProduktbatchDTO;
 import dal.dto.ProduktbatchKompDTO;
 
+import javax.ws.rs.core.Response;
 import java.util.List;
 
 public class ProduktbatchController {
@@ -22,6 +23,17 @@ public class ProduktbatchController {
     public List<ProduktbatchDTO> getAktuelle(){
         try {
             return DAOSQL.getAktuelProduktBatchList();
+        } catch (IDALException.DALException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public ProduktbatchKompDTO getBatchComponent(String batchID, int RBID){
+        int batchIDint = Integer.parseInt(batchID);
+
+        try {
+            return DAOSQL.getBatchkomponent(batchIDint, RBID);
         } catch (IDALException.DALException e) {
             e.printStackTrace();
         }
@@ -65,6 +77,7 @@ public class ProduktbatchController {
             DAOSQL.updateProduktBatch(produktbatchDTO);
         } catch (IDALException.DALException e) {
             e.printStackTrace();
+            throw DAOSQL.getdb().buildError(Response.Status.NOT_ACCEPTABLE, "Error updating: error in controller");
         }
         return produktbatchDTO;
     }

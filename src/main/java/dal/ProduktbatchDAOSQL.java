@@ -4,6 +4,7 @@ import dal.dto.ProduktbatchDTO;
 import dal.dto.ProduktbatchKompDTO;
 import dal.dto.RaavareDTO;
 
+import javax.ws.rs.core.Response;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -13,8 +14,29 @@ public class ProduktbatchDAOSQL /*implements IProduktbatchDAO*/ {
 
     //Makes new SQLDatabaseIO object.
     SQLDatabaseIO db = new SQLDatabaseIO("kamel", "dreng", "runerne.dk", 8003);
+    public SQLDatabaseIO getdb(){return db;}
 
 //    @Override
+public ProduktbatchKompDTO getBatchkomponent(int pbId, int rbID) throws IDALException.DALException{
+    db.connect();
+    ResultSet rs = db.query("SELECT * FROM ProduktBatches where PBID = " + pbId + " AND RBID = " RBID); //Select all columns from recept where receptID is input
+    ProduktbatchKompDTO pb = new ProduktbatchKompDTO();
+    try {
+        rs.next();
+        pb.setPbId(pbId);
+        pb.setStatus(rs.getString("Stading"));
+        pb.setUserId(rs.getInt("UserID"));
+        pb.setRbID(rs.getInt("RBID"));
+        pb.setTara(rs.getDouble("Tara"));
+        pb.setNetto(rs.getDouble("Netto"));
+        rs.close();
+    } catch (SQLException e) {
+        e.printStackTrace();
+    }
+    db.close();
+    return pb;
+}
+
     public List<ProduktbatchKompDTO> getBatchkomponents(int pbId) throws IDALException.DALException{
         db.connect();
         ResultSet rs = db.query("SELECT * FROM ProduktBatches where PBID = " + pbId); //Select all columns from recept where receptID is input
@@ -132,13 +154,14 @@ public void updateNewpb(ProduktbatchKompDTO ProduktbatchKomp) throws IDALExcepti
             ResultSet rs = db.query("SELECT * FROM ProduktBatches where PBID=" + Produktbatch.getPbId());
             rs.next();
             if (rs.getInt("PBID") == Produktbatch.getPbId()) {
-                db.update("UPDATE ProduktBatches SET Standing = '" + Produktbatch.getStatus() + "' WHERE (PBID = '" + Produktbatch.getPbId() );
-                db.update("UPDATE ProduktBatches SET RID = '" + Produktbatch.getReceptId() + "' WHERE (PBID = '" + Produktbatch.getPbId());
-                db.update("UPDATE ProduktBatches SET Standing = '" + Produktbatch.getStatus() + "' WHERE (PBID = '" + Produktbatch.getPbId());
+                db.update("UPDATE ProduktBatches SET Standing = '" + Produktbatch.getStatus() + "' WHERE PBID = " + Produktbatch.getPbId() );
+                db.update("UPDATE ProduktBatches SET RID = '" + Produktbatch.getReceptId() + "' WHERE PBID = " + Produktbatch.getPbId());
+                db.update("UPDATE ProduktBatches SET Dato = '" + Produktbatch.getDato() + "' WHERE PBID = " + Produktbatch.getPbId());
             }
             rs.close();
         } catch (SQLException e) {
             e.printStackTrace();
+            throw db.buildError(Response.Status.NOT_ACCEPTABLE, "Error updating: wrong input");
         }
         db.close();
     }
