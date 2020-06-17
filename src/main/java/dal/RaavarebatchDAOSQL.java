@@ -100,5 +100,8 @@ public class RaavarebatchDAOSQL implements IRaavarebatchDAO {
         }
         db.close();
     }
+    public void setDB(String dbName){
+        db.setDB(dbName);
+    }
 
 }

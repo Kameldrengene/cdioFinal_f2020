@@ -43,4 +43,7 @@ public class PrintDAOSQL implements IPrintDAO{
 
         return printDTOList;
     }
+    public void setDB(String dbName){
+        db.setDB(dbName);
+    }
 }

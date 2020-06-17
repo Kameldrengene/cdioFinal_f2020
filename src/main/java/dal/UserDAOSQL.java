@@ -179,4 +179,8 @@ public class UserDAOSQL implements IUserDAO {
 
         return user.getAktiv();
     }
+
+    public void setDB(String dbName){
+        db.setDB(dbName);
+    }
 }

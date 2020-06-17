@@ -86,4 +86,7 @@ public class ReceptDAOSQL implements IReceptDAO{
         }
         db.close();
     }
+    public void setDB(String dbName){
+        db.setDB(dbName);
+    }
 }

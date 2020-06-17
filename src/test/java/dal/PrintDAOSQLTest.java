@@ -12,6 +12,7 @@ class PrintDAOSQLTest {
     List<PrintDTO> printDTOList;
     @Test
     void getPrint() {
+        printDAOSQL.setDB("cdioTest_2020");
 
         try {
             printDTOList = printDAOSQL.getPrint(1,10);

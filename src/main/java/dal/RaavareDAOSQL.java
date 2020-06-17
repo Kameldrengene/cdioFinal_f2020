@@ -92,4 +92,7 @@ public class RaavareDAOSQL implements IRaavareDAO{
         }
         return false;
     }
+    public void setDB(String dbName){
+        db.setDB(dbName);
+    }
 }

@@ -132,5 +132,8 @@ public class ProduktbatchDAOSQL /*implements IProduktbatchDAO*/ {
         db.close();
 
     }
+    public void setDB(String dbName){
+        db.setDB(dbName);
+    }
 
 }
