@@ -42,7 +42,7 @@ function raavareData(modType) {
         dataType: 'json',
         data: JSON.stringify(jsonData),
         success: function (data) {
-            switchP("FarmaScreen/PLeadScreen.html")
+            switchP("FarmaScreen/PLeadScreen.html");
         },
         error: function (jqXHR, text, error) {
             alert(JSON.stringify(jsonData));
@@ -107,37 +107,52 @@ function confirmOpretRecept() {
 }
 
 function opretRecept() {
-
+    errorID = false
     for (let i = 1; i <= counter ; i++) {
-        if ($('#ledeligeNavn' + i + '').length) {
-            const RID = document.getElementById("recepID").value;
-            const RNavn = $("#recepnavn").val();
-            const RaaNavn = document.getElementById('ledeligeNavn' + i + '').value;
-            const RaaID = alleMap.get(RaaNavn);
-            console.log("test3 " + RaaID);
-            const Rnetto = $("#netto" + i + "").val();
-            console.log("test4 " + Rnetto);
-            const Rtol = $("#tol" + i + "").val();
-            console.log("test4 " + Rtol);
-            const jsonData = {receptId: RID, receptNavn: RNavn, raavareId: RaaID, nonNetto: Rnetto, tolerance: Rtol};
-            console.log(JSON.stringify(jsonData));
-            $.ajax({
-                url: "/BoilerPlate_war_exploded/rest/Recept/opretRecept",
-                type: 'POST',
-                contentType: "application/json",
-                dataType: 'json',
-                data: JSON.stringify(jsonData),
-                success: function (data) {
-                    if (i === counter) {
-                        switchP("FarmaScreen/index.html")
-                        counter = 0;
+        if (errorID) {
+            i = counter + 1
+        } else {
+            if ($('#ledeligeNavn' + i + '').length) {
+                const RID = document.getElementById("recepID").value;
+                const RNavn = $("#recepnavn").val();
+                const RaaNavn = document.getElementById('ledeligeNavn' + i + '').value;
+                const RaaID = alleMap.get(RaaNavn);
+                console.log("test3 " + RaaID);
+                const Rnetto = $("#netto" + i + "").val();
+                console.log("test4 " + Rnetto);
+                const Rtol = $("#tol" + i + "").val();
+                console.log("test4 " + Rtol);
+                const jsonData = {
+                    receptId: RID,
+                    receptNavn: RNavn,
+                    raavareId: RaaID,
+                    nonNetto: Rnetto,
+                    tolerance: Rtol
+                };
+                console.log(JSON.stringify(jsonData));
+                $.ajax({
+                    url: "/BoilerPlate_war_exploded/rest/Recept/opretRecept",
+                    type: 'POST',
+                    contentType: "application/json",
+                    dataType: 'json',
+                    data: JSON.stringify(jsonData),
+                    success: function (data) {
+                        if (i === counter) {
+                            switchP("FarmaScreen/index.html");
+                            counter = 0;
+                        }
+                    },
+                    error: function (data) {
+                        if (data.status === 406){
+                            errorID =true;
+                            alert(data.responseText);
+                        }else {
+                            i = i - 1;
+                            alert('prøver igen');
+                        }
                     }
-                },
-                error: function (jqXHR, text, error) {
-                    i = i - 1;
-                    alert('error prøver igen');
-                }
-            });
+                });
+            }
         }
     }
 }
@@ -209,63 +224,6 @@ function visBestemtRecepter(id) {
 }
 
 
-function confirmReceptupdate(raavareID) {
-    $(document).ready(function () {
-        switchP("FarmaScreen/VisRecept/updateRecept.html");
-        const ReceptId = localStorage.getItem("vistID");
-        const RaavarID = localStorage.setItem("raavarid",raavareID);
-
-        document.getElementById("receptheader").textContent = "Opdater Recept med ReceptID: " + ReceptId + "og RaavareID: " + raavareID;
-        $("#ReceptID").html(ReceptId);
-
-        $.getJSON("/BoilerPlate_war_exploded/rest/Recept/getRecept/" + ReceptId + "/" + raavareID, function (data) {
-            $("#ReceptNavn").html(data.receptNavn);
-            $("#RåvareID").html(data.raavareId);
-            $("#nonNetto").html(data.nonNetto);
-            $("#Tolerance").html(data.tolerance);
-        });
-    });
-}
-
-
-function postReceptUpdate() {
-    $(document).ready(function () {
-        if (confirm("gem ændringer?")) {
-            gemopdatering();
-        } else {
-            alert("ingen problem");
-        }
-    });
-}
-
-function gemopdatering(){
-
-    const ReceptID = $(".brugertable").find("td").eq(0).text();
-    const ReceptNavn = $(".brugertable").find("td").eq(1).text();
-    const RaavareID = $(".brugertable").find("td").eq(2).text();
-    const nonNetto = $(".brugertable").find("td").eq(3).text();
-    const tolerance = $(".brugertable").find("td").eq(4).text();
-    const jsonData = {
-        receptId: ReceptID,
-        receptNavn: ReceptNavn,
-        raavareId: RaavareID,
-        nonNetto: nonNetto,
-        tolerance: tolerance
-    };
-    $.ajax({
-        url: "/BoilerPlate_war_exploded/rest/Recept/opdaterRecept",
-        type: 'PUT',
-        contentType: "application/json",
-        dataType: 'json',
-        data: JSON.stringify(jsonData),
-        success: function (data) {
-            tilbage();
-        },
-        error: function (jqXHR, text, error) {
-            alert(JSON.stringify(jsonData));
-        }
-    });
-}
 
 function tilbage() {
     $(document).ready(function () {
@@ -275,44 +233,8 @@ function tilbage() {
     });
 }
 
-function tiladdReceptHtml() {
-    $(document).ready(function () {
-        // console.log("test1");
-        switchP("FarmaScreen/NyRecept/addRecept.html");
-        // console.log("test2")
-        document.getElementById("addReceptmedID").textContent = "Tilføje ny Råvare i Recept med ID: " + localStorage.getItem("vistID");
-        //console.log("test3");
-        document.getElementById("recID").value = localStorage.getItem("vistID");
-        // console.log("test4");
-        document.getElementById("recnavn").value = localStorage.getItem("vistNavn");
-        // console.log("test5");
 
-    });
 
-}
-
-function listofRaavare() {
-    $(document).ready(function () {
-        var listraavarenavn = [];
-        var listraavare = [];
-        let map = new Map();
-        var RID = localStorage.getItem("vistID");
-        $.getJSON("/BoilerPlate_war_exploded/rest/Recept/getRecepts/"+ RID,function (data) {
-            $.each(data,function (key,value) {
-                console.log(value);
-                var raavarID = value.raavareId;
-                var raavarNavn = value.raavareNavn;
-                listraavare.push(raavarID);
-                listraavarenavn.push(raavarNavn);
-                map.set(raavarNavn,raavarID);
-            });
-        });
-        localStorage.setItem("map",map);
-        localStorage.setItem("idList" ,listraavare);
-        localStorage.setItem("navnList",listraavarenavn);
-    });
-
-}
 let alleMap = new Map();  //indeholder alle rååvare med navn som key.
 function ledeligeRaavare() {
     $(document).ready(function () {
@@ -336,121 +258,7 @@ function ledeligeRaavare() {
     });
 }
 
-function checkRaavareID() {
-    $(document).ready(function () {
-        var currentraavarlist = localStorage.getItem("idList").split(",");
-        var alleRaavare = localStorage.getItem("ledeligeRaavarID").split(",");
-        var currentraavarNavn = localStorage.getItem("navnList").split(",");
-        var alleRaavarNavn = localStorage.getItem("ledeligeRaavarNavn").split(",");
-        var index = 0;
-        for (x = 0; x < currentraavarlist.length; x++){
-            for (i = 0; i < alleRaavare.length; i++){
-                if(currentraavarlist[x]===alleRaavare[i]){
-                    index++;
-                    alleRaavare.splice(i,1);
-                    alleRaavarNavn.splice(i,1);
-                }
-            }
-        }
-        localStorage.setItem("ledeligeRaavarID",alleRaavare);
-        localStorage.setItem("ledeligeRaavarNavn",alleRaavarNavn);
-        localStorage.setItem("index",index);
-    });
-}
 
-function getledeligeRaavare() {
-    listofRaavare();
-    ledeligeRaavare();
-    checkRaavareID();
-    $(document).ready(function () {
-        // var select = document.getElementById('ledeligeID');
-        var selectNavn = document.getElementById('ledeligeNavn');
-        var ledeliglist = localStorage.getItem("ledeligeRaavarID").split(",");
-        var ledeligNavnList = localStorage.getItem("ledeligeRaavarNavn").split(",");
-        for (i = 0; i < ledeliglist.length; i++){
-            //   var option = document.createElement('option');
-            var option2 = document.createElement('option');
-            //  option.value = option.text = ledeliglist[i];
-            option2.value = option2.text = ledeligNavnList[i];
-            //  select.add(option);
-            selectNavn.add(option2);
-        }
-        localStorage.setItem("ledeligeRaavarID","");
-        localStorage.setItem("ledeligeRaavarNavn","");
-    });
-}
-
-function getReceptIDNavn() {
-    $(document).ready(function () {
-        var RID = document.getElementById("recepID").value;
-        var Rnavn = document.getElementById("recepnavn").value;
-        var listraavare = [];
-        localStorage.setItem("vistID",RID);
-        localStorage.setItem("Orecepnavn",Rnavn);
-    });
-    //listofRaavare();
-    ledeligeRaavare();
-    //checkRaavareID();
-
-    $(document).ready(function () {
-        // var select = document.getElementById('ledeligeID');
-        var selectNavn = document.getElementById('ledeligeNavn');
-        var ledeliglist = localStorage.getItem("ledeligeRaavarID").split(",");
-        var ledeligNavnList = localStorage.getItem("ledeligeRaavarNavn").split(",");
-        for (i = 0; i < ledeliglist.length; i++){
-            //   var option = document.createElement('option');
-            var option2 = document.createElement('option');
-            //  option.value = option.text = ledeliglist[i];
-            option2.value = option2.text = ledeligNavnList[i];
-            //  select.add(option);
-            selectNavn.add(option2);
-        }
-        localStorage.setItem("ledeligeRaavarID","");
-        localStorage.setItem("ledeligeRaavarNavn","");
-        document.getElementById("recepID").readOnly = true;
-        document.getElementById("recepnavn").readOnly = true;
-        $("#addRaavare").show();
-        $("#videre").hide();
-    });
-
-
-}
-
-function OpretReceptIDNavn() {
-    $(document).ready(function () {
-        var RID = document.getElementById("recepID").value;
-        var Rnavn = document.getElementById("recepnavn").value;
-        localStorage.setItem("vistID",RID);
-        localStorage.setItem("Orecepnavn",Rnavn);
-    });
-
-    listofRaavare();
-    ledeligeRaavare();
-    checkRaavareID();
-
-    $(document).ready(function () {
-        // var select = document.getElementById('ledeligeID');
-        var selectNavn = document.getElementById('ledeligeNavn');
-        var ledeliglist = localStorage.getItem("ledeligeRaavarID").split(",");
-        var ledeligNavnList = localStorage.getItem("ledeligeRaavarNavn").split(",");
-        for (i = 0; i < ledeliglist.length; i++){
-            //   var option = document.createElement('option');
-            var option2 = document.createElement('option');
-            //  option.value = option.text = ledeliglist[i];
-            option2.value = option2.text = ledeligNavnList[i];
-            //  select.add(option);
-            selectNavn.add(option2);
-        }
-        localStorage.setItem("ledeligeRaavarID","");
-        localStorage.setItem("ledeligeRaavarNavn","");
-        document.getElementById("recepID").readOnly = true;
-        document.getElementById("recepnavn").readOnly = true;
-        $("#addRaavare").show();
-        //   $("#videre").hide();
-    });
-
-
-}
 var counter = 0;  //bruges til at give at tilføje id's til elementer.
 function addLinje() {
     if(($("#recepID").val() === null) || ($("#recepnavn").val() === '')){
@@ -468,10 +276,10 @@ function addLinje() {
                 '<option value="" disabled selected>Vælg Råvare</option>' +
                 '</select>' +
                 '</td>\n' +
-                '        <td>' +
+                '        <td >' +
                 '<input type="number" id="netto' + counter + '" placeholder="Mængde 1.0001" value="" step="0.0001" max="20" min="0.05">' +
                 '</td>\n' +
-                '        <td>' +
+                '        <td >' +
                 '<input type="number" id="tol' + counter + '"  placeholder="Tolerance 0.1" value="" step="0.01" max="10" min="0.1"> ' +
                 '</td>\n' +
                 '<td>\n' +
@@ -512,55 +320,14 @@ function selectbtn(counter) {
         }
         localStorage.setItem("ledeligeRaavarID", "");
         localStorage.setItem("ledeligeRaavarNavn", "");
-        document.getElementById("recepID").readOnly = true;
-        document.getElementById("recepnavn").readOnly = true;
+        // document.getElementById("recepID").readOnly = true;
+        // document.getElementById("recepnavn").readOnly = true;
 
         if(counter===1) {
             $("#addRaavare").show();
         }
 
         //   $("#videre").hide();
-    });
-}
-
-
-function confirmaddRecept() {
-    $(document).ready(function () {
-        if (confirm('Er du sikker?')) {
-            console.log("test1");
-            if(document.getElementById('recID').value != '' && document.getElementById('recnavn').value != '' && document.getElementById('ledeligeNavn').value != ''){
-                console.log("test2");
-                addRecept();
-            } else {
-                alert('Ikke alt udfyldt');
-            }
-        }
-    });
-}
-
-function addRecept() {
-    //  const raaID = localStorage.getItem("ledeligeMap");
-    const RID = document.getElementById("recepID").value;
-    const RNavn = document.getElementById("recepnavn").value;
-    console.log("test3");
-    const RaaNavn = document.getElementById("ledeligeNavn").value;
-    const raID = alleMap.get(RaaNavn);
-    console.log(raID);
-    const Rnetto = $("#netto").val();
-    const Rtol = $("#tol").val();
-    const jsonData = {receptId: RID, receptNavn: RNavn, raavareId: raID, nonNetto: Rnetto, tolerance: Rtol};
-    $.ajax({
-        url: "/BoilerPlate_war_exploded/rest/Recept/opretRecept",
-        type: 'POST',
-        contentType: "application/json",
-        dataType: 'json',
-        data: JSON.stringify(jsonData),
-        success: function (data) {
-            tilbage();
-        },
-        error: function (jqXHR, text, error) {
-            alert(jqXHR + text.status);
-        }
     });
 }
 

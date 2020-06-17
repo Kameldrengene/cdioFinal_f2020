@@ -14,16 +14,6 @@
     font-family: Open Sans, Verdana, sans-serif;
 }
 
-select{
-    width: 300px;
-    height: 100px;
-    margin-bottom: 1%;
-    /* Fjerner boxen rundt om tekstfeltet  */
-    border: navy;
-    border-bottom: 1px solid var(--color-primary);
-    background-color: var(--col-background);
-    color: var(--col-textprimary);
-}
 
 /* Selector på flere tags */
 h1, h2, h3 {
@@ -58,7 +48,13 @@ input:invalid{
 
 /* Selector der vælger de samme som ovenstående, blot
     når der 'focused', dvs */
-input[type=text]:focus, input[type=password]:focus, input[type=number]:focus {
+input[type=number]:focus, input[type=password]:focus, input[type=number]:focus {
+    outline: none;
+    border-bottom: 2px solid var(--color-primary);
+    background-color: var(--col-background);
+}
+
+input[type=number]:focus, input[type=password]:focus, input[type=number]:focus {
     outline: none;
     border-bottom: 2px solid var(--color-primary);
     background-color: var(--col-background);
