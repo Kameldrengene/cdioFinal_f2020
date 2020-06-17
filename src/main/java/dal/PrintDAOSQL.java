@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PrintDAOSQL implements IPrintDAO{
-    SQLDatabaseIO db = new SQLDatabaseIO("kamel", "dreng", "runerne.dk", 8003);
+    public SQLDatabaseIO db = new SQLDatabaseIO("kamel", "dreng", "runerne.dk", 8003);
 
     @Override
     public List<PrintDTO> getPrint(int pbId, int receptID) throws IDALException.DALException {
@@ -43,7 +43,5 @@ public class PrintDAOSQL implements IPrintDAO{
 
         return printDTOList;
     }
-    public void setDB(String dbName){
-        db.setDB(dbName);
-    }
+
 }

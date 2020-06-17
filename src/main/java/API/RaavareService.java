@@ -14,7 +14,7 @@ import java.util.List;
 public class RaavareService {
 
 
-    private RaavareController raavareController = new RaavareController();
+    public RaavareController raavareController = new RaavareController();
     @Path("getRaavarer")
     @GET
     public List<RaavareDTO> getData() throws IDALException.DALException {

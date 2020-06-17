@@ -9,7 +9,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 public class UserDAOSQL implements IUserDAO {
-    SQLDatabaseIO db = new SQLDatabaseIO("kamel", "dreng", "runerne.dk", 8003); //Makes new SQLDatabaseIO object.
+    public SQLDatabaseIO db = new SQLDatabaseIO("kamel", "dreng", "runerne.dk", 8003); //Makes new SQLDatabaseIO object.
 
     @Override
     public UserDTO getUser(int userId) throws IDALException.DALException {
@@ -180,7 +180,4 @@ public class UserDAOSQL implements IUserDAO {
         return user.getAktiv();
     }
 
-    public void setDB(String dbName){
-        db.setDB(dbName);
-    }
 }

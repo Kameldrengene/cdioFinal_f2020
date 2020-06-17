@@ -12,7 +12,7 @@ import java.util.List;
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
 public class PrintService {
-   PrintController printController = new PrintController();
+   public PrintController printController = new PrintController();
 
     @GET
     @Path("getData/{ID}")

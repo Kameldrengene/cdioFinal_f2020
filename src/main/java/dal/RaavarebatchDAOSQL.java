@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class RaavarebatchDAOSQL implements IRaavarebatchDAO {
-    SQLDatabaseIO db = new SQLDatabaseIO("kamel", "dreng", "runerne.dk", 8003); //Makes new SQLDatabaseIO object.
+    public SQLDatabaseIO db = new SQLDatabaseIO("kamel", "dreng", "runerne.dk", 8003); //Makes new SQLDatabaseIO object.
 
     @Override
     public RaavarebatchDTO getRaavarebatch(int rbId) throws IDALException.DALException{
@@ -100,8 +100,6 @@ public class RaavarebatchDAOSQL implements IRaavarebatchDAO {
         }
         db.close();
     }
-    public void setDB(String dbName){
-        db.setDB(dbName);
-    }
+
 
 }

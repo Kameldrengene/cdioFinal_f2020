@@ -8,7 +8,7 @@ import dal.dto.RaavareDTO;
 import java.util.List;
 
 public class RaavareController {
-    private RaavareDAOSQL raavareDAOSQL;
+    public RaavareDAOSQL raavareDAOSQL;
 
     public RaavareController (){
         raavareDAOSQL = new RaavareDAOSQL();

@@ -12,6 +12,7 @@ class PrintServiceTest {
  List<PrintDTO> printDTOList;
     @Test
     void getData() {
+        printService.printController.printDAOSQL.db.setDB("cdioTest_2020");
         printDTOList = printService.getData("1-10");
         assertEquals(4,printDTOList.size());
 

@@ -18,6 +18,7 @@ class ReceptDAOSQLTest {
     @Test
     @Order(1)
     void getRecept() {
+        receptDAOSQL.db.setDB("cdioTest_2020");
         try {
             testRecept = receptDAOSQL.getRecept(10);
             assertEquals(10,testRecept.getReceptId());
@@ -29,6 +30,7 @@ class ReceptDAOSQLTest {
     @Test
     @Order(2)
     void getReceptList() {
+        receptDAOSQL.db.setDB("cdioTest_2020");
         try {
             listRecept = receptDAOSQL.getReceptList();
             assertEquals(11,listRecept.get(4).getReceptId());
@@ -42,6 +44,7 @@ class ReceptDAOSQLTest {
     @Test
     @Order(3)
     void createRecept() {
+        receptDAOSQL.db.setDB("cdioTest_2020");
         int expected = 99;
         ReceptDTO newRecept = new ReceptDTO();
         newRecept.setNonNetto(5.5);
@@ -64,6 +67,7 @@ class ReceptDAOSQLTest {
     @Test
     @Order(4)
     void updateRecept() {
+        receptDAOSQL.db.setDB("cdioTest_2020");
         double expected = 3.5;
         ReceptDTO newRecept = new ReceptDTO();
         newRecept.setNonNetto(3.5);
@@ -89,7 +93,7 @@ class ReceptDAOSQLTest {
             try {
                 SQLDatabaseIO sqlDatabaseIO = new SQLDatabaseIO("kamel", "dreng", "runerne.dk", 8003);
                 sqlDatabaseIO.connect();
-                sqlDatabaseIO.update("DELETE FROM cdioFinal_2020.Recepter WHERE RID = 99 AND raavareID = 3");
+                sqlDatabaseIO.update("DELETE FROM cdioTest_2020.Recepter WHERE RID = 99 AND raavareID = 3");
             } catch (Exception e){
                 e.printStackTrace();
             }
