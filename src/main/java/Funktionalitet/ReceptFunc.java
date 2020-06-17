@@ -19,8 +19,9 @@ public class ReceptFunc {
     }
     public boolean doesIdExist(ReceptDTO recept, List<ReceptDTO> receptDTOList){
         for (int i = 0; i < receptDTOList.size() ; i++) {
-            if (receptDTOList.get(i).getReceptId()==recept.getReceptId())
+            if (receptDTOList.get(i).getReceptId()==recept.getReceptId()) {
                 return true;
+            }
         }
         return false;
 

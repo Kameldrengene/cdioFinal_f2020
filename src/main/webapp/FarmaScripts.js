@@ -107,7 +107,7 @@ function confirmOpretRecept() {
 }
 
 function opretRecept() {
-    errorID = false
+    errorID = false;
     for (let i = 1; i <= counter ; i++) {
         if (errorID) {
             i = counter + 1
@@ -131,7 +131,7 @@ function opretRecept() {
                 };
                 console.log(JSON.stringify(jsonData));
                 $.ajax({
-                    url: "/BoilerPlate_war_exploded/rest/Recept/opretRecept",
+                    url: "/BoilerPlate_war_exploded/rest/Recept/opretRecept/" + (i - 1)+"",
                     type: 'POST',
                     contentType: "application/json",
                     dataType: 'json',

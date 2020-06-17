@@ -44,10 +44,10 @@ public class ReceptController {
         return null;
     }
 
-    public ReceptDTO opretRecept (ReceptDTO recept){
+    public ReceptDTO opretRecept (ReceptDTO recept, int check){
         try {
             ReceptFunc receptFunc = new ReceptFunc();
-            if(!receptFunc.doesIdExist(recept, getData())){
+            if(check != 0 || !receptFunc.doesIdExist(recept, getData())){
                 receptDAOSQL.createRecept(recept);
             } else {
                 throw new WebApplicationException(Response.status(Response.Status.NOT_ACCEPTABLE).entity("ID existerer allerede").build());

@@ -38,9 +38,9 @@ public class ReceptService {
     }
 
     @POST
-    @Path("opretRecept")
-    public ReceptDTO opretRecept (ReceptDTO receptDTO){
-        return receptController.opretRecept(receptDTO);
+    @Path("opretRecept/{check}")
+    public ReceptDTO opretRecept (ReceptDTO receptDTO, @PathParam("check") int check){
+        return receptController.opretRecept(receptDTO, check);
     }
 
     @PUT
