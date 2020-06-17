@@ -217,6 +217,11 @@ input[type=text]:focus, input[type=password]:focus, input[type=number]:focus {
     overflow: scroll;
 }
 
+::-webkit-scrollbar {
+    width: 0px;
+    background: transparent; /* make scrollbar transparent */
+}
+
 /* Giver padding på alle headers og celler i tabellen.
     Padding er afstand fra cellens kant til cellens indhold. */
 .brugertable th, .brugertable td {
