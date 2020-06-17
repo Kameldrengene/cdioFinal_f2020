@@ -1,16 +1,19 @@
-$("document").ready(function () {
+$("document").ready(async function () {
 
-    loadRaavarer();
+    await loadRaavarer();
 
     $("#raavareTable").on("click", "button", function () {
         localStorage.setItem("activeRaavare", this.id);
         switchP("PLeadScreen/Raavarebatches/OpretRaavarebatch/AngivData.html")
     })
 
-
 })
 
 async function loadRaavarer(path) {
+
+    //Hide table and display loader while updating
+    $("#raavareTable").hide();
+    $("#loading").show();
 
     await $.ajax({
         url: "/BoilerPlate_war_exploded/rest/Raavare/getRaavarer",
@@ -20,6 +23,10 @@ async function loadRaavarer(path) {
         dataType: "json",
         success: data => viewTable(data)
     });
+
+    //Remove loader and reveal table
+    $("#loading").hide();
+    $("#raavareTable").show();
 
 }
 
