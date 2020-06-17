@@ -12,13 +12,14 @@ $("document").ready(async function () {
     $("#login").load("Login/LoginTable.html");
     $(".brugertable").hide();
 
-    $(".rolletabel").click(function () {
+    $(".rolletabel").on('click','input',function () {
         $(".brugertable").show();
     })
 
     //Saves the ID of the selected user in localStorage
     $("#personer").on("click", "input", function () {
         localStorage.setItem("loginID", this.id);
+        console.log(this.id);
     });
 
     //Attach the appropiate actions to the role tabel
@@ -58,6 +59,7 @@ $("document").ready(async function () {
         if (ID === "None") {
             alert("Vælg venligst en rolle"); return false;
         } else {
+            localStorage.setItem("localID",ID);
             if (loginRole == "admin")
                 switchP("AdminScreen/index.html");
             else if (loginRole == "farma")
@@ -71,8 +73,6 @@ $("document").ready(async function () {
 });
 
 async function loadUsers(){
-
-    console.log("her")
 
     //Display loader
     $("#loader").html("<div id='loading'></div>")
