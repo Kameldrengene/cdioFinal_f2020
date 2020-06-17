@@ -126,11 +126,6 @@ function confirmUserUpdate(ID) { //metoden sender videre til update html siden.
     });
 }
 
-function postUserUpdate() { // metoden bliver kaldt når man trykker på opret knappen
-    if(confirm("Are you sure?")){
-        updateUser(); // opdatere brugeren
-    }
-}
 
 function userCheck(){
     var errorMsg = "";
@@ -189,15 +184,6 @@ function userHandler(z){
             console.log(data);
         }, requestType, JSON.stringify(jsondata));
     }
-}
-
-function updateUser() {
-    userHandler("Update");
-}
-
-function postUserData() {
-    userHandler("Create");
-
 }
 
 function adminHomepage () {

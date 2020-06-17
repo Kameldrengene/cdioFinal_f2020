@@ -16,7 +16,7 @@
     <input id="confirmbtn" type="button" onclick="
         if (confirm('Er du sikker?')) {
             if(document.getElementById('raavareNavn').value != '' && document.getElementById('leverandoer').value != ''){
-                postRaavareUpdate()
+                raavareData('Update')
                 switchP('FarmaScreen/VisRaavare/index.html'); {
 
                 }
