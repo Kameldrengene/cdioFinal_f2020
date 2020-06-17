@@ -205,7 +205,7 @@ function visBestemtRecepter(id) {
             person_data += '<td>'+RaaNavn+'</td>';
             person_data += '<td id="nonnetto" >'+Rnonnetto+'</td>';
             person_data += '<td id="tolerance" >'+Rtolerance+'</td>';
-            person_data += "<td><input id='updateRecept' class='update' type='button' onclick='confirmReceptupdate("+RaaID+")' value='Rediger'/> </td>";
+           // person_data += "<td><input id='updateRecept' class='update' type='button' onclick='confirmReceptupdate("+RaaID+")' value='Rediger'/> </td>";
             person_data +=  '</tr>';
         });
         $('#nyrecept_table').html(person_data);
