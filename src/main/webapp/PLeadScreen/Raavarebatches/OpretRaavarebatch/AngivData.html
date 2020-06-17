@@ -18,11 +18,11 @@
     <br>
 
     <form>
-        <input type="text" id="batchID" placeholder="Angiv batch ID" value=""><br>
-        <input type="text" id="startMaengde"  placeholder="Angiv startmængde" value=""><br>
+        <input type="text" id="batchID" placeholder="Angiv batch ID" value="" autofocus><br>
+        <input type="number" id="startMaengde"  placeholder="Angiv startmængde" value="" min="0"><br>
     </form>
 
-    <td><button class = hvr-buzz id="opret">Opret</button></td>
+    <button class = hvr-buzz id="opret">Opret</button>
 
     <br>
     <input type="submit" id="retur" class="hvr-buzz" value="Retur" onclick="switchP('PLeadScreen/Raavarebatches/OpretRaavarebatch/VaelgRaavare.html'); return false">

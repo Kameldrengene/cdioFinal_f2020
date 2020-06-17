@@ -5,6 +5,7 @@ import dal.ProduktbatchDAOSQL;
 import dal.dto.ProduktbatchDTO;
 import dal.dto.ProduktbatchKompDTO;
 
+import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.Response;
 import java.util.List;
 
@@ -91,21 +92,14 @@ public class ProduktbatchController {
         return produktbatchKompDTO;
     }
 
-    public ProduktbatchDTO opretProduktbatch(ProduktbatchDTO produktbatchDTO){
-        try {
-            DAOSQL.createProduktBatch(produktbatchDTO);
-        } catch (IDALException.DALException e) {
-            e.printStackTrace();
-        }
+    public ProduktbatchDTO opretProduktbatch(ProduktbatchDTO produktbatchDTO) throws WebApplicationException {
+//        try {
+//            DAOSQL.createProduktBatch(produktbatchDTO);
+//        } catch (IDALException.DALException e) {
+//            e.printStackTrace();
+//        }
         return produktbatchDTO;
     }
-
-    public void eraseProduktBatch(String pbId, String RBID) throws IDALException.DALException{
-        int pbIdint = Integer.parseInt(pbId);
-        int RBIDint = Integer.parseInt(RBID);
-        DAOSQL.eraseProduktBatch(pbIdint, RBIDint);
-    }
-
 
 
 }

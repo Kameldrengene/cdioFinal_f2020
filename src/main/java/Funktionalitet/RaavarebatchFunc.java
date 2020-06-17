@@ -3,15 +3,24 @@ package Funktionalitet;
 
 import dal.dto.RaavarebatchDTO;
 
+import javax.ws.rs.WebApplicationException;
+import javax.ws.rs.core.Response;
+
 public class RaavarebatchFunc {
 
-//    public boolean isStarmaengdeOk(RaavarebatchDTO dto){
-//        double val = dto.getStartMaengde();
-//
-//        if(val < 0) return false;
-//
-//
-//    }
+
+
+
+    public boolean startMaengdeCheck(RaavarebatchDTO dto){
+
+        return false;
+
+
+    }
+
+
+
+
 
 
 

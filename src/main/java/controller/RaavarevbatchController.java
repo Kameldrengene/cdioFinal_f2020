@@ -4,6 +4,8 @@ import dal.IDALException;
 import dal.RaavarebatchDAOSQL;
 import dal.dto.RaavarebatchDTO;
 
+import javax.ws.rs.WebApplicationException;
+import javax.ws.rs.core.Response;
 import java.util.List;
 
 public class RaavarevbatchController {
@@ -40,13 +42,22 @@ public class RaavarevbatchController {
         return raavarebatchDTO;
     }
 
-    public RaavarebatchDTO opretRaavarebatch(RaavarebatchDTO raavarebatchDTO){
-        try {
-            DAOSQL.createRaavarebatch(raavarebatchDTO);
-        } catch (IDALException.DALException e) {
-            e.printStackTrace();
-        }
+    public RaavarebatchDTO opretRaavarebatch(RaavarebatchDTO raavarebatchDTO) throws WebApplicationException{
+
+
+//        throw buildError(Response.Status.INTERNAL_SERVER_ERROR, "Mike test");
+
+//        try {
+//            DAOSQL.createRaavarebatch(raavarebatchDTO);
+//        } catch (IDALException.DALException e) {
+//            e.printStackTrace();
+//        }
+        System.out.println(raavarebatchDTO);
         return raavarebatchDTO;
+    }
+
+    public WebApplicationException buildError(Response.Status status, String msg){
+        return new WebApplicationException(Response.status(status).entity(msg).build());
     }
 
 }

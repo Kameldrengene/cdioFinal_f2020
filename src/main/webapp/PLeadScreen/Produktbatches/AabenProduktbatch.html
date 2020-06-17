@@ -17,10 +17,14 @@
     <h5 id="status"></h5>
     <h5 id="dato"></h5>
 
+    <button class="hvr-pop" id="opret" onclick=printDiv('print')>Print</button>
+
     <div id="print" style="text-align: center">
     <table class="brugertable" id="produktbatch"></table>
     </div>
-    <input type="submit" class="hvr-pop" value="Retur" onclick="switchP('PLeadScreen/Produktbatches/VisProduktbatches.html'); return false">
-    <input type="submit" class="hvr-pop" value="Print" onclick="printDiv('print'); return false">
+
+    <br>
+    <input id="retur" type="submit" class="hvr-pop" value="Retur" onclick="switchP('PLeadScreen/Produktbatches/VisProduktbatches.html'); return false">
+
 </body>
 </html>

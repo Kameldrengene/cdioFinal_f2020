@@ -6,11 +6,37 @@ $("document").ready(async function () {
 
         let confirmation = confirm("Opret produktbatch for recept ID: " + this.id);
         if (confirmation == true)
-            opretProduktbatch(this.id);
+
+            try{
+                opretProduktbatch(this.id);
+            }catch(err){
+                console.log(err);
+                alert(err.responseText);
+            }
 
     })
 
 });
+
+
+async function opretProduktbatch(activeReceptID){
+
+    //todo brug auto increment i SQL
+    const activeBatchID =  "18";
+
+    const obj = { pbId: activeBatchID, status: "Ikke påbegyndt", receptId: activeReceptID, dato: "" };
+    const myJson = JSON.stringify(obj);
+
+    await $.ajax({
+        url: "/BoilerPlate_war_exploded/rest/produktbatch/opretProduktbatch",
+        type: "POST",
+        async: true,
+        contentType: "application/json",
+        dataType: "json",
+        data: myJson,
+    });
+
+}
 
 async function loadRecepter() {
 
@@ -61,25 +87,3 @@ function viewTable(data){
 
 }
 
-async function opretProduktbatch(activeReceptID){
-
-    const activeBatchID =  "18";
-
-    var obj = { pbId: activeBatchID, status: "Ikke påbegyndt", receptId: activeReceptID, dato: "" };
-    var myJson = JSON.stringify(obj);
-    console.log(myJson)
-
-    await sendAjax(
-        "/BoilerPlate_war_exploded/rest/produktbatch/opretProduktbatch",
-        function(data) {
-        alert("Produktbatch oprettet succesfuldt");
-        $("#gem").removeAttr("hover");
-    },
-        function (data) {
-        alert("Error Creating produktbatch: ERR.NO.12");
-        console.log(data);
-    },
-        "POST",
-        myJson);
-
-}
