@@ -3,8 +3,11 @@ $("document").ready(async function () {
     await loadRecepter();
 
     $("#receptTable").on("click", "button", function () {
-        console.log("Opret: " + this.id);
-        opretProduktbatch(this.id);
+
+        let confirmation = confirm("Opret produktbatch for recept ID: " + this.id);
+        if (confirmation == true)
+            opretProduktbatch(this.id);
+
     })
 
 });
