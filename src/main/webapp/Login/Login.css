@@ -6,7 +6,7 @@
 .brugertable{
     margin: 20px auto;
     width: 250px;
-    overflow: scroll;
+    /*overflow: scroll;*/
 }
 
 th, td{
