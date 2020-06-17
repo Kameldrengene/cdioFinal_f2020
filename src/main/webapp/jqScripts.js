@@ -1,5 +1,6 @@
 $.ajaxSetup({async: false}); //this file is for general scripts used all over the site
 
+
 async function sendAjax(link, successFunc, errorFunc=function (data) {console.log(data);}, type="GET", jsonData="None"){
     await $.ajax({
         url: link,
@@ -11,7 +12,9 @@ async function sendAjax(link, successFunc, errorFunc=function (data) {console.lo
         success: function (data) {successFunc(data)},
         error: function (data) {errorFunc(data)}
     });
+    
 }
+
 
 
 async function viewlist(headers, link, tableName, btnHtmlfunc) {
