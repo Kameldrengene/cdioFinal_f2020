@@ -2,11 +2,10 @@ package controller;
 
 import dal.IDALException;
 import dal.ProduktbatchDAOSQL;
-import dal.RaavarebatchDAOSQL;
 import dal.dto.ProduktbatchDTO;
 import dal.dto.ProduktbatchKompDTO;
-import dal.dto.RaavarebatchDTO;
 
+import javax.ws.rs.core.Response;
 import java.util.List;
 
 public class ProduktbatchController {
@@ -30,32 +29,62 @@ public class ProduktbatchController {
         return null;
     }
 
-    public List<ProduktbatchKompDTO> getBatch(String batchID){
+    public ProduktbatchKompDTO getBatchComponent(String batchID, int RBID){
         int batchIDint = Integer.parseInt(batchID);
 
         try {
-            return DAOSQL.getProduktBatch(batchIDint);
+            return DAOSQL.getBatchkomponent(batchIDint, RBID);
         } catch (IDALException.DALException e) {
             e.printStackTrace();
         }
         return null;
     }
 
-    public ProduktbatchDTO getBatchLine(String batchID, String RBID){
+    public List<ProduktbatchKompDTO> getBatchComponents(String batchID){
         int batchIDint = Integer.parseInt(batchID);
-        int RBIDint = Integer.parseInt(RBID);
 
         try {
-            return DAOSQL.getProduktBatchLine(batchIDint, RBIDint);
+            return DAOSQL.getBatchkomponents(batchIDint);
         } catch (IDALException.DALException e) {
             e.printStackTrace();
         }
         return null;
     }
 
-    public ProduktbatchKompDTO opdaterProduktbatch(ProduktbatchKompDTO produktbatchKompDTO){
+    public ProduktbatchDTO getBatchLine(String batchID){
+        int batchIDint = Integer.parseInt(batchID);
+
+
         try {
-            DAOSQL.updateProduktBatch(produktbatchKompDTO);
+            return DAOSQL.getBatchLine(batchIDint);
+        } catch (IDALException.DALException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public ProduktbatchKompDTO opdaterProduktbatchLine(ProduktbatchKompDTO produktbatchKompDTO){
+        try {
+            DAOSQL.updateProduktBatchLine(produktbatchKompDTO);
+        } catch (IDALException.DALException e) {
+            e.printStackTrace();
+        }
+        return produktbatchKompDTO;
+    }
+
+    public ProduktbatchDTO opdaterProduktbatch(ProduktbatchDTO produktbatchDTO){
+        try {
+            DAOSQL.updateProduktBatch(produktbatchDTO);
+        } catch (IDALException.DALException e) {
+            e.printStackTrace();
+            throw DAOSQL.getdb().buildError(Response.Status.NOT_ACCEPTABLE, "Error updating: error in controller");
+        }
+        return produktbatchDTO;
+    }
+
+    public ProduktbatchKompDTO opdaterNewProduktbatch(ProduktbatchKompDTO produktbatchKompDTO){
+        try {
+            DAOSQL.updateNewpb(produktbatchKompDTO);
         } catch (IDALException.DALException e) {
             e.printStackTrace();
         }

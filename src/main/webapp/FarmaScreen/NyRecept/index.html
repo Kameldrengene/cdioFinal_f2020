@@ -2,25 +2,37 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Farma Screen</title>
+    <title>Recept</title>
+    <link rel="stylesheet" type="text/css" href="addrecept.css">
+
+
 </head>
 <body>
-<h1>Farmaceut</h1>
-<div style="width: 30%; margin: auto">
-<div style="width: 50%; float: left;">
-    <h2>Råvarer</h2>
-    <input type="submit" class="hvr-buzz screenbtn" value="Opret ny Råvare" onclick="switchP('AdminScreen/index.html'); return false"><br>
-    <input type="submit" class="hvr-buzz screenbtn" value="Vis råvarer" onclick="switchP('FarmaScreen/index.html'); return false">
+<div id=""><h1>Opret ny Recept</h1>
+    <br>
+
+    <div id="nyRecept">
+        <input type="number" id="recepID" placeholder="ReceptID" value="" minlength="1" maxlength="8" ><br>
+        <input type="text" id="recepnavn" placeholder="ReceptNavn" value="" minlength="2" maxlength="20" ><br>
+    </div>
+    <div id="alleRaavare">
+        <div id="addRaavare">
+            <div>
+                <table class="brugertable" id="raavareLinjer">
+                    <tr>
+                        <th>Råvare</th>
+                        <th>Mængde</th>
+                        <th>Tolerance</th>
+                    </tr>
+                </table>
+            </div>
+            <input id="confirmbtn" type="button" onclick="confirmOpretRecept()" class="hvr-pop" value="OpretRecept">
+        </div>
+    </div>
 </div>
 
-<div style="width: 50%; float: right;">
-    <h2>Recepter</h2>
-    <input type="submit" class="hvr-buzz screenbtn" value="Opret ny Recept" onclick="switchP('PLeadScreen/index.html'); return false"><br>
-    <input type="submit" class="hvr-buzz screenbtn" value="Vis recepter" onclick="switchP('LabScreen/index.html'); return false">
-</div>
-</div>
-
-<input type="submit" class="hvr-buzz screenbtn" value="Retur" onclick="switchP('FarmaScreen/index.html'); return false">
+<input type="submit" id="videre" class="hvr-buzz screenbtn" onclick="addLinje(); return false" value="TilføjeRåvare" ><br>
+<input type="submit" class="hvr-buzz screenbtn" value="Retur" onclick="retur(); return false">
 
 </body>
 </html>

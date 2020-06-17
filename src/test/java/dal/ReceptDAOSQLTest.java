@@ -20,7 +20,7 @@ class ReceptDAOSQLTest {
     void getRecept() {
         receptDAOSQL.db.setDB("cdioTest_2020");
         try {
-            testRecept = receptDAOSQL.getRecept(10);
+            testRecept = receptDAOSQL.getRecept(10,1);
             assertEquals(10,testRecept.getReceptId());
         } catch (IDALException.DALException e){
             e.printStackTrace();
@@ -33,7 +33,7 @@ class ReceptDAOSQLTest {
         receptDAOSQL.db.setDB("cdioTest_2020");
         try {
             listRecept = receptDAOSQL.getReceptList();
-            assertEquals(11,listRecept.get(4).getReceptId());
+            assertEquals(11,listRecept.get(1).getReceptId());
         } catch (IDALException.DALException e){
             e.printStackTrace();
         }
@@ -54,7 +54,7 @@ class ReceptDAOSQLTest {
         newRecept.setTolerance(9.5);
         try {
             receptDAOSQL.createRecept(newRecept);
-            testRecept = receptDAOSQL.getRecept(99);
+            testRecept = receptDAOSQL.getRecept(99,3);
             assertEquals(expected,testRecept.getReceptId());
 
 
@@ -77,7 +77,7 @@ class ReceptDAOSQLTest {
         newRecept.setTolerance(5.5);
         try {
             receptDAOSQL.updateRecept(newRecept);
-            testRecept = receptDAOSQL.getRecept(99);
+            testRecept = receptDAOSQL.getRecept(99,3);
             assertEquals(expected,testRecept.getNonNetto());
 
 

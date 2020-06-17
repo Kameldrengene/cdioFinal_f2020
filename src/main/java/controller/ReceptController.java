@@ -7,6 +7,8 @@ import dal.UserDAOSQL;
 import dal.dto.ReceptDTO;
 import dal.dto.UserDTO;
 
+import javax.ws.rs.WebApplicationException;
+import javax.ws.rs.core.Response;
 import java.util.List;
 
 public class ReceptController {
@@ -14,6 +16,15 @@ public class ReceptController {
 
     public ReceptController(){
         receptDAOSQL = new ReceptDAOSQL();
+    }
+
+    public ReceptDTO getRecept (int receptID, int raavareID){
+        try {
+            return receptDAOSQL.getRecept(receptID,raavareID);
+        }catch (IDALException.DALException e){
+            e.printStackTrace();
+        }
+        return null;
     }
     public List<ReceptDTO> getData()  {
         try {
@@ -24,20 +35,22 @@ public class ReceptController {
         return null;
     }
 
-    public ReceptDTO getRecept (int receptId) {
+    public List<ReceptDTO> getuniqueRecept (int receptId) {
         try {
-            return receptDAOSQL.getRecept(receptId);
+            return receptDAOSQL.getRecepts(receptId);
         }catch (IDALException.DALException e){
             e.printStackTrace();
         }
         return null;
     }
 
-    public ReceptDTO opretRecept (ReceptDTO recept){
+    public ReceptDTO opretRecept (ReceptDTO recept, int check){
         try {
             ReceptFunc receptFunc = new ReceptFunc();
-            if(receptFunc.isReceptOk(recept) && !receptFunc.doesIdExist(recept, getData())){
+            if(check != 0 || !receptFunc.doesIdExist(recept, getData())){
                 receptDAOSQL.createRecept(recept);
+            } else {
+                throw new WebApplicationException(Response.status(Response.Status.NOT_ACCEPTABLE).entity("ID existerer allerede").build());
             }
         }catch (IDALException.DALException e){
             e.printStackTrace();

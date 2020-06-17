@@ -1,11 +1,9 @@
 package API;
 
 import controller.ProduktbatchController;
-import controller.RaavarevbatchController;
 import dal.IDALException;
 import dal.dto.ProduktbatchDTO;
 import dal.dto.ProduktbatchKompDTO;
-import dal.dto.RaavarebatchDTO;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
@@ -33,26 +31,51 @@ public class ProduktbatchService {
     }
 
     //Hent alle linjer fra ét enkelt batch
-    //todo ændres til -komp
-    @Path("getBatch/{batchID}")
+    //todo Fix test
+    @Path("getBatchComponents/{batchID}")
     @GET
-    public List<ProduktbatchKompDTO> getBatch(@PathParam("batchID") String batchID) throws IDALException.DALException {
-        return produktbatchController.getBatch(batchID);
+    public List<ProduktbatchKompDTO> getBatchComponents(@PathParam("batchID") String batchID) throws IDALException.DALException {
+        return produktbatchController.getBatchComponents(batchID);
+    }
+
+    @Path("getBatchComponent/{batchID}/{RBID}")
+    @GET
+    public ProduktbatchKompDTO getBatchComponent(@PathParam("batchID") String batchID, @PathParam("RBID") int RBID) throws IDALException.DALException {
+        return produktbatchController.getBatchComponent(batchID, RBID);
+    }
+
+    @Path("getBatchLine/{batchID}") //TODO Make Test!
+    @GET
+    public ProduktbatchDTO getBatchLine(@PathParam("batchID") String batchID) throws IDALException.DALException {
+        return produktbatchController.getBatchLine(batchID);
     }
 
     //Opdater én enkelt linje i ét enkelt batch
-    //todo ændres til -komp
-    @Path("opdaterProduktbatch")
+    @Path("opdaterProduktbatchLine")
     @POST
-    public ProduktbatchKompDTO updateRaavarebatch(ProduktbatchKompDTO produktbatchKompDTO) {
-        return produktbatchController.opdaterProduktbatch(produktbatchKompDTO);
+    public ProduktbatchKompDTO updateProduktbatchLine(ProduktbatchKompDTO produktbatchKompDTO) {
+        return produktbatchController.opdaterProduktbatchLine(produktbatchKompDTO);
+    }
+
+    @Path("opdaterProduktbatch") //TODO make test
+    @POST
+    public ProduktbatchDTO updateProduktbatch(ProduktbatchDTO produktbatchDTO) {
+        return produktbatchController.opdaterProduktbatch(produktbatchDTO);
+    }
+
+    @Path("opdaterNewProduktbatch") //TODO make test
+    @POST
+    public ProduktbatchKompDTO updateNewProduktbatch(ProduktbatchKompDTO produktbatchKompDTO) {
+        return produktbatchController.opdaterNewProduktbatch(produktbatchKompDTO);
     }
 
     //Oprettet et produktbatch
     @Path("opretProduktbatch")
     @POST
-    public ProduktbatchDTO opretRaavarebatch(ProduktbatchDTO produktbatchDTO){
+    public ProduktbatchDTO opretProduktbatch(ProduktbatchDTO produktbatchDTO){
         return produktbatchController.opretProduktbatch(produktbatchDTO);
     }
+
+    //TODO Erase? Mikkel
 
 }
