@@ -126,7 +126,24 @@ public void updateNewpb(ProduktbatchKompDTO ProduktbatchKomp) throws IDALExcepti
     db.close();
 }
 
-    public void updateProduktBatch(ProduktbatchKompDTO ProduktbatchKomp) throws IDALException.DALException{
+    public void updateProduktBatch(ProduktbatchDTO Produktbatch) throws IDALException.DALException{
+        db.connect();
+        try {
+            ResultSet rs = db.query("SELECT * FROM ProduktBatches where PBID=" + Produktbatch.getPbId());
+            rs.next();
+            if (rs.getInt("PBID") == Produktbatch.getPbId()) {
+                db.update("UPDATE ProduktBatches SET Standing = '" + Produktbatch.getStatus() + "' WHERE (PBID = '" + Produktbatch.getPbId() );
+                db.update("UPDATE ProduktBatches SET RID = '" + Produktbatch.getReceptId() + "' WHERE (PBID = '" + Produktbatch.getPbId());
+                db.update("UPDATE ProduktBatches SET Standing = '" + Produktbatch.getStatus() + "' WHERE (PBID = '" + Produktbatch.getPbId());
+            }
+            rs.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        db.close();
+    }
+
+    public void updateProduktBatchLine(ProduktbatchKompDTO ProduktbatchKomp) throws IDALException.DALException{
         db.connect();
         try {
             ResultSet rs = db.query("SELECT * FROM ProduktBatches where PBID=" + ProduktbatchKomp.getPbId() + " AND RBID = " + ProduktbatchKomp.getRbID());

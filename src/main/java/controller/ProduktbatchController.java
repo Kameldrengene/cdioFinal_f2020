@@ -51,13 +51,22 @@ public class ProduktbatchController {
         return null;
     }
 
-    public ProduktbatchKompDTO opdaterProduktbatch(ProduktbatchKompDTO produktbatchKompDTO){
+    public ProduktbatchKompDTO opdaterProduktbatchLine(ProduktbatchKompDTO produktbatchKompDTO){
         try {
-            DAOSQL.updateProduktBatch(produktbatchKompDTO);
+            DAOSQL.updateProduktBatchLine(produktbatchKompDTO);
         } catch (IDALException.DALException e) {
             e.printStackTrace();
         }
         return produktbatchKompDTO;
+    }
+
+    public ProduktbatchDTO opdaterProduktbatch(ProduktbatchDTO produktbatchDTO){
+        try {
+            DAOSQL.updateProduktBatch(produktbatchDTO);
+        } catch (IDALException.DALException e) {
+            e.printStackTrace();
+        }
+        return produktbatchDTO;
     }
 
     public ProduktbatchKompDTO opdaterNewProduktbatch(ProduktbatchKompDTO produktbatchKompDTO){
