@@ -10,7 +10,7 @@ import dal.dto.UserDTO;
 import java.util.List;
 
 public class ReceptController {
-    private ReceptDAOSQL receptDAOSQL;
+    public ReceptDAOSQL receptDAOSQL;
 
     public ReceptController(){
         receptDAOSQL = new ReceptDAOSQL();

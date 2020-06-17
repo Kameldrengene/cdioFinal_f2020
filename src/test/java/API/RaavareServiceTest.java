@@ -20,6 +20,7 @@ class RaavareServiceTest {
     @Test
     @Order(1)
     void getData() {
+        raavareService.raavareController.raavareDAOSQL.db.setDB("cdioTest_2020");
         int expected = 2;
         try {
             listRaavare = raavareService.getData();
@@ -31,6 +32,7 @@ class RaavareServiceTest {
     @Test
     @Order(2)
     void getRaavare() {
+        raavareService.raavareController.raavareDAOSQL.db.setDB("cdioTest_2020");
         int expected = 1;
         testraavare = raavareService.getRaavare(1);
         assertEquals(expected,testraavare.getRaavareID());
@@ -39,6 +41,7 @@ class RaavareServiceTest {
     @Test
     @Order(3)
     void opretRaavare() {
+        raavareService.raavareController.raavareDAOSQL.db.setDB("cdioTest_2020");
         int expected = 99;
         RaavareDTO newRaavare = new RaavareDTO();
         newRaavare.setLagerBeholdning(10.5);
@@ -54,6 +57,7 @@ class RaavareServiceTest {
     @Test
     @Order(4)
     void updateRaavare() {
+        raavareService.raavareController.raavareDAOSQL.db.setDB("cdioTest_2020");
         String expected = "Novo";
         RaavareDTO newRaavare = new RaavareDTO();
         newRaavare.setLagerBeholdning(10.5);
@@ -72,7 +76,7 @@ class RaavareServiceTest {
         try {
             SQLDatabaseIO sqlDatabaseIO = new SQLDatabaseIO("kamel", "dreng", "runerne.dk", 8003);
             sqlDatabaseIO.connect();
-            sqlDatabaseIO.update("DELETE FROM cdioFinal_2020.Raavarer WHERE raavareID = 99");
+            sqlDatabaseIO.update("DELETE FROM cdioTest_2020.Raavarer WHERE raavareID = 99");
         } catch (Exception e){
             e.printStackTrace();
         }
