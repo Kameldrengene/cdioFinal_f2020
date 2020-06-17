@@ -2,10 +2,8 @@ package controller;
 
 import dal.IDALException;
 import dal.ProduktbatchDAOSQL;
-import dal.RaavarebatchDAOSQL;
 import dal.dto.ProduktbatchDTO;
 import dal.dto.ProduktbatchKompDTO;
-import dal.dto.RaavarebatchDTO;
 
 import java.util.List;
 
@@ -30,23 +28,23 @@ public class ProduktbatchController {
         return null;
     }
 
-    public List<ProduktbatchKompDTO> getBatch(String batchID){
+    public List<ProduktbatchKompDTO> getBatchComponents(String batchID){
         int batchIDint = Integer.parseInt(batchID);
 
         try {
-            return DAOSQL.getProduktBatch(batchIDint);
+            return DAOSQL.getBatchkomponents(batchIDint);
         } catch (IDALException.DALException e) {
             e.printStackTrace();
         }
         return null;
     }
 
-    public ProduktbatchDTO getBatchLine(String batchID, String RBID){
+    public ProduktbatchDTO getBatchLine(String batchID){
         int batchIDint = Integer.parseInt(batchID);
-        int RBIDint = Integer.parseInt(RBID);
+
 
         try {
-            return DAOSQL.getProduktBatchLine(batchIDint, RBIDint);
+            return DAOSQL.getBatchLine(batchIDint);
         } catch (IDALException.DALException e) {
             e.printStackTrace();
         }

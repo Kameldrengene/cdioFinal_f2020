@@ -1,7 +1,6 @@
 $.ajaxSetup({async: false});
 
 function showPBList() {
-    console.log("test1")
     var inner = "";
     $(document).ready(
         sendAjax("/BoilerPlate_war_exploded/rest/produktbatch/getAktuelle", function (data) {
@@ -22,6 +21,7 @@ function showPBList() {
 function getProductBatch(id){
     localStorage.setItem("procesPBID", id);
     sendAjax("/BoilerPlate_war_exploded/rest/produktbatch/getBatch/" + id, function (data) {
+        console.log(data);
         var RID = data.receptId;
         if (RID == undefined) {
             RID = data[0].receptId;

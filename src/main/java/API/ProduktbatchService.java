@@ -1,11 +1,9 @@
 package API;
 
 import controller.ProduktbatchController;
-import controller.RaavarevbatchController;
 import dal.IDALException;
 import dal.dto.ProduktbatchDTO;
 import dal.dto.ProduktbatchKompDTO;
-import dal.dto.RaavarebatchDTO;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
@@ -33,11 +31,17 @@ public class ProduktbatchService {
     }
 
     //Hent alle linjer fra ét enkelt batch
-    //todo ændres til -komp
-    @Path("getBatch/{batchID}")
+    //todo Fix test
+    @Path("getBatchComponents/{batchID}")
     @GET
-    public List<ProduktbatchKompDTO> getBatch(@PathParam("batchID") String batchID) throws IDALException.DALException {
-        return produktbatchController.getBatch(batchID);
+    public List<ProduktbatchKompDTO> getBatchComponents(@PathParam("batchID") String batchID) throws IDALException.DALException {
+        return produktbatchController.getBatchComponents(batchID);
+    }
+
+    @Path("getBatchLine/{batchID}") //TODO Make Test!
+    @GET
+    public ProduktbatchDTO getBatchLine(@PathParam("batchID") String batchID) throws IDALException.DALException {
+        return produktbatchController.getBatchLine(batchID);
     }
 
     //Opdater én enkelt linje i ét enkelt batch

@@ -15,13 +15,15 @@ public class ProduktbatchDAOSQL /*implements IProduktbatchDAO*/ {
     SQLDatabaseIO db = new SQLDatabaseIO("kamel", "dreng", "runerne.dk", 8003);
 
 //    @Override
-    public List<ProduktbatchKompDTO> getProduktBatch(int pbId) throws IDALException.DALException{
+    public List<ProduktbatchKompDTO> getBatchkomponents(int pbId) throws IDALException.DALException{
         db.connect();
-        ResultSet rs = db.query("SELECT * FROM ProduktBatches where PBID = " + pbId);
+        ResultSet rs = db.query("SELECT * FROM ProduktBatches where PBID = " + pbId); //Select all columns from recept where receptID is input
         List<ProduktbatchKompDTO> pbList = new ArrayList<>();
         try {
             while(rs.next()){
                 ProduktbatchKompDTO pb = new ProduktbatchKompDTO();
+                pb.setPbId(pbId);
+                pb.setStatus(rs.getString("Stading"));
                 pb.setUserId(rs.getInt("UserID"));
                 pb.setRbID(rs.getInt("RBID"));
                 pb.setTara(rs.getDouble("Tara"));
@@ -37,15 +39,16 @@ public class ProduktbatchDAOSQL /*implements IProduktbatchDAO*/ {
     }
 
 //    @Override
-    public ProduktbatchDTO getProduktBatchLine(int pbId, int RBID) throws IDALException.DALException{
+    public ProduktbatchDTO getBatchLine(int pbId) throws IDALException.DALException{
         db.connect();
-        ResultSet rs = db.query("SELECT * FROM ProduktBatches where PBID = " + pbId + " AND RBID = " + RBID); //Select all columns from recept where receptID is input
+        ResultSet rs = db.query("SELECT * FROM ProduktBatches where PBID = " + pbId + " GROUP BY PBID");
         ProduktbatchDTO pb = new ProduktbatchDTO();
         try {
             rs.next();
-            pb.setPbId(rs.getInt("PBID"));
+            pb.setPbId(pbId);
             pb.setReceptId(rs.getInt("RID"));
             pb.setStatus(rs.getString("Standing"));
+            pb.setDato(rs.getString("Dato"));
             rs.close();
         } catch (SQLException e) {
             e.printStackTrace();
