@@ -199,6 +199,11 @@ input[type=text]:focus, input[type=password]:focus, input[type=number]:focus {
     width: 850px;
 }
 
+html, body{
+    height: 100%;
+    width: 100%;
+}
+
 /*Stærk inspireret af Malte's løsning i for html og css
  Vi vil ikke have at teksten er centreret i tabellen */
 .brugertable {
@@ -213,9 +218,14 @@ input[type=text]:focus, input[type=password]:focus, input[type=number]:focus {
     background: var(--col-secondarybackground);
     color: var(--col-textthird);
     display: inline-block;
-    max-height: 600px;
-    overflow: scroll;
+    max-height: 70%;
+    overflow: auto;
 }
+
+/*::-webkit-scrollbar {*/
+/*    width: 0px;*/
+/*    background: transparent; !* make scrollbar transparent *!*/
+/*}*/
 
 /* Giver padding på alle headers og celler i tabellen.
     Padding er afstand fra cellens kant til cellens indhold. */

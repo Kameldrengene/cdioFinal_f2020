@@ -20,6 +20,7 @@ class UserDAOSQLTest {
     @Test
     @Order(1)
     void getUser() {
+        userDAOSQL.db.setDB("cdioTest_2020");
         try {
             testUser = userDAOSQL.getUser(11);
         }catch (IDALException.DALException e){
@@ -33,6 +34,7 @@ class UserDAOSQLTest {
     @Test
     @Order(2)
     void getRole() {
+        userDAOSQL.db.setDB("cdioTest_2020");
         int expected = 1;
         testList = userDAOSQL.getRole("Administrator");
         assertEquals(expected,testList.size());
@@ -41,6 +43,7 @@ class UserDAOSQLTest {
     @Test
     @Order(3)
     void getData() {
+        userDAOSQL.db.setDB("cdioTest_2020");
         try {
             testList = userDAOSQL.getData();
         }catch (IDALException.DALException e){
@@ -53,6 +56,7 @@ class UserDAOSQLTest {
     @Test
     @Order(4)
     void createUser() {
+        userDAOSQL.db.setDB("cdioTest_2020");
         UserDTO newUser = new UserDTO();
         newUser.setAktiv(false);
         newUser.setUserName("Test");
@@ -72,6 +76,7 @@ class UserDAOSQLTest {
     @Test
     @Order(5)
     void updateUser() {
+        userDAOSQL.db.setDB("cdioTest_2020");
         UserDTO newUser = new UserDTO();
         newUser.setAktiv(false);
         newUser.setUserName("Test");
@@ -92,6 +97,7 @@ class UserDAOSQLTest {
     @Test
     @Order(6)
     void getActivity() {
+        userDAOSQL.db.setDB("cdioTest_2020");
         try {
             boolean aktual = userDAOSQL.getActivity(19);
             assertFalse(aktual);
@@ -103,6 +109,7 @@ class UserDAOSQLTest {
     @Test
     @Order(7)
     void aktivitySwitchUser() {
+        userDAOSQL.db.setDB("cdioTest_2020");
         try{
             userDAOSQL.aktivitySwitchUser(19);
             boolean aktual = userDAOSQL.getUser(19).getAktiv();
@@ -120,7 +127,7 @@ class UserDAOSQLTest {
         try {
             SQLDatabaseIO sqlDatabaseIO = new SQLDatabaseIO("kamel", "dreng", "runerne.dk", 8003);
             sqlDatabaseIO.connect();
-            sqlDatabaseIO.update("DELETE FROM cdioFinal_2020.userdto WHERE userName = 'Test'");
+            sqlDatabaseIO.update("DELETE FROM cdioTest_2020.userdto WHERE userName = 'Test'");
         } catch (Exception e){
             e.printStackTrace();
         }

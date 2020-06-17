@@ -13,7 +13,7 @@ import java.util.List;
 
 public class UserController {
 
-    private UserDAOSQL userDAOSQL;
+    public UserDAOSQL userDAOSQL;
 
     //Constructor
     public UserController(){

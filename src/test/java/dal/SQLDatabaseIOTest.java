@@ -12,6 +12,7 @@ class SQLDatabaseIOTest {
 
     @Test
     void connect() {
+        sqlDatabaseIO.setDB("cdioTest_2020");
         sqlDatabaseIO.connect();
         assertTrue(sqlDatabaseIO.isConnected());
 
@@ -20,11 +21,13 @@ class SQLDatabaseIOTest {
 
     @Test
     void close() {
+        sqlDatabaseIO.setDB("cdioTest_2020");
         sqlDatabaseIO.close();
         assertFalse(sqlDatabaseIO.isConnected());
     }
     @Test
     void query() {
+        sqlDatabaseIO.setDB("cdioTest_2020");
         int expected = 10;
         int actual = 0;
         sqlDatabaseIO.connect();
@@ -50,6 +53,7 @@ class SQLDatabaseIOTest {
         int expected = 99;
         int actual = 0;
 
+        sqlDatabaseIO.setDB("cdioTest_2020");
         sqlDatabaseIO.connect();
         sqlDatabaseIO.update("insert into Recepter (RID, RName, raavareID, nonNetto, Tolerance) VALUE ('" + "99" + "','" + "Mojito" + "','" + "1" + "','" + "6.2" + "','" + "1.5" + "')");
         ResultSet rs = sqlDatabaseIO.query("SELECT * FROM Recepter WHERE RID=99");
@@ -60,7 +64,7 @@ class SQLDatabaseIOTest {
             e.printStackTrace();
         }
         assertEquals(expected,actual,0);
-        sqlDatabaseIO.update("DELETE FROM cdioFinal_2020.Recepter WHERE RID = 99 AND raavareID = 1");
+        sqlDatabaseIO.update("DELETE FROM cdioTest_2020.Recepter WHERE RID = 99 AND raavareID = 1");
 
         sqlDatabaseIO.close();
     }

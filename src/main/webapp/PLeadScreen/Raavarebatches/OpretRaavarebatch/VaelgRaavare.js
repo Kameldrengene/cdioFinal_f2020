@@ -7,22 +7,24 @@ $("document").ready(async function () {
         switchP("PLeadScreen/Raavarebatches/OpretRaavarebatch/AngivData.html")
     })
 
-})
+});
 
-async function loadRaavarer(path) {
+async function loadRaavarer() {
 
     //Hide table and display loader while updating
     $("#raavareTable").hide();
     $("#loading").show();
 
-    await $.ajax({
-        url: "/BoilerPlate_war_exploded/rest/Raavare/getRaavarer",
-        type: "GET",
-        async: true,
-        contentType: "application/json",
-        dataType: "json",
-        success: data => viewTable(data)
-    });
+    await sendAjax(
+        "/BoilerPlate_war_exploded/rest/Raavare/getRaavarer",
+        function (data) {
+            viewTable(data)
+        },
+        function (data) {
+            alert("Error getting all/actual råvarer: ERR.NO.XX");
+            console.log(data);
+        }
+    );
 
     //Remove loader and reveal table
     $("#loading").hide();
@@ -47,7 +49,7 @@ function viewTable(data){
         tabelData += "<tr>";
         tabelData += "<td>"+value.raavareID+"</td>";
         tabelData += "<td>"+value.raavareNavn+"</td>";
-        tabelData += "<td> <button class = hvr-buzz id =" + value.raavareID + " >Vælg</button>  </td>"
+        tabelData += "<td> <button class = hvr-buzz id =" + value.raavareID + " >Vælg</button>  </td>";
         tabelData += "</tr>";
 
     });
