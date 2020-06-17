@@ -7,11 +7,6 @@ $("document").ready(async function(){
         await updateTable();
     });
 
-    $("#raavarebatches").on("click", "button", function () {
-        localStorage.setItem("activeRBId", this.id);
-        switchP("PLeadScreen/Raavarebatches/RedigerRaavarebatches.html");
-    });
-
 });
 
 async function updateTable(){
@@ -37,7 +32,6 @@ async function updateTable(){
     //Remove loader and reveal table
     $("#loading").hide();
     $("#raavarebatches").show();
-
 
 };
 
