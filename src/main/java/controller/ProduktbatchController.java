@@ -60,9 +60,9 @@ public class ProduktbatchController {
         return produktbatchKompDTO;
     }
 
-    public ProduktbatchKompDTO opdaterinitialProduktbatch(ProduktbatchKompDTO produktbatchKompDTO){
+    public ProduktbatchKompDTO opdaterNewProduktbatch(ProduktbatchKompDTO produktbatchKompDTO){
         try {
-            DAOSQL.updateInitialpb(produktbatchKompDTO);
+            DAOSQL.updateNewpb(produktbatchKompDTO);
         } catch (IDALException.DALException e) {
             e.printStackTrace();
         }

@@ -51,10 +51,10 @@ public class ProduktbatchService {
         return produktbatchController.opdaterProduktbatch(produktbatchKompDTO);
     }
 
-    @Path("opdaterInitialProduktbatch")
+    @Path("opdaterNewProduktbatch") //TODO make test
     @POST
-    public ProduktbatchKompDTO updateinitialProduktbatch(ProduktbatchKompDTO produktbatchKompDTO) {
-        return produktbatchController.opdaterinitialProduktbatch(produktbatchKompDTO);
+    public ProduktbatchKompDTO updateNewProduktbatch(ProduktbatchKompDTO produktbatchKompDTO) {
+        return produktbatchController.opdaterNewProduktbatch(produktbatchKompDTO);
     }
 
     //Oprettet et produktbatch

@@ -106,7 +106,7 @@ public class ProduktbatchDAOSQL /*implements IProduktbatchDAO*/ {
     }
 
 //    @Override
-public void updateInitialpb(ProduktbatchKompDTO ProduktbatchKomp) throws IDALException.DALException{
+public void updateNewpb(ProduktbatchKompDTO ProduktbatchKomp) throws IDALException.DALException{
     db.connect();
     try {
         ResultSet rs = db.query("SELECT * FROM ProduktBatches where PBID=" + ProduktbatchKomp.getPbId() + " AND RBID = 0");
