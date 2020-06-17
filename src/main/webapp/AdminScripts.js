@@ -1,6 +1,5 @@
 $.ajaxSetup({async: false});
 
-localStorage.setItem('loginID', 'None');
 var ID = 'delete';
 function Personslist() {
     $(document).ready(sendAjax("/BoilerPlate_war_exploded/rest/user/getUsers", function (data) {
