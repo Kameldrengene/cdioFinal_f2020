@@ -47,10 +47,13 @@ public class ReceptController {
     public ReceptDTO opretRecept (ReceptDTO recept, int check){
         try {
             ReceptFunc receptFunc = new ReceptFunc();
-            if(check != 0 || !receptFunc.doesIdExist(recept, getData())){
-                receptDAOSQL.createRecept(recept);
-            } else {
+            if(!receptFunc.isReceptOk(recept)){
+                throw new WebApplicationException(Response.status(Response.Status.NOT_ACCEPTABLE).entity("Error: \n navn: >2 og <3\n"+"nonNetto: >= 0,05 og <20\n"+"tolerance: >= 0.1 og <20").build());
+            }
+            if(!(check != 0 || !receptFunc.doesIdExist(recept, getData()))){
                 throw new WebApplicationException(Response.status(Response.Status.NOT_ACCEPTABLE).entity("ID existerer allerede").build());
+            } else {
+                receptDAOSQL.createRecept(recept);
             }
         }catch (IDALException.DALException e){
             e.printStackTrace();

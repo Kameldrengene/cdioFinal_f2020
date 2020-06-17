@@ -19,7 +19,7 @@ public class ProduktbatchDAOSQL /*implements IProduktbatchDAO*/ {
 //    @Override
 public ProduktbatchKompDTO getBatchkomponent(int pbId, int rbID) throws IDALException.DALException{
     db.connect();
-    ResultSet rs = db.query("SELECT * FROM ProduktBatches where PBID = " + pbId + " AND RBID = " RBID); //Select all columns from recept where receptID is input
+    ResultSet rs = db.query("SELECT * FROM ProduktBatches where PBID = " + pbId + " AND RBID = " + rbID); //Select all columns from recept where receptID is input
     ProduktbatchKompDTO pb = new ProduktbatchKompDTO();
     try {
         rs.next();
