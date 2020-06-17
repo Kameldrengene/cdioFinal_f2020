@@ -1,5 +1,6 @@
 package controller;
 
+import Funktionalitet.ReceptFunc;
 import dal.IDALException;
 import dal.ReceptDAOSQL;
 import dal.UserDAOSQL;
@@ -43,7 +44,10 @@ public class ReceptController {
 
     public ReceptDTO opretRecept (ReceptDTO recept){
         try {
-            receptDAOSQL.createRecept(recept);
+            ReceptFunc receptFunc = new ReceptFunc();
+            if(receptFunc.isReceptOk(recept) && !receptFunc.doesIdExist(recept, getData())){
+                receptDAOSQL.createRecept(recept);
+            }
         }catch (IDALException.DALException e){
             e.printStackTrace();
         }
@@ -52,8 +56,11 @@ public class ReceptController {
 
     public ReceptDTO updateRecept (ReceptDTO recept){
         try {
-            receptDAOSQL.updateRecept(recept);
-        }catch (IDALException.DALException e){
+            ReceptFunc receptFunc = new ReceptFunc();
+            if(receptFunc.isReceptOk(recept) && receptFunc.doesIdExist(recept,getData())){
+                receptDAOSQL.updateRecept(recept);
+            }
+            }catch (IDALException.DALException e){
             e.printStackTrace();
         }
         return recept;

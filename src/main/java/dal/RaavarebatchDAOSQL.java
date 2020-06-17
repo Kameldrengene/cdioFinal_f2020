@@ -35,13 +35,15 @@ public class RaavarebatchDAOSQL implements IRaavarebatchDAO {
     @Override
     public List<RaavarebatchDTO> getRaavarebatchList() throws IDALException.DALException{
         db.connect();
-        ResultSet rs = db.query("SELECT * FROM RaavareBatches"); //Select all data from raavarer
+        ResultSet rs = db.query("SELECT * FROM raavarebatchview");
         List<RaavarebatchDTO> RBList = new ArrayList<>();
         try {
             //We do as in getUser, except we make new user until rs is empty
             while (rs.next()) {
                 RaavarebatchDTO rb = new RaavarebatchDTO();
                 rb.setRbId(rs.getInt("rBID"));
+                rb.setRaavareNavn(rs.getString("raavareNavn"));
+                rb.setLeverandoer(rs.getString("leverandoer"));
                 rb.setRaavareId(rs.getInt("raavareID"));
                 rb.setStartMaengde(rs.getDouble("maengde"));
                 rb.setAktuelMaengde(rs.getDouble("aktuelMaengde"));
@@ -63,10 +65,12 @@ public class RaavarebatchDAOSQL implements IRaavarebatchDAO {
         List<RaavarebatchDTO> oldRBList = getRaavarebatchList();
         List<RaavarebatchDTO> newRBList = new ArrayList<>();
 
-
         for (int i = 0; i < oldRBList.size(); i++) {
-            if(oldRBList.get(i).getAktuelMaengde() > 0)
+            if(oldRBList.get(i).getAktuelMaengde() > 0){
                 newRBList.add(oldRBList.get(i));
+                System.out.println(oldRBList.get(i).getAktuelMaengde());
+            }
+
         }
 
         return newRBList;

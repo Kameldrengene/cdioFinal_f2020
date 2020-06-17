@@ -1,6 +1,5 @@
 package dal;
 
-import Funktionalitet.ReceptFunc;
 import dal.dto.ReceptDTO;
 
 import java.sql.ResultSet;
@@ -89,6 +88,8 @@ public class ReceptDAOSQL implements IReceptDAO{
         //System.out.println(recept.getReceptId());
         //System.out.println(getRecept(recept.getReceptId()));
         if(receptFunc.isReceptOk(recept,getReceptList())){
+        System.out.println(recept.getReceptId());
+        System.out.println(getRecept(recept.getReceptId()));
             if(!getReceptList().contains(recept)){
                 db.connect();
                 db.update("insert into Recepter (RID, RName, raavareID, nonNetto, Tolerance) VALUE ('" + recept.getReceptId() + "','" + recept.getReceptNavn() + "','" + recept.getRaavareId() + "','" + recept.getNonNetto() + "','" + recept.getTolerance() + "')");

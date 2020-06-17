@@ -7,15 +7,8 @@ public class ProduktbatchDTO {
     String status;
     /** recept id i området 1-99999999. Vælges af brugerne */
     int receptId;
-    /** user id i området 1-99999999. Vælges af brugerne
-     *  i opgaver står der (1..N) derfor er det en array */
-    int userId;
-    /** raavarebatch id  1-99999999. vælges af brugere */
-    int rbID;
-    /** tara i kilogram med 4 decimaler */
-    double tara;
-    /** netto i kilogram med 4 decimaler */
-    double netto;
+
+    String dato;
 
     public int getPbId() {
         return pbId;
@@ -41,37 +34,12 @@ public class ProduktbatchDTO {
         this.receptId = receptId;
     }
 
-    public int getUserId() {
-        return userId;
+    public String getDato() {
+        return dato;
     }
 
-    public void setUserId(int userId) {
-        this.userId = userId;
-    }
+    public void setDato(String dato) { this.dato = dato; }
 
-    public int getRbID() {
-        return rbID;
-    }
-
-    public void setRbID(int rbID) {
-        this.rbID = rbID;
-    }
-
-    public double getTara() {
-        return tara;
-    }
-
-    public void setTara(double tara) {
-        this.tara = tara;
-    }
-
-    public double getNetto() {
-        return netto;
-    }
-
-    public void setNetto(double netto) {
-        this.netto = netto;
-    }
 
 
 
