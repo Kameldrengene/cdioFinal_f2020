@@ -33,6 +33,15 @@ public class ReceptController {
         return null;
     }
 
+    public List<ReceptDTO> getReceptList (int receptId) {
+        try {
+            return receptDAOSQL.getReceptkomponents(receptId);
+        }catch (IDALException.DALException e){
+            e.printStackTrace();
+        }
+        return null;
+    }
+
     public ReceptDTO opretRecept (ReceptDTO recept){
         try {
             ReceptFunc receptFunc = new ReceptFunc();

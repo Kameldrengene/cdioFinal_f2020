@@ -24,8 +24,14 @@ public class ReceptService {
 
     @GET
     @Path("getRecept/{receptId}")
-    public ReceptDTO getRecept (@PathParam("receptId") int receptId){
-        return receptController.getRecept(receptId);
+    public List<ReceptDTO> getRecept (@PathParam("receptId") int receptId){
+        return receptController.getReceptList(receptId);
+    }
+
+    @GET
+    @Path("getReceptList/{receptId}") //TODO make test
+    public List<ReceptDTO> getReceptList (@PathParam("receptId") int receptId){
+        return receptController.getReceptList(receptId);
     }
 
     @POST

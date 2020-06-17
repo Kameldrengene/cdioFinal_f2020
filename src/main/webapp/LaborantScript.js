@@ -20,28 +20,28 @@ function showPBList() {
 
 function getProductBatch(id){
     localStorage.setItem("procesPBID", id);
-    sendAjax("/BoilerPlate_war_exploded/rest/produktbatch/getBatch/" + id, function (data) {
-        console.log(data);
+    sendAjax("/BoilerPlate_war_exploded/rest/produktbatch/getBatchLine/" + id, function (data) {
         var RID = data.receptId;
         if (RID == undefined) {
             RID = data[0].receptId;
         }
         localStorage.setItem("receptId", RID);
-        sendAjax("/BoilerPlate_war_exploded/rest/Recept/getRecept/" + RID, function (data2) {
-            var RNavn = data2.receptNavn;
+        sendAjax("/BoilerPlate_war_exploded/rest/Recept/getRecept/" + RID, function (Rdata) {
+            var RNavn = Rdata.receptNavn;
             if (RNavn == undefined) {
-                RNavn = data2[0].receptNavn;
+                RNavn = Rdata[0].receptNavn;
             }
             if(confirm("Arbejd med Produktbatch " + id + " (" + RNavn + ")")){
                 var raavareList = [];
-                console.log(data2);
-                $.each(data2, function (key, value) {
+                console.log(Rdata);
+                $.each(Rdata, function (key, value) {
                     raavareList.push(value.raavareId)
                 })
                 localStorage.setItem("raavareList", raavareList);
                 switchP("LabScreen/ProcesserProduktbatch/index.html");
                 document.getElementById("header").innerText = "Produktbatch: " + id + " (" + RNavn + ")"
-                taraView()
+
+                initPB(data, Rdata);
             }
         }, function (data) {
             alert("Error getting recept: ERR.NO.18");
@@ -51,6 +51,12 @@ function getProductBatch(id){
         alert("Error getting recept: ERR.NO.19");
         console.log(data)
     })
+}
+
+function initPB(data, Rdata) {
+    if (data.status === "Ikke påbegyndt") {
+
+    }
 }
 
 
