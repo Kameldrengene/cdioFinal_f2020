@@ -26,13 +26,22 @@ function getProductBatch(id){
         if (RID == undefined) {
             RID = data[0].receptId;
         }
-        sendAjax("/BoilerPlate_war_exploded/rest/Recept/getRecept/" + RID, function (data) {
-            var RNavn = data.receptNavn;
+        localStorage.setItem("receptId", RID);
+        sendAjax("/BoilerPlate_war_exploded/rest/Recept/getRecept/" + RID, function (data2) {
+            var RNavn = data2.receptNavn;
             if (RNavn == undefined) {
-                RNavn = data[0].receptNavn;
+                RNavn = data2[0].receptNavn;
             }
             if(confirm("Arbejd med Produktbatch " + id + " (" + RNavn + ")")){
+                var raavareList = [];
+                console.log(data2);
+                $.each(data2, function (key, value) {
+                    raavareList.push(value.raavareId)
+                })
+                localStorage.setItem("raavareList", raavareList);
                 switchP("LabScreen/ProcesserProduktbatch/index.html");
+                document.getElementById("header").innerText = "Produktbatch: " + id + " (" + RNavn + ")"
+                taraView()
             }
         }, function (data) {
             alert("Error getting recept: ERR.NO.18");
@@ -44,6 +53,36 @@ function getProductBatch(id){
     })
 }
 
+
+function taraView(){
+    const PBID = localStorage.getItem("procesPBID");
+    const RID = localStorage.getItem("receptId");
+    const raavareList = localStorage.getItem("raavareList").split(",");
+    let raavareNavn = "";
+    let counter = 0;
+    let todo = []
+    for (let i = 0; i < raavareList.length; i++) {
+        sendAjax("BoilerPlate_war_exploded/rest/produktbatch/getBatchLine/" + PBID + "/" + raavareList[counter], function (data) {
+            if (data.pbId === "0") {
+                todo.push(raavareList[counter])
+            }
+            counter++
+        }, function (data) {
+            alert("Error Getting Bathlines: ERR.NO.20")
+            console.log(data)
+        })
+    }
+    localStorage.setItem("todo", todo);
+
+    sendAjax("BoilerPlate_war_exploded/rest/Raavare/getRaavare/" + todo[0], function (data) {
+        raavareNavn = data.raavareNavn
+    }, function (data) {
+        alert("Error Getting raavare: ERR.NO.21")
+        console.log(data)
+    })
+
+    document.getElementById("content").innerHTML ="<h2>Indtast Tara for Råvare " + raavareNavn + " (ID: " + raavareList[counter] + ")</h2>"
+}
 
 
 
