@@ -7,11 +7,6 @@ $("document").ready(async function(){
         await updateTable();
     });
 
-    $("#raavarebatches").on("click", "button", function () {
-        localStorage.setItem("activeRBId", this.id);
-        switchP("PLeadScreen/Raavarebatches/RedigerRaavarebatches.html");
-    });
-
 });
 
 async function updateTable(){
@@ -27,17 +22,56 @@ async function updateTable(){
     else
         path = "getAktuelle"
 
-    await viewlist(
-        ["Batch ID", "Råvare ID", "Oprindelig mængde", "Aktuel mængde", "Råvarenavn", "Leverandør"],
-        "/BoilerPlate_war_exploded/rest/Raavarebatch/" + path,
-        "raavarebatches",
-        function () {}
-    )
+    await sendAjax("/BoilerPlate_war_exploded/rest/Raavarebatch/" + path,
+        function (data) {
+        viewTable(data)
+    }, function (data) {
+        alert("Error loading list: ERR.NO.01");
+        console.log(data);
+    })
 
     //Remove loader and reveal table
     $("#loading").hide();
     $("#raavarebatches").show();
 
-
 };
+
+function viewTable(data){
+
+    //Variable to hold all the tabel rows
+    let tabelData = "";
+
+    tabelData += "<tr>";
+    tabelData += "<th>Batch ID</th>";
+    tabelData += "<th>Råvare ID</th>";
+    tabelData += "<th>Oprindelig mængde</th>";
+    tabelData += "<th>Aktuel mængde</th>";
+    tabelData += "<th>Råvarenavn</th>";
+    tabelData += "<th>Leverandør</th>";
+    tabelData += "</tr>";
+
+    //Loop through
+    $.each(data, function (key, value) {
+
+        //Uses userID for label reference
+        tabelData += "<tr>";
+        tabelData += "<td>"+value.rbId+"</td>";
+        tabelData += "<td>"+value.raavareId+"</td>";
+
+        //Ensure numbers always shows 4 decimal places
+        const startM = (Math.round(value.startMaengde * 100) / 100).toFixed(4);
+        const aktuelM = (Math.round(value.aktuelMaengde * 100) / 100).toFixed(4);
+
+        tabelData += "<td>"+startM+"</td>";
+        tabelData += "<td>"+aktuelM+"</td>";
+
+        tabelData += "<td>"+value.raavareNavn+"</td>";
+        tabelData += "<td>"+value.leverandoer+"</td>";
+        tabelData += "</tr>";
+
+    });
+
+    $("#raavarebatches").html(tabelData);
+
+}
 

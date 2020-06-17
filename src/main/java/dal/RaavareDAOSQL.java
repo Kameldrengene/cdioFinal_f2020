@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class RaavareDAOSQL implements IRaavareDAO{
-    SQLDatabaseIO db = new SQLDatabaseIO("kamel", "dreng", "runerne.dk", 8003); //Makes new SQLDatabaseIO object.
+    public SQLDatabaseIO db = new SQLDatabaseIO("kamel", "dreng", "runerne.dk", 8003); //Makes new SQLDatabaseIO object.
 
     @Override
     public RaavareDTO getRaavare(int raavareId) throws IDALException.DALException{
@@ -92,4 +92,5 @@ public class RaavareDAOSQL implements IRaavareDAO{
         }
         return false;
     }
+
 }

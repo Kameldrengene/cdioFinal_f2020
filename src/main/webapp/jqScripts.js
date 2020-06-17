@@ -24,7 +24,7 @@ async function viewlist(headers, link, tableName, btnHtmlfunc) {
             data += '</tr>';
 
             $.each(BEdata,function (key,value) {
-                //console.log(value);
+                console.log(value);
                 data += '<tr>';
                 $.each(value, function (key2, inner) {
                     data += '<td>' + inner + '</td>'

@@ -19,6 +19,7 @@ class RaavarevbatchControllerTest {
     @Test
     @Order(1)
     void getData() {
+        raavarevbatchController.DAOSQL.db.setDB("cdioTest_2020");
         int expected = 2;
         int expectedSize = 19;
         try {
@@ -34,12 +35,13 @@ class RaavarevbatchControllerTest {
     @Test
     @Order(2)
     void getAktuelle() {
-        int expected = 3;
-        int expectedSize = 17;
+        raavarevbatchController.DAOSQL.db.setDB("cdioTest_2020");
+        int expected = 22;
+        int expectedSize = 20;
         try {
             listRaavarebatch = raavarevbatchController.getAktuelle();
-//            assertEquals(expected,listRaavarebatch.get(2).getRbId());
-            //assertEquals(expectedSize,listRaavarebatch.size());
+            assertEquals(expected,listRaavarebatch.get(2).getRbId());
+            assertEquals(expectedSize,listRaavarebatch.size());
         } catch (IDALException.DALException e) {
             e.printStackTrace();
         }
@@ -49,6 +51,7 @@ class RaavarevbatchControllerTest {
     @Test
     @Order(3)
     void getBatch() {
+        raavarevbatchController.DAOSQL.db.setDB("cdioTest_2020");
         int expected = 1;
         try {
             testRaavarebatch = raavarevbatchController.getBatch("1");
@@ -63,6 +66,7 @@ class RaavarevbatchControllerTest {
     @Test
     @Order(4)
     void opretRaavarebatch() {
+        raavarevbatchController.DAOSQL.db.setDB("cdioTest_2020");
         int expected = 99;
         RaavarebatchDTO newRaavarebatch = new RaavarebatchDTO();
         newRaavarebatch.setAktuelMaengde(85.5);
@@ -84,6 +88,7 @@ class RaavarevbatchControllerTest {
     @Test
     @Order(5)
     void updateRaavarebatch() {
+        raavarevbatchController.DAOSQL.db.setDB("cdioTest_2020");
         double expected = 70.5;
         RaavarebatchDTO newRaavarebatch = new RaavarebatchDTO();
         newRaavarebatch.setAktuelMaengde(70.5);

@@ -19,6 +19,7 @@ class UserServiceTest {
     @Test
     @Order(1)
     void getData() {
+        userService.userController.userDAOSQL.db.setDB("cdioTest_2020");
         String name = "Mark";
         testList = userService.getData();
         assertEquals(name, testList.get(0).getUserName());
@@ -27,6 +28,7 @@ class UserServiceTest {
     @Test
     @Order(2)
     void getUser() {
+        userService.userController.userDAOSQL.db.setDB("cdioTest_2020");
         String initial = "FD";
         testUser = userService.getUser(12);
         assertEquals(initial, testUser.getIni());
@@ -35,6 +37,7 @@ class UserServiceTest {
     @Test
     @Order(3)
     void getRole() {
+        userService.userController.userDAOSQL.db.setDB("cdioTest_2020");
         int expected = 2;
         testList = userService.getRole("Produktionsleder");
         assertEquals(expected, testList.size());
@@ -43,6 +46,7 @@ class UserServiceTest {
     @Test
     @Order(4)
     void getUserActivity() {
+        userService.userController.userDAOSQL.db.setDB("cdioTest_2020");
         boolean aktual = userService.getUserActivity(11);
         assertTrue(aktual);
     }
@@ -51,6 +55,7 @@ class UserServiceTest {
     @Test
     @Order(5)
     void createUser() {
+        userService.userController.userDAOSQL.db.setDB("cdioTest_2020");
         String expected = "Test";
         UserDTO newUser = new UserDTO();
         newUser.setAktiv(false);
@@ -67,6 +72,7 @@ class UserServiceTest {
     @Test
     @Order(6)
     void activitySwitchUser() {
+        userService.userController.userDAOSQL.db.setDB("cdioTest_2020");
         testUser = userService.getUser(19);
         userService.activitySwitchUser(testUser);
         boolean aktual = userService.getUserActivity(19);
@@ -77,6 +83,7 @@ class UserServiceTest {
     @Test
     @Order(7)
     void updateUser() {
+        userService.userController.userDAOSQL.db.setDB("cdioTest_2020");
         String expected = "Produktionsleder";
 
         UserDTO newUser = new UserDTO();
@@ -98,7 +105,7 @@ class UserServiceTest {
         try {
             SQLDatabaseIO sqlDatabaseIO = new SQLDatabaseIO("kamel", "dreng", "runerne.dk", 8003);
             sqlDatabaseIO.connect();
-            sqlDatabaseIO.update("DELETE FROM cdioFinal_2020.userdto WHERE userName = 'Test'");
+            sqlDatabaseIO.update("DELETE FROM cdioTest_2020.userdto WHERE userName = 'Test'");
         } catch (Exception e) {
             e.printStackTrace();
         }

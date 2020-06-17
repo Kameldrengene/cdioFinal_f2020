@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ReceptDAOSQL implements IReceptDAO{
-    SQLDatabaseIO db = new SQLDatabaseIO("kamel", "dreng", "runerne.dk", 8003); //Makes new SQLDatabaseIO object.
+    public SQLDatabaseIO db = new SQLDatabaseIO("kamel", "dreng", "runerne.dk", 8003); //Makes new SQLDatabaseIO object.
 
 
     @Override
@@ -109,4 +109,5 @@ public class ReceptDAOSQL implements IReceptDAO{
         }
         db.close();
     }
+
 }

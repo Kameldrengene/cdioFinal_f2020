@@ -4,25 +4,24 @@
     <meta charset="UTF-8">
     <title>Title</title>
 
+    <script src="jquery/jquery-3.5.1.min.js"></script>
     <script src="PLeadScreen/Produktbatches/OpretProduktbatch.js"></script>
+    <script src="jqScripts.js"></script>
 
 </head>
 <body>
 
     <h1>Opret produktbatch</h1>
+
+    <h3>Vælg recept</h3>
+
+    <div id='loading'></div>
+
+    <table class="brugertable" id="receptTable">
+    </table>
+
+    <br>
     <input type="submit" class="hvr-buzz screenbtn" value="Retur" id="retur" onclick="switchP('PLeadScreen/PLeadScreen.html'); return false">
-    <br><br>
-
-    <form>
-        <input type="text" id="batchID" placeholder="Angiv batch ID" value=""><br><br>
-    </form>
-
-    <select id="receptValg" style="font-size: 14pt">
-        <option>Vælg recept</option>
-    </select>
-
-    <br><br>
-    <button id="opret" class="hvr-pop">Opret</button>
 
 </body>
 </html>

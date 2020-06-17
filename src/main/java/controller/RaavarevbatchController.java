@@ -8,7 +8,7 @@ import java.util.List;
 
 public class RaavarevbatchController {
 
-    private RaavarebatchDAOSQL DAOSQL;
+    public RaavarebatchDAOSQL DAOSQL;
 
 
     //Konstruktør

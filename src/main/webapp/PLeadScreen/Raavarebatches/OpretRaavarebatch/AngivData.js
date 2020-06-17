@@ -4,10 +4,16 @@ $("document").ready(function () {
 
     $("#raavareID").html("Råvare ID: " + activeRaavareID);
 
+    $("#opret").click(function () {
 
-})
+        let confirmation = confirm("Opret råvarebatch for råvare ID: " + activeRaavareID);
+        if (confirmation == true)
+            opretRaavarebatch(this.id);
+    })
 
-$("#opret").click(function () {
+});
+
+function opretRaavarebatch(){
 
     const activeRaavareID = localStorage.getItem("activeRaavare");
     const activeBatchID = $('#batchID').val();
@@ -25,7 +31,4 @@ $("#opret").click(function () {
         console.log(data);
     }, "POST", myJson);
 
-
-
-
-})
+};

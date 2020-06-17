@@ -10,12 +10,13 @@ import static org.junit.jupiter.api.Assertions.*;
 class PrintDAOSQLTest {
     PrintDAOSQL printDAOSQL = new PrintDAOSQL();
     List<PrintDTO> printDTOList;
+
     @Test
     void getPrint() {
-
+        printDAOSQL.db.setDB("cdioTest_2020");
         try {
-            printDTOList = printDAOSQL.getPrint(1,10);
-            assertEquals(4,printDTOList.size());
+            printDTOList = printDAOSQL.getPrint(1, 10);
+            assertEquals(4, printDTOList.size());
         } catch (IDALException.DALException e) {
             e.printStackTrace();
         }
