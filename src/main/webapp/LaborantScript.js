@@ -22,15 +22,9 @@ function getProductBatch(id){
     localStorage.setItem("procesPBID", id);
     sendAjax("/BoilerPlate_war_exploded/rest/produktbatch/getBatchLine/" + id, function (data) {
         var RID = data.receptId;
-        if (RID == undefined) {
-            RID = data[0].receptId;
-        }
         localStorage.setItem("receptId", RID);
-        sendAjax("/BoilerPlate_war_exploded/rest/Recept/getRecept/" + RID, function (Rdata) {
-            var RNavn = Rdata.receptNavn;
-            if (RNavn == undefined) {
-                RNavn = Rdata[0].receptNavn;
-            }
+        sendAjax("/BoilerPlate_war_exploded/rest/Recept/getReceptList/" + RID, function (Rdata) {
+            var RNavn = Rdata[0].receptNavn;
             if(confirm("Arbejd med Produktbatch " + id + " (" + RNavn + ")")){
                 var raavareList = [];
                 console.log(Rdata);
@@ -55,6 +49,7 @@ function getProductBatch(id){
 
 function initPB(data, Rdata) {
     if (data.status === "Ikke påbegyndt") {
+        data.status = "Under Produktion";
 
     }
 }

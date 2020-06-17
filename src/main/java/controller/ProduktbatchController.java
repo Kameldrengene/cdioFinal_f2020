@@ -60,6 +60,15 @@ public class ProduktbatchController {
         return produktbatchKompDTO;
     }
 
+    public ProduktbatchKompDTO opdaterinitialProduktbatch(ProduktbatchKompDTO produktbatchKompDTO){
+        try {
+            DAOSQL.updateInitialpb(produktbatchKompDTO);
+        } catch (IDALException.DALException e) {
+            e.printStackTrace();
+        }
+        return produktbatchKompDTO;
+    }
+
     public ProduktbatchDTO opretProduktbatch(ProduktbatchDTO produktbatchDTO){
         try {
             DAOSQL.createProduktBatch(produktbatchDTO);

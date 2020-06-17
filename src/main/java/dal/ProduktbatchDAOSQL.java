@@ -106,6 +106,26 @@ public class ProduktbatchDAOSQL /*implements IProduktbatchDAO*/ {
     }
 
 //    @Override
+public void updateInitialpb(ProduktbatchKompDTO ProduktbatchKomp) throws IDALException.DALException{
+    db.connect();
+    try {
+        ResultSet rs = db.query("SELECT * FROM ProduktBatches where PBID=" + ProduktbatchKomp.getPbId() + " AND RBID = 0");
+        rs.next();
+        if (rs.getInt("PBID") == ProduktbatchKomp.getPbId()) {
+
+            db.update("UPDATE ProduktBatches SET Standing = '" + ProduktbatchKomp.getStatus() + "' WHERE (PBID = '" + ProduktbatchKomp.getPbId() + "' AND RBID = 0);");
+            db.update("UPDATE ProduktBatches SET RBID = '" + ProduktbatchKomp.getRbID()+ "' WHERE (PBID = '" + ProduktbatchKomp.getPbId() + "' AND RBID = 0);");
+            db.update("UPDATE ProduktBatches SET UserID = '" + ProduktbatchKomp.getUserId() + "' WHERE (PBID = '" + ProduktbatchKomp.getPbId() + "' AND RBID = 0);");
+            db.update("UPDATE ProduktBatches SET Tara = '" + ProduktbatchKomp.getTara() + "' WHERE (PBID = '" + ProduktbatchKomp.getPbId() + "' AND RBID = 0);");
+            db.update("UPDATE ProduktBatches SET Netto = '" + ProduktbatchKomp.getNetto() + "' WHERE (PBID = '" + ProduktbatchKomp.getPbId() + "' AND RBID = 0);");
+        }
+        rs.close();
+    } catch (SQLException e) {
+        e.printStackTrace();
+    }
+    db.close();
+}
+
     public void updateProduktBatch(ProduktbatchKompDTO ProduktbatchKomp) throws IDALException.DALException{
         db.connect();
         try {
@@ -117,6 +137,24 @@ public class ProduktbatchDAOSQL /*implements IProduktbatchDAO*/ {
                 db.update("UPDATE ProduktBatches SET UserID = '" + ProduktbatchKomp.getUserId() + "' WHERE (PBID = '" + ProduktbatchKomp.getPbId() + "' AND RBID = '" + ProduktbatchKomp.getRbID() + "');");
                 db.update("UPDATE ProduktBatches SET Tara = '" + ProduktbatchKomp.getTara() + "' WHERE (PBID = '" + ProduktbatchKomp.getPbId() + "' AND RBID = '" + ProduktbatchKomp.getRbID() + "');");
                 db.update("UPDATE ProduktBatches SET Netto = '" + ProduktbatchKomp.getNetto() + "' WHERE (PBID = '" + ProduktbatchKomp.getPbId() + "' AND RBID = '" + ProduktbatchKomp.getRbID() + "');");
+            }
+            rs.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        db.close();
+    }
+
+    public void updateProduktBatchLine(ProduktbatchDTO produktbatchDTO) throws IDALException.DALException{
+        db.connect();
+        try {
+            ResultSet rs = db.query("SELECT * FROM ProduktBatches where PBID=" + produktbatchDTO.getPbId());
+            rs.next();
+            if (rs.getInt("PBID") == produktbatchDTO.getPbId()) {
+
+                db.update("UPDATE ProduktBatches SET Standing = '" + produktbatchDTO.getStatus() + "' WHERE (PBID = '" + produktbatchDTO.getPbId() + "');");
+                db.update("UPDATE ProduktBatches SET RID = '" + produktbatchDTO.getReceptId() + "' WHERE (PBID = '" + produktbatchDTO.getPbId() + "');");
+                db.update("UPDATE ProduktBatches SET Dato = '" + produktbatchDTO.getDato() + "' WHERE (PBID = '" + produktbatchDTO.getPbId() + "');");
             }
             rs.close();
         } catch (SQLException e) {

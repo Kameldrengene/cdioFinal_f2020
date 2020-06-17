@@ -45,17 +45,22 @@ public class ProduktbatchService {
     }
 
     //Opdater én enkelt linje i ét enkelt batch
-    //todo ændres til -komp
     @Path("opdaterProduktbatch")
     @POST
-    public ProduktbatchKompDTO updateRaavarebatch(ProduktbatchKompDTO produktbatchKompDTO) {
+    public ProduktbatchKompDTO updateProduktbatch(ProduktbatchKompDTO produktbatchKompDTO) {
         return produktbatchController.opdaterProduktbatch(produktbatchKompDTO);
+    }
+
+    @Path("opdaterInitialProduktbatch")
+    @POST
+    public ProduktbatchKompDTO updateinitialProduktbatch(ProduktbatchKompDTO produktbatchKompDTO) {
+        return produktbatchController.opdaterinitialProduktbatch(produktbatchKompDTO);
     }
 
     //Oprettet et produktbatch
     @Path("opretProduktbatch")
     @POST
-    public ProduktbatchDTO opretRaavarebatch(ProduktbatchDTO produktbatchDTO){
+    public ProduktbatchDTO opretProduktbatch(ProduktbatchDTO produktbatchDTO){
         return produktbatchController.opretProduktbatch(produktbatchDTO);
     }
 
