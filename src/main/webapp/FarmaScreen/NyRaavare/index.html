@@ -17,7 +17,7 @@
     <input id="confirmbtn" type="button" onclick="
         if (confirm('Er du sikker?')) {
             if(document.getElementById('raavareID').value != '' && document.getElementById('raavareNavn').value != '' && document.getElementById('leverandoer').value != ''){
-                postRaavareData()
+                raavareData('Create')
             } else {
                 alert('Ikke alt udfyldt')
             }

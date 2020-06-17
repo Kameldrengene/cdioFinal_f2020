@@ -5,6 +5,7 @@ import dal.dto.RaavareDTO;
 import java.util.List;
 
 public class RaavareFunc {
+
     public boolean isNewRaavareOk(RaavareDTO rv, List<RaavareDTO> rvList) {
         return (!IDExists(rv, rvList) && isIDOk(rv) && isNavnOk(rv) && isleverandoerOk(rv));
     }

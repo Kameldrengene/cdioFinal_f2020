@@ -68,6 +68,9 @@ function viewTable(data){
     $.each(data, function (key, value) {
 
         //Uses userID for label reference
+        tabelData+= "<tr>";
+        tabelData+= "<th style='border-bottom: solid 1px black'></th><th style='border-bottom: solid 1px black'></th><th style='border-bottom: solid 1px black'></th><th style='border-bottom: solid 1px black'></th><th style='border-bottom: solid 1px black'></th><th style='border-bottom: solid 1px black'></th>";
+        tabelData+= "</tr>";
         tabelData += "<tr>";
         tabelData += "<th align='left'>Råvare nr: </th><th align='left'>"+value.raavareID+"</th>";
         tabelData += "</tr>";
