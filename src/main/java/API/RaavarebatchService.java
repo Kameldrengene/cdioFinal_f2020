@@ -41,7 +41,7 @@ public class RaavarebatchService {
 
     @Path("opretRaavarebatch")
     @POST
-    public RaavarebatchDTO opretRaavarebatch(RaavarebatchDTO raavarebatchDTO){
+    public RaavarebatchDTO opretRaavarebatch(RaavarebatchDTO raavarebatchDTO) throws WebApplicationException{
         return raavarebatchController.opretRaavarebatch(raavarebatchDTO);
     }
 

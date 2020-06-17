@@ -72,7 +72,7 @@ public class ProduktbatchService {
     //Oprettet et produktbatch
     @Path("opretProduktbatch")
     @POST
-    public ProduktbatchDTO opretProduktbatch(ProduktbatchDTO produktbatchDTO){
+    public ProduktbatchDTO opretProduktbatch(ProduktbatchDTO produktbatchDTO) throws WebApplicationException{
         return produktbatchController.opretProduktbatch(produktbatchDTO);
     }
 

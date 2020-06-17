@@ -9,6 +9,7 @@ $("document").ready(async function () {
 
             try{
                 opretProduktbatch(this.id);
+                console.log("success")
             }catch(err){
                 console.log(err);
                 alert(err.responseText);
@@ -17,7 +18,6 @@ $("document").ready(async function () {
     })
 
 });
-
 
 async function opretProduktbatch(activeReceptID){
 

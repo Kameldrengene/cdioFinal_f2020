@@ -98,8 +98,13 @@ public class ProduktbatchController {
 //        } catch (IDALException.DALException e) {
 //            e.printStackTrace();
 //        }
-        return produktbatchDTO;
+        throw buildError(Response.Status.INTERNAL_SERVER_ERROR, "ERROR: Fejl i forsøg på at kontakte databasen");
+
+//        return produktbatchDTO;
     }
 
+    public WebApplicationException buildError(Response.Status status, String msg){
+        return new WebApplicationException(Response.status(status).entity(msg).build());
+    }
 
 }
