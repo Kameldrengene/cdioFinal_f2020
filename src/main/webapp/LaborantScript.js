@@ -26,7 +26,7 @@ function getProductBatch(id){
             var RNavn = Rdata[0].receptNavn;
             if(confirm("Arbejd med Produktbatch " + id + " (" + RNavn + ")")){
                 var raavareList = [];
-                var raavareNavnObjekt = {1 : "test"};
+                var raavareNavnObjekt = {};
                 $.each(Rdata, function (key, value) {
                     raavareList.push(value.raavareId)
                     sendAjax("/BoilerPlate_war_exploded/rest/Raavare/getRaavare/" + value.raavareId, function (data) {
@@ -60,12 +60,20 @@ function initPB(data) {
             localStorage.setItem("raavareCounter", 0);
             taraView()
         }, function (data) {
-            alert("Error updating produktbatch: ERR.NO.22"); //TODO make try again
+            alert("Fejl ved indlæsningen af Produktbatchet. Prøver at genstarte.\nHvis problemet fortsætter, bedes system administratoren kontaktes");
             console.log(data);
+            data.status = "Ikke påbegyndt";
+            initPB(data);
         }, "POST", JSON.stringify(data));
 
     } else {
-        //TODO find correct place
+        sendAjax("/BoilerPlate_war_exploded/rest/produktbatch/getBatchComponents/" + data.pbId, function (data) {
+            localStorage.setItem("raavareCounter", data.length - 1);
+            taraView()
+        }, function (data) {
+            alert("Error getting batch components: ERR.NO.33")
+            console.log(data)
+        })
     }
 }
 
