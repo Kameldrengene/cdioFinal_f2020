@@ -7,11 +7,12 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class RaavarebatchDAOSQL implements IRaavarebatchDAO {
+//todo aktiver interface!
+public class RaavarebatchDAOSQL /*implements IRaavarebatchDAO*/ {
     public SQLDatabaseIO db = new SQLDatabaseIO("kamel", "dreng", "runerne.dk", 8003); //Makes new SQLDatabaseIO object.
 
     // -Mikkel
-    @Override
+//    @Override
     public List<RaavarebatchDTO> getRaavarebatchList() throws SQLException{
 
         db.connect();
@@ -35,34 +36,29 @@ public class RaavarebatchDAOSQL implements IRaavarebatchDAO {
         return RBList;
     }
 
-    public List<RaavarebatchDTO> getRVIDBatch(int RVID) {
+    public List<RaavarebatchDTO> getRVIDBatch(int RVID) throws SQLException{
         db.connect();
         ResultSet rs = db.query("SELECT * FROM raavarebatchview WHERE raavareID = " + RVID + " AND aktuelMaengde > 0");
         List<RaavarebatchDTO> RVBList = new ArrayList<>();
-        try {
-            //We do as in getUser, except we make new user until rs is empty
-            while (rs.next()) {
-                RaavarebatchDTO rb = new RaavarebatchDTO();
-                rb.setRbId(rs.getInt("rBID"));
-                rb.setRaavareNavn(rs.getString("raavareNavn"));
-                rb.setLeverandoer(rs.getString("leverandoer"));
-                rb.setRaavareId(rs.getInt("raavareID"));
-                rb.setStartMaengde(rs.getDouble("maengde"));
-                rb.setAktuelMaengde(rs.getDouble("aktuelMaengde"));
-                RVBList.add(rb);
-            }
-            rs.close();
 
-        } catch (
-                SQLException e) {
-            e.printStackTrace();
+        //We do as in getUser, except we make new user until rs is empty
+        while (rs.next()) {
+            RaavarebatchDTO rb = new RaavarebatchDTO();
+            rb.setRbId(rs.getInt("rBID"));
+            rb.setRaavareNavn(rs.getString("raavareNavn"));
+            rb.setLeverandoer(rs.getString("leverandoer"));
+            rb.setRaavareId(rs.getInt("raavareID"));
+            rb.setStartMaengde(rs.getDouble("maengde"));
+            rb.setAktuelMaengde(rs.getDouble("aktuelMaengde"));
+            RVBList.add(rb);
         }
+        rs.close();
         db.close();
         return RVBList;
     }
 
     // -Mikkel
-    @Override
+//    @Override
     public List<RaavarebatchDTO> getAktuelRaavarebatchList() throws SQLException{
 
         List<RaavarebatchDTO> oldRBList = getRaavarebatchList();
@@ -79,7 +75,7 @@ public class RaavarebatchDAOSQL implements IRaavarebatchDAO {
     }
 
     // -Mikkel
-    @Override
+//    @Override
     public void createRaavarebatch(RaavarebatchDTO raavarebatch) throws SQLException{
         db.connect();
         db.update("insert into RaavareBatches (rBID, raavareID, maengde, aktuelMaengde) VALUE ('" + raavarebatch.getRbId() + "','" + raavarebatch.getRaavareId() + "','" + raavarebatch.getStartMaengde() + "','" + raavarebatch.getAktuelMaengde()  + "')");
@@ -87,32 +83,25 @@ public class RaavarebatchDAOSQL implements IRaavarebatchDAO {
     }
 
     //todo slet?
-    @Override
-    public RaavarebatchDTO getRaavarebatch(int rbId) throws IDALException.DALException{
+//    @Override
+    public RaavarebatchDTO getRaavarebatch(int rbId) throws SQLException{
+
         db.connect();
         ResultSet rs = db.query("SELECT * FROM RaavareBatches where rBID=" + rbId); //Select all columns from recept where receptID is input
         RaavarebatchDTO rb = new RaavarebatchDTO();
-        try {
-            rs.next();
-            rb.setRbId(rs.getInt("rBID"));
-            rb.setRaavareId(rs.getInt("raavareID"));
-            rb.setStartMaengde(rs.getDouble("maengde"));
-            rb.setAktuelMaengde(rs.getDouble("aktuelMaengde"));
-            rs.close();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
-        System.out.println(rs);
-
+        rs.next();
+        rb.setRbId(rs.getInt("rBID"));
+        rb.setRaavareId(rs.getInt("raavareID"));
+        rb.setStartMaengde(rs.getDouble("maengde"));
+        rb.setAktuelMaengde(rs.getDouble("aktuelMaengde"));
+        rs.close();
         db.close();
         return rb;
     }
 
     //todo slet?
-    @Override
+//    @Override
     public void updateRaavarebatch(RaavarebatchDTO raavarebatch) throws SQLException {
-
 
         db.connect();
         ResultSet rs = db.query("SELECT * FROM RaavareBatches where rBID=" + raavarebatch.getRbId());

@@ -45,12 +45,8 @@ class RaavarevbatchControllerTest {
     void getBatch() {
         raavarevbatchController.DAOSQL.db.setDB("cdioTest_2020");
         int expected = 1;
-        try {
-            testRaavarebatch = raavarevbatchController.getBatch("1");
-            assertEquals(expected,testRaavarebatch.getRbId());
-        } catch (IDALException.DALException e) {
-            e.printStackTrace();
-        }
+        testRaavarebatch = raavarevbatchController.getBatch("1");
+        assertEquals(expected,testRaavarebatch.getRbId());
     }
 
 
@@ -67,12 +63,8 @@ class RaavarevbatchControllerTest {
         newRaavarebatch.setStartMaengde(100.0);
         raavarevbatchController.opretRaavarebatch(newRaavarebatch);
 
-        try {
-            testRaavarebatch = raavarevbatchController.getBatch("99");
-            assertEquals(expected,testRaavarebatch.getRbId());
-        } catch (IDALException.DALException e) {
-            e.printStackTrace();
-        }
+        testRaavarebatch = raavarevbatchController.getBatch("99");
+        assertEquals(expected,testRaavarebatch.getRbId());
 
 
     }
@@ -90,12 +82,8 @@ class RaavarevbatchControllerTest {
 
         raavarevbatchController.updateRaavarebatch(newRaavarebatch);
 
-        try {
-            testRaavarebatch=raavarevbatchController.getBatch("99");
-            assertEquals(expected,testRaavarebatch.getAktuelMaengde());
-        } catch (IDALException.DALException e) {
-            e.printStackTrace();
-        }
+        testRaavarebatch=raavarevbatchController.getBatch("99");
+        assertEquals(expected,testRaavarebatch.getAktuelMaengde());
     }
     @Test
     @Order(6)

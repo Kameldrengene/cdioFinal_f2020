@@ -23,7 +23,7 @@ public class RaavarevbatchController {
     }
 
     // -Mikkel
-    public List<RaavarebatchDTO> getData() throws WebApplicationException {
+    public List<RaavarebatchDTO> getData(){
         try {
             return DAOSQL.getRaavarebatchList();
         } catch (SQLException e) {
@@ -32,7 +32,7 @@ public class RaavarevbatchController {
     };
 
     // -Mikkel
-    public List<RaavarebatchDTO> getAktuelle() throws WebApplicationException {
+    public List<RaavarebatchDTO> getAktuelle(){
         try {
             return DAOSQL.getAktuelRaavarebatchList();
         } catch (Exception e) {
@@ -41,7 +41,8 @@ public class RaavarevbatchController {
     };
 
     // -Mikkel
-    public RaavarebatchDTO opretRaavarebatch(RaavarebatchDTO dto) throws WebApplicationException {
+    public RaavarebatchDTO opretRaavarebatch(RaavarebatchDTO dto) {
+
         //Valider startmængde
         String startMaengdeMsg = func.startMaengdeOk(dto);
         if( !startMaengdeMsg.equals("OK") ){
@@ -64,17 +65,27 @@ public class RaavarevbatchController {
         return dto;
     };
 
-    public List<RaavarebatchDTO> getRVIDBatch(String RVID) throws IDALException.DALException{
+    public List<RaavarebatchDTO> getRVIDBatch(String RVID){
 
         int RVIDint = Integer.parseInt(RVID);
-        return DAOSQL.getRVIDBatch(RVIDint);
+
+        try{
+            return DAOSQL.getRVIDBatch(RVIDint);
+        } catch(SQLException e){
+            throw buildError(Response.Status.NOT_ACCEPTABLE, SQLErrorMsg);
+        }
+
     }
 
     //todo slet?
-    public RaavarebatchDTO getBatch(String batchID) throws IDALException.DALException{
+    public RaavarebatchDTO getBatch(String batchID){
 
         int batchIDint = Integer.parseInt(batchID);
-        return DAOSQL.getRaavarebatch(batchIDint);
+        try {
+            return DAOSQL.getRaavarebatch(batchIDint);
+        } catch (IDALException.DALException e) {
+            throw buildError(Response.Status.NOT_ACCEPTABLE, SQLErrorMsg);
+        }
     }
 
     //todo slet?
@@ -82,7 +93,7 @@ public class RaavarevbatchController {
         try {
             DAOSQL.updateRaavarebatch(raavarebatchDTO);
         } catch (SQLException e) {
-            e.printStackTrace();
+            throw buildError(Response.Status.NOT_ACCEPTABLE, SQLErrorMsg);
         }
         return raavarebatchDTO;
     }

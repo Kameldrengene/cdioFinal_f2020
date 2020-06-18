@@ -31,7 +31,7 @@ public class RaavarebatchService {
 
     @Path("getRVIDBatch/{batchID}")
     @GET
-    public List<RaavarebatchDTO> getRVIDBatch(@PathParam("batchID") String raavareID) throws IDALException.DALException {
+    public List<RaavarebatchDTO> getRVIDBatch(@PathParam("batchID") String raavareID) throws WebApplicationException {
         return raavarebatchController.getRVIDBatch(raavareID);
     }
 
@@ -45,7 +45,7 @@ public class RaavarebatchService {
     //todo slet?
     @Path("getBatch/{batchID}")
     @GET
-    public RaavarebatchDTO getBatch(@PathParam("batchID") String batchID) throws IDALException.DALException {
+    public RaavarebatchDTO getBatch(@PathParam("batchID") String batchID) throws WebApplicationException {
         return raavarebatchController.getBatch(batchID);
     }
 

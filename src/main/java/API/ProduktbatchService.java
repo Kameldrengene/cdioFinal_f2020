@@ -19,14 +19,14 @@ public class ProduktbatchService {
     //Hent alle batches
     @Path("getAlle")
     @GET
-    public List<ProduktbatchDTO> getAlle() throws IDALException.DALException {
+    public List<ProduktbatchDTO> getAlle() throws WebApplicationException {
         return produktbatchController.getAlle();
     }
 
     //Hent alle aktuelle batches
     @Path("getAktuelle")
     @GET
-    public List<ProduktbatchDTO> getAktuelle() throws IDALException.DALException {
+    public List<ProduktbatchDTO> getAktuelle() throws WebApplicationException {
         return produktbatchController.getAktuelle();
     }
 
@@ -34,45 +34,45 @@ public class ProduktbatchService {
     //todo Fix test
     @Path("getBatchComponents/{batchID}")
     @GET
-    public List<ProduktbatchKompDTO> getBatchComponents(@PathParam("batchID") String batchID) throws IDALException.DALException {
+    public List<ProduktbatchKompDTO> getBatchComponents(@PathParam("batchID") String batchID) throws WebApplicationException {
         return produktbatchController.getBatchComponents(batchID);
     }
 
     @Path("getBatchComponent/{batchID}/{RBID}")
     @GET
-    public ProduktbatchKompDTO getBatchComponent(@PathParam("batchID") String batchID, @PathParam("RBID") String RBID) throws IDALException.DALException {
+    public ProduktbatchKompDTO getBatchComponent(@PathParam("batchID") String batchID, @PathParam("RBID") String RBID) throws WebApplicationException {
         return produktbatchController.getBatchComponent(batchID, RBID);
     }
 
     @Path("getBatchLine/{batchID}") //TODO Make Test!
     @GET
-    public ProduktbatchDTO getBatchLine(@PathParam("batchID") String batchID) throws IDALException.DALException {
+    public ProduktbatchDTO getBatchLine(@PathParam("batchID") String batchID) throws WebApplicationException {
         return produktbatchController.getBatchLine(batchID);
     }
 
     //Opdater én enkelt linje i ét enkelt batch
     @Path("opdaterProduktbatchLine")
     @POST
-    public ProduktbatchKompDTO updateProduktbatchLine(ProduktbatchKompDTO produktbatchKompDTO) {
+    public ProduktbatchKompDTO updateProduktbatchLine(ProduktbatchKompDTO produktbatchKompDTO) throws WebApplicationException{
         return produktbatchController.opdaterProduktbatchLine(produktbatchKompDTO);
     }
 
     @Path("opdaterProduktbatch") //TODO make test
     @POST
-    public ProduktbatchDTO updateProduktbatch(ProduktbatchDTO produktbatchDTO) {
+    public ProduktbatchDTO updateProduktbatch(ProduktbatchDTO produktbatchDTO) throws WebApplicationException{
         return produktbatchController.opdaterProduktbatch(produktbatchDTO);
     }
 
     @Path("opdaterNewProduktbatch") //TODO make test
     @POST
-    public ProduktbatchKompDTO updateNewProduktbatch(ProduktbatchKompDTO produktbatchKompDTO) {
+    public ProduktbatchKompDTO updateNewProduktbatch(ProduktbatchKompDTO produktbatchKompDTO) throws WebApplicationException{
         return produktbatchController.opdaterNewProduktbatch(produktbatchKompDTO);
     }
 
     // -Mikkel
     @Path("getMaxPBID")
     @GET
-    public int getMaxPBID() throws WebApplicationException{
+    public int getMaxPBID() throws WebApplicationException {
         return produktbatchController.getMaxPDID();
     }
 

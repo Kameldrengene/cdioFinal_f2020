@@ -19,17 +19,53 @@ public class ProduktbatchController {
         DAOSQL = new ProduktbatchDAOSQL();
     }
 
-    public List<ProduktbatchDTO> getAlle() throws IDALException.DALException {
-        return DAOSQL.getProduktBatchList();
+    // -Mikkel
+    public List<ProduktbatchDTO> getAlle(){
+        try {
+            return DAOSQL.getProduktBatchList();
+        } catch (SQLException e) {
+            throw buildError(Response.Status.NOT_ACCEPTABLE, SQLErrorMsg);
+        }
     }
 
+    // -Mikkel
     public List<ProduktbatchDTO> getAktuelle(){
         try {
             return DAOSQL.getAktuelProduktBatchList();
-        } catch (IDALException.DALException e) {
-            e.printStackTrace();
+        } catch (SQLException e) {
+            throw buildError(Response.Status.NOT_ACCEPTABLE, SQLErrorMsg);
         }
-        return null;
+    }
+
+    // -Mikkel
+    public int getMaxPDID(){
+        try{
+            return DAOSQL.getMaxPDID();
+        } catch(SQLException e) {
+            throw buildError(Response.Status.NOT_ACCEPTABLE, SQLErrorMsg);
+        }
+    }
+
+    // -Mikkel
+    public ProduktbatchDTO opretProduktbatch(ProduktbatchDTO produktbatchDTO){
+
+        try {
+            DAOSQL.createProduktBatch(produktbatchDTO);
+        } catch (SQLException e) {
+            throw buildError(Response.Status.NOT_ACCEPTABLE, SQLErrorMsg);
+        }
+        return produktbatchDTO;
+    }
+
+    // -Mikkel
+    public ProduktbatchDTO getBatchLine(String batchID){
+        int batchIDint = Integer.parseInt(batchID);
+
+        try {
+            return DAOSQL.getBatchLine(batchIDint);
+        } catch (SQLException e) {
+            throw buildError(Response.Status.NOT_ACCEPTABLE, SQLErrorMsg);
+        }
     }
 
     public ProduktbatchKompDTO getBatchComponent(String batchID, String RBID){
@@ -39,9 +75,8 @@ public class ProduktbatchController {
         try {
             return DAOSQL.getBatchkomponent(batchIDint, RBIDint);
         } catch (IDALException.DALException e) {
-            e.printStackTrace();
+            throw buildError(Response.Status.NOT_ACCEPTABLE, SQLErrorMsg);
         }
-        return null;
     }
 
     public List<ProduktbatchKompDTO> getBatchComponents(String batchID){
@@ -50,28 +85,15 @@ public class ProduktbatchController {
         try {
             return DAOSQL.getBatchkomponents(batchIDint);
         } catch (IDALException.DALException e) {
-            e.printStackTrace();
+            throw buildError(Response.Status.NOT_ACCEPTABLE, SQLErrorMsg);
         }
-        return null;
-    }
-
-    public ProduktbatchDTO getBatchLine(String batchID){
-        int batchIDint = Integer.parseInt(batchID);
-
-
-        try {
-            return DAOSQL.getBatchLine(batchIDint);
-        } catch (IDALException.DALException e) {
-            e.printStackTrace();
-        }
-        return null;
     }
 
     public ProduktbatchKompDTO opdaterProduktbatchLine(ProduktbatchKompDTO produktbatchKompDTO){
         try {
             DAOSQL.updateProduktBatchLine(produktbatchKompDTO);
         } catch (IDALException.DALException e) {
-            e.printStackTrace();
+            throw buildError(Response.Status.NOT_ACCEPTABLE, SQLErrorMsg);
         }
         return produktbatchKompDTO;
     }
@@ -90,31 +112,11 @@ public class ProduktbatchController {
         try {
             DAOSQL.updateNewpb(produktbatchKompDTO);
         } catch (IDALException.DALException e) {
-            e.printStackTrace();
+            throw buildError(Response.Status.NOT_ACCEPTABLE, SQLErrorMsg);
         }
         return produktbatchKompDTO;
     }
 
-    // -Mikkel
-    public int getMaxPDID() throws WebApplicationException{
-        try{
-            return DAOSQL.getMaxPDID();
-        } catch(SQLException e) {
-            throw buildError(Response.Status.NOT_ACCEPTABLE, SQLErrorMsg);
-        }
-
-    }
-
-    public ProduktbatchDTO opretProduktbatch(ProduktbatchDTO produktbatchDTO) throws WebApplicationException {
-
-        try {
-            DAOSQL.createProduktBatch(produktbatchDTO);
-        } catch (IDALException.DALException e) {
-            throw buildError(Response.Status.NOT_ACCEPTABLE, SQLErrorMsg);
-        }
-
-        return produktbatchDTO;
-    }
 
     public WebApplicationException buildError(Response.Status status, String msg){
         return new WebApplicationException(Response.status(status).entity(msg).build());

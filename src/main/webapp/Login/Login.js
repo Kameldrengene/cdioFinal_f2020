@@ -84,11 +84,19 @@ async function loadUsers(){
 
 async function loadUser(role, redo=0) {
 
-    await sendAjax(
-        "/BoilerPlate_war_exploded/rest/user/getRole?role=" + role,
-        data => createTable(data, role),
-        (response, error) => load(response, error)
-        )
+    $(".loads").show()
+
+    await $.ajax({
+        url: "/BoilerPlate_war_exploded/rest/user/getRole?role=" + role,
+        type: "GET",
+        async: true,
+        contentType: "application/json",
+        dataType: "json",
+        success: data => createTable(data, role),
+        error: (response, error) => load(response, error)
+    });
+
+    $(".loads").hide()
 
 }
 
