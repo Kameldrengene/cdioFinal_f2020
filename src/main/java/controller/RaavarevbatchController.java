@@ -34,7 +34,7 @@ public class RaavarevbatchController {
     public List<RaavarebatchDTO> getAktuelle() throws WebApplicationException {
         try {
             return DAOSQL.getAktuelRaavarebatchList();
-        } catch (SQLException e) {
+        } catch (Exception e) {
             throw buildError(Response.Status.NOT_ACCEPTABLE, "ERROR: Fejl i forsøg på at kontakte databasen. Prøv igen senere");
         }
     };
@@ -43,18 +43,20 @@ public class RaavarevbatchController {
     public RaavarebatchDTO opretRaavarebatch(RaavarebatchDTO dto) throws WebApplicationException{
 
         //Valider startmængde
-        String startMaengdeCheck = func.startMaengdeOk(dto);
-        if( !startMaengdeCheck.equals("OK") ){
-            throw buildError(Response.Status.NOT_ACCEPTABLE, startMaengdeCheck);
+        String startMaengdeMsg = func.startMaengdeOk(dto);
+        if( !startMaengdeMsg.equals("OK") ){
+            throw buildError(Response.Status.NOT_ACCEPTABLE, startMaengdeMsg);
         }
 
-        //Valider batch ID
-        String batchIdCheck = func.batchIdOk(dto);
-        if( !batchIdCheck.equals("OK") )
-            throw buildError(Response.Status.NOT_ACCEPTABLE, batchIdCheck);
-
         try {
+
+            //Valider batch ID
+            String batchIdMsg = func.batchIdOk(dto);
+            if( !batchIdMsg.equals("OK") )
+                throw buildError(Response.Status.NOT_ACCEPTABLE, batchIdMsg);
+
             DAOSQL.createRaavarebatch(dto);
+
         } catch (SQLException e) {
             throw buildError(Response.Status.NOT_ACCEPTABLE, "ERROR: Fejl i forsøg på at kontakte databasen. Prøv igen senere");
         }

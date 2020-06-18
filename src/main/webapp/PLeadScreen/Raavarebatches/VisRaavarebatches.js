@@ -62,8 +62,8 @@ function viewTable(data){
         tabelData += "<td>"+value.raavareId+"</td>";
 
         //Ensure numbers always shows 4 decimal places
-        const startM = (Math.round(value.startMaengde * 100) / 100).toFixed(4);
-        const aktuelM = (Math.round(value.aktuelMaengde * 100) / 100).toFixed(4);
+        const startM = value.startMaengde.toFixed(4);
+        const aktuelM = value.aktuelMaengde.toFixed(4);
 
         tabelData += "<td>"+startM+"</td>";
         tabelData += "<td>"+aktuelM+"</td>";
