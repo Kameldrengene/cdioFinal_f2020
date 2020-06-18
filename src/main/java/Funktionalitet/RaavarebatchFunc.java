@@ -14,7 +14,7 @@ public class RaavarebatchFunc {
 
         double subject = dto.getStartMaengde();
 
-        if(subject < 3 )
+        if(subject < 0)
             return "ERROR: Startmængde skal være et tal større end nul";
 
         return "OK";
@@ -23,8 +23,8 @@ public class RaavarebatchFunc {
 
     public String batchIdOk(RaavarebatchDTO dto){
 
-        return "ERROR: Batch ID findes allerede";
-//        return "OK";
+//        return "ERROR: Batch ID findes allerede";
+        return "OK";
 
     }
 

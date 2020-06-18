@@ -15,7 +15,7 @@ public class RaavarebatchDAOSQL implements IRaavarebatchDAO {
     public List<RaavarebatchDTO> getRaavarebatchList() throws SQLException{
 
         db.connect();
-        ResultSet rs = db.query("SELECT * FROM raavarebatchview");
+        ResultSet rs = db.query("SELECT * FROM raavarebatchview ORDER BY rbId");
         List<RaavarebatchDTO> RBList = new ArrayList<>();
 
         //We do as in getUser, except we make new user until rs is empty

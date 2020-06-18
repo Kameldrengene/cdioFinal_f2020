@@ -40,7 +40,7 @@ public ProduktbatchKompDTO getBatchkomponent(int pbId, int rbID) throws IDALExce
 
     public List<ProduktbatchKompDTO> getBatchkomponents(int pbId) throws IDALException.DALException{
         db.connect();
-        ResultSet rs = db.query("SELECT * FROM ProduktBatches where PBID = " + pbId); //Select all columns from recept where receptID is input
+        ResultSet rs = db.query("SELECT * FROM ProduktBatches where PBID = " + pbId + " ORDER BY PBID"); //Select all columns from recept where receptID is input
         List<ProduktbatchKompDTO> pbList = new ArrayList<>();
         try {
             while(rs.next()){
@@ -64,7 +64,7 @@ public ProduktbatchKompDTO getBatchkomponent(int pbId, int rbID) throws IDALExce
 //    @Override
     public ProduktbatchDTO getBatchLine(int pbId) throws IDALException.DALException{
         db.connect();
-        ResultSet rs = db.query("SELECT * FROM ProduktBatches where PBID = " + pbId + " GROUP BY PBID");
+        ResultSet rs = db.query("SELECT * FROM ProduktBatches where PBID = " + pbId + " GROUP BY PBID ORDER BY PBID");
         ProduktbatchDTO pb = new ProduktbatchDTO();
         try {
             rs.next();
@@ -83,7 +83,7 @@ public ProduktbatchKompDTO getBatchkomponent(int pbId, int rbID) throws IDALExce
 //    @Override
     public List<ProduktbatchDTO> getProduktBatchList() throws IDALException.DALException{
         db.connect();
-        ResultSet rs = db.query("SELECT * FROM ProduktBatches GROUP BY PBID"); //Select all data from raavarer
+        ResultSet rs = db.query("SELECT * FROM ProduktBatches GROUP BY PBID ORDER BY PBID"); //Select all data from raavarer
         List<ProduktbatchDTO> pbList = new ArrayList<>();
         try {
             //We do as in getUser, except we make new user until rs is empty
