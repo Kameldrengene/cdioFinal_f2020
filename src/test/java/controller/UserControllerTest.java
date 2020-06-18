@@ -97,7 +97,6 @@ class UserControllerTest {
         newUser.setJob("Produktionsleder");
         newUser.setPassword("passNew");
         newUser.setUserID(19);
-
         userController.updateUser(newUser);
         testUser = userController.getUser(19);
         assertEquals(expected,testUser.getJob());
