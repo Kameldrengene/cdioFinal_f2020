@@ -35,9 +35,3 @@ function success(){
     alert("Råvarebatch oprettet succesfuldt");
     switchP("PLeadScreen/Raavarebatches/OpretRaavarebatch/VaelgRaavare.html")
 }
-
-function error(err){
-    const status = err.status;
-    if(status != 500) alert(err.responseText);
-    else alert("ERROR: Fejl i forbindelse med håndtering af input. Prøv igen")
-}

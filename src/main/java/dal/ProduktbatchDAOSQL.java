@@ -120,13 +120,22 @@ public ProduktbatchKompDTO getBatchkomponent(int pbId, int rbID) throws IDALExce
         return newRBList;
     }
 
+    // -Mikkel
+    public int getMaxPDID() throws SQLException{
+        db.connect();
+        ResultSet rs = db.query("SELECT MAX(PBID) AS max FROM ProduktBatches");
+        rs.next();
+        int out = rs.getInt("max");
+        return out;
+    }
 
 //    @Override
     public void createProduktBatch(ProduktbatchDTO produktbatchDTO) throws IDALException.DALException{
         db.connect();
-        db.update("insert into ProduktBatches (PBID, RID, Standing) VALUE ('" + produktbatchDTO.getPbId() + "','" + produktbatchDTO.getReceptId() + "','" + produktbatchDTO.getStatus() + "')");
+        db.update("insert into ProduktBatches (PBID, RID, Standing) VALUES ('" + produktbatchDTO.getPbId() + "','" + produktbatchDTO.getReceptId() + "','" + produktbatchDTO.getStatus() + "')");
         db.close();
     }
+
 
 //    @Override
 public void updateNewpb(ProduktbatchKompDTO ProduktbatchKomp) throws IDALException.DALException{

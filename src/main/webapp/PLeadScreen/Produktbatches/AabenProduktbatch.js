@@ -37,12 +37,6 @@ async function loadBatch(param) {
 
 }
 
-function error(err) {
-    const status = err.status;
-    if (status != 500) alert(err.responseText);
-    else alert("ERROR: Fejl i forbindelse med håndtering af input. Prøv igen")
-}
-
 function viewTable(data){
 
     //Variable to hold all the tabel rows

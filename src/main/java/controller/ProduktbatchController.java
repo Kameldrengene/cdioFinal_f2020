@@ -7,11 +7,13 @@ import dal.dto.ProduktbatchKompDTO;
 
 import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.Response;
+import java.sql.SQLException;
 import java.util.List;
 
 public class ProduktbatchController {
 
     private ProduktbatchDAOSQL DAOSQL;
+    private String SQLErrorMsg = "ERROR: Fejl i forsøg på at kontakte databasen. Prøv igen senere";
 
     public ProduktbatchController(){
         DAOSQL = new ProduktbatchDAOSQL();
@@ -79,7 +81,7 @@ public class ProduktbatchController {
             DAOSQL.updateProduktBatch(produktbatchDTO);
         } catch (IDALException.DALException e) {
             e.printStackTrace();
-            throw DAOSQL.getdb().buildError(Response.Status.NOT_ACCEPTABLE, "Error updating: error in controller");
+            throw DAOSQL.getdb().buildError(Response.Status.NOT_ACCEPTABLE, SQLErrorMsg);
         }
         return produktbatchDTO;
     }
@@ -93,15 +95,25 @@ public class ProduktbatchController {
         return produktbatchKompDTO;
     }
 
-    public ProduktbatchDTO opretProduktbatch(ProduktbatchDTO produktbatchDTO) throws WebApplicationException {
-//        try {
-//            DAOSQL.createProduktBatch(produktbatchDTO);
-//        } catch (IDALException.DALException e) {
-//            e.printStackTrace();
-//        }
-        throw buildError(Response.Status.INTERNAL_SERVER_ERROR, "ERROR: Fejl i forsøg på at kontakte databasen. Prøv igen senere");
+    // -Mikkel
+    public int getMaxPDID() throws WebApplicationException{
+        try{
+            return DAOSQL.getMaxPDID();
+        } catch(SQLException e) {
+            throw buildError(Response.Status.NOT_ACCEPTABLE, SQLErrorMsg);
+        }
 
-//        return produktbatchDTO;
+    }
+
+    public ProduktbatchDTO opretProduktbatch(ProduktbatchDTO produktbatchDTO) throws WebApplicationException {
+
+        try {
+            DAOSQL.createProduktBatch(produktbatchDTO);
+        } catch (IDALException.DALException e) {
+            throw buildError(Response.Status.NOT_ACCEPTABLE, SQLErrorMsg);
+        }
+
+        return produktbatchDTO;
     }
 
     public WebApplicationException buildError(Response.Status status, String msg){

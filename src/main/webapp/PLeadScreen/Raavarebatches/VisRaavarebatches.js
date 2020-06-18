@@ -33,12 +33,6 @@ async function updateTable(){
 
 };
 
-function error(err){
-    const status = err.status;
-    if(status != 500) alert(err.responseText);
-    else alert("ERROR: Intern serverfejl. Prøv igen")
-}
-
 function viewTable(data){
 
     //Variable to hold all the tabel rows

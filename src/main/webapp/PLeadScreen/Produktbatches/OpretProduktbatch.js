@@ -12,18 +12,27 @@ $("document").ready(async function () {
 
 async function opretProduktbatch(activeReceptID){
 
-    //todo brug auto increment i SQL
-    const activeBatchID =  "18";
+    let obj;
 
-    const obj = { pbId: activeBatchID, status: "Ikke påbegyndt", receptId: activeReceptID, dato: "" };
-    const myJson = JSON.stringify(obj);
+    //First find out what the next product batch number should be
+    await sendAjax(
+        "/BoilerPlate_war_exploded/rest/produktbatch/getMaxPBID",
+        async maxPBID => {
 
-    sendAjax(
-        "/BoilerPlate_war_exploded/rest/produktbatch/opretProduktbatch",
-        () => success(),
+            const newPBDI = maxPBID +1;
+            obj = { pbId: newPBDI, status: "Ikke påbegyndt", receptId: activeReceptID, dato: "" }
+
+            let myJson = JSON.stringify(obj);
+
+            await sendAjax(
+                "/BoilerPlate_war_exploded/rest/produktbatch/opretProduktbatch",
+                () => alert("Produktbatch oprettet successfuldt"),
+                err => error(err),
+                "POST",
+                myJson
+            )
+        },
         err => error(err),
-        "POST",
-        myJson
     )
 }
 
@@ -35,7 +44,7 @@ async function loadRecepter() {
 
     await sendAjax(
         "/BoilerPlate_war_exploded/rest/Recept/getRecepts",
-        () => alert("Produktbatch oprettet successfuldt"),
+        data => viewTable(data),
         err => error(err)
     );
 
@@ -43,12 +52,6 @@ async function loadRecepter() {
     $("#loading").hide();
     $("#receptTable").show();
 
-}
-
-function error(err){
-    const status = err.status;
-    if(status != 500) alert(err.responseText);
-    else alert("ERROR: Fejl i forbindelse med håndtering af input. Prøv igen")
 }
 
 function viewTable(data){

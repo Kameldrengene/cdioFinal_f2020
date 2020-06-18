@@ -69,6 +69,13 @@ public class ProduktbatchService {
         return produktbatchController.opdaterNewProduktbatch(produktbatchKompDTO);
     }
 
+    // -Mikkel
+    @Path("getMaxPBID")
+    @GET
+    public int getMaxPBID() throws WebApplicationException{
+        return produktbatchController.getMaxPDID();
+    }
+
     //Oprettet et produktbatch
     @Path("opretProduktbatch")
     @POST

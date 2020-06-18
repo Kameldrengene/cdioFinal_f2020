@@ -51,3 +51,9 @@ function switchP(page) {
     $("body").load(page);
     $("#addRaavare").hide();
 }
+
+function error(err) {
+    const status = err.status;
+    if (status != 500) alert(err.responseText);
+    else alert("ERROR: Intern serverfejl. Prøv igen")
+}

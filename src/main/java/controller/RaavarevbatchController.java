@@ -14,6 +14,7 @@ public class RaavarevbatchController {
 
     public RaavarebatchDAOSQL DAOSQL;
     private RaavarebatchFunc func;
+    private String SQLErrorMsg = "ERROR: Fejl i forsøg på at kontakte databasen. Prøv igen senere";
 
     //Konstruktør
     public RaavarevbatchController() {
@@ -26,7 +27,7 @@ public class RaavarevbatchController {
         try {
             return DAOSQL.getRaavarebatchList();
         } catch (SQLException e) {
-            throw buildError(Response.Status.NOT_ACCEPTABLE, "ERROR: Fejl i forsøg på at kontakte databasen. Prøv igen senere");
+            throw buildError(Response.Status.NOT_ACCEPTABLE, SQLErrorMsg);
         }
     };
 
@@ -35,7 +36,7 @@ public class RaavarevbatchController {
         try {
             return DAOSQL.getAktuelRaavarebatchList();
         } catch (Exception e) {
-            throw buildError(Response.Status.NOT_ACCEPTABLE, "ERROR: Fejl i forsøg på at kontakte databasen. Prøv igen senere");
+            throw buildError(Response.Status.NOT_ACCEPTABLE, SQLErrorMsg);
         }
     };
 
@@ -58,7 +59,7 @@ public class RaavarevbatchController {
             DAOSQL.createRaavarebatch(dto);
 
         } catch (SQLException e) {
-            throw buildError(Response.Status.NOT_ACCEPTABLE, "ERROR: Fejl i forsøg på at kontakte databasen. Prøv igen senere");
+            throw buildError(Response.Status.NOT_ACCEPTABLE, SQLErrorMsg);
         }
 
         return dto;
