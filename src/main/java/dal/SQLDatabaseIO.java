@@ -28,7 +28,11 @@ public class SQLDatabaseIO {
     }
     public void setDB(String db){
         this.db_name = db;
+        connect();
+        query("use "+db+";");
+        close();
     } //Tells object what DB to use
+
     //Try to connect to DB
     public void connect() {
         if(!connected){

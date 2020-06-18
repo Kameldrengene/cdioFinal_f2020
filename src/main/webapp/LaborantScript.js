@@ -22,7 +22,7 @@ function getProductBatch(id){
     sendAjax("/BoilerPlate_war_exploded/rest/produktbatch/getBatchLine/" + id, function (data) {
         var RID = data.receptId;
         localStorage.setItem("receptId", RID);
-        sendAjax("/BoilerPlate_war_exploded/rest/Recept/getReceptList/" + RID, function (Rdata) {
+        sendAjax("/BoilerPlate_war_exploded/rest/Recept/getRecepts/" + RID, function (Rdata) {
             var RNavn = Rdata[0].receptNavn;
             if(confirm("Arbejd med Produktbatch " + id + " (" + RNavn + ")")){
                 var raavareList = [];
@@ -79,9 +79,9 @@ function taraView(){
 
     document.getElementById("content").innerHTML ="<h2>Indtast Tara for Råvare " + raavareNavn + " (ID: " + raavareList[counter] + ")</h2>" +
         "<br>" +
-        "<input id='tara' style='font-size: 14pt' type='number' min='0.05' max='10' step='0.01' placeholder='Tara [Kg]'>" +
+        "<input id='tara' style='font-size: 14pt; width: 10%; text-align: center;' type='number' min='0.05' max='10' step='0.0001' placeholder='Tara [Kg]'>" +
         "<br>" +
-        "<input type='submit' class='hvr-pop screenbtn' value='Næste' onclick='taraSwitch(PBID)'>"
+        "<input type='submit' class='hvr-pop screenbtn' value='Næste' onclick='taraSwitch(" + PBID + ")'>"
 }
 
 function nettoView() {
@@ -95,8 +95,9 @@ function nettoView() {
 }
 
 function taraSwitch(PBID) {
-    sendAjax("/BoilerPlate_war_exploded/rest/produktbatch/getBatchLine/" + PBID, function (data) {
+    sendAjax("/BoilerPlate_war_exploded/rest/produktbatch/getBatchComponent/" + PBID + "/0", function (data) {
         data.tara = $("#tara").val()
+        console.log(data);
         sendAjax("/BoilerPlate_war_exploded/rest/produktbatch/opdaterNewProduktbatch", function (data) {
             nettoView()
         }, function (data) {
@@ -104,7 +105,7 @@ function taraSwitch(PBID) {
             console.log(data)
         }, "POST", JSON.stringify(data))
     }, function (data) {
-        alert("Error getting line: ERR.NO.24")
+        alert("Error getting batchline: ERR.NO.24")
         console.log(data)
     })
 }
