@@ -29,11 +29,12 @@ public class ProduktbatchController {
         return null;
     }
 
-    public ProduktbatchKompDTO getBatchComponent(String batchID, int RBID){
+    public ProduktbatchKompDTO getBatchComponent(String batchID, String RBID){
         int batchIDint = Integer.parseInt(batchID);
+        int RBIDint = Integer.parseInt(RBID);
 
         try {
-            return DAOSQL.getBatchkomponent(batchIDint, RBID);
+            return DAOSQL.getBatchkomponent(batchIDint, RBIDint);
         } catch (IDALException.DALException e) {
             e.printStackTrace();
         }

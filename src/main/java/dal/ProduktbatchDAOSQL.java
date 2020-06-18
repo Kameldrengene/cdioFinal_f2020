@@ -24,7 +24,7 @@ public ProduktbatchKompDTO getBatchkomponent(int pbId, int rbID) throws IDALExce
     try {
         rs.next();
         pb.setPbId(pbId);
-        pb.setStatus(rs.getString("Stading"));
+        pb.setStatus(rs.getString("Standing"));
         pb.setUserId(rs.getInt("UserID"));
         pb.setRbID(rs.getInt("RBID"));
         pb.setTara(rs.getDouble("Tara"));
@@ -32,6 +32,7 @@ public ProduktbatchKompDTO getBatchkomponent(int pbId, int rbID) throws IDALExce
         rs.close();
     } catch (SQLException e) {
         e.printStackTrace();
+        throw db.buildError(Response.Status.NOT_ACCEPTABLE, "error getting from db: " + "SELECT * FROM ProduktBatches where PBID = " + pbId + " AND RBID = " + rbID);
     }
     db.close();
     return pb;
@@ -144,6 +145,7 @@ public void updateNewpb(ProduktbatchKompDTO ProduktbatchKomp) throws IDALExcepti
         rs.close();
     } catch (SQLException e) {
         e.printStackTrace();
+        throw db.buildError(Response.Status.NOT_ACCEPTABLE, "Error sending it to db");
     }
     db.close();
 }
