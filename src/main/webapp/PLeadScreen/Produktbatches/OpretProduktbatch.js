@@ -38,19 +38,11 @@ async function opretProduktbatch(activeReceptID){
 
 async function loadRecepter() {
 
-    //Hide table and display loader while updating
-    $("#receptTable").hide();
-    $("#loading").show();
-
     await sendAjax(
         "/BoilerPlate_war_exploded/rest/Recept/getRecepts",
         data => viewTable(data),
         err => error(err)
     );
-
-    //Remove loader and reveal table
-    $("#loading").hide();
-    $("#receptTable").show();
 
 }
 

@@ -11,19 +11,11 @@ $("document").ready(async function () {
 
 async function loadRaavarer() {
 
-    //Hide table and display loader while updating
-    $("#raavareTable").hide();
-    $("#loading").show();
-
     await sendAjax(
         "/BoilerPlate_war_exploded/rest/Raavare/getRaavarer",
         data => viewTable(data),
         err => error(err)
     );
-
-    //Remove loader and reveal table
-    $("#loading").hide();
-    $("#raavareTable").show();
 
 }
 

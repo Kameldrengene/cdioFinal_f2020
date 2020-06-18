@@ -2,6 +2,9 @@ $.ajaxSetup({async: false}); //this file is for general scripts used all over th
 
 
 async function sendAjax(link, successFunc, errorFunc=function (data) {console.log(data);}, type="GET", jsonData="None"){
+
+    $(".loads").show()
+
     await $.ajax({
         url: link,
         type: type,
@@ -12,6 +15,8 @@ async function sendAjax(link, successFunc, errorFunc=function (data) {console.lo
         success: function (data) {successFunc(data)},
         error: function (data) {errorFunc(data)}
     });
+
+    $(".loads").hide()
     
 }
 

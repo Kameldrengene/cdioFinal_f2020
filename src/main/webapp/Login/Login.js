@@ -74,54 +74,47 @@ $("document").ready(async function () {
 
 async function loadUsers(){
 
-    //Display loader
-    $("#loader").html("<div id='loading'></div>")
-
     //fetch and save user data
     await loadUser("Administrator");
     await loadUser("Farmaceut");
     await loadUser("Produktionsleder");
     await loadUser("Laborant");
 
-    //Remove loader
-    $("#loader").html("")
-
 }
 
 async function loadUser(role, redo=0) {
 
-     await $.ajax({
-        url: "/BoilerPlate_war_exploded/rest/user/getRole?role=" + role,
-        type: "GET",
-        async: true,
-        contentType: "application/json",
-        dataType: "json",
-        success: function(data){ createTable(data, role)},
-        error: async function (response, error) {
-            if (response.status == 500) {
-                alert("Kunne ikke forbinde korrekt til backenden. Genstarter siden");
-                location.reload();
-            }else {
-                if (redo == 0) {
-                    alert("Kunne ikke forbinde til databasen. Prøver igen");
-                    console.log(response);
-                    await loadUser(role, 1);
-                } else if (redo < 4) {
-                    console.log(response);
-                    await sleep(500);
-                    await loadUser(role, redo + 1);
-
-                } else {
-                    alert("Fejlede 5 forsøg i træk. Kontakt System administratoren.")
-                    console.log(response);
-                }
-            }
-        }
-    });
+    await sendAjax(
+        "/BoilerPlate_war_exploded/rest/user/getRole?role=" + role,
+        data => createTable(data, role),
+        (response, error) => load(response, error)
+        )
 
 }
 
-function createTable(data, role){
+async function loadError(response, error){
+    if (response.status == 500) {
+        alert("Kunne ikke forbinde korrekt til backenden. Genstarter siden");
+        location.reload();
+    }else {
+        if (redo == 0) {
+            alert("Kunne ikke forbinde til databasen. Prøver igen");
+            console.log(response);
+            await loadUser(role, 1);
+        } else if (redo < 4) {
+            console.log(response);
+            await sleep(500);
+            await loadUser(role, redo + 1);
+
+        } else {
+            alert("Fejlede 5 forsøg i træk. Kontakt System administratoren.")
+            console.log(response);
+        }
+    }
+}
+
+async function createTable(data, role){
+
     //Variable to hold all the tabel rows
     let tabelData = "";
 

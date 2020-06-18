@@ -28,10 +28,6 @@ $("document").ready(async function(){
 
 async function updateTable(){
 
-    //Hide table and display loader while updating
-    $("#produktbatches").hide();
-    $("#loading").show();
-
     let path;
 
     if($("#visAfsluttede").is(":checked"))
@@ -44,10 +40,6 @@ async function updateTable(){
         data => viewTable(data),
         err => error(err)
     )
-
-    //Remove loader and reveal table
-    $("#loading").hide();
-    $("#produktbatches").show();
 
 };
 

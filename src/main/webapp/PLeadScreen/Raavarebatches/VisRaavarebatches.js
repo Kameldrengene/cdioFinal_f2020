@@ -10,10 +10,6 @@ $("document").ready(async function(){
 
 async function updateTable(){
 
-    //Hide table and display loader while updating
-    $("#raavarebatches").hide();
-    $("#loading").show();
-
     let path;
 
     if($("#visTomme").is(":checked"))
@@ -26,10 +22,6 @@ async function updateTable(){
         data => viewTable(data),
         err => error(err)
     );
-
-    //Remove loader and reveal table
-    $("#loading").hide();
-    $("#raavarebatches").show();
 
 };
 
