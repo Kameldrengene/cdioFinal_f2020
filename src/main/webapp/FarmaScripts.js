@@ -143,4 +143,10 @@ function tilbage() {
     });
 }
 
+function toOpretrecept() {
+    switchP('FarmaScreen/NyRecept/index.html');
+    $("#loading").hide();
+
+}
+
 

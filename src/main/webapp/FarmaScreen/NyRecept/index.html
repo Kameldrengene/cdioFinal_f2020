@@ -9,10 +9,14 @@
     <link rel="stylesheet" type="text/css" href="addrecept.css">
     <link rel="stylesheet" href="addrecept.css">
     <link rel="stylesheet" href="../../default.css">
+    <script src="opretRecept.js"></script>
+    <script src="../../PLeadScreen/Produktbatches/VisProduktbatches.js"></script>
 
 </head>
 <body>
-<div id=""><h1>Opret ny Recept</h1>
+
+<div id='loading'></div>
+<div id="opretRecept"><h1>Opret ny Recept</h1>
     <br>
 
     <div id="nyRecept">
@@ -34,9 +38,9 @@
         </div>
     </div>
 </div>
-
+<div id="opretReceptBtn">
 <input type="submit" id="videre" class="hvr-buzz screenbtn" onclick="addLinje(); return false" value="TilføjeRåvare" ><br>
 <input type="submit" class="hvr-buzz screenbtn" value="Retur" onclick="retur(); return false">
-
+</div>
 </body>
 </html>
