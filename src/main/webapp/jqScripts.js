@@ -15,8 +15,6 @@ async function sendAjax(link, successFunc, errorFunc=function (data) {console.lo
     
 }
 
-
-
 async function viewlist(headers, link, tableName, btnHtmlfunc) {
     $(document).ready(
         await sendAjax(link ,function (BEdata) {

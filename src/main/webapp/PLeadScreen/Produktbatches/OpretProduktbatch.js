@@ -6,17 +6,8 @@ $("document").ready(async function () {
 
         let confirmation = confirm("Opret produktbatch for recept ID: " + this.id);
         if (confirmation == true)
-
-            try{
-                opretProduktbatch(this.id);
-                console.log("success")
-            }catch(err){
-                console.log(err);
-                alert(err.responseText);
-            }
-
-    })
-
+            opretProduktbatch(this.id);
+    });
 });
 
 async function opretProduktbatch(activeReceptID){
@@ -26,6 +17,14 @@ async function opretProduktbatch(activeReceptID){
 
     const obj = { pbId: activeBatchID, status: "Ikke påbegyndt", receptId: activeReceptID, dato: "" };
     const myJson = JSON.stringify(obj);
+
+    sendAjax(
+        "/BoilerPlate_war_exploded/rest/produktbatch/opretProduktbatch",
+        () => {},
+        err => alert(err.responseText),
+        "POST",
+        myJson
+    )
 
     await $.ajax({
         url: "/BoilerPlate_war_exploded/rest/produktbatch/opretProduktbatch",

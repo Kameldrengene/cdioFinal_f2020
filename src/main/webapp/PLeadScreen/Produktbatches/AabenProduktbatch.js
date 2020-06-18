@@ -2,12 +2,14 @@ var batchID;
 var receptID;
 var status;
 var dato;
-$("document").ready(function () {
+
+$("document").ready(async function () {
 
     batchID = localStorage.getItem("activePBId");
     receptID = localStorage.getItem("activeReceptID");
     status = localStorage.getItem("activeStatus");
     dato = localStorage.getItem("activeDato");
+
     let param = "";
     param += batchID+"-"+receptID;
 
@@ -16,7 +18,7 @@ $("document").ready(function () {
     $("#status").html("Status: " + status);
     $("#dato").html("Oprettelses dato: " + dato);
 
-    loadBatch(param);
+    await loadBatch(param);
 
     $("#produktbatch").on("click", "button", function () {
         localStorage.setItem("activeRBId", this.id);
@@ -26,14 +28,12 @@ $("document").ready(function () {
 });
 
 async function loadBatch(param) {
-    sendAjax(
+
+    await sendAjax(
         "/BoilerPlate_war_exploded/rest/Print/getData/" + param,
-        function (data) {
-        viewTable(data);
-    }, function (data) {
-        alert("Error loading produktbatches: ERR.NO.11");
-        console.log(data);
-    })
+        data => viewTable(data),
+        err => console.log(err)
+    )
 
 }
 
@@ -61,7 +61,6 @@ function viewTable(data){
     tabelData += "<tr>";
     tabelData += "<td> &nbsp; </td>";
     tabelData += "</tr>";
-
 
 
     //Loop through
@@ -119,8 +118,8 @@ function sniff(value) {
 
 function printDiv(divName) {
     $("#produktbatch").removeClass("brugertable");
-    var printContents = document.getElementById(divName).innerHTML;
-    var originalContents = document.body.innerHTML;
+    let printContents = document.getElementById(divName).innerHTML;
+    let originalContents = document.body.innerHTML;
 
     document.body.innerHTML = printContents;
 

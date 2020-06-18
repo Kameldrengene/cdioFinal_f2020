@@ -1,11 +1,6 @@
 $("document").ready(async function () {
 
-    try{
-        await loadRaavarer();
-    } catch(err){
-        console.log(err);
-        alert(err.responseText);
-    }
+    await loadRaavarer();
 
     $("#raavareTable").on("click", "button", function () {
         localStorage.setItem("activeRaavare", this.id);
@@ -20,14 +15,12 @@ async function loadRaavarer() {
     $("#raavareTable").hide();
     $("#loading").show();
 
-    await $.ajax({
-        url: "/BoilerPlate_war_exploded/rest/Raavare/getRaavarer",
-        type: "GET",
-        async: true,
-        contentType: "application/json",
-        dataType: "json",
-        success: data => viewTable(data)
-    });
+    await sendAjax(
+        "/BoilerPlate_war_exploded/rest/Raavare/getRaavarer",
+        data => viewTable(data),
+        alert(err.responseText)
+
+    );
 
     //Remove loader and reveal table
     $("#loading").hide();
