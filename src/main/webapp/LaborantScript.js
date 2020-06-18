@@ -78,7 +78,7 @@ function taraView(){
 
     document.getElementById("content").innerHTML ="<h2>Indtast Tara for Råvare " + raavareNavn + " (ID: " + raavareList[counter] + ")</h2>" +
         "<br>" +
-        "<input id='tara' style='font-size: 14pt; width: 10%; text-align: center;' type='number' min='0.05' max='10' step='0.0001' placeholder='Tara [Kg]'>" +
+        "<input id='tara' style='font-size: 14pt; width: 10%; text-align: center;' type='number' min='0.001' max='10' step='0.0001' placeholder='Tara [Kg]'>" +
         "<br>" +
         "<input type='submit' class='hvr-pop screenbtn' value='Næste' onclick='taraSwitch(" + PBID + ")'>"
 }
@@ -114,7 +114,7 @@ function taraSwitch(PBID) {
     sendAjax("/BoilerPlate_war_exploded/rest/produktbatch/getBatchComponent/" + PBID + "/0", function (data) {
         data.tara = $("#tara").val()
         data.userId = localStorage.getItem("loginID");
-        sendAjax("/BoilerPlate_war_exploded/rest/produktbatch/opdaterNewProduktbatch", function (data) {
+        sendAjax("/BoilerPlate_war_exploded/rest/produktbatch/opdaterNewProduktbatch/", function (data) {
             nettoView()
         }, function (data) {
             alert("Error updating new batch: ERR.NO.23")
@@ -127,34 +127,51 @@ function taraSwitch(PBID) {
 }
 
 function nettoSwitch(PBID) {
-    sendAjax("/BoilerPlate_war_exploded/rest/produktbatch/getBatchComponent/" + PBID + "/0", function (data) {
-        data.netto = $("#netto").val();
-        data.rbID = $("#batchSelect").val();
-        console.log(data);
-        sendAjax("/BoilerPlate_war_exploded/rest/produktbatch/opdaterNewProduktbatch", function (data) {
-            var counter = parseInt(localStorage.getItem("raavareCounter"));
-            const raavareList = localStorage.getItem("raavareList").split(",");
-            if (counter < raavareList.length - 1) {
-                console.log(counter < raavareList.length - 1)
-                localStorage.setItem("raavareCounter", (counter + 1) + "");
-                const newPBLine = {pbId: PBID, receptId: localStorage.getItem("receptId"), status: "Under Produktion"}
-                sendAjax("/BoilerPlate_war_exploded/rest/produktbatch/opretProduktbatch", function (data) {
-                    taraView();
+    sendAjax("/BoilerPlate_war_exploded/rest/Raavarebatch/getBatch/" + $("#batchSelect").val(), function (data) {
+        if (data.aktuelMaengde < parseFloat($("#netto").val())) {
+            alert("Vælg venligst en Batch med nok matriale tilbage.")
+            nettoView()
+        } else {
+            data.aktuelMaengde -= parseFloat($("#netto").val());
+            sendAjax("/BoilerPlate_war_exploded/rest/Raavarebatch/opdaterRaavarebatch", function (data) {
+                sendAjax("/BoilerPlate_war_exploded/rest/produktbatch/getBatchComponent/" + PBID + "/0", function (data) {
+                    data.netto = parseFloat($("#netto").val());
+                    data.rbID = parseInt($("#batchSelect").val());
+                    console.log(data);
+                    sendAjax("/BoilerPlate_war_exploded/rest/produktbatch/opdaterNewProduktbatch", function (data) {
+                        var counter = parseInt(localStorage.getItem("raavareCounter"));
+                        const raavareList = localStorage.getItem("raavareList").split(",");
+                        if (counter < raavareList.length - 1) {
+                            console.log(counter < raavareList.length - 1)
+                            localStorage.setItem("raavareCounter", (counter + 1) + "");
+                            const newPBLine = {pbId: PBID, receptId: localStorage.getItem("receptId"), status: "Under Produktion"}
+                            sendAjax("/BoilerPlate_war_exploded/rest/produktbatch/opretProduktbatch", function (data) {
+                                taraView();
+                            }, function (data) {
+                                alert("Error creating new pbLine: ERR.NO.30")
+                                console.log(data)
+                            }, "POST", JSON.stringify(newPBLine))
+                        } else {
+                            completepb(PBID);
+                        }
+                    }, function (data) {
+                        alert("Error updating new batch: ERR.NO.26")
+                        console.log(data)
+                    }, "POST", JSON.stringify(data))
                 }, function (data) {
-                    alert("Error creating new pbLine: ERR.NO.30")
+                    alert("Error getting batchline: ERR.NO.27")
                     console.log(data)
-                }, "POST", JSON.stringify(newPBLine))
-            } else {
-                completepb(PBID);
-            }
-        }, function (data) {
-            alert("Error updating new batch: ERR.NO.26")
-            console.log(data)
-        }, "POST", JSON.stringify(data))
+                })
+            }, function (data) {
+                alert("Error updating RaavareBatch: ERR.NO.31");
+                console.log(data)
+            }, "POST", JSON.stringify(data))
+        }
     }, function (data) {
-        alert("Error getting batchline: ERR.NO.27")
+        alert("Error getting RaavareBatch: ERR.NO.32");
         console.log(data)
     })
+
 }
 
 function completepb(PBID){
