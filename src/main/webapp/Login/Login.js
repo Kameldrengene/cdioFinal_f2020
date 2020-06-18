@@ -98,18 +98,23 @@ async function loadUser(role, redo=0) {
         dataType: "json",
         success: function(data){ createTable(data, role)},
         error: async function (response, error) {
-            if (redo==0) {
-                alert("Kunne ikke forbinde til databasen. Prøver igen");
-                console.log(response);
-                await loadUser(role, 1);
-            }else if (redo < 4) {
-                console.log(response);
-                await sleep(500);
-                await loadUser(role, redo + 1);
+            if (response.status == 500) {
+                alert("Kunne ikke forbinde korrekt til backenden. Genstarter siden");
+                location.reload();
+            }else {
+                if (redo == 0) {
+                    alert("Kunne ikke forbinde til databasen. Prøver igen");
+                    console.log(response);
+                    await loadUser(role, 1);
+                } else if (redo < 4) {
+                    console.log(response);
+                    await sleep(500);
+                    await loadUser(role, redo + 1);
 
-            } else {
-                alert("Fejlede 5 forsøg i træk. Kontakt System administratoren.")
-                console.log(response);
+                } else {
+                    alert("Fejlede 5 forsøg i træk. Kontakt System administratoren.")
+                    console.log(response);
+                }
             }
         }
     });
