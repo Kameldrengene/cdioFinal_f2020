@@ -63,15 +63,21 @@ public class ReceptController {
 
     public List<ReceptDTO> opretRecept (List<ReceptDTO> recept){
         try {
-            boolean checkError = true;
-                for (int i = 0; i < recept.size(); i++) {
+            int i = 0;
+            int j = 0;
+                while (i < recept.size()){
                     ReceptFunc receptFunc = new ReceptFunc();
                     if (!(receptFunc.isReceptOk(recept.get(i)))) {
                         throw new WebApplicationException(Response.status(Response.Status.NOT_ACCEPTABLE).entity("Error! Tilføje venligst rigtig størrelser: \n navn: >2 og <3\n" + "nonNetto: >= 0,05 og <20\n" + "tolerance: >= 0.1 og <20").build());
                     }
-                    if ((receptFunc.doesIdExist(recept.get(i), getData()))) {
+                    i++;
+                }
+                while (j < recept.size()) {
+                    ReceptFunc receptFunc = new ReceptFunc();
+                    if ((receptFunc.doesIdExist(recept.get(j), getData()))) {
                         throw new WebApplicationException(Response.status(Response.Status.NOT_ACCEPTABLE).entity("ID existerer allerede").build());
                     }
+                    j++;
                 }
                 receptDAOSQL.createReceptList(recept);
         }catch (IDALException.DALException e){
