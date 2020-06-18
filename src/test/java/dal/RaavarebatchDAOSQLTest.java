@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
 
+import java.sql.SQLException;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -74,7 +75,7 @@ class RaavarebatchDAOSQLTest {
             testRaavarebatch = raavarebatchDAOSQL.getRaavarebatch(99);
             assertEquals(expected,testRaavarebatch.getRbId());
 
-        } catch (IDALException.DALException e) {
+        } catch (SQLException | IDALException.DALException e) {
             e.printStackTrace();
         }
 
@@ -97,7 +98,7 @@ class RaavarebatchDAOSQLTest {
             testRaavarebatch = raavarebatchDAOSQL.getRaavarebatch(99);
             assertEquals(expected,testRaavarebatch.getAktuelMaengde());
 
-        } catch (IDALException.DALException e) {
+        } catch (SQLException | IDALException.DALException e) {
             e.printStackTrace();
         }
     }

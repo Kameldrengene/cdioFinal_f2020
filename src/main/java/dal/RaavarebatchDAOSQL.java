@@ -77,28 +77,27 @@ public class RaavarebatchDAOSQL implements IRaavarebatchDAO {
     }
 
     @Override
-    public void createRaavarebatch(RaavarebatchDTO raavarebatch) throws IDALException.DALException{
+    public void createRaavarebatch(RaavarebatchDTO raavarebatch) throws SQLException{
         db.connect();
         db.update("insert into RaavareBatches (rBID, raavareID, maengde, aktuelMaengde) VALUE ('" + raavarebatch.getRbId() + "','" + raavarebatch.getRaavareId() + "','" + raavarebatch.getStartMaengde() + "','" + raavarebatch.getAktuelMaengde()  + "')");
         db.close();
     }
 
     @Override
-    public void updateRaavarebatch(RaavarebatchDTO raavarebatch) throws IDALException.DALException{
+    public void updateRaavarebatch(RaavarebatchDTO raavarebatch) throws SQLException {
+
+
         db.connect();
-        try {
-            ResultSet rs = db.query("SELECT * FROM RaavareBatches where rBID=" + raavarebatch.getRbId());
-            rs.next();
-            if (rs.getInt("rBID") == raavarebatch.getRbId()) {
-                db.update("UPDATE RaavareBatches SET raavareID = '" + raavarebatch.getRaavareId() + "' WHERE (rBID = '" + raavarebatch.getRbId() + "');");
-                db.update("UPDATE RaavareBatches SET maengde = '" + raavarebatch.getStartMaengde() + "' WHERE (rBID = '" + raavarebatch.getRbId() + "');");
-                db.update("UPDATE RaavareBatches SET aktuelMaengde = '" + raavarebatch.getAktuelMaengde() + "' WHERE (rBID = '" + raavarebatch.getRbId() + "');");
-            }
-            rs.close();
-        } catch (SQLException e) {
-            e.printStackTrace();
+        ResultSet rs = db.query("SELECT * FROM RaavareBatches where rBID=" + raavarebatch.getRbId());
+        rs.next();
+        if (rs.getInt("rBID") == raavarebatch.getRbId()) {
+            db.update("UPDATE RaavareBatches SET raavareID = '" + raavarebatch.getRaavareId() + "' WHERE (rBID = '" + raavarebatch.getRbId() + "');");
+            db.update("UPDATE RaavareBatches SET maengde = '" + raavarebatch.getStartMaengde() + "' WHERE (rBID = '" + raavarebatch.getRbId() + "');");
+            db.update("UPDATE RaavareBatches SET aktuelMaengde = '" + raavarebatch.getAktuelMaengde() + "' WHERE (rBID = '" + raavarebatch.getRbId() + "');");
         }
+        rs.close();
         db.close();
+
     }
 
 

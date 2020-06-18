@@ -7,6 +7,7 @@ import dal.dto.RaavarebatchDTO;
 
 import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.Response;
+import java.sql.SQLException;
 import java.util.List;
 
 public class RaavarevbatchController {
@@ -14,10 +15,10 @@ public class RaavarevbatchController {
     public RaavarebatchDAOSQL DAOSQL;
     private RaavarebatchFunc func;
 
-
     //Konstruktør
     public RaavarevbatchController() {
         DAOSQL = new RaavarebatchDAOSQL();
+        func = new RaavarebatchFunc();
     }
 
     public List<RaavarebatchDTO> getData() throws IDALException.DALException {
@@ -39,11 +40,12 @@ public class RaavarevbatchController {
     public RaavarebatchDTO updateRaavarebatch(RaavarebatchDTO raavarebatchDTO) {
         try {
             DAOSQL.updateRaavarebatch(raavarebatchDTO);
-        } catch (IDALException.DALException e) {
+        } catch (SQLException e) {
             e.printStackTrace();
         }
         return raavarebatchDTO;
     }
+
 
     public RaavarebatchDTO opretRaavarebatch(RaavarebatchDTO dto) throws WebApplicationException{
 
@@ -61,8 +63,8 @@ public class RaavarevbatchController {
 
         try {
             DAOSQL.createRaavarebatch(dto);
-        } catch (IDALException.DALException e) {
-            throw buildError(Response.Status.INTERNAL_SERVER_ERROR, "ERROR: Fejl i forsøg på at kontakte databasen");
+        } catch (SQLException e) {
+            throw buildError(Response.Status.INTERNAL_SERVER_ERROR, "ERROR: Fejl i forsøg på at kontakte databasen. Prøv igen senere");
         }
 
         return dto;

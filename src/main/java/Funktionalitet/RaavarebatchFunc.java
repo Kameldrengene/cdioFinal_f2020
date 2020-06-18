@@ -22,9 +22,4 @@ public class RaavarebatchFunc {
     }
 
 
-
-
-
-
-
 }

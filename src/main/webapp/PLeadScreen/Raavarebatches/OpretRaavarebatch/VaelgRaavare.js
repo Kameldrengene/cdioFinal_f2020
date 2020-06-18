@@ -1,6 +1,11 @@
 $("document").ready(async function () {
 
-    await loadRaavarer();
+    try{
+        await loadRaavarer();
+    } catch(err){
+        console.log(err);
+        alert(err.responseText);
+    }
 
     $("#raavareTable").on("click", "button", function () {
         localStorage.setItem("activeRaavare", this.id);
@@ -15,16 +20,14 @@ async function loadRaavarer() {
     $("#raavareTable").hide();
     $("#loading").show();
 
-    await sendAjax(
-        "/BoilerPlate_war_exploded/rest/Raavare/getRaavarer",
-        function (data) {
-            viewTable(data)
-        },
-        function (data) {
-            alert("Error getting all/actual råvarer: ERR.NO.XX");
-            console.log(data);
-        }
-    );
+    await $.ajax({
+        url: "/BoilerPlate_war_exploded/rest/Raavare/getRaavarer",
+        type: "GET",
+        async: true,
+        contentType: "application/json",
+        dataType: "json",
+        success: data => viewTable(data)
+    });
 
     //Remove loader and reveal table
     $("#loading").hide();

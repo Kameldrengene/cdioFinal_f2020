@@ -1,7 +1,13 @@
 
 $("document").ready(async function(){
 
-    await updateTable()
+    try{
+        await updateTable()
+    } catch(err){
+        console.log(err);
+        alert(err.responseText);
+    }
+
 
     $("#visTomme").click(async function () {
         await updateTable();
@@ -22,13 +28,14 @@ async function updateTable(){
     else
         path = "getAktuelle"
 
-    await sendAjax("/BoilerPlate_war_exploded/rest/Raavarebatch/" + path,
-        function (data) {
-        viewTable(data)
-    }, function (data) {
-        alert("Error loading list: ERR.NO.01");
-        console.log(data);
-    })
+    await $.ajax({
+        url: "/BoilerPlate_war_exploded/rest/Raavarebatch/" + path,
+        type: "GET",
+        async: true,
+        contentType: "application/json",
+        dataType: "json",
+        success: data => viewTable(data)
+    });
 
     //Remove loader and reveal table
     $("#loading").hide();
