@@ -61,7 +61,7 @@ public class RaavarebatchDAOSQL implements IRaavarebatchDAO {
 
     public List<RaavarebatchDTO> getRVIDBatch(int RVID) {
         db.connect();
-        ResultSet rs = db.query("SELECT * FROM raavarebatchview WHERE raavareID = " + RVID);
+        ResultSet rs = db.query("SELECT * FROM raavarebatchview WHERE raavareID = " + RVID + " AND aktuelMaengde > 0");
         List<RaavarebatchDTO> RVBList = new ArrayList<>();
         try {
             //We do as in getUser, except we make new user until rs is empty
