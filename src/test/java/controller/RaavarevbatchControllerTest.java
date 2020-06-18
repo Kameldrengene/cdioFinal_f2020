@@ -22,13 +22,9 @@ class RaavarevbatchControllerTest {
         raavarevbatchController.DAOSQL.db.setDB("cdioTest_2020");
         int expected = 2;
         int expectedSize = 19;
-        try {
-            listRaavarebatch = raavarevbatchController.getData();
-            assertEquals(expected,listRaavarebatch.get(1).getRbId());
-            //assertEquals(expectedSize,listRaavarebatch.size());
-        } catch (IDALException.DALException e) {
-            e.printStackTrace();
-        }
+        listRaavarebatch = raavarevbatchController.getData();
+        assertEquals(expected,listRaavarebatch.get(1).getRbId());
+        //assertEquals(expectedSize,listRaavarebatch.size());
 
     }
 
@@ -38,13 +34,9 @@ class RaavarevbatchControllerTest {
         raavarevbatchController.DAOSQL.db.setDB("cdioTest_2020");
         int expected = 22;
         int expectedSize = 20;
-        try {
-            listRaavarebatch = raavarevbatchController.getAktuelle();
-            assertEquals(expected,listRaavarebatch.get(2).getRbId());
-            assertEquals(expectedSize,listRaavarebatch.size());
-        } catch (IDALException.DALException e) {
-            e.printStackTrace();
-        }
+        listRaavarebatch = raavarevbatchController.getAktuelle();
+        assertEquals(expected,listRaavarebatch.get(2).getRbId());
+        assertEquals(expectedSize,listRaavarebatch.size());
 
     }
 

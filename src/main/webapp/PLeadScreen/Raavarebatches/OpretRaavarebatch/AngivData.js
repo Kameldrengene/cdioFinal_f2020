@@ -24,13 +24,20 @@ async function opretRaavarebatch(){
 
     await sendAjax(
         "/BoilerPlate_war_exploded/rest/Raavarebatch/opretRaavarebatch",
-        () => {
-            alert("Råvarebatch oprettet succesfuldt");
-            switchP("PLeadScreen/Raavarebatches/OpretRaavarebatch/VaelgRaavare.html")
-        },
-        err => alert(err.responseText),
+        () => success(),
+        err => error(err),
         "POST",
         myJson
     );
-
 };
+
+function success(){
+    alert("Råvarebatch oprettet succesfuldt");
+    switchP("PLeadScreen/Raavarebatches/OpretRaavarebatch/VaelgRaavare.html")
+}
+
+function error(err){
+    const status = err.status;
+    if(status != 500) alert(err.responseText);
+    else alert("ERROR: Fejl i forbindelse med håndtering af input. Prøv igen")
+}

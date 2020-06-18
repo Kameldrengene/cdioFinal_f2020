@@ -32,9 +32,15 @@ async function loadBatch(param) {
     await sendAjax(
         "/BoilerPlate_war_exploded/rest/Print/getData/" + param,
         data => viewTable(data),
-        err => console.log(err)
+        err => error(err)
     )
 
+}
+
+function error(err) {
+    const status = err.status;
+    if (status != 500) alert(err.responseText);
+    else alert("ERROR: Fejl i forbindelse med håndtering af input. Prøv igen")
 }
 
 function viewTable(data){

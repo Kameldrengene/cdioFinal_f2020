@@ -24,13 +24,9 @@ class RaavarebatchServiceTest {
         int expected = 2;
         int expectedSize = 22;
 
-        try {
-            listRaavarebatch = raavarebatchService.getData();
-            assertEquals(expected,listRaavarebatch.get(1).getRbId());
-            assertEquals(expectedSize,listRaavarebatch.size());
-        } catch (IDALException.DALException e) {
-            e.printStackTrace();
-        }
+        listRaavarebatch = raavarebatchService.getData();
+        assertEquals(expected,listRaavarebatch.get(1).getRbId());
+        assertEquals(expectedSize,listRaavarebatch.size());
     }
 
     @Test
@@ -39,13 +35,9 @@ class RaavarebatchServiceTest {
         raavarebatchService.raavarebatchController.DAOSQL.db.setDB("cdioTest_2020");
         int expected = 22;
         int expectedSize = 20;
-        try {
-            listRaavarebatch = raavarebatchService.getAktuelle();
-            assertEquals(expected,listRaavarebatch.get(2).getRbId());
-            assertEquals(expectedSize,listRaavarebatch.size());
-        } catch (IDALException.DALException e) {
-            e.printStackTrace();
-        }
+        listRaavarebatch = raavarebatchService.getAktuelle();
+        assertEquals(expected,listRaavarebatch.get(2).getRbId());
+        assertEquals(expectedSize,listRaavarebatch.size());
     }
 
     @Test

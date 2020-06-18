@@ -42,7 +42,7 @@ async function updateTable(){
     await sendAjax(
         "/BoilerPlate_war_exploded/rest/produktbatch/" + path,
         data => viewTable(data),
-        err => alert(err.responseText)
+        err => error(err)
     )
 
     //Remove loader and reveal table
@@ -50,6 +50,12 @@ async function updateTable(){
     $("#produktbatches").show();
 
 };
+
+function error(err){
+    const status = err.status;
+    if(status != 500) alert(err.responseText);
+    else alert("ERROR: Fejl i forbindelse med håndtering af input. Prøv igen")
+}
 
 function viewTable(data){
 

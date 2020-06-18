@@ -20,21 +20,11 @@ async function opretProduktbatch(activeReceptID){
 
     sendAjax(
         "/BoilerPlate_war_exploded/rest/produktbatch/opretProduktbatch",
-        () => {},
-        err => alert(err.responseText),
+        () => success(),
+        err => error(err),
         "POST",
         myJson
     )
-
-    await $.ajax({
-        url: "/BoilerPlate_war_exploded/rest/produktbatch/opretProduktbatch",
-        type: "POST",
-        async: true,
-        contentType: "application/json",
-        dataType: "json",
-        data: myJson,
-    });
-
 }
 
 async function loadRecepter() {
@@ -45,19 +35,20 @@ async function loadRecepter() {
 
     await sendAjax(
         "/BoilerPlate_war_exploded/rest/Recept/getRecepts",
-        function (data) {
-            viewTable(data)
-        },
-        function (data) {
-            alert("Error getting all/actual recept: ERR.NO.XX");
-            console.log(data);
-        }
+        () => alert("Produktbatch oprettet successfuldt"),
+        err => error(err)
     );
 
     //Remove loader and reveal table
     $("#loading").hide();
     $("#receptTable").show();
 
+}
+
+function error(err){
+    const status = err.status;
+    if(status != 500) alert(err.responseText);
+    else alert("ERROR: Fejl i forbindelse med håndtering af input. Prøv igen")
 }
 
 function viewTable(data){

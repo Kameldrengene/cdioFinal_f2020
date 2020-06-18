@@ -21,13 +21,46 @@ public class RaavarevbatchController {
         func = new RaavarebatchFunc();
     }
 
-    public List<RaavarebatchDTO> getData() throws IDALException.DALException {
-        return DAOSQL.getRaavarebatchList();
-    }
+    // -Mikkel
+    public List<RaavarebatchDTO> getData() throws WebApplicationException {
+        try {
+            return DAOSQL.getRaavarebatchList();
+        } catch (SQLException e) {
+            throw buildError(Response.Status.NOT_ACCEPTABLE, "ERROR: Fejl i forsøg på at kontakte databasen. Prøv igen senere");
+        }
+    };
 
-    public List<RaavarebatchDTO> getAktuelle() throws IDALException.DALException {
-        return DAOSQL.getAktuelRaavarebatchList();
-    }
+    // -Mikkel
+    public List<RaavarebatchDTO> getAktuelle() throws WebApplicationException {
+        try {
+            return DAOSQL.getAktuelRaavarebatchList();
+        } catch (SQLException e) {
+            throw buildError(Response.Status.NOT_ACCEPTABLE, "ERROR: Fejl i forsøg på at kontakte databasen. Prøv igen senere");
+        }
+    };
+
+    // -Mikkel
+    public RaavarebatchDTO opretRaavarebatch(RaavarebatchDTO dto) throws WebApplicationException{
+
+        //Valider startmængde
+        String startMaengdeCheck = func.startMaengdeOk(dto);
+        if( !startMaengdeCheck.equals("OK") ){
+            throw buildError(Response.Status.NOT_ACCEPTABLE, startMaengdeCheck);
+        }
+
+        //Valider batch ID
+        String batchIdCheck = func.batchIdOk(dto);
+        if( !batchIdCheck.equals("OK") )
+            throw buildError(Response.Status.NOT_ACCEPTABLE, batchIdCheck);
+
+        try {
+            DAOSQL.createRaavarebatch(dto);
+        } catch (SQLException e) {
+            throw buildError(Response.Status.NOT_ACCEPTABLE, "ERROR: Fejl i forsøg på at kontakte databasen. Prøv igen senere");
+        }
+
+        return dto;
+    };
 
     //todo slet?
     public RaavarebatchDTO getBatch(String batchID) throws IDALException.DALException{
@@ -44,31 +77,6 @@ public class RaavarevbatchController {
             e.printStackTrace();
         }
         return raavarebatchDTO;
-    }
-
-
-    public RaavarebatchDTO opretRaavarebatch(RaavarebatchDTO dto) throws WebApplicationException{
-
-
-        //Valider startmængde
-        String startMaengdeCheck = func.startMaengdeOk(dto);
-        if( !startMaengdeCheck.equals("OK") ){
-            throw buildError(Response.Status.INTERNAL_SERVER_ERROR, startMaengdeCheck);
-        }
-
-        //Valider batch ID
-        String batchIdCheck = func.batchIdOk(dto);
-        if( !batchIdCheck.equals("OK") )
-            throw buildError(Response.Status.INTERNAL_SERVER_ERROR, batchIdCheck);
-
-        try {
-            DAOSQL.createRaavarebatch(dto);
-        } catch (SQLException e) {
-            throw buildError(Response.Status.INTERNAL_SERVER_ERROR, "ERROR: Fejl i forsøg på at kontakte databasen. Prøv igen senere");
-        }
-
-        return dto;
-
     }
 
     public WebApplicationException buildError(Response.Status status, String msg){

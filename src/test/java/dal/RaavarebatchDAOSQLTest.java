@@ -39,7 +39,7 @@ class RaavarebatchDAOSQLTest {
             listRaavarebatch = raavarebatchDAOSQL.getRaavarebatchList();
             assertEquals(expected,listRaavarebatch.get(1).getRbId());
             assertEquals(expectedSize,listRaavarebatch.size());
-        } catch (IDALException.DALException e){
+        } catch (SQLException e){
             e.printStackTrace();
         }
     }
@@ -54,7 +54,7 @@ class RaavarebatchDAOSQLTest {
             listRaavarebatch = raavarebatchDAOSQL.getAktuelRaavarebatchList();
             assertEquals(expected,listRaavarebatch.get(2).getRbId());
             assertEquals(expectedSize,listRaavarebatch.size());
-        } catch (IDALException.DALException e) {
+        } catch (SQLException e) {
             e.printStackTrace();
         }
     }

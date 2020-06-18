@@ -18,14 +18,19 @@ async function loadRaavarer() {
     await sendAjax(
         "/BoilerPlate_war_exploded/rest/Raavare/getRaavarer",
         data => viewTable(data),
-        alert(err.responseText)
-
+        err => error(err)
     );
 
     //Remove loader and reveal table
     $("#loading").hide();
     $("#raavareTable").show();
 
+}
+
+function error(err){
+    const status = err.status;
+    if(status != 500) alert(err.responseText);
+    else alert("ERROR: Fejl i forbindelse med håndtering af input. Prøv igen")
 }
 
 function viewTable(data){
