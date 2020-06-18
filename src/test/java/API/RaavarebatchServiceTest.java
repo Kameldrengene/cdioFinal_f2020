@@ -45,12 +45,8 @@ class RaavarebatchServiceTest {
     void getBatch() {
         raavarebatchService.raavarebatchController.DAOSQL.db.setDB("cdioTest_2020");
         int expected = 1;
-        try {
-            testRaavarebatch = raavarebatchService.getBatch("1");
-            assertEquals(expected,testRaavarebatch.getRbId());
-        } catch (IDALException.DALException e) {
-            e.printStackTrace();
-        }
+        testRaavarebatch = raavarebatchService.getBatch("1");
+        assertEquals(expected,testRaavarebatch.getRbId());
     }
 
     @Test
@@ -66,12 +62,8 @@ class RaavarebatchServiceTest {
 
         raavarebatchService.opretRaavarebatch(newRaavarebatch);
 
-        try {
-            testRaavarebatch = raavarebatchService.getBatch("99");
-            assertEquals(expected,testRaavarebatch.getRbId());
-        } catch (IDALException.DALException e) {
-            e.printStackTrace();
-        }
+        testRaavarebatch = raavarebatchService.getBatch("99");
+        assertEquals(expected,testRaavarebatch.getRbId());
     }
 
     @Test
@@ -87,12 +79,8 @@ class RaavarebatchServiceTest {
 
         raavarebatchService.updateRaavarebatch(newRaavarebatch);
 
-        try {
-            testRaavarebatch = raavarebatchService.getBatch("99");
-            assertEquals(expected,testRaavarebatch.getAktuelMaengde());
-        } catch (IDALException.DALException e) {
-            e.printStackTrace();
-        }
+        testRaavarebatch = raavarebatchService.getBatch("99");
+        assertEquals(expected,testRaavarebatch.getAktuelMaengde());
     }
     @Test
     @Order(6)

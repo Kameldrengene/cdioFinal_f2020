@@ -24,7 +24,7 @@ class RaavarebatchDAOSQLTest {
         try {
             testRaavarebatch = raavarebatchDAOSQL.getRaavarebatch(1);
             assertEquals(expected,testRaavarebatch.getRbId());
-        } catch (IDALException.DALException e){
+        } catch (SQLException e){
             e.printStackTrace();
         }
     }
@@ -75,7 +75,7 @@ class RaavarebatchDAOSQLTest {
             testRaavarebatch = raavarebatchDAOSQL.getRaavarebatch(99);
             assertEquals(expected,testRaavarebatch.getRbId());
 
-        } catch (SQLException | IDALException.DALException e) {
+        } catch (SQLException e) {
             e.printStackTrace();
         }
 
@@ -98,7 +98,7 @@ class RaavarebatchDAOSQLTest {
             testRaavarebatch = raavarebatchDAOSQL.getRaavarebatch(99);
             assertEquals(expected,testRaavarebatch.getAktuelMaengde());
 
-        } catch (SQLException | IDALException.DALException e) {
+        } catch (SQLException e) {
             e.printStackTrace();
         }
     }

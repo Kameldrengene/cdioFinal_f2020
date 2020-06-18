@@ -83,7 +83,7 @@ public class RaavarevbatchController {
         int batchIDint = Integer.parseInt(batchID);
         try {
             return DAOSQL.getRaavarebatch(batchIDint);
-        } catch (IDALException.DALException e) {
+        } catch (SQLException e) {
             throw buildError(Response.Status.NOT_ACCEPTABLE, SQLErrorMsg);
         }
     }
