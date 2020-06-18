@@ -35,6 +35,32 @@ public class RaavarebatchDAOSQL implements IRaavarebatchDAO {
         return RBList;
     }
 
+    public List<RaavarebatchDTO> getRVIDBatch(int RVID) {
+        db.connect();
+        ResultSet rs = db.query("SELECT * FROM raavarebatchview WHERE raavareID = " + RVID + " AND aktuelMaengde > 0");
+        List<RaavarebatchDTO> RVBList = new ArrayList<>();
+        try {
+            //We do as in getUser, except we make new user until rs is empty
+            while (rs.next()) {
+                RaavarebatchDTO rb = new RaavarebatchDTO();
+                rb.setRbId(rs.getInt("rBID"));
+                rb.setRaavareNavn(rs.getString("raavareNavn"));
+                rb.setLeverandoer(rs.getString("leverandoer"));
+                rb.setRaavareId(rs.getInt("raavareID"));
+                rb.setStartMaengde(rs.getDouble("maengde"));
+                rb.setAktuelMaengde(rs.getDouble("aktuelMaengde"));
+                RVBList.add(rb);
+            }
+            rs.close();
+
+        } catch (
+                SQLException e) {
+            e.printStackTrace();
+        }
+        db.close();
+        return RVBList;
+    }
+
     // -Mikkel
     @Override
     public List<RaavarebatchDTO> getAktuelRaavarebatchList() throws SQLException{

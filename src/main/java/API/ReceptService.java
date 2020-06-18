@@ -43,6 +43,12 @@ public class ReceptService {
         return receptController.opretRecept(receptDTO, check);
     }
 
+    @POST
+    @Path("OpretRecept")
+    public List<ReceptDTO> OpretRecept (List<ReceptDTO> receptDTO){
+        return receptController.opretRecept(receptDTO);
+    }
+
     @PUT
     @Path("opdaterRecept")
     public ReceptDTO updateRecept (ReceptDTO receptDTO){

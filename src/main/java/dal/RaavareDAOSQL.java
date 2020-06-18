@@ -1,11 +1,11 @@
 package dal;
 
 import dal.dto.RaavareDTO;
+import dal.dto.RaavarebatchDTO;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 public class RaavareDAOSQL implements IRaavareDAO{
     public SQLDatabaseIO db = new SQLDatabaseIO("kamel", "dreng", "runerne.dk", 8003); //Makes new SQLDatabaseIO object.

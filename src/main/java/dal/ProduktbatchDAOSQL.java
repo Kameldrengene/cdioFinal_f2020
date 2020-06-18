@@ -46,7 +46,7 @@ public ProduktbatchKompDTO getBatchkomponent(int pbId, int rbID) throws IDALExce
             while(rs.next()){
                 ProduktbatchKompDTO pb = new ProduktbatchKompDTO();
                 pb.setPbId(pbId);
-                pb.setStatus(rs.getString("Stading"));
+                pb.setStatus(rs.getString("Standing"));
                 pb.setUserId(rs.getInt("UserID"));
                 pb.setRbID(rs.getInt("RBID"));
                 pb.setTara(rs.getDouble("Tara"));

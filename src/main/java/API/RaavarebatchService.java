@@ -29,6 +29,11 @@ public class RaavarebatchService {
         return raavarebatchController.getAktuelle();
     }
 
+    @Path("getRVIDBatch/{batchID}")
+    @GET
+    public List<RaavarebatchDTO> getRVIDBatch(@PathParam("batchID") String raavareID) throws IDALException.DALException {
+        return raavarebatchController.getRVIDBatch(raavareID);
+    }
 
     // -Mikkel
     @Path("opretRaavarebatch")

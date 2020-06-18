@@ -41,8 +41,7 @@ public class RaavarevbatchController {
     };
 
     // -Mikkel
-    public RaavarebatchDTO opretRaavarebatch(RaavarebatchDTO dto) throws WebApplicationException{
-
+    public RaavarebatchDTO opretRaavarebatch(RaavarebatchDTO dto) throws WebApplicationException {
         //Valider startmængde
         String startMaengdeMsg = func.startMaengdeOk(dto);
         if( !startMaengdeMsg.equals("OK") ){
@@ -64,6 +63,12 @@ public class RaavarevbatchController {
 
         return dto;
     };
+
+    public List<RaavarebatchDTO> getRVIDBatch(String RVID) throws IDALException.DALException{
+
+        int RVIDint = Integer.parseInt(RVID);
+        return DAOSQL.getRVIDBatch(RVIDint);
+    }
 
     //todo slet?
     public RaavarebatchDTO getBatch(String batchID) throws IDALException.DALException{
