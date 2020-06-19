@@ -107,7 +107,7 @@ function confirmUserUpdate(ID) { //metoden sender videre til update html siden.
     $(document).ready(function () {
         if (confirm("are you sure, you want to update user " + ID + "?")) {
             updatedID = ID;
-            switchP('Brugeroversigt/Updatebruger/Admin.html')
+            switchP('AdminScreen/Brugeroversigt/Updatebruger/Admin.html')
             //load info from user into page
             $(document).ready(function () {
                 sendAjax("/BoilerPlate_war_exploded/rest/user/getUser/" + updatedID, function (data) {

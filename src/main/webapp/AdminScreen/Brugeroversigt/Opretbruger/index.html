@@ -2,18 +2,17 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Update bruger</title>
+    <title>Opret bruger</title>
 
-    <!-- Henter Font fra Google's Font API
+    <!-- Henter Font fra Google's Font API Stærk inspireret af Malte's løsning i for html og css
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans" > -->
 
     <!-- Linker vores stylesheet -->
-    <link rel="stylesheet" type="text/css" href="Brugeroversigt/Updatebruger/index.css">
+    <link rel="stylesheet" type="text/css" href="AdminScreen/Brugeroversigt/Opretbruger/index.css">
 </head>
 <body>
-<div id="content"><h1>RET BRUGER</h1>
+<div id="content"><h1>Opret ny bruger</h1>
     <br>
-
 
     <input type="text" id="username" placeholder="Brugernavn" value="" minlength="2" maxlength="20"><br>
     <input type="text" id="ini"  placeholder="Initialer" value="" minlength="2" maxlength="4"><br>
@@ -21,11 +20,11 @@
 
 
     <!-- En <div> (gruppe) der indeholder en serie labels og 'radio'-knapper -->
-    <div class="radiogroup">
+    <div class="roller">
+        <!-- Kun én knap af dem med "name=gender" kan vælges -->
         <form>
         <h3>Vælg Job</h3>
 
-        <!-- Kun én knap af dem med "name=gender" kan vælges -->
             <table class="rolletabel">
                 <tr>
                     <td><input type="radio" id="role1" name="jobs" class="jobsradio"  value="Administrator" required></td>
@@ -46,20 +45,19 @@
             </table>
         </form>
     </div>
-
     <div class="aktivopret">
         <table class="rolletabel">
-            <h3>Vælg om aktiv</h3>
-            <tr>
-                <td><input type="checkbox" id="aktivcheckbox" name="aktive" class="jobs" value="true" required></td>
-                <td><label for="aktivcheckbox"> Active? </label><br></td>
-            </tr>
+        <h3>Vælg om aktiv</h3>
+        <tr>
+            <td><input type="checkbox" id="aktivcheckbox" name="aktive" class="jobs" value="true" required></td>
+            <td><label for="aktivcheckbox"> Active? </label><br></td>
+        </tr>
         </table>
     </div>
+        <input type="button" onclick="userHandler('Create')" class="hvr-pop" value="Opret">
+    </div>
 
-    <input type="button" onclick="userHandler('Update')" class="hvr-pop" value="Ret">
-
+<input type="submit" class="hvr-buzz screenbtn" value="Retur" onclick="switchP('AdminScreen/Admin.html') ; return false">
 </div>
-<input type="submit" class="hvr-buzz screenbtn" value="Retur" onclick="switchP('Brugeroversigt/index.html') ; return false">
 </body>
 </html>
