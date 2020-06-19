@@ -33,8 +33,8 @@ function viewTable(data){
     tabelData += "<tr>";
     tabelData += "<th>Batch ID</th>";
     tabelData += "<th>Råvare ID</th>";
-    tabelData += "<th>Oprindelig mængde</th>";
-    tabelData += "<th>Aktuel mængde</th>";
+    tabelData += "<th>Oprindelig mængde [kg]</th>";
+    tabelData += "<th>Aktuel mængde [kg]</th>";
     tabelData += "<th>Råvarenavn</th>";
     tabelData += "<th>Leverandør</th>";
     tabelData += "</tr>";

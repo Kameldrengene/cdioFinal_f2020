@@ -25,7 +25,7 @@ $("document").ready(async function () {
 
     $("#produktbatch").on("click", "button", function () {
         localStorage.setItem("activeRBId", this.id);
-        switchP("PLeadScreen/Produktbatches/RedigerProduktbatch.html");
+        switchP("ProduktScreen/Produktbatches/RedigerProduktbatch.html");
     })
 
 });

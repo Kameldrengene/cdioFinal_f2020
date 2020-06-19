@@ -36,7 +36,7 @@ function raavareData(modType) {
     const ILeve = $("#leverandoer").val();
     const jsonData = {raavareID: IID, raavareNavn: INavn, leverandoer: ILeve};
     sendAjax(APILink,function (data) {
-            switchP("FarmaScreen/PLeadScreen.html");
+            switchP("FarmaScreen/ProduktScreen.html");
         }, function (jqXHR, text, error) {
         alert(JSON.stringify(jsonData));
     }, "PUT", JSON.stringify(jsonData))

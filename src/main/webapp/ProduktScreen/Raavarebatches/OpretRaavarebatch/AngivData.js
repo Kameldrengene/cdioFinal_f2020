@@ -33,5 +33,5 @@ async function opretRaavarebatch(){
 
 function success(){
     alert("Råvarebatch oprettet succesfuldt");
-    switchP("PLeadScreen/Raavarebatches/OpretRaavarebatch/VaelgRaavare.html")
+    switchP("ProduktScreen/Raavarebatches/OpretRaavarebatch/VaelgRaavare.html")
 }

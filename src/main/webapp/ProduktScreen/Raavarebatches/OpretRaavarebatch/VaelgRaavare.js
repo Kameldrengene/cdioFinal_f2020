@@ -4,7 +4,7 @@ $("document").ready(async function () {
 
     $("#raavareTable").on("click", "button", function () {
         localStorage.setItem("activeRaavare", this.id);
-        switchP("PLeadScreen/Raavarebatches/OpretRaavarebatch/AngivData.html")
+        switchP("ProduktScreen/Raavarebatches/OpretRaavarebatch/AngivData.html")
     })
 
 });
