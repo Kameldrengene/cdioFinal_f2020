@@ -28,7 +28,28 @@ public class PrintDTO {
     double tolerance;
     /** Receptnavn min. 2 max. 20 karakterer */
     String receptNavn;
+    /** Produktbatch oprettelses dato */
     String dato;
+    /** Summen af tara */
+    double sumTara;
+    /** Summen af Netto */
+    double sumNetto;
+
+    public double getSumTara() {
+        return sumTara;
+    }
+
+    public void setSumTara(double sumTara) {
+        this.sumTara = sumTara;
+    }
+
+    public double getSumNetto() {
+        return sumNetto;
+    }
+
+    public void setSumNetto(double sumNetto) {
+        this.sumNetto = sumNetto;
+    }
 
     public PrintDTO() {
     }

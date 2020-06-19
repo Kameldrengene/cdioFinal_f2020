@@ -63,8 +63,7 @@ function initPB(data) {
             alert("Fejl ved indlæsningen af Produktbatchet. Prøver at genstarte.\nHvis problemet fortsætter, bedes system administratoren kontaktes");
             console.log(data);
             data.status = "Ikke påbegyndt";
-            sleep(500);
-            initPB(data);
+            switchP("LabScreen/index.html")
         }, "POST", JSON.stringify(data));
 
     } else {
@@ -180,26 +179,29 @@ function nettoSwitch(PBID) {
                                 }, function (data) {
                                     alert("Error updating new batch: ERR.NO.26")
                                     console.log(data)
-                                }, "POST", JSON.stringify(data))
+                                }, "POST", JSON.stringify(data), false)
                             }, function (data) {
                                 alert("Error getting batchline: ERR.NO.27")
                                 console.log(data)
-                            })
+                            }, "GET", "None", false)
                         }, function (data) {
                             alert("Error updating RaavareBatch: ERR.NO.31");
                             console.log(data)
-                        }, "POST", JSON.stringify(data))
+                        }, "POST", JSON.stringify(data), false)
                     }
                 }, function (data) {
                     alert("Error getting RaavareBatch: ERR.NO.32");
                     console.log(data)
-                })
+                }, "GET", "None", false)
             }
         } else {
             alert("Vægt ikke acceptabel, prøv igen")
             nettoView()
         }
-    })
+    }, function (data) {
+        alert("Error getting Recept: ERR.NO.34");
+        console.log(data)
+    }, "GET", "None", false)
 
 
 }
