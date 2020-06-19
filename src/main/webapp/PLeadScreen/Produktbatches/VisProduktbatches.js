@@ -3,7 +3,7 @@ $("document").ready(async function(){
     await updateTable();
 
     $("#visAfsluttede").click(async function () {
-        await updateTable();
+        await updateTable()
     });
 
     $("#produktbatches").on("click", "button", function () {
@@ -28,10 +28,6 @@ $("document").ready(async function(){
 
 async function updateTable(){
 
-    //Hide table and display loader while updating
-    $("#produktbatches").hide();
-    $("#loading").show();
-
     let path;
 
     if($("#visAfsluttede").is(":checked"))
@@ -39,16 +35,11 @@ async function updateTable(){
     else
         path = "getAktuelle"
 
-    await sendAjax("/BoilerPlate_war_exploded/rest/produktbatch/" + path, function (data) {
-        viewTable(data)
-    }, function (data) {
-        alert("Error getting all/actual produktbatches: ERR.NO.16");
-        console.log(data);
-    })
-
-    //Remove loader and reveal table
-    $("#loading").hide();
-    $("#produktbatches").show();
+    await sendAjax(
+        "/BoilerPlate_war_exploded/rest/produktbatch/" + path,
+        data => viewTable(data),
+        err => error(err)
+    )
 
 };
 

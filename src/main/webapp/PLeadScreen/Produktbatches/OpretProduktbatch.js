@@ -7,31 +7,42 @@ $("document").ready(async function () {
         let confirmation = confirm("Opret produktbatch for recept ID: " + this.id);
         if (confirmation == true)
             opretProduktbatch(this.id);
-
-    })
-
+    });
 });
+
+async function opretProduktbatch(activeReceptID){
+
+    let obj;
+
+    //First find out what the next product batch number should be
+    await sendAjax(
+        "/BoilerPlate_war_exploded/rest/produktbatch/getMaxPBID",
+        async maxPBID => {
+
+            const newPBDI = maxPBID +1;
+            obj = { pbId: newPBDI, status: "Ikke påbegyndt", receptId: activeReceptID, dato: "" }
+
+            let myJson = JSON.stringify(obj);
+
+            await sendAjax(
+                "/BoilerPlate_war_exploded/rest/produktbatch/opretProduktbatch",
+                () => alert("Produktbatch oprettet successfuldt"),
+                err => error(err),
+                "POST",
+                myJson
+            )
+        },
+        err => error(err),
+    )
+}
 
 async function loadRecepter() {
 
-    //Hide table and display loader while updating
-    $("#receptTable").hide();
-    $("#loading").show();
-
     await sendAjax(
         "/BoilerPlate_war_exploded/rest/Recept/getRecepts",
-        function (data) {
-            viewTable(data)
-        },
-        function (data) {
-            alert("Error getting all/actual recept: ERR.NO.XX");
-            console.log(data);
-        }
+        data => viewTable(data),
+        err => error(err)
     );
-
-    //Remove loader and reveal table
-    $("#loading").hide();
-    $("#receptTable").show();
 
 }
 
@@ -61,25 +72,3 @@ function viewTable(data){
 
 }
 
-async function opretProduktbatch(activeReceptID){
-
-    const activeBatchID =  "18";
-
-    var obj = { pbId: activeBatchID, status: "Ikke påbegyndt", receptId: activeReceptID, dato: "" };
-    var myJson = JSON.stringify(obj);
-    console.log(myJson)
-
-    await sendAjax(
-        "/BoilerPlate_war_exploded/rest/produktbatch/opretProduktbatch",
-        function(data) {
-        alert("Produktbatch oprettet succesfuldt");
-        $("#gem").removeAttr("hover");
-    },
-        function (data) {
-        alert("Error Creating produktbatch: ERR.NO.12");
-        console.log(data);
-    },
-        "POST",
-        myJson);
-
-}

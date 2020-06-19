@@ -15,40 +15,45 @@ public class RaavarebatchService {
 
     public RaavarevbatchController raavarebatchController = new RaavarevbatchController();
 
+    // -Mikkel
     @Path("getAlle")
     @GET
-    public List<RaavarebatchDTO> getData() throws IDALException.DALException {
+    public List<RaavarebatchDTO> getData() throws WebApplicationException{
         return raavarebatchController.getData();
     }
 
+    // -Mikkel
     @Path("getAktuelle")
     @GET
-    public List<RaavarebatchDTO> getAktuelle() throws IDALException.DALException {
+    public List<RaavarebatchDTO> getAktuelle() throws WebApplicationException {
         return raavarebatchController.getAktuelle();
     }
 
     @Path("getRVIDBatch/{batchID}")
     @GET
-    public List<RaavarebatchDTO> getRVIDBatch(@PathParam("batchID") String raavareID) throws IDALException.DALException {
+    public List<RaavarebatchDTO> getRVIDBatch(@PathParam("batchID") String raavareID) throws WebApplicationException {
         return raavarebatchController.getRVIDBatch(raavareID);
     }
 
+    // -Mikkel
+    @Path("opretRaavarebatch")
+    @POST
+    public RaavarebatchDTO opretRaavarebatch(RaavarebatchDTO raavarebatchDTO) throws WebApplicationException{
+        return raavarebatchController.opretRaavarebatch(raavarebatchDTO);
+    }
+
+    //todo slet?
     @Path("getBatch/{batchID}")
     @GET
-    public RaavarebatchDTO getBatch(@PathParam("batchID") String batchID) throws IDALException.DALException {
+    public RaavarebatchDTO getBatch(@PathParam("batchID") String batchID) throws WebApplicationException {
         return raavarebatchController.getBatch(batchID);
     }
 
+    //todo slet?
     @Path("opdaterRaavarebatch")
     @POST
     public RaavarebatchDTO updateRaavarebatch(RaavarebatchDTO raavarebatchDTO) {
         return raavarebatchController.updateRaavarebatch(raavarebatchDTO);
-    }
-
-    @Path("opretRaavarebatch")
-    @POST
-    public RaavarebatchDTO opretRaavarebatch(RaavarebatchDTO raavarebatchDTO){
-        return raavarebatchController.opretRaavarebatch(raavarebatchDTO);
     }
 
 }

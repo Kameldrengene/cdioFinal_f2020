@@ -2,6 +2,9 @@ $.ajaxSetup({async: false}); //this file is for general scripts used all over th
 
 
 async function sendAjax(link, successFunc, errorFunc=function (data) {console.log(data);}, type="GET", jsonData="None"){
+
+    $(".loads").show()
+
     await $.ajax({
         url: link,
         type: type,
@@ -10,12 +13,12 @@ async function sendAjax(link, successFunc, errorFunc=function (data) {console.lo
         dataType: "json",
         data: ((jsonData==="None") ? "" : jsonData),
         success: function (data) {successFunc(data)},
-        error: function (data) {errorFunc(data)}
+        error: function (data) {errorFunc(data)},
+        complete: () => $(".loads").hide()
     });
-    
+
+
 }
-
-
 
 async function viewlist(headers, link, tableName, btnHtmlfunc) {
     $(document).ready(
@@ -27,7 +30,6 @@ async function viewlist(headers, link, tableName, btnHtmlfunc) {
             data += '</tr>';
 
             $.each(BEdata,function (key,value) {
-                console.log(value);
                 data += '<tr>';
                 $.each(value, function (key2, inner) {
                     data += '<td>' + inner + '</td>'
@@ -39,7 +41,6 @@ async function viewlist(headers, link, tableName, btnHtmlfunc) {
         },
         function (data) {
             alert("Error loading list: ERR.NO.01");
-            console.log(data);
         })
     );
 }
@@ -52,4 +53,10 @@ async function sleep(ms){
 function switchP(page) {
     $("body").load(page);
     $("#addRaavare").hide();
+}
+
+async function error(err) {
+    const status = err.status;
+    if (status != 500) alert(err.responseText);
+    else alert("ERROR: Intern serverfejl. Prøv igen")
 }
