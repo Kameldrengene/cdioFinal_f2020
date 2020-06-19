@@ -48,7 +48,7 @@ async function visBestemtRecepter(id) {
                 var Rname = value.receptNavn;
                 var RaaID = value.raavareId;
                 var RaaNavn = value.raavarNavn;
-                var Rnonnetto = value.nonNetto;
+                var Rnonnetto = value.nonNetto.toFixed(4);
                 var Rtolerance = value.tolerance;
                 person_data += '<tr>';
                 person_data += '<td>'+RID+'</td>';

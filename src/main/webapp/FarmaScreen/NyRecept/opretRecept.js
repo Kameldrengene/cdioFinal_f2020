@@ -80,7 +80,7 @@ function fjernRaavar(counter1) {
 
 }
 
-function selectbtn(counter) {
+function selectbtn(counter) {    //tilføjer råvare i scroll down list.
     $(document).ready(function () {
         let selectNavn = document.getElementById('ledeligeNavn'+counter+'');
         let ledeliglist = localStorage.getItem("ledeligeRaavarID").split(",");
@@ -197,13 +197,13 @@ async function opretReceptList() {
     console.log("before ajax");
     await sendAjax("/BoilerPlate_war_exploded/rest/Recept/OpretRecept", function (data) {
         console.log("before" + counter);
-        retur();
+        alert("Recept oprettet succesfuldt");
+        switchP('FarmaScreen/index.html');
         console.log("after" + counter);
     }, function (data) {
-        if (data.status === 406) {
+        if (data.status != 500) {
             alert(data.responseText);
             console.log(counter);
-
         } else {
             alert('Enternal Error: Prøve igen!');
 
