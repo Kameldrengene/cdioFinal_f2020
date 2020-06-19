@@ -100,13 +100,13 @@ function viewTable(data){
     });
 
     tabelData += "<tr>";
-    tabelData += "<th align='left'>Sum Tara: </th>"+"<th>"+sniff(sumTara)+"</th>";
+    tabelData += "<th align='left'>Sum Tara: </th>"+"<th align='left'>"+sniff(sumTara)+"</th>";
     tabelData += "</tr>";
     tabelData += "<tr>";
-    tabelData += "<th align='left'>Sum Netto: </th>"+"<th>"+sniff(sumNetto)+"</th>";
+    tabelData += "<th align='left'>Sum Netto: </th>"+"<th align='left'>"+sniff(sumNetto)+"</th>";
     tabelData += "</tr>";
     tabelData += "<tr>";
-    tabelData += "<th align='left'>Produktion Slut: </th>"+"<th>"+slutDato(status,lastDato)+"</th>"
+    tabelData += "<th align='left'>Produktion Slut: </th>"+"<th align='left'>"+slutDato(status,lastDato)+"</th>"
     tabelData += "</tr>";
 
     $("#produktbatch").html(tabelData);
