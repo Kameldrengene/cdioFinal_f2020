@@ -19,6 +19,19 @@ function ledeligeRaavare() {   // gemmer alle råvare i en Map.
                 alleMap.set(raavarNavn,raavarID);
             });
         });
+       // await sendAjax("/BoilerPlate_war_exploded/rest/Raavare/getRaavarer",function (data) {
+       //      $.each(data,function (key,value) {
+       //          //console.log(value);
+       //          var raavarID = value.raavareID;
+       //          var raavarNavn = value.raavareNavn;
+       //
+       //          alleRaavare.push(raavarID);
+       //          alleRaavareNavn.push(raavarNavn);
+       //          alleMap.set(raavarNavn,raavarID);
+       //      });
+       //  }, function (data) {
+       //      alert("kunne ikke fetche raavar, prøve igen")
+       //  });
         localStorage.setItem("ledeligeRaavarID",alleRaavare);
         localStorage.setItem("ledeligeRaavarNavn",alleRaavareNavn);
     });
@@ -32,7 +45,7 @@ function addLinje() {    //tilføjer ekstra råvare
         ledeligeRaavare();
         counter++;
         console.log(counter);
-        let coutnum = counter;
+        let coutnum = counter;   //indeholder præcise ledeligeNavn + nr=countnum
         console.log(coutnum);
         $("#raavareLinjer").append(
             '<tr id="raavareLines' + counter + '">\n' +
@@ -63,36 +76,26 @@ function fjernRaavar(counter1) {
     $(document).ready(function () {
         $("#raavareLines"+counter1+"").remove();
         console.log(counter);
-        //  document.getElementById("raavareLinjer"+counter+"").innerHTML +=
-        // '<div id="raavareLinjer'+(counter + 1)+'"></div>'
     });
 
 }
 
 function selectbtn(counter) {
     $(document).ready(function () {
-        // var select = document.getElementById('ledeligeID');
         let selectNavn = document.getElementById('ledeligeNavn'+counter+'');
         let ledeliglist = localStorage.getItem("ledeligeRaavarID").split(",");
         let ledeligNavnList = localStorage.getItem("ledeligeRaavarNavn").split(",");
         for (i = 0; i < ledeliglist.length; i++) {
-            //   var option = document.createElement('option');
             var option2 = document.createElement('option');
-            //  option.value = option.text = ledeliglist[i];
             option2.value = option2.text = ledeligNavnList[i];
-            //  select.add(option);
             selectNavn.add(option2);
         }
         localStorage.setItem("ledeligeRaavarID", "");
         localStorage.setItem("ledeligeRaavarNavn", "");
-        // document.getElementById("recepID").readOnly = true;
-        // document.getElementById("recepnavn").readOnly = true;
 
         if(counter===1) {
             $("#addRaavare").show();
         }
-
-        //   $("#videre").hide();
     });
 }
 
