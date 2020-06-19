@@ -1,6 +1,8 @@
 package dal;
 
-import dal.dto.RaavarebatchDTO;
+import Data.RaavarebatchDAOSQL;
+import Data.SQLDatabaseIO;
+import Data.dto.RaavarebatchDTO;
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
@@ -12,7 +14,7 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 class RaavarebatchDAOSQLTest {
-    RaavarebatchDAOSQL raavarebatchDAOSQL = new RaavarebatchDAOSQL();
+    final RaavarebatchDAOSQL raavarebatchDAOSQL = new RaavarebatchDAOSQL();
     RaavarebatchDTO testRaavarebatch;
     List<RaavarebatchDTO> listRaavarebatch;
 

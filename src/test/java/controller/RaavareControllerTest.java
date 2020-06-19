@@ -1,7 +1,8 @@
 package controller;
 
-import dal.SQLDatabaseIO;
-import dal.dto.RaavareDTO;
+import Controllers.RaavareController;
+import Data.SQLDatabaseIO;
+import Data.dto.RaavareDTO;
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
@@ -12,7 +13,7 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 class RaavareControllerTest {
-    RaavareController raavareController = new RaavareController();
+    final RaavareController raavareController = new RaavareController();
     RaavareDTO testraavare;
     List<RaavareDTO> listRaavare;
 

@@ -1,8 +1,8 @@
 package API;
 
-import controller.UserController;
-import dal.IDALException;
-import dal.dto.UserDTO;
+import Controllers.UserController;
+import Data.IDALException;
+import Data.dto.UserDTO;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
@@ -13,7 +13,7 @@ import java.util.List;
 @Produces(MediaType.APPLICATION_JSON)
 public class UserService {
 
-    public UserController userController = new UserController();
+    public final UserController userController = new UserController();
 
     @Path("getUsers")
     @GET

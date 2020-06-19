@@ -1,5 +1,6 @@
 package dal;
 
+import Data.SQLDatabaseIO;
 import org.junit.jupiter.api.Test;
 
 import java.sql.ResultSet;
@@ -8,7 +9,7 @@ import java.sql.SQLException;
 import static org.junit.jupiter.api.Assertions.*;
 
 class SQLDatabaseIOTest {
-    SQLDatabaseIO sqlDatabaseIO = new SQLDatabaseIO("kamel", "dreng", "runerne.dk", 8003);
+    final SQLDatabaseIO sqlDatabaseIO = new SQLDatabaseIO("kamel", "dreng", "runerne.dk", 8003);
 
     @Test
     void connect() {

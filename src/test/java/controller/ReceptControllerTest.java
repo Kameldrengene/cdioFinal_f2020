@@ -1,7 +1,8 @@
 package controller;
 
-import dal.SQLDatabaseIO;
-import dal.dto.ReceptDTO;
+import Controllers.ReceptController;
+import Data.SQLDatabaseIO;
+import Data.dto.ReceptDTO;
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
@@ -13,7 +14,7 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 class ReceptControllerTest {
-    ReceptController receptController = new ReceptController();
+    final ReceptController receptController = new ReceptController();
     ReceptDTO testRecept;
     List<ReceptDTO> listRecept;
     @Test

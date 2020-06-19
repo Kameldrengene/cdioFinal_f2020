@@ -1,6 +1,7 @@
 package controller;
 
-import dal.dto.PrintDTO;
+import Controllers.PrintController;
+import Data.dto.PrintDTO;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
@@ -8,7 +9,7 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
 class PrintControllerTest {
-    PrintController printController = new PrintController();
+    final PrintController printController = new PrintController();
     List<PrintDTO> printDTOList;
     @Test
     void getData() {

@@ -1,8 +1,8 @@
 package API;
 
-import dal.IDALException;
-import dal.SQLDatabaseIO;
-import dal.dto.RaavareDTO;
+import Data.IDALException;
+import Data.SQLDatabaseIO;
+import Data.dto.RaavareDTO;
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
@@ -13,7 +13,7 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 class RaavareServiceTest {
-    RaavareService raavareService = new RaavareService();
+    final RaavareService raavareService = new RaavareService();
     RaavareDTO testraavare;
     List<RaavareDTO> listRaavare;
 

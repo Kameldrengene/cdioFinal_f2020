@@ -1,6 +1,8 @@
 package dal;
 
-import dal.dto.PrintDTO;
+import Data.IDALException;
+import Data.PrintDAOSQL;
+import Data.dto.PrintDTO;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
@@ -8,7 +10,7 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
 class PrintDAOSQLTest {
-    PrintDAOSQL printDAOSQL = new PrintDAOSQL();
+    final PrintDAOSQL printDAOSQL = new PrintDAOSQL();
     List<PrintDTO> printDTOList;
 
     @Test

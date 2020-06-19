@@ -1,8 +1,7 @@
 package API;
 
-import dal.IDALException;
-import dal.SQLDatabaseIO;
-import dal.dto.RaavarebatchDTO;
+import Data.SQLDatabaseIO;
+import Data.dto.RaavarebatchDTO;
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
@@ -13,7 +12,7 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 class RaavarebatchServiceTest {
-    RaavarebatchService raavarebatchService = new RaavarebatchService();
+    final RaavarebatchService raavarebatchService = new RaavarebatchService();
     RaavarebatchDTO testRaavarebatch;
     List<RaavarebatchDTO> listRaavarebatch;
 

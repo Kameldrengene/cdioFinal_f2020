@@ -1,8 +1,9 @@
 package controller;
 
-import dal.IDALException;
-import dal.SQLDatabaseIO;
-import dal.dto.UserDTO;
+import Controllers.UserController;
+import Data.IDALException;
+import Data.SQLDatabaseIO;
+import Data.dto.UserDTO;
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
@@ -13,7 +14,7 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 class UserControllerTest {
-    UserController userController = new UserController();
+    final UserController userController = new UserController();
     UserDTO testUser;
     List<UserDTO> testList;
 

@@ -1,6 +1,9 @@
 package dal;
 
-import dal.dto.RaavareDTO;
+import Data.IDALException;
+import Data.RaavareDAOSQL;
+import Data.SQLDatabaseIO;
+import Data.dto.RaavareDTO;
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
@@ -8,13 +11,12 @@ import org.junit.jupiter.api.TestMethodOrder;
 
 import java.sql.SQLException;
 import java.util.List;
-import java.util.zip.DataFormatException;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 class RaavareDAOSQLTest {
-    RaavareDAOSQL raavareDAOSQL = new RaavareDAOSQL();
+    final RaavareDAOSQL raavareDAOSQL = new RaavareDAOSQL();
     RaavareDTO testRaavare;
     List<RaavareDTO> listRaavare;
 
