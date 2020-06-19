@@ -29,7 +29,6 @@ public class UserController {
         }
     }
 
-
     public List<UserDTO> getRole(String role)  {
         try {
             return userDAOSQL.getRole(role);
@@ -38,13 +37,12 @@ public class UserController {
         }
     }
 
-
     public UserDTO activitySwitchUser(UserDTO user) {
         UserDAOSQL db = new UserDAOSQL();
         try {
             db.aktivitySwitchUser(user.getUserID());
         } catch (SQLException e) {
-            e.printStackTrace();
+            throw buildError(Response.Status.NOT_ACCEPTABLE, SQLErrorMsg);
         }
         return user;
     }
@@ -54,9 +52,8 @@ public class UserController {
         try {
             return db.getActivity(id);
         } catch (SQLException e) {
-            e.printStackTrace();
+            throw buildError(Response.Status.NOT_ACCEPTABLE, SQLErrorMsg);
         }
-        return false;
     }
 
     public UserDTO getUser(int id) {
@@ -64,9 +61,8 @@ public class UserController {
         try {
             return db.getUser(id);
         } catch (SQLException e) {
-            e.printStackTrace();
+            throw buildError(Response.Status.NOT_ACCEPTABLE, SQLErrorMsg);
         }
-        return null;
     }
 
     public UserDTO createUser(UserDTO user) {
@@ -77,11 +73,10 @@ public class UserController {
                 db.createUser(user);
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            throw buildError(Response.Status.NOT_ACCEPTABLE, SQLErrorMsg);
         }
         return user;
     }
-
 
     public UserDTO updateUser(UserDTO user) {
         UserDAOSQL db = new UserDAOSQL();
@@ -91,7 +86,7 @@ public class UserController {
                 db.updateUser(user);
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            throw buildError(Response.Status.NOT_ACCEPTABLE, SQLErrorMsg);
         }
         return user;
     }
