@@ -35,19 +35,11 @@ function raavareData(modType) {
     const INavn = $("#raavareNavn").val();
     const ILeve = $("#leverandoer").val();
     const jsonData = {raavareID: IID, raavareNavn: INavn, leverandoer: ILeve};
-    $.ajax({
-        url: APILink,
-        type: httpType,
-        contentType: "application/json",
-        dataType: 'json',
-        data: JSON.stringify(jsonData),
-        success: function (data) {
+    sendAjax(APILink,function (data) {
             switchP("FarmaScreen/PLeadScreen.html");
-        },
-        error: function (jqXHR, text, error) {
-            alert(JSON.stringify(jsonData));
-        }
-    });
+        }, function (jqXHR, text, error) {
+        alert(JSON.stringify(jsonData));
+    }, "PUT", JSON.stringify(jsonData))
 }
 
 function postRaavareData() {
