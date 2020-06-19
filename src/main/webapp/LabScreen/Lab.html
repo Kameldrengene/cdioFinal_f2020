@@ -6,36 +6,37 @@
     <link rel="stylesheet" type="text/css" href="LabScreen/Lab.css">
     <script src="LabScreen/Lab.js"></script>
 </head>
+
 <body>
-<h5 id="brugerInfo">Loading</h5>
-<script src="currentUserScript.js"></script>
-<h1>Laborant</h1>
-<div id="content">
-    <div class="loads"><div id="loading"></div> </div>
-    <br>
-    <h2>Vælg ID på produktbatch</h2>
+    <h5 id="brugerInfo">Loading</h5>
+    <script>currentUser();</script>
+    <h1>Laborant</h1>
+    <div id="content">
+        <div class="loads"><div id="loading"></div> </div>
+        <br>
+        <h2>Vælg ID på produktbatch</h2>
 
-    <br>
-    <select id="pbvalg" style="font-size: 14pt">
-        <option value="None">Vælg ID</option>
-    </select>
+        <br>
+        <select id="pbvalg" style="font-size: 14pt">
+            <option value="None">Vælg ID</option>
+        </select>
 
-    <script>showPBList()</script>
+        <script>showPBList()</script>
 
-    <br>
-    <br>
+        <br>
+        <br>
 
-    <input id="confirmbtn" type="button" onclick="
-                const id = document.getElementById('pbvalg').value;
-                if (id == 'None') {
-                    alert('Vælg en ID');
-                } else {
-                    getProductBatch(id)
-                }"
-           class="hvr-pop" value="OK">
-</div>
-<input type="submit" class="hvr-buzz screenbtn" value="Log ud" onclick="window.location.reload()">
-</body>
+        <input id="confirmbtn" type="button" onclick="
+                    const id = document.getElementById('pbvalg').value;
+                    if (id == 'None') {
+                        alert('Vælg en ID');
+                    } else {
+                        getProductBatch(id)
+                    }"
+               class="hvr-pop" value="OK">
+    </div>
+    <input type="submit" class="hvr-buzz screenbtn" value="Log ud" onclick="window.location.reload()">
+    </body>
 </html>
 
 </body>
