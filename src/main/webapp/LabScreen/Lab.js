@@ -38,7 +38,7 @@ function getProductBatch(id){
                     }, "GET", "None", false)
                 })
                 localStorage.setItem("raavareList", raavareList);
-                switchP("LabScreen/ProcesserProduktbatch/index.html");
+                switchP("LabScreen/ProcesserProduktbatch/ProcesserProduktbatch.html");
                 document.getElementById("header").innerText = "Produktbatch: " + id + " (" + RNavn + ")"
 
                 initPB(data);
@@ -63,7 +63,7 @@ function initPB(data) {
             alert("Fejl ved indlæsningen af Produktbatchet. Prøver at genstarte.\nHvis problemet fortsætter, bedes system administratoren kontaktes");
             console.log(data);
             data.status = "Ikke påbegyndt";
-            switchP("LabScreen/index.html")
+            switchP("LabScreen/ProcesserProduktbatch.html")
         }, "POST", JSON.stringify(data));
 
     } else {
@@ -211,7 +211,7 @@ function completepb(PBID){
         data.status = "Afsluttet";
         sendAjax("/BoilerPlate_war_exploded/rest/produktbatch/opdaterProduktbatch/", function (data) {
             alert("Success");
-            switchP("LabScreen/index.html");
+            switchP("LabScreen/Lab.html");
         }, function (data) {
             alert("Error updating produktbatch: ERR.NO.28");
             console.log(data);

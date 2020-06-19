@@ -102,7 +102,7 @@ function selectbtn(counter) {
 function retur() {
     $(document).ready(function () {
         delete counter;
-        switchP('FarmaScreen/index.html');
+        switchP('FarmaScreen/ProcesserProduktbatch.html');
     });
 }
 
