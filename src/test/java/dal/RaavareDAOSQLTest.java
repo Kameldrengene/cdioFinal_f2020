@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
 
+import java.sql.SQLException;
 import java.util.List;
 import java.util.zip.DataFormatException;
 
@@ -26,7 +27,7 @@ class RaavareDAOSQLTest {
             testRaavare = raavareDAOSQL.getRaavare(1);
             assertEquals(expected,testRaavare.getRaavareID());
 
-        }catch (IDALException.DALException e){
+        }catch (SQLException e){
             e.printStackTrace();
         }
     }
@@ -39,7 +40,7 @@ class RaavareDAOSQLTest {
         try{
             listRaavare = raavareDAOSQL.getRaavareList();
             assertEquals(expected,listRaavare.get(1).getRaavareID());
-        }catch (IDALException.DALException e){
+        }catch (SQLException e){
             e.printStackTrace();
         }
     }
@@ -58,7 +59,7 @@ class RaavareDAOSQLTest {
             raavareDAOSQL.createRaavare(newRaavare);
             testRaavare = raavareDAOSQL.getRaavare(99);
             assertEquals(expected,testRaavare.getRaavareID());
-        }catch (IDALException.DALException e){
+        }catch (SQLException e){
             e.printStackTrace();
         }
     }
@@ -77,7 +78,7 @@ class RaavareDAOSQLTest {
             raavareDAOSQL.updateRaavare(newRaavare);
             testRaavare = raavareDAOSQL.getRaavare(99);
             assertEquals(expected,testRaavare.getLeverandoer());
-        }catch (IDALException.DALException e){
+        }catch (SQLException e){
             e.printStackTrace();
         }
     }
@@ -86,11 +87,16 @@ class RaavareDAOSQLTest {
     @Order(5)
     void raavareExists() {
         raavareDAOSQL.db.setDB("cdioTest_2020");
-        boolean aktual;
-        aktual = raavareDAOSQL.raavareExists(99);
-        assertTrue(aktual);
-        aktual= raavareDAOSQL.raavareExists(69);
-        assertFalse(aktual);
+        try {
+            boolean aktual;
+            aktual = raavareDAOSQL.raavareExists(99);
+            assertTrue(aktual);
+            aktual= raavareDAOSQL.raavareExists(69);
+            assertFalse(aktual);
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+
     }
 
     @Test

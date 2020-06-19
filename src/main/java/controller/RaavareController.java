@@ -7,6 +7,7 @@ import dal.dto.RaavareDTO;
 
 import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.Response;
+import java.sql.SQLException;
 import java.util.List;
 
 public class RaavareController {
@@ -19,7 +20,7 @@ public class RaavareController {
     public List<RaavareDTO> getData()  {
         try {
             return raavareDAOSQL.getRaavareList();
-        }catch (IDALException.DALException e){
+        }catch (SQLException e){
             e.printStackTrace();
         }
         return null;
@@ -28,7 +29,7 @@ public class RaavareController {
     public RaavareDTO getRaavare(int id) {
         try {
             return raavareDAOSQL.getRaavare(id);
-        }catch (IDALException.DALException e){
+        }catch (SQLException e){
             e.printStackTrace();
         }
         return null;
@@ -41,7 +42,7 @@ public class RaavareController {
                 throw new WebApplicationException(Response.status(Response.Status.NOT_ACCEPTABLE).entity("Error! Tilføje venligst rigtig størrelser: \n navn: => 2 og < 30\n" + "nonNetto: => 0.05 og < 20\n" + "tolerance: => 0.1 og < 20").build());
             }
             raavareDAOSQL.createRaavare(raavareDTO);
-        }catch (IDALException.DALException e){
+        }catch (SQLException e){
             e.printStackTrace();
         }
         return raavareDTO;
@@ -53,7 +54,7 @@ public class RaavareController {
             if (rvFunc.isUpdateRaavareOk(raavareDTO,getData())) {
                 raavareDAOSQL.updateRaavare(raavareDTO);
             }
-        }catch (IDALException.DALException e){
+        }catch (SQLException e){
             e.printStackTrace();
         }
         return raavareDTO;
