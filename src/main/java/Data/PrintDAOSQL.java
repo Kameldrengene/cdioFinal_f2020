@@ -10,6 +10,7 @@ import java.util.List;
 public class PrintDAOSQL implements IPrintDAO{
     public final SQLDatabaseIO db = new SQLDatabaseIO("kamel", "dreng", "runerne.dk", 8003);
 
+
     @Override
     public List<PrintDTO> getPrint(int pbId, int receptID) throws IDALException.DALException {
         db.connect();
