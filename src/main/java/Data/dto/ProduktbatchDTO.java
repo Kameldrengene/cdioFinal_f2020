@@ -7,7 +7,7 @@ public class ProduktbatchDTO {
     String status;
     /** recept id i området 1-99999999. Vælges af brugerne */
     int receptId;
-
+    /** Dato. Tildeles automatisk i databasen*/
     String dato;
 
     public int getPbId() {

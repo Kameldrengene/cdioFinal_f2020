@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 public class UserDTO implements Serializable{
 
+	//todo comments
 	private int userID;
 	private String userName;                
 	private String ini;
