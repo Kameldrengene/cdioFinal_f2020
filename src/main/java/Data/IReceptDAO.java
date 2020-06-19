@@ -2,13 +2,15 @@ package Data;
 
 import Data.dto.ReceptDTO;
 
+import java.sql.SQLException;
 import java.util.List;
 
 public interface IReceptDAO {
-    List<ReceptDTO> getRecepts(int id) throws IDALException.DALException;
-    ReceptDTO getRecept(int receptId, int raavarID) throws IDALException.DALException;
-    List<ReceptDTO> getReceptList() throws IDALException.DALException;
-    void createRecept(ReceptDTO recept) throws IDALException.DALException;
-    void updateRecept(ReceptDTO recept) throws IDALException.DALException;
 
+    public List<ReceptDTO> getReceptList() throws SQLException;
+    public ReceptDTO getReceptKomponent(int receptId, int RaavareID) throws SQLException;
+    public List<ReceptDTO> getReceptkomponents(int receptId) throws SQLException;
+    public List<ReceptDTO> getRecepts(int id) throws SQLException;
+    public void createRecept(ReceptDTO recept) throws SQLException;
+    public void createReceptList(List<ReceptDTO> recept) throws SQLException;
 }

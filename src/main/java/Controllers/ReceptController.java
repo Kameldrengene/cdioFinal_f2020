@@ -18,7 +18,7 @@ public class ReceptController {
 
     public ReceptDTO getRecept (int receptID, int raavareID){
         try {
-            return receptDAOSQL.getRecept(receptID,raavareID);
+            return receptDAOSQL.getReceptKomponent(receptID,raavareID);
         }catch (IDALException.DALException e){
             e.printStackTrace();
         }
