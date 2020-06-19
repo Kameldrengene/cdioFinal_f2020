@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
 
+import java.sql.SQLException;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -23,7 +24,7 @@ class RaavarebatchDAOSQLTest {
         try {
             testRaavarebatch = raavarebatchDAOSQL.getRaavarebatch(1);
             assertEquals(expected,testRaavarebatch.getRbId());
-        } catch (IDALException.DALException e){
+        } catch (SQLException e){
             e.printStackTrace();
         }
     }
@@ -38,7 +39,7 @@ class RaavarebatchDAOSQLTest {
             listRaavarebatch = raavarebatchDAOSQL.getRaavarebatchList();
             assertEquals(expected,listRaavarebatch.get(1).getRbId());
             assertEquals(expectedSize,listRaavarebatch.size());
-        } catch (IDALException.DALException e){
+        } catch (SQLException e){
             e.printStackTrace();
         }
     }
@@ -53,7 +54,7 @@ class RaavarebatchDAOSQLTest {
             listRaavarebatch = raavarebatchDAOSQL.getAktuelRaavarebatchList();
             assertEquals(expected,listRaavarebatch.get(2).getRbId());
             assertEquals(expectedSize,listRaavarebatch.size());
-        } catch (IDALException.DALException e) {
+        } catch (SQLException e) {
             e.printStackTrace();
         }
     }
@@ -74,7 +75,7 @@ class RaavarebatchDAOSQLTest {
             testRaavarebatch = raavarebatchDAOSQL.getRaavarebatch(99);
             assertEquals(expected,testRaavarebatch.getRbId());
 
-        } catch (IDALException.DALException e) {
+        } catch (SQLException e) {
             e.printStackTrace();
         }
 
@@ -97,7 +98,7 @@ class RaavarebatchDAOSQLTest {
             testRaavarebatch = raavarebatchDAOSQL.getRaavarebatch(99);
             assertEquals(expected,testRaavarebatch.getAktuelMaengde());
 
-        } catch (IDALException.DALException e) {
+        } catch (SQLException e) {
             e.printStackTrace();
         }
     }

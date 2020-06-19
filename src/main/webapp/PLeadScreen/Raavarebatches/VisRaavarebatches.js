@@ -1,19 +1,14 @@
-
 $("document").ready(async function(){
 
-    await updateTable()
+    await updateTable();
 
     $("#visTomme").click(async function () {
-        await updateTable();
+          await updateTable();
     });
 
 });
 
 async function updateTable(){
-
-    //Hide table and display loader while updating
-    $("#raavarebatches").hide();
-    $("#loading").show();
 
     let path;
 
@@ -22,17 +17,11 @@ async function updateTable(){
     else
         path = "getAktuelle"
 
-    await sendAjax("/BoilerPlate_war_exploded/rest/Raavarebatch/" + path,
-        function (data) {
-        viewTable(data)
-    }, function (data) {
-        alert("Error loading list: ERR.NO.01");
-        console.log(data);
-    })
-
-    //Remove loader and reveal table
-    $("#loading").hide();
-    $("#raavarebatches").show();
+    await sendAjax(
+        "/BoilerPlate_war_exploded/rest/Raavarebatch/" + path,
+        data => viewTable(data),
+        err => error(err)
+    );
 
 };
 
@@ -58,9 +47,9 @@ function viewTable(data){
         tabelData += "<td>"+value.rbId+"</td>";
         tabelData += "<td>"+value.raavareId+"</td>";
 
-        //Ensure numbers always shows 4 decimal places
-        const startM = (Math.round(value.startMaengde * 100) / 100).toFixed(4);
-        const aktuelM = (Math.round(value.aktuelMaengde * 100) / 100).toFixed(4);
+        //Ensure numbers always show 4 decimal places
+        const startM = value.startMaengde.toFixed(4);
+        const aktuelM = value.aktuelMaengde.toFixed(4);
 
         tabelData += "<td>"+startM+"</td>";
         tabelData += "<td>"+aktuelM+"</td>";

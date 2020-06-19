@@ -11,24 +11,11 @@ $("document").ready(async function () {
 
 async function loadRaavarer() {
 
-    //Hide table and display loader while updating
-    $("#raavareTable").hide();
-    $("#loading").show();
-
     await sendAjax(
         "/BoilerPlate_war_exploded/rest/Raavare/getRaavarer",
-        function (data) {
-            viewTable(data)
-        },
-        function (data) {
-            alert("Error getting all/actual råvarer: ERR.NO.XX");
-            console.log(data);
-        }
+        data => viewTable(data),
+        err => error(err)
     );
-
-    //Remove loader and reveal table
-    $("#loading").hide();
-    $("#raavareTable").show();
 
 }
 

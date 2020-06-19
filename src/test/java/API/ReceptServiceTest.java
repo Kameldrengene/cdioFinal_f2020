@@ -8,6 +8,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
 
 import javax.ws.rs.PathParam;
+import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -48,6 +49,35 @@ class ReceptServiceTest {
         newRecept.setTolerance(9.5);
 
         receptService.opretRecept(newRecept,0);
+        testRecept=receptService.getrecept(99,3);
+        assertEquals(expected,testRecept.getReceptId());
+
+    }
+
+    @Test
+    @Order(4)
+    void opretReceptList() {
+        receptService.receptController.receptDAOSQL.db.setDB("cdioTest_2020");
+        int expected = 99;
+        List<ReceptDTO> receptDTOList = new ArrayList<>();
+        ReceptDTO newRecept = new ReceptDTO();
+        newRecept.setNonNetto(5.5);
+        newRecept.setRaavareId(3);
+        newRecept.setReceptId(99);
+        newRecept.setReceptNavn("Morfin");
+        newRecept.setTolerance(9.5);
+
+        ReceptDTO newRecept2 = new ReceptDTO();
+        newRecept2.setNonNetto(5.5);
+        newRecept2.setRaavareId(4);
+        newRecept2.setReceptId(99);
+        newRecept2.setReceptNavn("Morfin");
+        newRecept2.setTolerance(9.5);
+
+        receptDTOList.add(newRecept);
+        receptDTOList.add(newRecept2);
+
+        receptService.OpretRecept(receptDTOList);
         testRecept=receptService.getrecept(99,3);
         assertEquals(expected,testRecept.getReceptId());
 

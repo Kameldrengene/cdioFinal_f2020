@@ -7,6 +7,7 @@ import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -39,12 +40,14 @@ class ReceptControllerTest {
     void opretRecept() {
         receptController.receptDAOSQL.db.setDB("cdioTest_2020");
         int expected = 10;
+        List<ReceptDTO> receptDTOList = new ArrayList<>();
         ReceptDTO newRecept = new ReceptDTO();
         newRecept.setNonNetto(5.5);
         newRecept.setRaavareId(3);
         newRecept.setReceptId(10);
         newRecept.setReceptNavn("Morfin");
         newRecept.setTolerance(9.5);
+
         receptController.opretRecept(newRecept,0);
         testRecept = receptController.getRecept(99,3);
         assertEquals(expected,testRecept.getReceptId());
