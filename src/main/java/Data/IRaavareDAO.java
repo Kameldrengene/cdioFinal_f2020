@@ -2,15 +2,17 @@ package Data;
 
 import Data.dto.RaavareDTO;
 
+import java.sql.SQLException;
 import java.util.List;
 
 public interface IRaavareDAO {
 
-    RaavareDTO getRaavare(int raavareId) throws IDALException.DALException;
-    List<RaavareDTO> getRaavareList() throws IDALException.DALException;
-    void createRaavare(RaavareDTO raavare) throws IDALException.DALException;
-    void updateRaavare(RaavareDTO raavare) throws IDALException.DALException;
-    boolean raavareExists(int raavareID);
+    public List<RaavareDTO> getRaavareList() throws SQLException;
+    public RaavareDTO getRaavare(int raavareId) throws SQLException;
+    public void createRaavare(RaavareDTO raavare) throws SQLException;
+    public void updateRaavare(RaavareDTO raavare) throws SQLException;
+    public boolean raavareExists(int raavareID) throws SQLException;
+
 
 
 }
