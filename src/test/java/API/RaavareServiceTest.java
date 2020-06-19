@@ -21,7 +21,11 @@ class RaavareServiceTest {
     @Test
     @Order(1)
     void getData() {
-        raavareService.raavareController.raavareDAOSQL.db.setDB("cdioTest_2020");
+        try {
+            raavareService.raavareController.raavareDAOSQL.db.setDB("cdioTest_2020");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         int expected = 2;
         listRaavare = raavareService.getData();
     }
@@ -29,7 +33,11 @@ class RaavareServiceTest {
     @Test
     @Order(2)
     void getRaavare() {
-        raavareService.raavareController.raavareDAOSQL.db.setDB("cdioTest_2020");
+        try {
+            raavareService.raavareController.raavareDAOSQL.db.setDB("cdioTest_2020");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         int expected = 1;
         testraavare = raavareService.getRaavare(1);
         assertEquals(expected,testraavare.getRaavareID());
@@ -38,7 +46,11 @@ class RaavareServiceTest {
     @Test
     @Order(3)
     void opretRaavare() {
-        raavareService.raavareController.raavareDAOSQL.db.setDB("cdioTest_2020");
+        try {
+            raavareService.raavareController.raavareDAOSQL.db.setDB("cdioTest_2020");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         int expected = 99;
         RaavareDTO newRaavare = new RaavareDTO();
         newRaavare.setLagerBeholdning(10.5);
@@ -54,7 +66,11 @@ class RaavareServiceTest {
     @Test
     @Order(4)
     void updateRaavare() {
-        raavareService.raavareController.raavareDAOSQL.db.setDB("cdioTest_2020");
+        try {
+            raavareService.raavareController.raavareDAOSQL.db.setDB("cdioTest_2020");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         String expected = "Novo";
         RaavareDTO newRaavare = new RaavareDTO();
         newRaavare.setLagerBeholdning(10.5);

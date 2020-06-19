@@ -7,6 +7,7 @@ import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,7 +21,11 @@ class ReceptServiceTest {
     @Test
     @Order(1)
     void getData() {
-        receptService.receptController.receptDAOSQL.db.setDB("cdioTest_2020");
+        try {
+            receptService.receptController.receptDAOSQL.db.setDB("cdioTest_2020");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         int expected = 10;
         listRecept = receptService.getRecepts();
         assertEquals(expected,listRecept.get(0).getReceptId());
@@ -29,7 +34,11 @@ class ReceptServiceTest {
     @Test
     @Order(2)
     void getRecept() {
-        receptService.receptController.receptDAOSQL.db.setDB("cdioTest_2020");
+        try {
+            receptService.receptController.receptDAOSQL.db.setDB("cdioTest_2020");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         int expected = 11;
         listRecept = receptService.getReceptlist(11);
         assertEquals(expected,listRecept.get(0).getReceptId());
@@ -38,7 +47,11 @@ class ReceptServiceTest {
     @Test
     @Order(3)
     void opretRecept() {
-        receptService.receptController.receptDAOSQL.db.setDB("cdioTest_2020");
+        try {
+            receptService.receptController.receptDAOSQL.db.setDB("cdioTest_2020");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         int expected = 99;
         ReceptDTO newRecept = new ReceptDTO();
         newRecept.setNonNetto(5.5);
@@ -70,7 +83,11 @@ class ReceptServiceTest {
     @Test
     @Order(5)
     void opretReceptList() {
-        receptService.receptController.receptDAOSQL.db.setDB("cdioTest_2020");
+        try {
+            receptService.receptController.receptDAOSQL.db.setDB("cdioTest_2020");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         int expected = 99;
         List<ReceptDTO> receptDTOList = new ArrayList<>();
         ReceptDTO newRecept = new ReceptDTO();

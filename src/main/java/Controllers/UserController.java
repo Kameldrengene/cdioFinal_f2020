@@ -6,6 +6,7 @@ import Data.UserDAOSQL;
 import Data.dto.UserDTO;
 
 import javax.ws.rs.*;
+import javax.ws.rs.core.Response;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -13,19 +14,28 @@ import java.util.List;
 public class UserController {
 
     public final UserDAOSQL userDAOSQL;
+    private final String SQLErrorMsg = "ERROR: Fejl i forbindelse med kontakt af databasen";
 
     //Constructor
     public UserController(){
         userDAOSQL = new UserDAOSQL();
     }
 
-    public List<UserDTO> getData() throws SQLException {
-        return userDAOSQL.getData();
+    public List<UserDTO> getData()  {
+        try {
+            return userDAOSQL.getData();
+        } catch (SQLException e) {
+            throw buildError(Response.Status.NOT_ACCEPTABLE, SQLErrorMsg);
+        }
     }
 
 
-    public List<UserDTO> getRole(String role) throws WebApplicationException {
-        return userDAOSQL.getRole(role);
+    public List<UserDTO> getRole(String role)  {
+        try {
+            return userDAOSQL.getRole(role);
+        } catch (SQLException e) {
+            throw buildError(Response.Status.NOT_ACCEPTABLE, SQLErrorMsg);
+        }
     }
 
 
@@ -84,6 +94,10 @@ public class UserController {
             e.printStackTrace();
         }
         return user;
+    }
+
+    public WebApplicationException buildError(Response.Status status, String msg){
+        return new WebApplicationException(Response.status(status).entity(msg).build());
     }
 
 

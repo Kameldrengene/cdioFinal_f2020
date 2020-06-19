@@ -24,7 +24,11 @@ class UserDAOSQLTest {
     @Test
     @Order(1)
     void getUser() {
-        userDAOSQL.db.setDB("cdioTest_2020");
+        try {
+            userDAOSQL.db.setDB("cdioTest_2020");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         try {
             testUser = userDAOSQL.getUser(11);
         }catch (SQLException e){
@@ -38,16 +42,28 @@ class UserDAOSQLTest {
     @Test
     @Order(2)
     void getRole() {
-        userDAOSQL.db.setDB("cdioTest_2020");
+        try {
+            userDAOSQL.db.setDB("cdioTest_2020");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         int expected = 1;
-        testList = userDAOSQL.getRole("Administrator");
+        try {
+            testList = userDAOSQL.getRole("Administrator");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         assertEquals(expected,testList.size());
     }
 
     @Test
     @Order(3)
     void getData() {
-        userDAOSQL.db.setDB("cdioTest_2020");
+        try {
+            userDAOSQL.db.setDB("cdioTest_2020");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         try {
             testList = userDAOSQL.getData();
         }catch (SQLException e){
@@ -60,7 +76,11 @@ class UserDAOSQLTest {
     @Test
     @Order(4)
     void createUser() {
-        userDAOSQL.db.setDB("cdioTest_2020");
+        try {
+            userDAOSQL.db.setDB("cdioTest_2020");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         UserDTO newUser = new UserDTO();
         newUser.setAktiv(false);
         newUser.setUserName("Test");
@@ -80,7 +100,11 @@ class UserDAOSQLTest {
     @Test
     @Order(5)
     void updateUser() {
-        userDAOSQL.db.setDB("cdioTest_2020");
+        try {
+            userDAOSQL.db.setDB("cdioTest_2020");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         UserDTO newUser = new UserDTO();
         newUser.setAktiv(false);
         newUser.setUserName("Test");
@@ -101,7 +125,11 @@ class UserDAOSQLTest {
     @Test
     @Order(6)
     void getActivity() {
-        userDAOSQL.db.setDB("cdioTest_2020");
+        try {
+            userDAOSQL.db.setDB("cdioTest_2020");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         try {
             boolean aktual = userDAOSQL.getActivity(19);
             assertFalse(aktual);
@@ -113,7 +141,11 @@ class UserDAOSQLTest {
     @Test
     @Order(7)
     void aktivitySwitchUser() {
-        userDAOSQL.db.setDB("cdioTest_2020");
+        try {
+            userDAOSQL.db.setDB("cdioTest_2020");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         try{
             userDAOSQL.aktivitySwitchUser(19);
             boolean aktual = userDAOSQL.getUser(19).getAktiv();

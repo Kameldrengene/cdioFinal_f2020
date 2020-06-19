@@ -18,13 +18,8 @@ public class UserService {
 
     @Path("getUsers")
     @GET
-    public List<UserDTO> getData() {
-        try {
-            return userController.getData();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return null;
+    public List<UserDTO> getData() throws WebApplicationException{
+        return userController.getData();
     }
 
     @Path("getUser/{id}")

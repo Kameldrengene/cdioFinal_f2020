@@ -21,7 +21,11 @@ class RaavarebatchDAOSQLTest {
     @Test
     @Order(1)
     void getRaavarebatch() {
-        raavarebatchDAOSQL.db.setDB("cdioTest_2020");
+        try {
+            raavarebatchDAOSQL.db.setDB("cdioTest_2020");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         int expected = 1;
         try {
             testRaavarebatch = raavarebatchDAOSQL.getRaavarebatch(1);
@@ -34,7 +38,11 @@ class RaavarebatchDAOSQLTest {
     @Test
     @Order(2)
     void getRaavarebatchList() {
-        raavarebatchDAOSQL.db.setDB("cdioTest_2020");
+        try {
+            raavarebatchDAOSQL.db.setDB("cdioTest_2020");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         int expected = 2;
         int expectedSize = 22;
         try {
@@ -49,7 +57,11 @@ class RaavarebatchDAOSQLTest {
     @Test
     @Order(3)
     void getAktuelRaavarebatchList() {
-        raavarebatchDAOSQL.db.setDB("cdioTest_2020");
+        try {
+            raavarebatchDAOSQL.db.setDB("cdioTest_2020");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         int expected = 3;
         int expectedSize = 20;
         try {
@@ -64,7 +76,11 @@ class RaavarebatchDAOSQLTest {
     @Test
     @Order(4)
     void createRaavarebatch() {
-        raavarebatchDAOSQL.db.setDB("cdioTest_2020");
+        try {
+            raavarebatchDAOSQL.db.setDB("cdioTest_2020");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         int expected = 99;
         RaavarebatchDTO newRaavarebatch = new RaavarebatchDTO();
         newRaavarebatch.setAktuelMaengde(85.5);
@@ -87,7 +103,12 @@ class RaavarebatchDAOSQLTest {
     @Test
     @Order(5)
     void updateRaavarebatch() {
-        raavarebatchDAOSQL.db.setDB("cdioTest_2020");
+        try {
+            raavarebatchDAOSQL.db.setDB("cdioTest_2020");
+        } catch (SQLException e) {
+
+
+        }
         double expected = 70.5;
         RaavarebatchDTO newRaavarebatch = new RaavarebatchDTO();
         newRaavarebatch.setAktuelMaengde(70.5);

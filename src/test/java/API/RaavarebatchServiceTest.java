@@ -7,6 +7,7 @@ import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
 
+import java.sql.SQLException;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -19,7 +20,11 @@ class RaavarebatchServiceTest {
     @Test
     @Order(1)
     void getData() {
-        raavarebatchService.raavarebatchController.DAOSQL.db.setDB("cdioTest_2020");
+        try {
+            raavarebatchService.raavarebatchController.DAOSQL.db.setDB("cdioTest_2020");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         int expected = 2;
         int expectedSize = 22;
 
@@ -31,7 +36,11 @@ class RaavarebatchServiceTest {
     @Test
     @Order(2)
     void getAktuelle() {
-        raavarebatchService.raavarebatchController.DAOSQL.db.setDB("cdioTest_2020");
+        try {
+            raavarebatchService.raavarebatchController.DAOSQL.db.setDB("cdioTest_2020");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         int expected = 3;
         int expectedSize = 20;
         listRaavarebatch = raavarebatchService.getAktuelle();
@@ -42,7 +51,11 @@ class RaavarebatchServiceTest {
     @Test
     @Order(3)
     void getBatch() {
-        raavarebatchService.raavarebatchController.DAOSQL.db.setDB("cdioTest_2020");
+        try {
+            raavarebatchService.raavarebatchController.DAOSQL.db.setDB("cdioTest_2020");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         int expected = 1;
         testRaavarebatch = raavarebatchService.getBatch("1");
         assertEquals(expected,testRaavarebatch.getRbId());
@@ -51,7 +64,11 @@ class RaavarebatchServiceTest {
     @Test
     @Order(4)
     void opretRaavarebatch() {
-        raavarebatchService.raavarebatchController.DAOSQL.db.setDB("cdioTest_2020");
+        try {
+            raavarebatchService.raavarebatchController.DAOSQL.db.setDB("cdioTest_2020");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         int expected = 99;
         RaavarebatchDTO newRaavarebatch = new RaavarebatchDTO();
         newRaavarebatch.setAktuelMaengde(85.5);
@@ -68,7 +85,11 @@ class RaavarebatchServiceTest {
     @Test
     @Order(5)
     void updateRaavarebatch() {
-        raavarebatchService.raavarebatchController.DAOSQL.db.setDB("cdioTest_2020");
+        try {
+            raavarebatchService.raavarebatchController.DAOSQL.db.setDB("cdioTest_2020");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         double expected = 70.5;
         RaavarebatchDTO newRaavarebatch = new RaavarebatchDTO();
         newRaavarebatch.setAktuelMaengde(70.5);

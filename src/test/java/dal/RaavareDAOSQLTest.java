@@ -23,7 +23,11 @@ class RaavareDAOSQLTest {
     @Test
     @Order(1)
     void getRaavare() {
-        raavareDAOSQL.db.setDB("cdioTest_2020");
+        try {
+            raavareDAOSQL.db.setDB("cdioTest_2020");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         int expected = 1;
         try {
             testRaavare = raavareDAOSQL.getRaavare(1);
@@ -37,7 +41,11 @@ class RaavareDAOSQLTest {
     @Test
     @Order(2)
     void getRaavareList() {
-        raavareDAOSQL.db.setDB("cdioTest_2020");
+        try {
+            raavareDAOSQL.db.setDB("cdioTest_2020");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         int expected = 2;
         try{
             listRaavare = raavareDAOSQL.getRaavareList();
@@ -50,7 +58,11 @@ class RaavareDAOSQLTest {
     @Test
     @Order(3)
     void createRaavare() {
-        raavareDAOSQL.db.setDB("cdioTest_2020");
+        try {
+            raavareDAOSQL.db.setDB("cdioTest_2020");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         int expected = 99;
         RaavareDTO newRaavare = new RaavareDTO();
         newRaavare.setLagerBeholdning(10.5);
@@ -69,14 +81,14 @@ class RaavareDAOSQLTest {
     @Test
     @Order(4)
     void updateRaavare() {
-        raavareDAOSQL.db.setDB("cdioTest_2020");
-        String expected = "Novo";
-        RaavareDTO newRaavare = new RaavareDTO();
-        newRaavare.setLagerBeholdning(10.5);
-        newRaavare.setLeverandoer("Novo");
-        newRaavare.setRaavareID(99);
-        newRaavare.setRaavareNavn("Vodka");
-        try{
+        try {
+            raavareDAOSQL.db.setDB("cdioTest_2020");
+            String expected = "Novo";
+            RaavareDTO newRaavare = new RaavareDTO();
+            newRaavare.setLagerBeholdning(10.5);
+            newRaavare.setLeverandoer("Novo");
+            newRaavare.setRaavareID(99);
+            newRaavare.setRaavareNavn("Vodka");
             raavareDAOSQL.updateRaavare(newRaavare);
             testRaavare = raavareDAOSQL.getRaavare(99);
             assertEquals(expected,testRaavare.getLeverandoer());
@@ -88,15 +100,12 @@ class RaavareDAOSQLTest {
     @Test
     @Order(5)
     void raavareExists() {
-        raavareDAOSQL.db.setDB("cdioTest_2020");
+
         boolean aktual = false;
         try {
+            raavareDAOSQL.db.setDB("cdioTest_2020");
             aktual = raavareDAOSQL.raavareExists(99);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        assertTrue(aktual);
-        try {
+            assertTrue(aktual);
             aktual= raavareDAOSQL.raavareExists(69);
         } catch (SQLException e) {
             e.printStackTrace();
