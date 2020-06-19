@@ -33,7 +33,7 @@ class RaavarebatchServiceTest {
     @Order(2)
     void getAktuelle() {
         raavarebatchService.raavarebatchController.DAOSQL.db.setDB("cdioTest_2020");
-        int expected = 22;
+        int expected = 3;
         int expectedSize = 20;
         listRaavarebatch = raavarebatchService.getAktuelle();
         assertEquals(expected,listRaavarebatch.get(2).getRbId());
