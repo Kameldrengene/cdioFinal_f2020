@@ -1,4 +1,4 @@
-
+$.ajaxSetup({async: false});
 
 var alleMap = new Map();  //indeholder alle rååvare med navn som key.
 
@@ -23,7 +23,7 @@ function ledeligeRaavare() {   // gemmer alle råvare i en Map.
         localStorage.setItem("ledeligeRaavarNavn",alleRaavareNavn);
     });
 }
-localStorage.setItem("counter",0);
+
 counter = 0;  //bruges til at give at tilføje id's til elementer.
 function addLinje() {    //tilføjer ekstra råvare
     if(($("#recepID").val() === null) || ($("#recepnavn").val() === '')){
@@ -103,18 +103,16 @@ function retur() {
     });
 }
 
-async function confirmOpretRecept() {
-    $(document).ready(async function () {
+function confirmOpretRecept() {
+    $(document).ready(function () {
         if (confirm('Er du sikker?')) {
+            $("#loading").show();
             console.log("test1");
-            if(document.getElementById('recepID').value != '' && document.getElementById('recepnavn').value != ''){
+            if (document.getElementById('recepID').value != '' && document.getElementById('recepnavn').value != '') {
                 console.log("test2");
-                if(ingenDublicate()){
-                    $("#opretRecept").hide();
-                    $("#opretReceptBtn").hide();
-                    $("#loading").show();
-                    await opretReceptList();
-                }else {
+                if (ingenDublicate()) {
+                     opretReceptList();
+                } else {
                     alert("må ikke vælge samme råvare flere gang!")
                 }
             } else {
@@ -175,32 +173,30 @@ async function opretReceptList() {
         }
     }
     console.log(JSON.stringify(ReceptList));
-    await $.ajax({
-        url: "/BoilerPlate_war_exploded/rest/Recept/OpretRecept",
-        type: 'POST',
-        contentType: "application/json",
-        dataType: 'json',
-        data: JSON.stringify(ReceptList),
-        success: function (data) {
-            console.log("before"+ counter);
-            retur();
-            console.log("after" + counter);
+    console.log("before ajax");
+       await $.ajax({
+              url: "/BoilerPlate_war_exploded/rest/Recept/OpretRecept",
+              type: 'POST',
+              contentType: "application/json",
+              dataType: 'json',
+           async: true,
+              data: JSON.stringify(ReceptList),
+              success: function (data) {
+                  console.log("before" + counter);
+                  retur();
+                  console.log("after" + counter);
 
-        },
-        error: function (data) {
-            if (data.status === 406){
-                alert(data.responseText);
-                console.log(counter);
-                $("#loading").hide();
-                $("#opretRecept").show();
-                $("#opretReceptBtn").show();
-            }else {
-                alert('Enternal Error: Prøve igen!');
-                $("#loading").hide();
-                $("#opretRecept").show();
-                $("#opretReceptBtn").show();
-            }
-        }
-    });
+              },
+              error: function (data) {
+                  if (data.status === 406) {
+                      alert(data.responseText);
+                      console.log(counter);
+
+                  } else {
+                      alert('Enternal Error: Prøve igen!');
+
+                  }
+              }
+          });
 }
 
