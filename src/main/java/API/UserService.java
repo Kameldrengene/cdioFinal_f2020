@@ -1,8 +1,8 @@
 package API;
 
-import controller.UserController;
-import dal.IDALException;
-import dal.dto.UserDTO;
+import Controllers.UserController;
+import Data.IDALException;
+import Data.dto.UserDTO;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;

@@ -1,6 +1,6 @@
 package API;
 
-import dal.dto.PrintDTO;
+import Data.dto.PrintDTO;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;

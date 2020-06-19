@@ -1,7 +1,8 @@
 package controller;
 
-import dal.SQLDatabaseIO;
-import dal.dto.RaavareDTO;
+import Controllers.RaavareController;
+import Data.SQLDatabaseIO;
+import Data.dto.RaavareDTO;
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;

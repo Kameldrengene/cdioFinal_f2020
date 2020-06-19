@@ -1,8 +1,9 @@
 package controller;
 
-import dal.IDALException;
-import dal.SQLDatabaseIO;
-import dal.dto.UserDTO;
+import Controllers.UserController;
+import Data.IDALException;
+import Data.SQLDatabaseIO;
+import Data.dto.UserDTO;
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;

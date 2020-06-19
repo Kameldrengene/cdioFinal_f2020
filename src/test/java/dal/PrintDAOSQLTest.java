@@ -1,6 +1,8 @@
 package dal;
 
-import dal.dto.PrintDTO;
+import Data.IDALException;
+import Data.PrintDAOSQL;
+import Data.dto.PrintDTO;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;

@@ -1,6 +1,9 @@
 package dal;
 
-import dal.dto.UserDTO;
+import Data.IDALException;
+import Data.SQLDatabaseIO;
+import Data.UserDAOSQL;
+import Data.dto.UserDTO;
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;

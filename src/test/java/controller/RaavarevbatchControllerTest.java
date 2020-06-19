@@ -1,8 +1,8 @@
 package controller;
 
-import dal.IDALException;
-import dal.SQLDatabaseIO;
-import dal.dto.RaavarebatchDTO;
+import Controllers.RaavarevbatchController;
+import Data.SQLDatabaseIO;
+import Data.dto.RaavarebatchDTO;
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;

@@ -1,9 +1,8 @@
 package API;
 
-import controller.ProduktbatchController;
-import dal.IDALException;
-import dal.dto.ProduktbatchDTO;
-import dal.dto.ProduktbatchKompDTO;
+import Controllers.ProduktbatchController;
+import Data.dto.ProduktbatchDTO;
+import Data.dto.ProduktbatchKompDTO;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;

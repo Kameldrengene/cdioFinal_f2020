@@ -1,8 +1,8 @@
 package API;
 
-import controller.*;
-import dal.IDALException;
-import dal.dto.RaavareDTO;
+import Controllers.RaavareController;
+import Data.IDALException;
+import Data.dto.RaavareDTO;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;

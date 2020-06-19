@@ -1,7 +1,7 @@
 package API;
 
-import dal.SQLDatabaseIO;
-import dal.dto.UserDTO;
+import Data.SQLDatabaseIO;
+import Data.dto.UserDTO;
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;

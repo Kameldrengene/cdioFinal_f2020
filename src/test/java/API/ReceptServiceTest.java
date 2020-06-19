@@ -1,13 +1,12 @@
 package API;
 
-import dal.SQLDatabaseIO;
-import dal.dto.ReceptDTO;
+import Data.SQLDatabaseIO;
+import Data.dto.ReceptDTO;
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
 
-import javax.ws.rs.PathParam;
 import java.util.ArrayList;
 import java.util.List;
 
