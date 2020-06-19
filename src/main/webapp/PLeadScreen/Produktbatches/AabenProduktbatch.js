@@ -2,6 +2,9 @@ var batchID;
 var receptID;
 var status;
 var dato;
+var sumTara;
+var sumNetto;
+var lastDato;
 
 $("document").ready(async function () {
 
@@ -91,16 +94,19 @@ function viewTable(data){
         tabelData += "<tr>";
         tabelData += "<td> &nbsp; </td>";
         tabelData += "</tr>";
+        sumNetto = value.sumNetto;
+        sumTara = value.sumTara;
+        lastDato = value.dato;
     });
 
     tabelData += "<tr>";
-    tabelData += "<th align='left'>Sum Tara: </th>"
+    tabelData += "<th align='left'>Sum Tara: </th>"+"<th align='left'>"+sniff(sumTara)+"</th>";
     tabelData += "</tr>";
     tabelData += "<tr>";
-    tabelData += "<th align='left'>Sum Netto: </th>"
+    tabelData += "<th align='left'>Sum Netto: </th>"+"<th align='left'>"+sniff(sumNetto)+"</th>";
     tabelData += "</tr>";
     tabelData += "<tr>";
-    tabelData += "<th align='left'>Produktion Slut: </th>"
+    tabelData += "<th align='left'>Produktion Slut: </th>"+"<th align='left'>"+slutDato(status,lastDato)+"</th>"
     tabelData += "</tr>";
 
     $("#produktbatch").html(tabelData);
@@ -114,6 +120,12 @@ function sniff(value) {
     }
     else
         return value;
+}
+function slutDato(standing,dato){
+    if(standing=="Afsluttet"){
+        return dato;
+    }
+    return "";
 }
 
 function printDiv(divName) {
