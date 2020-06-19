@@ -63,11 +63,11 @@ $("document").ready(async function () {
             if (loginRole == "admin")
                 switchP("AdminScreen/Admin.html");
             else if (loginRole == "farma")
-                switchP("FarmaScreen/Admin.html");
+                switchP("FarmaScreen/Farma.html");
             else if (loginRole == "prodLeder")
                 switchP("PLeadScreen/PLeadScreen.html")
             else if (loginRole == "laborant")
-                switchP("LabScreen/Admin.html");
+                switchP("LabScreen/Lab.html");
         }
     });
 });
