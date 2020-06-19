@@ -21,7 +21,7 @@ $("document").ready(async function(){
         localStorage.setItem("activeReceptID", receptID);
         localStorage.setItem("activeDato", dato);
 
-        switchP("PLeadScreen/Produktbatches/AabenProduktbatch.html");
+        switchP("PLeadScreen/Produktbatches/OpretProduktbatch/AabenProduktbatch/AabenProduktbatch.html");
     });
 
 });

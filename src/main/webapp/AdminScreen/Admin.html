@@ -2,16 +2,16 @@
 <html lang="en">
 <head>
         <link rel="stylesheet" type="text/css" href="AdminScreen/Admin.css">
-        <script src="AdminScripts.js"></script>
+        <script src="AdminScreen/Admin.js"></script>
 </head>
 
 <body>
-        <h5 id="brugerInfo">Loading</h5>
+        <h5 id="brugerInfo">Loading</h5> <!-- Login som ID info -->
         <script src="currentUserScript.js"></script>
 
         <h1>Admin screen</h1>
-        <div id='loading'></div>
-        <button class="hvr-pop" onclick="switchP('Brugeroversigt/Opretbruger/index.html');">create new person</button>
+        <div id='loading'></div> <!-- Loading animation -->
+        <button class="hvr-pop" onclick="switchP('AdminScreen/Brugeroversigt/Opretbruger/OpretBruger.html');">create new person</button>
         <div id="list" class="container" className="brugertable">
                 <br/>
                 <table class="brugertable" id="Person_table">
@@ -23,6 +23,6 @@
 
         <input type="submit" style="margin-top: 0%;" class="hvr-buzz screenbtn" value="Log ud" onclick="window.location.reload()">
 
-        <script>Personslist();</script>
+        <script>Personslist();</script> <!--Kører Personlist, loader personer ind i tabellen herover -->
 </body>
 </html>

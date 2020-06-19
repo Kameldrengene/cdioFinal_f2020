@@ -3,7 +3,7 @@
 function confirmRaavareUpdate(id){
     $(document).ready(function () {
         if(confirm("are you sure, you want to update this råvare "+ id +"?")){
-            switchP('FarmaScreen/VisRaavare/OpdaterRaavare/index.html');
+            switchP('FarmaScreen/VisRaavare/OpdaterRaavare/ProcesserProduktbatch.html');
             localStorage.setItem("raavareUpdateID", id);
             $(document).ready(function () {
                 $.getJSON("/BoilerPlate_war_exploded/rest/Raavare/getRaavare/"+ localStorage.getItem("raavareUpdateID"), function (data) {
@@ -35,19 +35,11 @@ function raavareData(modType) {
     const INavn = $("#raavareNavn").val();
     const ILeve = $("#leverandoer").val();
     const jsonData = {raavareID: IID, raavareNavn: INavn, leverandoer: ILeve};
-    $.ajax({
-        url: APILink,
-        type: httpType,
-        contentType: "application/json",
-        dataType: 'json',
-        data: JSON.stringify(jsonData),
-        success: function (data) {
+    sendAjax(APILink,function (data) {
             switchP("FarmaScreen/PLeadScreen.html");
-        },
-        error: function (jqXHR, text, error) {
-            alert(JSON.stringify(jsonData));
-        }
-    });
+        }, function (jqXHR, text, error) {
+        alert(JSON.stringify(jsonData));
+    }, "PUT", JSON.stringify(jsonData))
 }
 
 function postRaavareData() {
@@ -144,7 +136,7 @@ function tilbage() {
 }
 
 function toOpretrecept() {
-    switchP('FarmaScreen/NyRecept/index.html');
+    switchP('FarmaScreen/NyRecept/ProcesserProduktbatch.html');
     $("#loading").hide();
 
 }
