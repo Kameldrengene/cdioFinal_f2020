@@ -13,7 +13,7 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 class ReceptControllerTest {
-    ReceptController receptController = new ReceptController();
+    final ReceptController receptController = new ReceptController();
     ReceptDTO testRecept;
     List<ReceptDTO> listRecept;
     @Test

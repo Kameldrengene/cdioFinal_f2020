@@ -1,6 +1,5 @@
 package controller;
 
-import dal.IDALException;
 import dal.SQLDatabaseIO;
 import dal.dto.RaavarebatchDTO;
 import org.junit.jupiter.api.MethodOrderer;
@@ -13,7 +12,7 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 class RaavarevbatchControllerTest {
-    RaavarevbatchController raavarevbatchController = new RaavarevbatchController();
+    final RaavarevbatchController raavarevbatchController = new RaavarevbatchController();
     RaavarebatchDTO testRaavarebatch;
     List<RaavarebatchDTO> listRaavarebatch;
     @Test

@@ -8,7 +8,7 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
 class PrintDAOSQLTest {
-    PrintDAOSQL printDAOSQL = new PrintDAOSQL();
+    final PrintDAOSQL printDAOSQL = new PrintDAOSQL();
     List<PrintDTO> printDTOList;
 
     @Test

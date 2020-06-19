@@ -12,7 +12,7 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 class RaavarebatchDAOSQLTest {
-    RaavarebatchDAOSQL raavarebatchDAOSQL = new RaavarebatchDAOSQL();
+    final RaavarebatchDAOSQL raavarebatchDAOSQL = new RaavarebatchDAOSQL();
     RaavarebatchDTO testRaavarebatch;
     List<RaavarebatchDTO> listRaavarebatch;
 

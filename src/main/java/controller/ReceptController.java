@@ -3,16 +3,14 @@ package controller;
 import Funktionalitet.ReceptFunc;
 import dal.IDALException;
 import dal.ReceptDAOSQL;
-import dal.UserDAOSQL;
 import dal.dto.ReceptDTO;
-import dal.dto.UserDTO;
 
 import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.Response;
 import java.util.List;
 
 public class ReceptController {
-    public ReceptDAOSQL receptDAOSQL;
+    public final ReceptDAOSQL receptDAOSQL;
 
     public ReceptController(){
         receptDAOSQL = new ReceptDAOSQL();

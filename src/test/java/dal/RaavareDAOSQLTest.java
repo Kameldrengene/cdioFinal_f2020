@@ -7,13 +7,12 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
 
 import java.util.List;
-import java.util.zip.DataFormatException;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 class RaavareDAOSQLTest {
-    RaavareDAOSQL raavareDAOSQL = new RaavareDAOSQL();
+    final RaavareDAOSQL raavareDAOSQL = new RaavareDAOSQL();
     RaavareDTO testRaavare;
     List<RaavareDTO> listRaavare;
 

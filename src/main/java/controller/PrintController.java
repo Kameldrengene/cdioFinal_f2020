@@ -7,7 +7,7 @@ import dal.dto.PrintDTO;
 import java.util.List;
 
 public class PrintController {
-    public PrintDAOSQL printDAOSQL;
+    public final PrintDAOSQL printDAOSQL;
     public PrintController(){
         printDAOSQL = new PrintDAOSQL();
     }

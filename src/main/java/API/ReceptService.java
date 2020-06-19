@@ -1,8 +1,6 @@
 package API;
 
 import controller.ReceptController;
-import dal.IDALException;
-import dal.ReceptDAOSQL;
 import dal.dto.ReceptDTO;
 
 import javax.ws.rs.*;
@@ -13,7 +11,7 @@ import java.util.List;
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
 public class ReceptService {
-    public ReceptController receptController = new ReceptController();
+    public final ReceptController receptController = new ReceptController();
 
 
 

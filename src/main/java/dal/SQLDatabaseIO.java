@@ -8,10 +8,9 @@ import javax.ws.rs.core.Response.Status;
 import java.sql.*;
 
 public class SQLDatabaseIO {
-    private final String JDBC_DRIVER = "com.mysql.cj.jdbc.Driver";
-    private String DatabaseURL;
-    private String USER;
-    private String PASS;
+    private final String DatabaseURL;
+    private final String USER;
+    private final String PASS;
     private String db_name = "cdioFinal_2020";
     private boolean connected = false;
     private Connection conn = null;
@@ -37,6 +36,7 @@ public class SQLDatabaseIO {
     public void connect() {
         if(!connected){
             try {
+                String JDBC_DRIVER = "com.mysql.cj.jdbc.Driver";
                 Class.forName(JDBC_DRIVER);
             } catch (ClassNotFoundException e) {
                 e.printStackTrace();

@@ -1,14 +1,13 @@
 package dal;
 
 import dal.dto.RaavareDTO;
-import dal.dto.RaavarebatchDTO;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.*;
 
 public class RaavareDAOSQL implements IRaavareDAO{
-    public SQLDatabaseIO db = new SQLDatabaseIO("kamel", "dreng", "runerne.dk", 8003); //Makes new SQLDatabaseIO object.
+    public final SQLDatabaseIO db = new SQLDatabaseIO("kamel", "dreng", "runerne.dk", 8003); //Makes new SQLDatabaseIO object.
 
     @Override
     public RaavareDTO getRaavare(int raavareId) throws IDALException.DALException{
@@ -84,8 +83,7 @@ public class RaavareDAOSQL implements IRaavareDAO{
         try {
             ResultSet rs = db.query("SELECT count(raavareID) AS fundet FROM Raavarer where raavareID=" + raavareID);
             rs.next();
-            if (rs.getInt("fundet") == 1) {return true;}
-            return false;
+            return rs.getInt("fundet") == 1;
 
         } catch (SQLException e) {
             e.printStackTrace();

@@ -1,6 +1,5 @@
 package controller;
 
-import dal.IDALException;
 import dal.ProduktbatchDAOSQL;
 import dal.dto.ProduktbatchDTO;
 import dal.dto.ProduktbatchKompDTO;
@@ -12,8 +11,8 @@ import java.util.List;
 
 public class ProduktbatchController {
 
-    private ProduktbatchDAOSQL DAOSQL;
-    private String SQLErrorMsg = "ERROR: Fejl i forsøg på at kontakte databasen. Prøv igen senere";
+    private final ProduktbatchDAOSQL DAOSQL;
+    private final String SQLErrorMsg = "ERROR: Fejl i forsøg på at kontakte databasen. Prøv igen senere";
 
     public ProduktbatchController(){
         DAOSQL = new ProduktbatchDAOSQL();

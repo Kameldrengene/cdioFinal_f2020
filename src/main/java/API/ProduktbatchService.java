@@ -1,7 +1,6 @@
 package API;
 
 import controller.ProduktbatchController;
-import dal.IDALException;
 import dal.dto.ProduktbatchDTO;
 import dal.dto.ProduktbatchKompDTO;
 
@@ -14,7 +13,7 @@ import java.util.List;
 @Produces(MediaType.APPLICATION_JSON)
 public class ProduktbatchService {
 
-    public ProduktbatchController produktbatchController = new ProduktbatchController();
+    public final ProduktbatchController produktbatchController = new ProduktbatchController();
 
     //Hent alle batches
     @Path("getAlle")

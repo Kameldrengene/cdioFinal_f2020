@@ -2,18 +2,16 @@ package controller;
 
 import Funktionalitet.UserFunc;
 import dal.IDALException;
-import dal.IUserDAO;
 import dal.UserDAOSQL;
 import dal.dto.UserDTO;
 
 import javax.ws.rs.*;
-import javax.ws.rs.core.MediaType;
 import java.util.List;
 
 
 public class UserController {
 
-    public UserDAOSQL userDAOSQL;
+    public final UserDAOSQL userDAOSQL;
 
     //Constructor
     public UserController(){

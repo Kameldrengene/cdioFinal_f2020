@@ -11,7 +11,7 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 class ReceptDAOSQLTest {
-    ReceptDAOSQL receptDAOSQL = new ReceptDAOSQL();
+    final ReceptDAOSQL receptDAOSQL = new ReceptDAOSQL();
     ReceptDTO testRecept;
     List<ReceptDTO> listRecept;
 

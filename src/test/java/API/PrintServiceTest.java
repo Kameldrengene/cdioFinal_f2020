@@ -8,7 +8,7 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
 class PrintServiceTest {
- PrintService printService = new PrintService();
+ final PrintService printService = new PrintService();
  List<PrintDTO> printDTOList;
     @Test
     void getData() {
