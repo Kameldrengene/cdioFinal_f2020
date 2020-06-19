@@ -5,7 +5,7 @@ var ID = 'delete';
 async function Personslist() {
     $("#Person_table").hide();
     $("#loading").show();
-    await sendAjax("/BoilerPlate_war_exploded/rest/user/getUsers", function (data) {
+    await sendAjax("/BoilerPlate_war_exploded/rest/user/getUsers", function (data) { /** henter data om brugere og indsætter dem i tabellen Person_table */
             var person_data = '<tr>\n' +
                 '                <th>ID</th>\n' +
                 '                <th>Name</th>\n' +
@@ -16,23 +16,21 @@ async function Personslist() {
                 '                <th>Update</th>\n' +
                 '                <th>ActiveSwitch</th>\n' +
                 '            </tr>';
-            $.each(data, function (key, value) {
+            $.each(data, function (key, value) { /** forloop: kører en gang for hver bruger */
                 //console.log(value);
-                var userID = value.userID;
+                var userID = value.userID; /**herunder sættes de enkelte linje i tabellen op */
                 person_data += '<tr>';
                 person_data += '<td>' + userID + '</td>';
                 person_data += '<td>' + value.userName + '</td>';
                 person_data += '<td>' + value.ini + '</td>';
                 person_data += '<td>' + value.password + '</td>';
                 person_data += '<td>' + value.job + '</td>';
-                //if (value.aktiv)
-
                 person_data += '<td>' + ((value.aktiv) ? "Aktiv" : "Ikke aktiv") + '</td>';
                 person_data += "<td><input id='updateuser' class='update' type='button' onclick='confirmUserUpdate(" + userID + ")' value='Update'/> </td>";
-                person_data += "<td><input id='deleteuser' class='slet' type='button' value='Switch Activity' onclick='testalert(" + userID + ")'/> </td>";
+                person_data += "<td><input id='deleteuser' class='slet' type='button' value='Switch Activity' onclick='changeCurrentActivity(" + userID + ")'/> </td>";
                 person_data += '</tr>';
             });
-            $('#Person_table').html(person_data);
+            $('#Person_table').html(person_data); /** indsætter i tabbellen */
         },
         function (data) {
             alert("Error making personList: ERR.NO.02");
@@ -42,14 +40,14 @@ async function Personslist() {
     $("#loading").hide();
 }
 
-function checkIfNew() {
+function checkIfNew() { /** Kører hvert 3. sekundt når man er logget ind som admin. Opdaterer person_table, hvis ny data er ankommet. */
     if ($('#Person_table').length) {
         sendAjax("/BoilerPlate_war_exploded/rest/user/getUsers", function (data) {
                 var x = JSON.parse(localStorage.getItem("userTable"));
                 if (JSON.stringify(x) !== JSON.stringify(data)) {
-                    localStorage.setItem("userTable", JSON.stringify(data));
+                    localStorage.setItem("userTable", JSON.stringify(data)); /** gemmer ny data, til at tjekke med senere */
                     console.log("Updated");
-                    Personslist();
+                    Personslist(); <!-- opdaterer -->
                 } else {
                     console.log("Not updated");
                 }
@@ -61,7 +59,7 @@ function checkIfNew() {
     }
 }
 
-if(localStorage.getItem("adminLoaded") === null) {
+if(localStorage.getItem("adminLoaded") === null) { /** sætter checkIfNew til at køre hvert 3. sekundt */
     setInterval(checkIfNew, 3000);
     localStorage.setItem("adminLoaded", 1);
 }
@@ -69,7 +67,7 @@ if(localStorage.getItem("adminLoaded") === null) {
 
 var currentactivity = "";
 
-function getcurrentActivity(ID) { //opdatere brugerens aktivitet
+function changeCurrentActivity(ID) { /**opdatere brugerens aktivitet til det modsatte */
     $(document).ready(function () {
         if (confirm("are you sure, you want to update user " + ID + "?")) {
             sendAjax("/BoilerPlate_war_exploded/rest/user/getactivity/" + ID, function (data) {
@@ -95,12 +93,6 @@ function getcurrentActivity(ID) { //opdatere brugerens aktivitet
         }
     });
 }
-
-//updatere brugerens aktivitet
-function testalert(ID) {
-    getcurrentActivity(ID);
-}
-
 
 var updatedID; //gemmer ID'et
 function confirmUserUpdate(ID) { //metoden sender videre til update html siden.
