@@ -2,7 +2,7 @@ $.ajaxSetup({async: false}); //this file is for general scripts used all over th
 
 
 async function sendAjax(link, successFunc, errorFunc=function (data) {console.log(data);},
-                        type="GET", jsonData="None", showbool = true){ /**Brugt til nemt at sende Requests til Backenden gennem Ajax */
+                        type="GET", jsonData="None", showbool = true){
 
     $(".loads").show()
 
@@ -19,7 +19,7 @@ async function sendAjax(link, successFunc, errorFunc=function (data) {console.lo
     });
 }
 
-async function viewlist(headers, link, tableName, btnHtmlfunc) { /**Genererer linjene i en tabel ud fra data hentet fra backenden */
+async function viewlist(headers, link, tableName, btnHtmlfunc) {
     $(document).ready(
         await sendAjax(link ,function (BEdata) {
             var data = '<tr>\n';
@@ -40,21 +40,20 @@ async function viewlist(headers, link, tableName, btnHtmlfunc) { /**Genererer li
         },
         function (data) {
             alert("Error loading list: ERR.NO.01");
-            console.log(data)
         })
     );
 }
 
-async function sleep(ms){ /**Pauser programmet i ms millisekunder */
+async function sleep(ms){
     await new Promise(resolve => setTimeout(resolve, ms))
 }
 
 
-function switchP(page) { /**Load html fra path ind i body på yderste index.html */
+function switchP(page) {
     $("body").load(page);
 }
 
-function error(err) {  /**Error handling: errors fra backenden har en besked i responeText, hvis det ikke er en internal server error (500) */
+async function error(err) {
     const status = err.status;
     if (status != 500) alert(err.responseText);
     else alert("ERROR: Intern serverfejl. Prøv igen")
