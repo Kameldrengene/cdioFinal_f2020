@@ -11,6 +11,20 @@ import java.util.List;
 public class UserDAOSQL implements IUserDAO {
     public SQLDatabaseIO db = new SQLDatabaseIO("kamel", "dreng", "runerne.dk", 8003); //Makes new SQLDatabaseIO object.
 
+    private UserDTO setUser(ResultSet rs, UserDTO user){
+        try {
+            user.setUserID(rs.getInt("userID"));
+            user.setUserName(rs.getString("userName"));
+            user.setIni(rs.getString("ini"));
+            user.setPassword(rs.getString("password"));
+            user.setJob(rs.getString("job"));
+            user.setAktiv(rs.getBoolean("aktiv"));
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return user;
+    }
+
     @Override
     public UserDTO getUser(int userId) throws IDALException.DALException {
         db.connect();
@@ -20,12 +34,7 @@ public class UserDAOSQL implements IUserDAO {
         //Try to insert columns into userDTO object
         try {
             rs.next();
-            user.setUserID(rs.getInt("userID"));
-            user.setUserName(rs.getString("userName"));
-            user.setIni(rs.getString("ini"));
-            user.setPassword(rs.getString("password"));
-            user.setJob(rs.getString("job"));
-            user.setAktiv(rs.getBoolean("aktiv"));
+            user = setUser(rs,user);
             rs.close();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -45,12 +54,7 @@ public class UserDAOSQL implements IUserDAO {
 
             while(rs.next()){
                 UserDTO user = new UserDTO();
-                user.setUserID(rs.getInt("userID"));
-                user.setUserName(rs.getString("userName"));
-                user.setIni(rs.getString("ini"));
-                user.setPassword(rs.getString("password"));
-                user.setJob(rs.getString("job"));
-                user.setAktiv(rs.getBoolean("aktiv"));
+                user = setUser(rs, user);
                 userList.add(user);
             }
 
@@ -79,12 +83,7 @@ public class UserDAOSQL implements IUserDAO {
             //We do as in getUser, except we make new user until rs is empty
             while (rs.next()) {
                 UserDTO user = new UserDTO();
-                user.setUserID(rs.getInt("userID"));
-                user.setUserName(rs.getString("userName"));
-                user.setIni(rs.getString("ini"));
-                user.setPassword(rs.getString("password"));
-                user.setJob(rs.getString("job"));
-                user.setAktiv(rs.getBoolean("aktiv"));
+                user = setUser(rs, user);
                 userList.add(user);
             }
             rs.close();
@@ -164,12 +163,7 @@ public class UserDAOSQL implements IUserDAO {
             ResultSet rs = db.query("SELECT * FROM userdto where userID ='" + id + "'");
             rs.next();
 
-            user.setUserID(rs.getInt("userID"));
-            user.setUserName(rs.getString("userName"));
-            user.setIni(rs.getString("ini"));
-            user.setPassword(rs.getString("password"));
-            user.setJob(rs.getString("job"));
-            user.setAktiv(rs.getBoolean("aktiv"));
+            user = setUser(rs, user);
 
             rs.close();
             db.close();
