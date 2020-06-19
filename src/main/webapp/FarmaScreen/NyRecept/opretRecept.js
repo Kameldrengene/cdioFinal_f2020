@@ -104,14 +104,16 @@ function retur() {
 }
 
 function confirmOpretRecept() {
-    $(document).ready(function () {
+    $(document).ready(async function () {
         if (confirm('Er du sikker?')) {
             $("#loading").show();
             console.log("test1");
             if (document.getElementById('recepID').value != '' && document.getElementById('recepnavn').value != '') {
                 console.log("test2");
-                if (ingenDublicate()) {
-                     opretReceptList();
+                if(!ingenRaavare()){
+                    alert("Tilføje en Råvare");
+                }else if (ingenDublicate()) {
+                     await opretReceptList();
                 } else {
                     alert("må ikke vælge samme råvare flere gang!")
                 }
@@ -147,6 +149,21 @@ function ingenDublicate() {  //funktion checker for samtlige raavar navn.
     return true;
 }
 
+function ingenRaavare() {  //funktion checker for samtlige raavar navn.
+    let checkraavarNr = [];
+    for (let i = 1; i <= counter ; i++) {
+        if($('#ledeligeNavn'+i+'').length) {
+            console.log(i);
+            const RaaNavn = document.getElementById('ledeligeNavn' + i + '').value;
+            checkraavarNr.push(RaaNavn);
+        }
+    }
+
+    return checkraavarNr.length !== 0;
+
+}
+
+
 
 async function opretReceptList() {
     let ReceptList = [];
@@ -156,11 +173,11 @@ async function opretReceptList() {
             const RNavn = $("#recepnavn").val();
             const RaaNavn = document.getElementById('ledeligeNavn' + i + '').value;
             const RaaID = alleMap.get(RaaNavn);
-            console.log("test3 " + RaaID);
+            //console.log("test3 " + RaaID);
             const Rnetto = $("#netto" + i + "").val();
-            console.log("test4 " + Rnetto);
+            // console.log("test4 " + Rnetto);
             const Rtol = $("#tol" + i + "").val();
-            console.log("test4 " + Rtol);
+            //console.log("test4 " + Rtol);
             const ReceptListobj = {
                 receptId: RID,
                 receptNavn: RNavn,
@@ -169,34 +186,25 @@ async function opretReceptList() {
                 tolerance: Rtol
             };
             ReceptList.push(ReceptListobj);
-            console.log(ReceptList[i-1]);
+            console.log(ReceptList[i - 1]);
         }
     }
+    var receptData = JSON.stringify(ReceptList);
     console.log(JSON.stringify(ReceptList));
     console.log("before ajax");
-       await $.ajax({
-              url: "/BoilerPlate_war_exploded/rest/Recept/OpretRecept",
-              type: 'POST',
-              contentType: "application/json",
-              dataType: 'json',
-           async: true,
-              data: JSON.stringify(ReceptList),
-              success: function (data) {
-                  console.log("before" + counter);
-                  retur();
-                  console.log("after" + counter);
+    await sendAjax("/BoilerPlate_war_exploded/rest/Recept/OpretRecept", function (data) {
+        console.log("before" + counter);
+        retur();
+        console.log("after" + counter);
+    }, function (data) {
+        if (data.status === 406) {
+            alert(data.responseText);
+            console.log(counter);
 
-              },
-              error: function (data) {
-                  if (data.status === 406) {
-                      alert(data.responseText);
-                      console.log(counter);
+        } else {
+            alert('Enternal Error: Prøve igen!');
 
-                  } else {
-                      alert('Enternal Error: Prøve igen!');
-
-                  }
-              }
-          });
+        }
+    },"POST",receptData);
 }
 
