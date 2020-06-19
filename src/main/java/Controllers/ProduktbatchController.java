@@ -116,7 +116,6 @@ public class ProduktbatchController {
         return produktbatchKompDTO;
     }
 
-
     public WebApplicationException buildError(Response.Status status, String msg){
         return new WebApplicationException(Response.status(status).entity(msg).build());
     }
