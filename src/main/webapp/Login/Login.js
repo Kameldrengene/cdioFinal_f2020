@@ -61,13 +61,13 @@ $("document").ready(async function () {
         } else {
             localStorage.setItem("localID",ID);
             if (loginRole == "admin")
-                switchP("AdminScreen/index.html");
+                switchP("AdminScreen/Admin.html");
             else if (loginRole == "farma")
-                switchP("FarmaScreen/index.html");
+                switchP("FarmaScreen/Admin.html");
             else if (loginRole == "prodLeder")
                 switchP("PLeadScreen/PLeadScreen.html")
             else if (loginRole == "laborant")
-                switchP("LabScreen/index.html");
+                switchP("LabScreen/Admin.html");
         }
     });
 });

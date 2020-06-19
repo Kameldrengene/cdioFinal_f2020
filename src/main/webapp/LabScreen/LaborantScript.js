@@ -38,7 +38,7 @@ function getProductBatch(id){
                     })
                 })
                 localStorage.setItem("raavareList", raavareList);
-                switchP("LabScreen/ProcesserProduktbatch/index.html");
+                switchP("LabScreen/ProcesserProduktbatch/Admin.html");
                 document.getElementById("header").innerText = "Produktbatch: " + id + " (" + RNavn + ")"
 
                 initPB(data);
@@ -188,7 +188,7 @@ function completepb(PBID){
         console.log(data);
         sendAjax("/BoilerPlate_war_exploded/rest/produktbatch/opdaterProduktbatch/", function (data) {
             alert("Success");
-            switchP("LabScreen/index.html");
+            switchP("LabScreen/Admin.html");
         }, function (data) {
             alert("Error updating produktbatch: ERR.NO.28");
             console.log(data);
