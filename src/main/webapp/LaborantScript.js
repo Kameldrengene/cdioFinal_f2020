@@ -1,4 +1,4 @@
-$.ajaxSetup({async: false});
+$.ajaxSetup({async: false}); //TODO make work with Tolerance
 
 function showPBList() {
     var inner = "";
