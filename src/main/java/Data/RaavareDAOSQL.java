@@ -70,6 +70,7 @@ public class RaavareDAOSQL implements IRaavareDAO{
         db.close();
     }
 
+    //todo - metoden bruges ikke, slet test og rapport
     //Check is specific raavare exist
     @Override
     public boolean raavareExists(int raavareID) throws SQLException {

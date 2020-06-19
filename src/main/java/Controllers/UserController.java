@@ -29,37 +29,18 @@ public class UserController {
         }
     }
 
-    public List<UserDTO> getRole(String role)  {
-        try {
-            return userDAOSQL.getRole(role);
-        } catch (SQLException e) {
-            throw buildError(Response.Status.NOT_ACCEPTABLE, SQLErrorMsg);
-        }
-    }
-
-    public UserDTO activitySwitchUser(UserDTO user) {
-        UserDAOSQL db = new UserDAOSQL();
-        try {
-            db.aktivitySwitchUser(user.getUserID());
-        } catch (SQLException e) {
-            throw buildError(Response.Status.NOT_ACCEPTABLE, SQLErrorMsg);
-        }
-        return user;
-    }
-
-    public boolean CurrentActivity (int id){
-        UserDAOSQL db = new UserDAOSQL();
-        try {
-            return db.getActivity(id);
-        } catch (SQLException e) {
-            throw buildError(Response.Status.NOT_ACCEPTABLE, SQLErrorMsg);
-        }
-    }
-
     public UserDTO getUser(int id) {
         UserDAOSQL db = new UserDAOSQL();
         try {
             return db.getUser(id);
+        } catch (SQLException e) {
+            throw buildError(Response.Status.NOT_ACCEPTABLE, SQLErrorMsg);
+        }
+    }
+
+    public List<UserDTO> getRole(String role)  {
+        try {
+            return userDAOSQL.getRole(role);
         } catch (SQLException e) {
             throw buildError(Response.Status.NOT_ACCEPTABLE, SQLErrorMsg);
         }
@@ -90,6 +71,26 @@ public class UserController {
         }
         return user;
     }
+
+    public UserDTO activitySwitchUser(UserDTO user) {
+        UserDAOSQL db = new UserDAOSQL();
+        try {
+            db.aktivitySwitchUser(user.getUserID());
+        } catch (SQLException e) {
+            throw buildError(Response.Status.NOT_ACCEPTABLE, SQLErrorMsg);
+        }
+        return user;
+    }
+
+    public boolean CurrentActivity (int id){
+        UserDAOSQL db = new UserDAOSQL();
+        try {
+            return db.getActivity(id);
+        } catch (SQLException e) {
+            throw buildError(Response.Status.NOT_ACCEPTABLE, SQLErrorMsg);
+        }
+    }
+
 
     public WebApplicationException buildError(Response.Status status, String msg){
         return new WebApplicationException(Response.status(status).entity(msg).build());

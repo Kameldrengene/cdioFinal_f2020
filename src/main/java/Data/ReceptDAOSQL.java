@@ -45,26 +45,6 @@ public class ReceptDAOSQL implements IReceptDAO{
         return recept;
     }
 
-    //Get all recept components from one recept
-    @Override
-    public List<ReceptDTO> getReceptkomponents(int receptId) throws SQLException {
-        db.connect();
-        ResultSet rs = db.query("SELECT * FROM Recepter where RID=" + receptId); //Select all columns from recept where receptID is input
-        List<ReceptDTO> receptList = new ArrayList<>();
-        while (rs.next()) {
-            ReceptDTO recept = new ReceptDTO();
-            recept.setReceptId(rs.getInt("RID"));
-            recept.setReceptNavn(rs.getString("RName"));
-            recept.setRaavareId(rs.getInt("raavareID"));
-            recept.setNonNetto(rs.getDouble("nonNetto"));
-            recept.setTolerance(rs.getDouble("Tolerance"));
-            receptList.add(recept);
-        }
-        rs.close();
-        db.close();
-        return receptList;
-    }
-
     //todo comment
     @Override
     public List<ReceptDTO> getRecepts(int id) throws SQLException {

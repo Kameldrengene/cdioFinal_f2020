@@ -44,12 +44,6 @@ public class UserService {
         return userController.CurrentActivity(id);
     }
 
-    @Path("activeUser")
-    @PUT
-    public UserDTO activitySwitchUser(UserDTO user) throws WebApplicationException{
-        return userController.activitySwitchUser(user);
-    }
-
     @Path("createUser")
     @POST
     public UserDTO createUser(UserDTO user) throws WebApplicationException{
@@ -62,4 +56,11 @@ public class UserService {
     public UserDTO updateUser(UserDTO user) throws WebApplicationException{
         return userController.updateUser(user);
     }
+
+    @Path("activeUser")
+    @PUT
+    public UserDTO activitySwitchUser(UserDTO user) throws WebApplicationException{
+        return userController.activitySwitchUser(user);
+    }
+
 }

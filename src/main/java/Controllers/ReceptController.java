@@ -18,13 +18,6 @@ public class ReceptController {
         receptDAOSQL = new ReceptDAOSQL();
     }
 
-    public ReceptDTO getRecept (int receptID, int raavareID){
-        try {
-            return receptDAOSQL.getReceptKomponent(receptID,raavareID);
-        }catch (SQLException e){
-            throw buildError(Response.Status.NOT_ACCEPTABLE, SQLErrorMsg);
-        }
-    }
     public List<ReceptDTO> getData()  {
         try {
             return receptDAOSQL.getReceptList();
@@ -32,6 +25,15 @@ public class ReceptController {
             throw buildError(Response.Status.NOT_ACCEPTABLE, SQLErrorMsg);
         }
     }
+
+    public ReceptDTO getRecept (int receptID, int raavareID){
+        try {
+            return receptDAOSQL.getReceptKomponent(receptID,raavareID);
+        }catch (SQLException e){
+            throw buildError(Response.Status.NOT_ACCEPTABLE, SQLErrorMsg);
+        }
+    }
+
 
     public List<ReceptDTO> getuniqueRecept (int receptId) {
         try {

@@ -20,16 +20,17 @@ public class ReceptService {
         return receptController.getData();
     }
 
-    @GET
-    @Path("getRecepts/{receptId}")
-    public List<ReceptDTO> getReceptlist (@PathParam("receptId") int receptId) throws WebApplicationException{
-        return receptController.getuniqueRecept(receptId);
-    }
 
     @GET
     @Path("getRecept/{receptId}/{raavareId}")
     public ReceptDTO getrecept(@PathParam("receptId") int receptID, @PathParam("raavareId") int raavareID) throws WebApplicationException{
         return receptController.getRecept(receptID,raavareID);
+    }
+
+    @GET
+    @Path("getRecepts/{receptId}")
+    public List<ReceptDTO> getReceptlist (@PathParam("receptId") int receptId) throws WebApplicationException{
+        return receptController.getuniqueRecept(receptId);
     }
 
     @POST
