@@ -1,9 +1,9 @@
 package Controllers;
 
+import Data.IDALException;
+import Data.ReceptDAOSQL;
+import Data.dto.ReceptDTO;
 import Funktionalitet.ReceptFunc;
-import dal.IDALException;
-import dal.ReceptDAOSQL;
-import dal.dto.ReceptDTO;
 
 import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.Response;
@@ -90,8 +90,6 @@ public class ReceptController {
         }
         return recept;
     }
-
-
 
 
     public ReceptDTO updateRecept (ReceptDTO recept){

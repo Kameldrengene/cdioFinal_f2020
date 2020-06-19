@@ -10,7 +10,7 @@ import java.util.List;
 @Path("Raavarebatch")
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
-public class RaavarebatchService {
+public class  RaavarebatchService {
 
     public final RaavarevbatchController raavarebatchController = new RaavarevbatchController();
 
@@ -48,7 +48,6 @@ public class RaavarebatchService {
         return raavarebatchController.getBatch(batchID);
     }
 
-    //todo slet?
     @Path("opdaterRaavarebatch")
     @POST
     public RaavarebatchDTO updateRaavarebatch(RaavarebatchDTO raavarebatchDTO) {

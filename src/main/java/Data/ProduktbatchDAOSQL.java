@@ -7,15 +7,14 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-//todo aktiver igen!
-public class ProduktbatchDAOSQL /*implements IProduktbatchDAO*/ {
+public class ProduktbatchDAOSQL implements IProduktbatchDAO {
 
     //Makes new SQLDatabaseIO object.
     final SQLDatabaseIO db = new SQLDatabaseIO("kamel", "dreng", "runerne.dk", 8003);
     public SQLDatabaseIO getdb(){return db;}
 
-
-    //    @Override
+    //Get list of all productbatches
+    @Override
     public List<ProduktbatchDTO> getProduktBatchList() throws SQLException{
         db.connect();
         ResultSet rs = db.query("SELECT * FROM ProduktBatches GROUP BY PBID ORDER BY PBID"); //Select all data from raavarer
@@ -36,7 +35,8 @@ public class ProduktbatchDAOSQL /*implements IProduktbatchDAO*/ {
         return pbList;
     }
 
-    //    @Override
+    //Get list of all active productbatches
+    @Override
     public List<ProduktbatchDTO> getAktuelProduktBatchList() throws SQLException {
 
         List<ProduktbatchDTO> oldRBList = getProduktBatchList();
@@ -50,12 +50,60 @@ public class ProduktbatchDAOSQL /*implements IProduktbatchDAO*/ {
         return newRBList;
     }
 
+    //Get one productbatch
+    @Override
+    public ProduktbatchDTO getBatchLine(int pbId) throws SQLException{
+        db.connect();
+        ResultSet rs = db.query("SELECT * FROM ProduktBatches where PBID = " + pbId + " GROUP BY PBID ORDER BY PBID");
+        ProduktbatchDTO pb = new ProduktbatchDTO();
+        rs.next();
+        pb.setPbId(pbId);
+        pb.setReceptId(rs.getInt("RID"));
+        pb.setStatus(rs.getString("Standing"));
+        pb.setDato(rs.getString("Dato"));
+        rs.close();
+        db.close();
+        return pb;
+    }
+
+    //Get one productbatch component
+    @Override
+    public ProduktbatchKompDTO getBatchkomponent(int pbId, int rbID) throws SQLException{
+        db.connect();
+        ResultSet rs = db.query("SELECT * FROM ProduktBatches where PBID = " + pbId + " AND RBID = " + rbID); //Select all columns from recept where receptID is input
+        ProduktbatchKompDTO pb = new ProduktbatchKompDTO();
+        rs.next();
+        setPB(rs, pb, pbId);
+        rs.close();
+        db.close();
+        return pb;
+    }
+
+    //Get all productbatch components of one productbatch
+    @Override
+    public List<ProduktbatchKompDTO> getBatchkomponents(int pbId)  throws SQLException{
+        db.connect();
+        ResultSet rs = db.query("SELECT * FROM ProduktBatches where PBID = " + pbId + " ORDER BY PBID"); //Select all columns from recept where receptID is input
+        List<ProduktbatchKompDTO> pbList = new ArrayList<>();
+        while(rs.next()){
+            ProduktbatchKompDTO pb = new ProduktbatchKompDTO();
+            setPB(rs, pb, pbId);
+            pbList.add(pb);
+        }
+        rs.close();
+        db.close();
+        return pbList;
+    }
+
     // -Mikkel
+    //Get the heighest productbatch ID
+    @Override
     public int getMaxPDID() throws SQLException{
         db.connect();
         ResultSet rs = db.query("SELECT MAX(PBID) AS max FROM ProduktBatches");
         rs.next();
-        return rs.getInt("max");
+        int out = rs.getInt("max");
+        return out;
     }
 
     private ProduktbatchKompDTO setPB(ResultSet rs, ProduktbatchKompDTO pb, int pbId){
@@ -71,72 +119,17 @@ public class ProduktbatchDAOSQL /*implements IProduktbatchDAO*/ {
         }
         return pb;
     }
-    //    @Override
-    public ProduktbatchKompDTO getBatchkomponent(int pbId, int rbID) throws SQLException{
-        db.connect();
-        ResultSet rs = db.query("SELECT * FROM ProduktBatches where PBID = " + pbId + " AND RBID = " + rbID); //Select all columns from recept where receptID is input
-        ProduktbatchKompDTO pb = new ProduktbatchKompDTO();
-        rs.next();
-        setPB(rs, pb, pbId);
-        rs.close();
-        db.close();
-        return pb;
-    }
 
-    public List<ProduktbatchKompDTO> getBatchkomponents(int pbId)  throws SQLException{
-        db.connect();
-        ResultSet rs = db.query("SELECT * FROM ProduktBatches where PBID = " + pbId + " ORDER BY PBID"); //Select all columns from recept where receptID is input
-        List<ProduktbatchKompDTO> pbList = new ArrayList<>();
-        while(rs.next()){
-            ProduktbatchKompDTO pb = new ProduktbatchKompDTO();
-            setPB(rs, pb, pbId);
-            pbList.add(pb);
-        }
-        rs.close();
-        db.close();
-        return pbList;
-    }
-
-//    @Override
-    public ProduktbatchDTO getBatchLine(int pbId) throws SQLException{
-        db.connect();
-        ResultSet rs = db.query("SELECT * FROM ProduktBatches where PBID = " + pbId + " GROUP BY PBID ORDER BY PBID");
-        ProduktbatchDTO pb = new ProduktbatchDTO();
-        rs.next();
-        pb.setPbId(pbId);
-        pb.setReceptId(rs.getInt("RID"));
-        pb.setStatus(rs.getString("Standing"));
-        pb.setDato(rs.getString("Dato"));
-        rs.close();
-        db.close();
-        return pb;
-    }
-
-//    @Override
+    //Create product batch
+    @Override
     public void createProduktBatch(ProduktbatchDTO produktbatchDTO) throws SQLException{
         db.connect();
         db.update("insert into ProduktBatches (PBID, RID, Standing) VALUES ('" + produktbatchDTO.getPbId() + "','" + produktbatchDTO.getReceptId() + "','" + produktbatchDTO.getStatus() + "')");
         db.close();
     }
 
-
-//    @Override
-public void updateNewpb(ProduktbatchKompDTO ProduktbatchKomp) throws SQLException{
-    db.connect();
-    ResultSet rs = db.query("SELECT * FROM ProduktBatches where PBID=" + ProduktbatchKomp.getPbId() + " AND RBID = 0");
-    rs.next();
-    if (rs.getInt("PBID") == ProduktbatchKomp.getPbId()) {
-
-        db.update("UPDATE ProduktBatches SET Standing = '" + ProduktbatchKomp.getStatus() + "' WHERE (PBID = '" + ProduktbatchKomp.getPbId() + "' AND RBID = 0);");
-        db.update("UPDATE ProduktBatches SET RBID = '" + ProduktbatchKomp.getRbID()+ "' WHERE (PBID = '" + ProduktbatchKomp.getPbId() + "' AND RBID = 0);");
-        db.update("UPDATE ProduktBatches SET UserID = '" + ProduktbatchKomp.getUserId() + "' WHERE (PBID = '" + ProduktbatchKomp.getPbId() + "' AND RBID = 0);");
-        db.update("UPDATE ProduktBatches SET Tara = '" + ProduktbatchKomp.getTara() + "' WHERE (PBID = '" + ProduktbatchKomp.getPbId() + "' AND RBID = 0);");
-        db.update("UPDATE ProduktBatches SET Netto = '" + ProduktbatchKomp.getNetto() + "' WHERE (PBID = '" + ProduktbatchKomp.getPbId() + "' AND RBID = 0);");
-    }
-    rs.close();
-    db.close();
-}
-
+    //Update a whole product batch
+    @Override
     public void updateProduktBatch(ProduktbatchDTO Produktbatch) throws SQLException{
         db.connect();
         ResultSet rs = db.query("SELECT * FROM ProduktBatches where PBID=" + Produktbatch.getPbId());
@@ -150,7 +143,9 @@ public void updateNewpb(ProduktbatchKompDTO ProduktbatchKomp) throws SQLExceptio
         db.close();
     }
 
-    public void updateProduktBatchLine(ProduktbatchKompDTO ProduktbatchKomp) throws SQLException{
+    //Update one productbatch component
+    @Override
+    public void updateProduktBatchkomponent(ProduktbatchKompDTO ProduktbatchKomp) throws SQLException{
         db.connect();
         ResultSet rs = db.query("SELECT * FROM ProduktBatches where PBID=" + ProduktbatchKomp.getPbId() + " AND RBID = " + ProduktbatchKomp.getRbID());
         rs.next();
@@ -165,23 +160,25 @@ public void updateNewpb(ProduktbatchKompDTO ProduktbatchKomp) throws SQLExceptio
         db.close();
     }
 
-    public void updateProduktBatchLine(ProduktbatchDTO produktbatchDTO) throws SQLException{
+    //todo comment
+    @Override
+    public void updateNewpb(ProduktbatchKompDTO ProduktbatchKomp) throws SQLException{
         db.connect();
-        ResultSet rs = db.query("SELECT * FROM ProduktBatches where PBID=" + produktbatchDTO.getPbId());
+        ResultSet rs = db.query("SELECT * FROM ProduktBatches where PBID=" + ProduktbatchKomp.getPbId() + " AND RBID = 0");
         rs.next();
-        if (rs.getInt("PBID") == produktbatchDTO.getPbId()) {
+        if (rs.getInt("PBID") == ProduktbatchKomp.getPbId()) {
 
-            db.update("UPDATE ProduktBatches SET Standing = '" + produktbatchDTO.getStatus() + "' WHERE (PBID = '" + produktbatchDTO.getPbId() + "');");
-            db.update("UPDATE ProduktBatches SET RID = '" + produktbatchDTO.getReceptId() + "' WHERE (PBID = '" + produktbatchDTO.getPbId() + "');");
-            db.update("UPDATE ProduktBatches SET Dato = '" + produktbatchDTO.getDato() + "' WHERE (PBID = '" + produktbatchDTO.getPbId() + "');");
+            db.update("UPDATE ProduktBatches SET Standing = '" + ProduktbatchKomp.getStatus() + "' WHERE (PBID = '" + ProduktbatchKomp.getPbId() + "' AND RBID = 0);");
+            db.update("UPDATE ProduktBatches SET RBID = '" + ProduktbatchKomp.getRbID()+ "' WHERE (PBID = '" + ProduktbatchKomp.getPbId() + "' AND RBID = 0);");
+            db.update("UPDATE ProduktBatches SET UserID = '" + ProduktbatchKomp.getUserId() + "' WHERE (PBID = '" + ProduktbatchKomp.getPbId() + "' AND RBID = 0);");
+            db.update("UPDATE ProduktBatches SET Tara = '" + ProduktbatchKomp.getTara() + "' WHERE (PBID = '" + ProduktbatchKomp.getPbId() + "' AND RBID = 0);");
+            db.update("UPDATE ProduktBatches SET Netto = '" + ProduktbatchKomp.getNetto() + "' WHERE (PBID = '" + ProduktbatchKomp.getPbId() + "' AND RBID = 0);");
         }
         rs.close();
         db.close();
     }
 
-    //todo slet
-    // -Mikkel
-//    @Override
+    //todo slet - også i rapport og test!
     public void eraseProduktBatch(int pbId, int RBID) throws SQLException{
         db.connect();
         db.update("DELETE FROM ProduktBatches WHERE PBID = " + pbId + " AND RBID = " + RBID);

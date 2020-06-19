@@ -7,13 +7,8 @@ import java.util.List;
 
 public interface IRaavarebatchDAO<getAktuelRaavarebatchList> {
 
-    List<RaavarebatchDTO> getRaavarebatchList() throws SQLException;
-    List<RaavarebatchDTO> getAktuelRaavarebatchList() throws SQLException;
-    void createRaavarebatch(RaavarebatchDTO raavarebatch) throws SQLException;
+    public List<RaavarebatchDTO> getRaavarebatchList() throws SQLException;
 
-    //todo slet?
-    RaavarebatchDTO getRaavarebatch(int rbId) throws IDALException.DALException;
-    void updateRaavarebatch(RaavarebatchDTO raavarebatch) throws SQLException;
 
 
 }
