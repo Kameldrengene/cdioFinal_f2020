@@ -2,6 +2,8 @@ var batchID;
 var receptID;
 var status;
 var dato;
+var sumTara;
+var sumNetto;
 
 $("document").ready(async function () {
 
@@ -91,13 +93,16 @@ function viewTable(data){
         tabelData += "<tr>";
         tabelData += "<td> &nbsp; </td>";
         tabelData += "</tr>";
+        sumNetto = value.sumNetto;
+        sumTara = value.sumTara;
+
     });
 
     tabelData += "<tr>";
-    tabelData += "<th align='left'>Sum Tara: </th>"
+    tabelData += "<th align='left'>Sum Tara: </th>"+"<th>"+sniff(sumTara)+"</th>";
     tabelData += "</tr>";
     tabelData += "<tr>";
-    tabelData += "<th align='left'>Sum Netto: </th>"
+    tabelData += "<th align='left'>Sum Netto: </th>"+"<th>"+sniff(sumNetto)+"</th>";
     tabelData += "</tr>";
     tabelData += "<tr>";
     tabelData += "<th align='left'>Produktion Slut: </th>"

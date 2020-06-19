@@ -36,7 +36,7 @@ public class PrintDAOSQL implements IPrintDAO{
                 printDTO.setTara(rs.getDouble("TARA"));
                 printDTO.setTolerance(rs.getDouble("Tolerance"));
                 printDTO.setUserId(rs.getInt("UserID"));
-                printDTO.setTara(rs.getDouble("sumTara"));
+                printDTO.setSumTara(rs.getDouble("sumTara"));
                 printDTO.setSumNetto(rs.getDouble("sumNetto"));
                 printDTOList.add(printDTO);
             }
