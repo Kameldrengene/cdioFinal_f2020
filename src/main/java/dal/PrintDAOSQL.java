@@ -13,7 +13,11 @@ public class PrintDAOSQL implements IPrintDAO{
     @Override
     public List<PrintDTO> getPrint(int pbId, int receptID) throws IDALException.DALException {
         db.connect();
-        ResultSet rs = db.query("SELECT * FROM printBatch WHERE RID="+receptID+" AND PBID="+pbId);
+        ResultSet rs = db.query("SELECT PBID, RID, raavareID, Standing, UserID, RName, raavareNavn, leverandoer," +
+                " nonNetto, Tolerance, RBID, Tara, Netto, Dato ,(SELECT SUM(Tara) FROM ProduktBatches" +
+                " WHERE ProduktBatches.PBID="+pbId+") AS sumTara,(SELECT SUM(Netto) FROM ProduktBatches" +
+                " WHERE ProduktBatches.PBID="+pbId+") AS sumNetto  FROM printBatch WHERE PBID="+pbId+" order by Dato");
+
         List<PrintDTO> printDTOList = new ArrayList<>();
         try {
             while (rs.next()){
@@ -32,6 +36,8 @@ public class PrintDAOSQL implements IPrintDAO{
                 printDTO.setTara(rs.getDouble("TARA"));
                 printDTO.setTolerance(rs.getDouble("Tolerance"));
                 printDTO.setUserId(rs.getInt("UserID"));
+                printDTO.setSumTara(rs.getDouble("sumTara"));
+                printDTO.setSumNetto(rs.getDouble("sumNetto"));
                 printDTOList.add(printDTO);
             }
             rs.close();
