@@ -34,12 +34,12 @@ async function visBestemtRecepter(id) {
     await sendAjax("/BoilerPlate_war_exploded/rest/Recept/getRecepts/"+id,function (data) {
             document.getElementById("receptheader").textContent = "Recept med ID: "+id;
             var person_data = '<tr>\n' +
-                '                <th>ID</th>\n' +
+                '                <th>ReceptID</th>\n' +
                 '                <th>Navn</th>\n' +
                 '                <th>RåvareID</th>\n' +
                 '                <th>RåvareNavn</th>\n' +
-                '                <th>nonNetto</th>\n' +
-                '                <th>Tolerance</th>\n' +
+                '                <th>nonNetto kg</th>\n' +
+                '                <th>Tolerance %</th>\n' +
                 '            </tr>';
             var intid = 0;
             $.each(data,function (key,value) {
