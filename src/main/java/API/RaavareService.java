@@ -13,8 +13,8 @@ import java.util.List;
 @Produces(MediaType.APPLICATION_JSON)
 public class RaavareService {
 
-
     public final RaavareController raavareController = new RaavareController();
+
     @Path("getRaavarer")
     @GET
     public List<RaavareDTO> getData() throws WebApplicationException {
@@ -23,19 +23,19 @@ public class RaavareService {
 
     @GET
     @Path("getRaavare/{raavareID}")
-    public RaavareDTO getRaavare (@PathParam("raavareID") int raavareID){
+    public RaavareDTO getRaavare (@PathParam("raavareID") int raavareID) throws WebApplicationException{
         return raavareController.getRaavare(raavareID);
     }
 
     @POST
     @Path("opretRaavare")
-    public RaavareDTO opretRaavare (RaavareDTO raavareDTO){
+    public RaavareDTO opretRaavare (RaavareDTO raavareDTO) throws WebApplicationException{
         return raavareController.opretRaavare(raavareDTO);
     }
 
     @PUT
     @Path("updaterRaavare")
-    public RaavareDTO updateRaavare (RaavareDTO raavareDTO){
+    public RaavareDTO updateRaavare (RaavareDTO raavareDTO) throws WebApplicationException{
         return raavareController.updateRaavare(raavareDTO);
     }
 
