@@ -206,7 +206,6 @@ async function opretReceptList() {
             console.log(counter);
         } else {
             alert('Enternal Error: Prøve igen!');
-
         }
     },"POST",receptData);
 }

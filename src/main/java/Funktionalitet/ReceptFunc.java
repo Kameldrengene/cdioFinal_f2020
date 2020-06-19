@@ -1,12 +1,19 @@
 package Funktionalitet;
 
+import dal.dto.RaavareDTO;
 import dal.dto.ReceptDTO;
 
 import java.util.List;
 
 public class ReceptFunc {
     public boolean isReceptOk( ReceptDTO recept){
-        return (isNameOk(recept) && isNonNettoOk(recept) && isToleranceOk(recept));
+        return (isIDOk(recept) && isNameOk(recept) && isNonNettoOk(recept) && isToleranceOk(recept));
+    }
+    private boolean isIDOk(ReceptDTO recept) {
+        if (recept.getReceptId() <= 99999999 && recept.getReceptId() >= 1) {
+            return true;
+        }
+        return false;
     }
     private boolean isNameOk(ReceptDTO recept){
         return (!(recept.getReceptNavn().length() <= 1 || recept.getReceptNavn().length() > 20));

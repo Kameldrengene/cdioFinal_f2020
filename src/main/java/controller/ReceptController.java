@@ -69,7 +69,7 @@ public class ReceptController {
                 while (i < recept.size()){
                     ReceptFunc receptFunc = new ReceptFunc();
                     if (!(receptFunc.isReceptOk(recept.get(i)))) {
-                        throw new WebApplicationException(Response.status(Response.Status.NOT_ACCEPTABLE).entity("Error! Tilføje venligst rigtig størrelser: \n navn: => 2 og < 30\n" + "nonNetto: => 0.05 og < 20\n" + "tolerance: => 0.1 og < 20").build());
+                        throw new WebApplicationException(Response.status(Response.Status.NOT_ACCEPTABLE).entity("Error! Tilføje venligst rigtig størrelser: \n"+ "ID => 1 og <= 99999999(8 cifre max) \nnavn: => 2 og < 30\n" + "nonNetto: => 0.05 og < 20\n" + "tolerance: => 0.1 og < 20").build());
                     }
                     i++;
                 }

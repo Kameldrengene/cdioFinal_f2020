@@ -7,16 +7,25 @@ import java.util.List;
 public class RaavareFunc {
 
     public boolean isNewRaavareOk(RaavareDTO rv, List<RaavareDTO> rvList) {
-        return (!IDExists(rv, rvList) && isIDOk(rv) && isNavnOk(rv) && isleverandoerOk(rv));
+        return (isIDOk(rv) && isNavnOk(rv) && isleverandoerOk(rv));
     }
 
     public boolean isUpdateRaavareOk(RaavareDTO rv, List<RaavareDTO> rvList) {
         return (IDExists(rv,rvList) && isIDOk(rv) && isNavnOk(rv) && isleverandoerOk(rv));
     }
 
-    private boolean IDExists(RaavareDTO rv, List<RaavareDTO> rvList) {
+    public boolean IDExists(RaavareDTO rv, List<RaavareDTO> rvList) {
         for(int i = 0; i < rvList.size(); i++){
             if(rv.getRaavareID() == rvList.get(i).getRaavareID()){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean NavnExists(RaavareDTO rv, List<RaavareDTO> rvList) {
+        for(int i = 0; i < rvList.size(); i++){
+            if(rv.getRaavareNavn().equals(rvList.get(i).getRaavareNavn())){
                 return true;
             }
         }
