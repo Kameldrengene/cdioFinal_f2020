@@ -14,7 +14,7 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 class ReceptDAOSQLTest {
-    ReceptDAOSQL receptDAOSQL = new ReceptDAOSQL();
+    final ReceptDAOSQL receptDAOSQL = new ReceptDAOSQL();
     ReceptDTO testRecept;
     List<ReceptDTO> listRecept;
 
@@ -96,7 +96,7 @@ class ReceptDAOSQLTest {
             try {
                 SQLDatabaseIO sqlDatabaseIO = new SQLDatabaseIO("kamel", "dreng", "runerne.dk", 8003);
                 sqlDatabaseIO.connect();
-                sqlDatabaseIO.update("DELETE FROM cdioTest_2020.Recepter WHERE RID = 99 AND raavareID = 3");
+                sqlDatabaseIO.update("DELETE FROM cdioTest_2020.Recepter WHERE RID = 99");
             } catch (Exception e){
                 e.printStackTrace();
             }

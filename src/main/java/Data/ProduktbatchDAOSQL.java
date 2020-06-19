@@ -2,7 +2,6 @@ package Data;
 
 import Data.dto.ProduktbatchDTO;
 import Data.dto.ProduktbatchKompDTO;
-
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -12,7 +11,7 @@ import java.util.List;
 public class ProduktbatchDAOSQL /*implements IProduktbatchDAO*/ {
 
     //Makes new SQLDatabaseIO object.
-    SQLDatabaseIO db = new SQLDatabaseIO("kamel", "dreng", "runerne.dk", 8003);
+    final SQLDatabaseIO db = new SQLDatabaseIO("kamel", "dreng", "runerne.dk", 8003);
     public SQLDatabaseIO getdb(){return db;}
 
 
@@ -56,23 +55,29 @@ public class ProduktbatchDAOSQL /*implements IProduktbatchDAO*/ {
         db.connect();
         ResultSet rs = db.query("SELECT MAX(PBID) AS max FROM ProduktBatches");
         rs.next();
-        int out = rs.getInt("max");
-        return out;
+        return rs.getInt("max");
     }
 
-
+    private ProduktbatchKompDTO setPB(ResultSet rs, ProduktbatchKompDTO pb, int pbId){
+        pb.setPbId(pbId);
+        try {
+            pb.setStatus(rs.getString("Standing"));
+            pb.setUserId(rs.getInt("UserID"));
+            pb.setRbID(rs.getInt("RBID"));
+            pb.setTara(rs.getDouble("Tara"));
+            pb.setNetto(rs.getDouble("Netto"));
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return pb;
+    }
     //    @Override
     public ProduktbatchKompDTO getBatchkomponent(int pbId, int rbID) throws SQLException{
         db.connect();
         ResultSet rs = db.query("SELECT * FROM ProduktBatches where PBID = " + pbId + " AND RBID = " + rbID); //Select all columns from recept where receptID is input
         ProduktbatchKompDTO pb = new ProduktbatchKompDTO();
         rs.next();
-        pb.setPbId(pbId);
-        pb.setStatus(rs.getString("Standing"));
-        pb.setUserId(rs.getInt("UserID"));
-        pb.setRbID(rs.getInt("RBID"));
-        pb.setTara(rs.getDouble("Tara"));
-        pb.setNetto(rs.getDouble("Netto"));
+        setPB(rs, pb, pbId);
         rs.close();
         db.close();
         return pb;
@@ -84,12 +89,7 @@ public class ProduktbatchDAOSQL /*implements IProduktbatchDAO*/ {
         List<ProduktbatchKompDTO> pbList = new ArrayList<>();
         while(rs.next()){
             ProduktbatchKompDTO pb = new ProduktbatchKompDTO();
-            pb.setPbId(pbId);
-            pb.setStatus(rs.getString("Standing"));
-            pb.setUserId(rs.getInt("UserID"));
-            pb.setRbID(rs.getInt("RBID"));
-            pb.setTara(rs.getDouble("Tara"));
-            pb.setNetto(rs.getDouble("Netto"));
+            setPB(rs, pb, pbId);
             pbList.add(pb);
         }
         rs.close();

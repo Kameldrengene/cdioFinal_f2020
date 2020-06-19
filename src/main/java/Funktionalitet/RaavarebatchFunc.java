@@ -10,7 +10,7 @@ import java.util.List;
 // -Mikkel
 public class RaavarebatchFunc {
 
-    private RaavarebatchDAOSQL dao = new RaavarebatchDAOSQL();
+    private final RaavarebatchDAOSQL dao = new RaavarebatchDAOSQL();
 
     public String startMaengdeOk(RaavarebatchDTO dto){
 

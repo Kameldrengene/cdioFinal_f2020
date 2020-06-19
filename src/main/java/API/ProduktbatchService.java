@@ -1,8 +1,8 @@
 package API;
 
-import Controllers.ProduktbatchController;
-import Data.dto.ProduktbatchDTO;
-import Data.dto.ProduktbatchKompDTO;
+import controller.ProduktbatchController;
+import dal.dto.ProduktbatchDTO;
+import dal.dto.ProduktbatchKompDTO;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
@@ -13,7 +13,7 @@ import java.util.List;
 @Produces(MediaType.APPLICATION_JSON)
 public class ProduktbatchService {
 
-    public ProduktbatchController produktbatchController = new ProduktbatchController();
+    public final ProduktbatchController produktbatchController = new ProduktbatchController();
 
     //Hent alle batches
     @Path("getAlle")

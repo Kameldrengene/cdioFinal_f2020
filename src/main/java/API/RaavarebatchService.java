@@ -12,7 +12,7 @@ import java.util.List;
 @Produces(MediaType.APPLICATION_JSON)
 public class RaavarebatchService {
 
-    public RaavarevbatchController raavarebatchController = new RaavarevbatchController();
+    public final RaavarevbatchController raavarebatchController = new RaavarevbatchController();
 
     // -Mikkel
     @Path("getAlle")

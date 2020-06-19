@@ -16,7 +16,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 class UserDAOSQLTest {
-    UserDAOSQL userDAOSQL = new UserDAOSQL();
+    final UserDAOSQL userDAOSQL = new UserDAOSQL();
     UserDTO testUser;
     List<UserDTO> testList;
 

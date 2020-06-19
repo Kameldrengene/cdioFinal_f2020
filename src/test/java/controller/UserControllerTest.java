@@ -14,7 +14,7 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 class UserControllerTest {
-    UserController userController = new UserController();
+    final UserController userController = new UserController();
     UserDTO testUser;
     List<UserDTO> testList;
 

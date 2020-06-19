@@ -63,7 +63,7 @@ $("document").ready(async function () {
             if (loginRole == "admin")
                 switchP("AdminScreen/Admin.html");
             else if (loginRole == "farma")
-                switchP("FarmaScreen/Farma.html");
+                switchP("FarmaScreen/index.html");
             else if (loginRole == "prodLeder")
                 switchP("ProduktScreen/ProduktScreen.html")
             else if (loginRole == "laborant")

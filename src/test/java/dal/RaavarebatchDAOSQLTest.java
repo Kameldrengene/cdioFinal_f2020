@@ -14,7 +14,7 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 class RaavarebatchDAOSQLTest {
-    RaavarebatchDAOSQL raavarebatchDAOSQL = new RaavarebatchDAOSQL();
+    final RaavarebatchDAOSQL raavarebatchDAOSQL = new RaavarebatchDAOSQL();
     RaavarebatchDTO testRaavarebatch;
     List<RaavarebatchDTO> listRaavarebatch;
 
@@ -50,7 +50,7 @@ class RaavarebatchDAOSQLTest {
     @Order(3)
     void getAktuelRaavarebatchList() {
         raavarebatchDAOSQL.db.setDB("cdioTest_2020");
-        int expected = 22;
+        int expected = 3;
         int expectedSize = 20;
         try {
             listRaavarebatch = raavarebatchDAOSQL.getAktuelRaavarebatchList();

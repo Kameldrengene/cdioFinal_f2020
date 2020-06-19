@@ -9,7 +9,7 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
 class PrintControllerTest {
-    PrintController printController = new PrintController();
+    final PrintController printController = new PrintController();
     List<PrintDTO> printDTOList;
     @Test
     void getData() {

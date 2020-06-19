@@ -9,7 +9,21 @@ import java.util.List;
 
 //todo aktiver interface!
 public class RaavarebatchDAOSQL /*implements IRaavarebatchDAO*/ {
-    public SQLDatabaseIO db = new SQLDatabaseIO("kamel", "dreng", "runerne.dk", 8003); //Makes new SQLDatabaseIO object.
+    public final SQLDatabaseIO db = new SQLDatabaseIO("kamel", "dreng", "runerne.dk", 8003); //Makes new SQLDatabaseIO object.
+
+    private RaavarebatchDTO setRb(ResultSet rs, RaavarebatchDTO rb){
+        try {
+            rb.setRbId(rs.getInt("rBID"));
+            rb.setRaavareNavn(rs.getString("raavareNavn"));
+            rb.setLeverandoer(rs.getString("leverandoer"));
+            rb.setRaavareId(rs.getInt("raavareID"));
+            rb.setStartMaengde(rs.getDouble("maengde"));
+            rb.setAktuelMaengde(rs.getDouble("aktuelMaengde"));
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return rb;
+    }
 
     // -Mikkel
 //    @Override
@@ -22,12 +36,7 @@ public class RaavarebatchDAOSQL /*implements IRaavarebatchDAO*/ {
         //We do as in getUser, except we make new user until rs is empty
         while (rs.next()) {
             RaavarebatchDTO rb = new RaavarebatchDTO();
-            rb.setRbId(rs.getInt("rBID"));
-            rb.setRaavareNavn(rs.getString("raavareNavn"));
-            rb.setLeverandoer(rs.getString("leverandoer"));
-            rb.setRaavareId(rs.getInt("raavareID"));
-            rb.setStartMaengde(rs.getDouble("maengde"));
-            rb.setAktuelMaengde(rs.getDouble("aktuelMaengde"));
+            setRb(rs, rb);
             RBList.add(rb);
         }
         rs.close();
@@ -44,12 +53,7 @@ public class RaavarebatchDAOSQL /*implements IRaavarebatchDAO*/ {
         //We do as in getUser, except we make new user until rs is empty
         while (rs.next()) {
             RaavarebatchDTO rb = new RaavarebatchDTO();
-            rb.setRbId(rs.getInt("rBID"));
-            rb.setRaavareNavn(rs.getString("raavareNavn"));
-            rb.setLeverandoer(rs.getString("leverandoer"));
-            rb.setRaavareId(rs.getInt("raavareID"));
-            rb.setStartMaengde(rs.getDouble("maengde"));
-            rb.setAktuelMaengde(rs.getDouble("aktuelMaengde"));
+            setRb(rs, rb);
             RVBList.add(rb);
         }
         rs.close();

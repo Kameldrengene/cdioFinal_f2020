@@ -13,7 +13,7 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 class RaavareServiceTest {
-    RaavareService raavareService = new RaavareService();
+    final RaavareService raavareService = new RaavareService();
     RaavareDTO testraavare;
     List<RaavareDTO> listRaavare;
 

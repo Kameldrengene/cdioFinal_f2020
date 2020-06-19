@@ -13,7 +13,7 @@ import java.util.List;
 @Produces(MediaType.APPLICATION_JSON)
 public class UserService {
 
-    public UserController userController = new UserController();
+    public final UserController userController = new UserController();
 
     @Path("getUsers")
     @GET

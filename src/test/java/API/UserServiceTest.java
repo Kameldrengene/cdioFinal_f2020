@@ -12,7 +12,7 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 class UserServiceTest {
-    UserService userService = new UserService();
+    final UserService userService = new UserService();
     UserDTO testUser;
     List<UserDTO> testList;
 

@@ -11,9 +11,9 @@ import java.util.List;
 
 public class RaavarevbatchController {
 
-    public RaavarebatchDAOSQL DAOSQL;
-    private RaavarebatchFunc func;
-    private String SQLErrorMsg = "ERROR: Fejl i forsøg på at kontakte databasen. Prøv igen senere";
+    public final RaavarebatchDAOSQL DAOSQL;
+    private final RaavarebatchFunc func;
+    private final String SQLErrorMsg = "ERROR: Fejl i forsøg på at kontakte databasen. Prøv igen senere";
 
     //Konstruktør
     public RaavarevbatchController() {
@@ -28,7 +28,7 @@ public class RaavarevbatchController {
         } catch (SQLException e) {
             throw buildError(Response.Status.NOT_ACCEPTABLE, SQLErrorMsg);
         }
-    };
+    }
 
     // -Mikkel
     public List<RaavarebatchDTO> getAktuelle(){
@@ -37,7 +37,7 @@ public class RaavarevbatchController {
         } catch (Exception e) {
             throw buildError(Response.Status.NOT_ACCEPTABLE, SQLErrorMsg);
         }
-    };
+    }
 
     // -Mikkel
     public RaavarebatchDTO opretRaavarebatch(RaavarebatchDTO dto) {
@@ -62,7 +62,7 @@ public class RaavarevbatchController {
         }
 
         return dto;
-    };
+    }
 
     public List<RaavarebatchDTO> getRVIDBatch(String RVID){
 

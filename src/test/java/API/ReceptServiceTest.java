@@ -13,7 +13,7 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 class ReceptServiceTest {
-    ReceptService receptService = new ReceptService();
+    final ReceptService receptService = new ReceptService();
     ReceptDTO testRecept;
     List<ReceptDTO> listRecept;
 
@@ -55,13 +55,27 @@ class ReceptServiceTest {
 
     @Test
     @Order(4)
+    void cleanUp(){
+
+        try {
+            SQLDatabaseIO sqlDatabaseIO = new SQLDatabaseIO("kamel", "dreng", "runerne.dk", 8003);
+            sqlDatabaseIO.connect();
+            sqlDatabaseIO.update("DELETE FROM cdioTest_2020.Recepter WHERE RID = 99");
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
+
+    @Test
+    @Order(5)
     void opretReceptList() {
         receptService.receptController.receptDAOSQL.db.setDB("cdioTest_2020");
         int expected = 99;
         List<ReceptDTO> receptDTOList = new ArrayList<>();
         ReceptDTO newRecept = new ReceptDTO();
         newRecept.setNonNetto(5.5);
-        newRecept.setRaavareId(3);
+        newRecept.setRaavareId(5);
         newRecept.setReceptId(99);
         newRecept.setReceptNavn("Morfin");
         newRecept.setTolerance(9.5);
@@ -77,7 +91,7 @@ class ReceptServiceTest {
         receptDTOList.add(newRecept2);
 
         receptService.OpretRecept(receptDTOList);
-        testRecept=receptService.getrecept(99,3);
+        testRecept=receptService.getrecept(99,4);
         assertEquals(expected,testRecept.getReceptId());
 
     }
@@ -99,13 +113,13 @@ class ReceptServiceTest {
 //        assertEquals(expected,testRecept.getNonNetto());
 //    }
     @Test
-    @Order(4)
-    void cleanUp(){
+    @Order(6)
+    void cleanUp2(){
 
         try {
             SQLDatabaseIO sqlDatabaseIO = new SQLDatabaseIO("kamel", "dreng", "runerne.dk", 8003);
             sqlDatabaseIO.connect();
-            sqlDatabaseIO.update("DELETE FROM cdioTest_2020.Recepter WHERE RID = 99 AND raavareID = 3");
+            sqlDatabaseIO.update("DELETE FROM cdioTest_2020.Recepter WHERE RID = 99");
         } catch (Exception e){
             e.printStackTrace();
         }

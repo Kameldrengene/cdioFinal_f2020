@@ -15,7 +15,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 class RaavareDAOSQLTest {
-    RaavareDAOSQL raavareDAOSQL = new RaavareDAOSQL();
+    final RaavareDAOSQL raavareDAOSQL = new RaavareDAOSQL();
     RaavareDTO testRaavare;
     List<RaavareDTO> listRaavare;
 
