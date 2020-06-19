@@ -3,7 +3,7 @@
 function confirmRaavareUpdate(id){
     $(document).ready(function () {
         if(confirm("are you sure, you want to update this råvare "+ id +"?")){
-            switchP('FarmaScreen/VisRaavare/OpdaterRaavare/index.html');
+            switchP('FarmaScreen/VisRaavare/OpdaterRaavare/ProcesserProduktbatch.html');
             localStorage.setItem("raavareUpdateID", id);
             $(document).ready(function () {
                 $.getJSON("/BoilerPlate_war_exploded/rest/Raavare/getRaavare/"+ localStorage.getItem("raavareUpdateID"), function (data) {
@@ -136,7 +136,7 @@ function tilbage() {
 }
 
 function toOpretrecept() {
-    switchP('FarmaScreen/NyRecept/index.html');
+    switchP('FarmaScreen/NyRecept/ProcesserProduktbatch.html');
     $("#loading").hide();
 
 }
