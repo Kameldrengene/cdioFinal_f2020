@@ -16,8 +16,6 @@ async function sendAjax(link, successFunc, errorFunc=function (data) {console.lo
         error: function (data) {errorFunc(data)},
         complete: () => $(".loads").hide()
     });
-
-
 }
 
 async function viewlist(headers, link, tableName, btnHtmlfunc) {
