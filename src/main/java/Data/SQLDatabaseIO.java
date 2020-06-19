@@ -1,7 +1,5 @@
 package Data;
 
-
-
 import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
@@ -25,76 +23,53 @@ public class SQLDatabaseIO {
         this.PASS = PASSWORD;
         this.DatabaseURL = "jdbc:mysql://" + URL + ":"+PORT+"/"+db_name+"?characterEncoding=latin1&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
     }
-    public void setDB(String db){
+
+    //Tells object what DB to use
+    public void setDB(String db) throws Exception {
         this.db_name = db;
         connect();
         query("use "+db+";");
         close();
-    } //Tells object what DB to use
+    }
 
     //Try to connect to DB
-    public void connect() {
+    public void connect() throws Exception {
         if(!connected){
-            try {
-                String JDBC_DRIVER = "com.mysql.cj.jdbc.Driver";
-                Class.forName(JDBC_DRIVER);
-            } catch (ClassNotFoundException e) {
-                e.printStackTrace();
-            }
-//            System.out.println("Connecting to DB");
-            try{
-                conn = DriverManager.getConnection(DatabaseURL, USER, PASS);
-                connected = true;
-                //System.out.println("connected");
-            }catch(SQLException e){
-                //System.out.println("Connecting failed");
-                connected=false;
-                e.printStackTrace();
-            }
+            String JDBC_DRIVER = "com.mysql.cj.jdbc.Driver";
+            Class.forName(JDBC_DRIVER);
+            conn = DriverManager.getConnection(DatabaseURL, USER, PASS);
+            connected = true;
         }
     }
+
     //Runs update on mysql server.
-    public void update(String query){
+    public void update(String query) throws SQLException {
         if(connected){
-            try {
-                System.out.println("starting");
-                stmt = conn.createStatement();
-                stmt.executeUpdate("use "+db_name);
-                stmt.executeUpdate(query);
-                System.out.println("executed!");
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
+            System.out.println("starting");
+            stmt = conn.createStatement();
+            stmt.executeUpdate("use "+db_name);
+            stmt.executeUpdate(query);
+            System.out.println("executed!");
         }
     }
+
     //Runs query on mysql server, and returns ResultSet object.
-    public ResultSet query(String query){
+    public ResultSet query(String query) throws SQLException {
         ResultSet result = null;
         if(!connected){
             System.out.println("Connect to a DB first");
         } else{
-            try {
-                stmt = conn.createStatement();
-                stmt.executeUpdate("use "+db_name);
-                result = stmt.executeQuery(query);
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
+            stmt = conn.createStatement();
+            stmt.executeUpdate("use "+db_name);
+            result = stmt.executeQuery(query);
         }
         return result;
     }
 
-    public void close(){
+    public void close() throws SQLException {
         if(connected){
-            try {
-                conn.close();
-                connected=false;
-                //System.out.println("closed");
-            } catch (SQLException e) {
-                connected=true;
-                e.printStackTrace();
-            }
-
+            conn.close();
+            connected=false;
         }
     }
 
