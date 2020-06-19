@@ -56,7 +56,8 @@ function postRaavareUpdate() {
 }
 
 function toOpretrecept() {
-    switchP('FarmaScreen/NyRecept/ProcesserProduktbatch.html');
+    switchP('FarmaScreen/NyRecept/index.html');
+    $("#addRaavare").hide();
     $("#loading").hide();
 }
 
