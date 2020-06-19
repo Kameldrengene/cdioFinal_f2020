@@ -1,7 +1,7 @@
 package API;
 
 import Controllers.RaavareController;
-import Data.IDALException;
+
 import Data.dto.RaavareDTO;
 
 import javax.ws.rs.*;
@@ -17,7 +17,7 @@ public class RaavareService {
     public final RaavareController raavareController = new RaavareController();
     @Path("getRaavarer")
     @GET
-    public List<RaavareDTO> getData() throws IDALException.DALException {
+    public List<RaavareDTO> getData() throws WebApplicationException {
         return raavareController.getData();
     }
 

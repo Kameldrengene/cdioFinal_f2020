@@ -1,7 +1,7 @@
 package controller;
 
 import Controllers.UserController;
-import Data.IDALException;
+
 import Data.SQLDatabaseIO;
 import Data.dto.UserDTO;
 import org.junit.jupiter.api.MethodOrderer;
@@ -9,6 +9,7 @@ import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
 
+import java.sql.SQLException;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -26,7 +27,7 @@ class UserControllerTest {
         try {
             testList = userController.getData();
             assertEquals(name,testList.get(0).getUserName());
-        } catch (IDALException.DALException e) {
+        } catch (SQLException e) {
             e.printStackTrace();
         }
     }

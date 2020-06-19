@@ -1,6 +1,6 @@
 package dal;
 
-import Data.IDALException;
+
 import Data.SQLDatabaseIO;
 import Data.UserDAOSQL;
 import Data.dto.UserDTO;
@@ -9,6 +9,7 @@ import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
 
+import java.sql.SQLException;
 import java.util.List;
 
 
@@ -26,7 +27,7 @@ class UserDAOSQLTest {
         userDAOSQL.db.setDB("cdioTest_2020");
         try {
             testUser = userDAOSQL.getUser(11);
-        }catch (IDALException.DALException e){
+        }catch (SQLException e){
             e.printStackTrace();
         }
 
@@ -49,7 +50,7 @@ class UserDAOSQLTest {
         userDAOSQL.db.setDB("cdioTest_2020");
         try {
             testList = userDAOSQL.getData();
-        }catch (IDALException.DALException e){
+        }catch (SQLException e){
             e.printStackTrace();
         }
         assertEquals("FD",testList.get(1).getIni());
@@ -71,7 +72,7 @@ class UserDAOSQLTest {
             testUser = userDAOSQL.getUser(19);
             assertEquals("Test",testUser.getUserName());
 
-        }catch (IDALException.DALException e){
+        }catch (SQLException e){
             e.printStackTrace();
         }
     }
@@ -92,7 +93,7 @@ class UserDAOSQLTest {
             testUser = userDAOSQL.getUser(19);
             assertEquals("Produktionsleder",testUser.getJob());
 
-        }catch (IDALException.DALException e){
+        }catch (SQLException e){
             e.printStackTrace();
         }
     }
@@ -104,7 +105,7 @@ class UserDAOSQLTest {
         try {
             boolean aktual = userDAOSQL.getActivity(19);
             assertFalse(aktual);
-        }catch (IDALException.DALException e){
+        }catch (SQLException e){
             e.printStackTrace();
         }
     }
@@ -117,7 +118,7 @@ class UserDAOSQLTest {
             userDAOSQL.aktivitySwitchUser(19);
             boolean aktual = userDAOSQL.getUser(19).getAktiv();
             assertTrue(aktual);
-        }catch (IDALException.DALException e){
+        }catch (SQLException e){
             e.printStackTrace();
         }
     }

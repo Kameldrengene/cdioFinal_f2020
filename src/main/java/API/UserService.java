@@ -1,11 +1,12 @@
 package API;
 
 import Controllers.UserController;
-import Data.IDALException;
+
 import Data.dto.UserDTO;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
+import java.sql.SQLException;
 import java.util.List;
 
 @Path("user")
@@ -20,7 +21,7 @@ public class UserService {
     public List<UserDTO> getData() {
         try {
             return userController.getData();
-        } catch (IDALException.DALException e) {
+        } catch (SQLException e) {
             e.printStackTrace();
         }
         return null;

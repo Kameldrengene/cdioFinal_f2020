@@ -1,6 +1,6 @@
 package dal;
 
-import Data.IDALException;
+
 import Data.ReceptDAOSQL;
 import Data.SQLDatabaseIO;
 import Data.dto.ReceptDTO;
@@ -9,6 +9,7 @@ import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
 
+import java.sql.SQLException;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -25,7 +26,7 @@ class ReceptDAOSQLTest {
         try {
             testRecept = receptDAOSQL.getReceptKomponent(10,1);
             assertEquals(10,testRecept.getReceptId());
-        } catch (IDALException.DALException e){
+        } catch (SQLException e){
             e.printStackTrace();
         }
     }
@@ -37,7 +38,7 @@ class ReceptDAOSQLTest {
         try {
             listRecept = receptDAOSQL.getReceptList();
             assertEquals(11,listRecept.get(1).getReceptId());
-        } catch (IDALException.DALException e){
+        } catch (SQLException e){
             e.printStackTrace();
         }
 
@@ -61,7 +62,7 @@ class ReceptDAOSQLTest {
             assertEquals(expected,testRecept.getReceptId());
 
 
-        }catch (IDALException.DALException e){
+        }catch (SQLException e){
             e.printStackTrace();
         }
 
@@ -84,7 +85,7 @@ class ReceptDAOSQLTest {
             assertEquals(expected,testRecept.getNonNetto());
 
 
-        }catch (IDALException.DALException e){
+        }catch (SQLException e){
             e.printStackTrace();
         }
     }

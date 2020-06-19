@@ -1,9 +1,10 @@
 package Controllers;
 
-import Data.IDALException;
+
 import Data.PrintDAOSQL;
 import Data.dto.PrintDTO;
 
+import java.sql.SQLException;
 import java.util.List;
 
 public class PrintController {
@@ -15,7 +16,7 @@ public class PrintController {
     public List<PrintDTO> getData(int pbID, int receptID){
         try {
             return printDAOSQL.getPrint(pbID,receptID);
-        } catch (IDALException.DALException e) {
+        } catch (SQLException e) {
             e.printStackTrace();
         }
         return null;

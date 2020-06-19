@@ -1,12 +1,12 @@
 package Controllers;
 
-import Data.IDALException;
 import Data.ReceptDAOSQL;
 import Data.dto.ReceptDTO;
 import Funktionalitet.ReceptFunc;
 
 import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.Response;
+import java.sql.SQLException;
 import java.util.List;
 
 public class ReceptController {
@@ -19,7 +19,7 @@ public class ReceptController {
     public ReceptDTO getRecept (int receptID, int raavareID){
         try {
             return receptDAOSQL.getReceptKomponent(receptID,raavareID);
-        }catch (IDALException.DALException e){
+        }catch (SQLException e){
             e.printStackTrace();
         }
         return null;
@@ -27,7 +27,7 @@ public class ReceptController {
     public List<ReceptDTO> getData()  {
         try {
             return receptDAOSQL.getReceptList();
-        }catch (IDALException.DALException e){
+        }catch (SQLException e){
             e.printStackTrace();
         }
         return null;
@@ -36,7 +36,7 @@ public class ReceptController {
     public List<ReceptDTO> getuniqueRecept (int receptId) {
         try {
             return receptDAOSQL.getRecepts(receptId);
-        }catch (IDALException.DALException e){
+        }catch (SQLException e){
             e.printStackTrace();
         }
         return null;
@@ -53,7 +53,7 @@ public class ReceptController {
             } else {
                 receptDAOSQL.createRecept(recept);
             }
-        }catch (IDALException.DALException e){
+        }catch (SQLException e){
             e.printStackTrace();
         }
         return recept;
@@ -85,7 +85,7 @@ public class ReceptController {
                     }
                 }
                 receptDAOSQL.createReceptList(recept);
-        }catch (IDALException.DALException e){
+        }catch (SQLException e){
             e.printStackTrace();
         }
         return recept;
@@ -98,7 +98,7 @@ public class ReceptController {
             if(receptFunc.isReceptOk(recept) && receptFunc.doesIdExist(recept,getData())){
                 receptDAOSQL.updateRecept(recept);
             }
-            }catch (IDALException.DALException e){
+            }catch (SQLException e){
             e.printStackTrace();
         }
         return recept;

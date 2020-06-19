@@ -1,10 +1,11 @@
 package dal;
 
-import Data.IDALException;
+
 import Data.PrintDAOSQL;
 import Data.dto.PrintDTO;
 import org.junit.jupiter.api.Test;
 
+import java.sql.SQLException;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -19,7 +20,7 @@ class PrintDAOSQLTest {
         try {
             printDTOList = printDAOSQL.getPrint(1, 10);
             assertEquals(4, printDTOList.size());
-        } catch (IDALException.DALException e) {
+        } catch (SQLException e) {
             e.printStackTrace();
         }
     }

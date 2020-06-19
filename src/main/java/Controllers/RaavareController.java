@@ -1,10 +1,11 @@
 package Controllers;
 
 import Funktionalitet.RaavareFunc;
-import Data.IDALException;
+
 import Data.RaavareDAOSQL;
 import Data.dto.RaavareDTO;
 
+import java.sql.SQLException;
 import java.util.List;
 
 public class RaavareController {
@@ -17,7 +18,7 @@ public class RaavareController {
     public List<RaavareDTO> getData()  {
         try {
             return raavareDAOSQL.getRaavareList();
-        }catch (IDALException.DALException e){
+        }catch (SQLException e){
             e.printStackTrace();
         }
         return null;
@@ -26,7 +27,7 @@ public class RaavareController {
     public RaavareDTO getRaavare(int id) {
         try {
             return raavareDAOSQL.getRaavare(id);
-        }catch (IDALException.DALException e){
+        }catch (SQLException e){
             e.printStackTrace();
         }
         return null;
@@ -38,7 +39,7 @@ public class RaavareController {
             if (rvFunc.isNewRaavareOk(raavareDTO,getData())) {
                 raavareDAOSQL.createRaavare(raavareDTO);
             }
-        }catch (IDALException.DALException e){
+        }catch (SQLException e){
             e.printStackTrace();
         }
         return raavareDTO;
@@ -50,7 +51,7 @@ public class RaavareController {
             if (rvFunc.isUpdateRaavareOk(raavareDTO,getData())) {
                 raavareDAOSQL.updateRaavare(raavareDTO);
             }
-        }catch (IDALException.DALException e){
+        }catch (SQLException e){
             e.printStackTrace();
         }
         return raavareDTO;

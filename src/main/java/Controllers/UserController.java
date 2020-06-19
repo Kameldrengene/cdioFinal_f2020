@@ -1,11 +1,12 @@
 package Controllers;
 
 import Funktionalitet.UserFunc;
-import Data.IDALException;
+
 import Data.UserDAOSQL;
 import Data.dto.UserDTO;
 
 import javax.ws.rs.*;
+import java.sql.SQLException;
 import java.util.List;
 
 
@@ -18,7 +19,7 @@ public class UserController {
         userDAOSQL = new UserDAOSQL();
     }
 
-    public List<UserDTO> getData() throws IDALException.DALException {
+    public List<UserDTO> getData() throws SQLException {
         return userDAOSQL.getData();
     }
 
@@ -32,7 +33,7 @@ public class UserController {
         UserDAOSQL db = new UserDAOSQL();
         try {
             db.aktivitySwitchUser(user.getUserID());
-        } catch (IDALException.DALException e) {
+        } catch (SQLException e) {
             e.printStackTrace();
         }
         return user;
@@ -42,7 +43,7 @@ public class UserController {
         UserDAOSQL db = new UserDAOSQL();
         try {
             return db.getActivity(id);
-        } catch (IDALException.DALException e) {
+        } catch (SQLException e) {
             e.printStackTrace();
         }
         return false;
@@ -52,7 +53,7 @@ public class UserController {
         UserDAOSQL db = new UserDAOSQL();
         try {
             return db.getUser(id);
-        } catch (IDALException.DALException e) {
+        } catch (SQLException e) {
             e.printStackTrace();
         }
         return null;
@@ -65,7 +66,7 @@ public class UserController {
             if(userF.isUserOk(user)){
                 db.createUser(user);
             }
-        } catch (IDALException.DALException e) {
+        } catch (SQLException e) {
             e.printStackTrace();
         }
         return user;
@@ -79,7 +80,7 @@ public class UserController {
             if(userF.isUserOk(user)) {
                 db.updateUser(user);
             }
-        } catch (IDALException.DALException e) {
+        } catch (SQLException e) {
             e.printStackTrace();
         }
         return user;

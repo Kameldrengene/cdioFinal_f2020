@@ -26,7 +26,7 @@ public class UserDAOSQL implements IUserDAO {
     }
 
     @Override
-    public UserDTO getUser(int userId) throws IDALException.DALException {
+    public UserDTO getUser(int userId) throws SQLException {
         db.connect();
         ResultSet rs = db.query("SELECT * FROM userdto where userID=" + userId); //Select all columns from userdto where userID is input
 
@@ -73,7 +73,7 @@ public class UserDAOSQL implements IUserDAO {
 
 
     @Override
-    public List<UserDTO> getData() throws IDALException.DALException { //We get a list of users here
+    public List<UserDTO> getData() throws SQLException { //We get a list of users here
         db.connect();
         ResultSet rs = db.query("SELECT * FROM userdto"); //Select all data from userdto
 
@@ -97,7 +97,7 @@ public class UserDAOSQL implements IUserDAO {
     }
 
     @Override
-    public UserDTO createUser(UserDTO user) throws IDALException.DALException { //We make a new user
+    public UserDTO createUser(UserDTO user) throws SQLException { //We make a new user
         List<UserDTO> users = getData();
         db.connect();
         int idIndex = users.get(users.size()-1).getUserID()+1;
@@ -108,7 +108,7 @@ public class UserDAOSQL implements IUserDAO {
     }
 
     @Override
-    public void updateUser(UserDTO user) throws IDALException.DALException { //We update user with a new user
+    public void updateUser(UserDTO user) throws SQLException { //We update user with a new user
         db.connect();
         try {
             ResultSet rs = db.query("SELECT * FROM userdto where userID=" + user.getUserID());
@@ -136,7 +136,7 @@ public class UserDAOSQL implements IUserDAO {
     }
 
     @Override
-    public void aktivitySwitchUser(int userId) throws IDALException.DALException { //We switch the activity of the user
+    public void aktivitySwitchUser(int userId) throws SQLException { //We switch the activity of the user
         db.connect();
         ResultSet rs = db.query("SELECT aktiv FROM userdto where userID=" + userId);
         boolean b;
@@ -156,7 +156,7 @@ public class UserDAOSQL implements IUserDAO {
         db.close();
     }
 
-    public boolean getActivity(int id) throws IDALException.DALException {
+    public boolean getActivity(int id) throws SQLException {
         UserDTO user = new UserDTO();
         try {
             db.connect();

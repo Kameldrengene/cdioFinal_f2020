@@ -1,6 +1,6 @@
 package API;
 
-import Data.IDALException;
+
 import Data.SQLDatabaseIO;
 import Data.dto.RaavareDTO;
 import org.junit.jupiter.api.MethodOrderer;
@@ -8,6 +8,7 @@ import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
 
+import java.sql.SQLException;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -22,11 +23,7 @@ class RaavareServiceTest {
     void getData() {
         raavareService.raavareController.raavareDAOSQL.db.setDB("cdioTest_2020");
         int expected = 2;
-        try {
-            listRaavare = raavareService.getData();
-        } catch (IDALException.DALException e){
-            e.printStackTrace();
-        }
+        listRaavare = raavareService.getData();
     }
 
     @Test
