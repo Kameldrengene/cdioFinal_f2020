@@ -93,7 +93,7 @@ class ReceptDAOSQLTest {
             try {
                 SQLDatabaseIO sqlDatabaseIO = new SQLDatabaseIO("kamel", "dreng", "runerne.dk", 8003);
                 sqlDatabaseIO.connect();
-                sqlDatabaseIO.update("DELETE FROM cdioTest_2020.Recepter WHERE RID = 99 AND raavareID = 3");
+                sqlDatabaseIO.update("DELETE FROM cdioTest_2020.Recepter WHERE RID = 99");
             } catch (Exception e){
                 e.printStackTrace();
             }

@@ -39,12 +39,12 @@ class ReceptControllerTest {
     @Order(3)
     void opretRecept() {
         receptController.receptDAOSQL.db.setDB("cdioTest_2020");
-        int expected = 10;
+        int expected = 99;
         List<ReceptDTO> receptDTOList = new ArrayList<>();
         ReceptDTO newRecept = new ReceptDTO();
         newRecept.setNonNetto(5.5);
         newRecept.setRaavareId(3);
-        newRecept.setReceptId(10);
+        newRecept.setReceptId(99);
         newRecept.setReceptNavn("Morfin");
         newRecept.setTolerance(9.5);
 
@@ -55,7 +55,7 @@ class ReceptControllerTest {
         ReceptDTO neRecept = new ReceptDTO();
         neRecept.setNonNetto(5.5);
         neRecept.setRaavareId(2);
-        neRecept.setReceptId(10);
+        neRecept.setReceptId(99);
         neRecept.setReceptNavn("Morfin");
         neRecept.setTolerance(9.5);
         receptController.opretRecept(neRecept,1);
