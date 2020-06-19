@@ -16,7 +16,7 @@ public class PrintDAOSQL implements IPrintDAO{
         ResultSet rs = db.query("SELECT PBID, RID, raavareID, Standing, UserID, RName, raavareNavn, leverandoer," +
                 " nonNetto, Tolerance, RBID, Tara, Netto, Dato ,(SELECT SUM(Tara) FROM ProduktBatches" +
                 " WHERE ProduktBatches.PBID="+pbId+") AS sumTara,(SELECT SUM(Netto) FROM ProduktBatches" +
-                " WHERE ProduktBatches.PBID="+pbId+") AS sumNetto  FROM printBatch WHERE PBID="+pbId);
+                " WHERE ProduktBatches.PBID="+pbId+") AS sumNetto  FROM printBatch WHERE PBID="+pbId+" order by Dato");
 
         List<PrintDTO> printDTOList = new ArrayList<>();
         try {
