@@ -5,12 +5,14 @@ import Data.dto.UserDTO;
 
 public interface IUserDAO {
 
-	UserDTO getUser(int userId) throws SQLException;
-	List<UserDTO> getData() throws SQLException;
-	UserDTO createUser(UserDTO user) throws SQLException;
-	void updateUser(UserDTO user) throws SQLException;
-	void aktivitySwitchUser(int userId) throws SQLException;
-	
+    public List<UserDTO> getData() throws SQLException;
+    public UserDTO getUser(int userId) throws SQLException;
+    public List<UserDTO> getRole(String role) throws SQLException;
+    public UserDTO createUser(UserDTO user) throws SQLException;
+    public void updateUser(UserDTO user) throws SQLException;
+    public boolean getActivity(int id) throws SQLException;
+    public void aktivitySwitchUser(int userId) throws SQLException;
+
 
 
 }

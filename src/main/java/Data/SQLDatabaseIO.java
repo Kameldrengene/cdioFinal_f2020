@@ -25,7 +25,7 @@ public class SQLDatabaseIO {
     }
 
     //Tells object what DB to use
-    public void setDB(String db) throws Exception {
+    public void setDB(String db) throws SQLException {
         this.db_name = db;
         connect();
         query("use "+db+";");
@@ -33,10 +33,14 @@ public class SQLDatabaseIO {
     }
 
     //Try to connect to DB
-    public void connect() throws Exception {
+    public void connect() throws SQLException {
         if(!connected){
             String JDBC_DRIVER = "com.mysql.cj.jdbc.Driver";
-            Class.forName(JDBC_DRIVER);
+            try {
+                Class.forName(JDBC_DRIVER);
+            } catch (ClassNotFoundException e) {
+                throw new SQLException();
+            }
             conn = DriverManager.getConnection(DatabaseURL, USER, PASS);
             connected = true;
         }
@@ -66,6 +70,7 @@ public class SQLDatabaseIO {
         return result;
     }
 
+    //Close connection to mysql server
     public void close() throws SQLException {
         if(connected){
             conn.close();

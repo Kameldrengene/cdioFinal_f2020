@@ -12,7 +12,7 @@ import java.util.List;
 public class ProduktbatchController {
 
     private final ProduktbatchDAOSQL DAOSQL;
-    private final String SQLErrorMsg = "ERROR: Fejl i forsøg på at kontakte databasen. Prøv igen senere";
+    private final String SQLErrorMsg = "ERROR: Fejl i forbindelse med kontakt af databasen";
 
     public ProduktbatchController(){
         DAOSQL = new ProduktbatchDAOSQL();

@@ -11,67 +11,7 @@ import java.util.List;
 public class UserDAOSQL implements IUserDAO {
     public final SQLDatabaseIO db = new SQLDatabaseIO("kamel", "dreng", "runerne.dk", 8003); //Makes new SQLDatabaseIO object.
 
-    private UserDTO setUser(ResultSet rs, UserDTO user){
-        try {
-            user.setUserID(rs.getInt("userID"));
-            user.setUserName(rs.getString("userName"));
-            user.setIni(rs.getString("ini"));
-            user.setPassword(rs.getString("password"));
-            user.setJob(rs.getString("job"));
-            user.setAktiv(rs.getBoolean("aktiv"));
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        }
-        return user;
-    }
-
-    @Override
-    public UserDTO getUser(int userId) throws SQLException {
-        db.connect();
-        ResultSet rs = db.query("SELECT * FROM userdto where userID=" + userId); //Select all columns from userdto where userID is input
-
-        UserDTO user = new UserDTO();
-        //Try to insert columns into userDTO object
-        try {
-            rs.next();
-            setUser(rs, user);
-            rs.close();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        db.close();
-        return user;
-    }
-
-    // -Mikkel
-    public List<UserDTO> getRole(String role) throws WebApplicationException {
-
-        List<UserDTO> userList = new ArrayList<>();
-
-        try{
-            db.connect();
-            ResultSet rs = db.query("SELECT * FROM userdto where job ='" + role + "'");
-
-            while(rs.next()){
-                UserDTO user = new UserDTO();
-                setUser(rs, user);
-                userList.add(user);
-            }
-
-            rs.close();
-            db.close();
-
-
-        //todo skal det håndteres anderledes?
-        }catch(Exception e){
-            e.printStackTrace();
-            throw db.buildError(Response.Status.INTERNAL_SERVER_ERROR, "Forbindelsen til Databasen kunne ikke blive oprettet. prøver at genloade");
-        }
-
-        return userList;
-    }
-
-
+    //Get all users
     @Override
     public List<UserDTO> getData() throws SQLException { //We get a list of users here
         db.connect();
@@ -79,23 +19,54 @@ public class UserDAOSQL implements IUserDAO {
 
 
         List<UserDTO> userList = new ArrayList<>();
-        try {
-            //We do as in getUser, except we make new user until rs is empty
-            while (rs.next()) {
-                UserDTO user = new UserDTO();
-                setUser(rs, user);
-                userList.add(user);
-            }
-            rs.close();
-
-        } catch (
-                SQLException e) {
-            e.printStackTrace();
+        //We do as in getUser, except we make new user until rs is empty
+        while (rs.next()) {
+            UserDTO user = new UserDTO();
+            setUser(rs, user);
+            userList.add(user);
         }
+        rs.close();
         db.close();
         return userList;
     }
 
+    //Get a specific user
+    @Override
+    public UserDTO getUser(int userId) throws SQLException {
+        db.connect();
+        ResultSet rs = db.query("SELECT * FROM userdto where userID=" + userId); //Select all columns from userdto where userID is input
+
+        UserDTO user = new UserDTO();
+        //Try to insert columns into userDTO object
+        rs.next();
+        setUser(rs, user);
+        rs.close();
+        db.close();
+        return user;
+    }
+
+    // -Mikkel
+    //Get all users with specific role
+    @Override
+    public List<UserDTO> getRole(String role) throws SQLException {
+
+        List<UserDTO> userList = new ArrayList<>();
+
+        db.connect();
+        ResultSet rs = db.query("SELECT * FROM userdto where job ='" + role + "'");
+
+        while(rs.next()){
+            UserDTO user = new UserDTO();
+            setUser(rs, user);
+            userList.add(user);
+        }
+        rs.close();
+        db.close();
+
+        return userList;
+    }
+
+    //Create user
     @Override
     public UserDTO createUser(UserDTO user) throws SQLException { //We make a new user
         List<UserDTO> users = getData();
@@ -107,71 +78,74 @@ public class UserDAOSQL implements IUserDAO {
         return user;
     }
 
+    //Update user
     @Override
     public void updateUser(UserDTO user) throws SQLException { //We update user with a new user
         db.connect();
-        try {
-            ResultSet rs = db.query("SELECT * FROM userdto where userID=" + user.getUserID());
-            rs.next();
-            if (rs.getInt("userID") == user.getUserID()) {
-                db.update("UPDATE userdto SET userID = '" + user.getUserID() + "' WHERE (userID = '" + user.getUserID() + "');");
-                db.update("UPDATE userdto SET userName = '" + user.getUserName() + "' WHERE (userID = '" + user.getUserID() + "');");
-                db.update("UPDATE userdto SET ini = '" + user.getIni() + "' WHERE (userID = '" + user.getUserID() + "');");
-                db.update("UPDATE userdto SET password = '" + user.getPassword() + "' WHERE (userID = '" + user.getUserID() + "');");
-                db.update("UPDATE userdto SET job = '" + user.getJob() + "' WHERE (userID = '" + user.getUserID() + "');");
-                boolean b = user.getAktiv();
-                int bool;
-                if(b){
-                    bool = 1;
-                }else {
-                    bool = 0;
-                }
-                db.update("UPDATE userdto SET aktiv = '" + bool + "' WHERE (userID = '" + user.getUserID() + "');");
+        ResultSet rs = db.query("SELECT * FROM userdto where userID=" + user.getUserID());
+        rs.next();
+        if (rs.getInt("userID") == user.getUserID()) {
+            db.update("UPDATE userdto SET userID = '" + user.getUserID() + "' WHERE (userID = '" + user.getUserID() + "');");
+            db.update("UPDATE userdto SET userName = '" + user.getUserName() + "' WHERE (userID = '" + user.getUserID() + "');");
+            db.update("UPDATE userdto SET ini = '" + user.getIni() + "' WHERE (userID = '" + user.getUserID() + "');");
+            db.update("UPDATE userdto SET password = '" + user.getPassword() + "' WHERE (userID = '" + user.getUserID() + "');");
+            db.update("UPDATE userdto SET job = '" + user.getJob() + "' WHERE (userID = '" + user.getUserID() + "');");
+            boolean b = user.getAktiv();
+            int bool;
+            if(b){
+                bool = 1;
+            }else {
+                bool = 0;
             }
-            rs.close();
-        } catch (SQLException e) {
-            e.printStackTrace();
+            db.update("UPDATE userdto SET aktiv = '" + bool + "' WHERE (userID = '" + user.getUserID() + "');");
         }
+        rs.close();
         db.close();
     }
 
+    //Get a users Activity
+    @Override
+    public boolean getActivity(int id) throws SQLException {
+        UserDTO user = new UserDTO();
+        db.connect();
+        ResultSet rs = db.query("SELECT * FROM userdto where userID ='" + id + "'");
+        rs.next();
+
+        setUser(rs, user);
+
+        rs.close();
+        db.close();
+
+        return user.getAktiv();
+    }
+
+    //Switch activity of user
     @Override
     public void aktivitySwitchUser(int userId) throws SQLException { //We switch the activity of the user
         db.connect();
         ResultSet rs = db.query("SELECT aktiv FROM userdto where userID=" + userId);
         boolean b;
         int boolVal = 0;
-        try {
-            rs.next();
-            b = rs.getBoolean("aktiv");
-            if(b){
-                boolVal = 0;
-            }else {
-                boolVal = 1;
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
+        rs.next();
+        b = rs.getBoolean("aktiv");
+        if(b){
+            boolVal = 0;
+        }else {
+            boolVal = 1;
         }
+
         db.update("UPDATE userdto SET aktiv = " + boolVal + " WHERE userID=" + userId);
         db.close();
     }
 
-    public boolean getActivity(int id) throws SQLException {
-        UserDTO user = new UserDTO();
-        try {
-            db.connect();
-            ResultSet rs = db.query("SELECT * FROM userdto where userID ='" + id + "'");
-            rs.next();
-
-            setUser(rs, user);
-
-            rs.close();
-            db.close();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        return user.getAktiv();
+    private UserDTO setUser(ResultSet rs, UserDTO user) throws SQLException {
+        user.setUserID(rs.getInt("userID"));
+        user.setUserName(rs.getString("userName"));
+        user.setIni(rs.getString("ini"));
+        user.setPassword(rs.getString("password"));
+        user.setJob(rs.getString("job"));
+        user.setAktiv(rs.getBoolean("aktiv"));
+        return user;
     }
 
 }

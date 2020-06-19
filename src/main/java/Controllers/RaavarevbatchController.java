@@ -13,7 +13,7 @@ public class RaavarevbatchController {
 
     public final RaavarebatchDAOSQL DAOSQL;
     private final RaavarebatchFunc func;
-    private final String SQLErrorMsg = "ERROR: Fejl i forsøg på at kontakte databasen. Prøv igen senere";
+    private final String SQLErrorMsg = "ERROR: Fejl i forbindelse med kontakt af databasen";
 
     //Konstruktør
     public RaavarevbatchController() {
