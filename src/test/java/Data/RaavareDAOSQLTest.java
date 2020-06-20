@@ -1,8 +1,6 @@
-package dal;
+package Data;
 
 
-import Data.RaavareDAOSQL;
-import Data.SQLDatabaseIO;
 import Data.dto.RaavareDTO;
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Order;

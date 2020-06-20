@@ -1,8 +1,6 @@
-package dal;
+package Data;
 
 
-import Data.SQLDatabaseIO;
-import Data.UserDAOSQL;
 import Data.dto.UserDTO;
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Order;

@@ -1,7 +1,6 @@
-package dal;
+package Data;
 
 
-import Data.PrintDAOSQL;
 import Data.dto.PrintDTO;
 import org.junit.jupiter.api.Test;
 
