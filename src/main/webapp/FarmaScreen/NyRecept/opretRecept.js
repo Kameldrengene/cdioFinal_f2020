@@ -19,19 +19,6 @@ function ledeligeRaavare() {   // gemmer alle råvare i en Map.
                 alleMap.set(raavarNavn,raavarID);
             });
         });
-       // await sendAjax("/BoilerPlate_war_exploded/rest/Raavare/getRaavarer",function (data) {
-       //      $.each(data,function (key,value) {
-       //          //console.log(value);
-       //          var raavarID = value.raavareID;
-       //          var raavarNavn = value.raavareNavn;
-       //
-       //          alleRaavare.push(raavarID);
-       //          alleRaavareNavn.push(raavarNavn);
-       //          alleMap.set(raavarNavn,raavarID);
-       //      });
-       //  }, function (data) {
-       //      alert("kunne ikke fetche raavar, prøve igen")
-       //  });
         localStorage.setItem("ledeligeRaavarID",alleRaavare);
         localStorage.setItem("ledeligeRaavarNavn",alleRaavareNavn);
     });
@@ -64,6 +51,7 @@ function addLinje() {    //tilføjer ekstra råvare
             '            <button class="hvr-buzz" onclick="fjernRaavar('+coutnum+');" id="fjern">fjern</button>\n' +
             '        </td>' +
             '    </tr>');
+        console.log("test1");
         coutnum = 0;
         console.log(coutnum);
         selectbtn(counter);
@@ -109,12 +97,16 @@ function confirmOpretRecept() {
     $(document).ready(async function () {
         if (confirm('Er du sikker?')) {
             $("#loading").show();
+            console.log("test1");
             if (document.getElementById('recepID').value != '' && document.getElementById('recepnavn').value != '') {
                 console.log("test2");
                 if(!ingenRaavare()){
                     alert("Tilføje en Råvare");
-                }else if (ingenDublicate()) {
-                     await opretReceptList();
+                } else if(rigtigRaavar()){
+                    alert("vælge en Råvare");
+                }
+                else if (ingenDublicate()) {
+                    await opretReceptList();
                 } else {
                     alert("må ikke vælge samme råvare flere gang!")
                 }
@@ -162,6 +154,15 @@ function ingenRaavare() {  //funktion checker for samtlige raavar navn.
 
     return checkraavarNr.length !== 0;
 
+}
+
+function rigtigRaavar(){
+    for (let i = 1; i <= counter ; i++) {
+        if($("#ledeligeNavn"+i+"").find(':selected').prop('disabled')){
+            return true;
+        }
+    }
+    return false;
 }
 
 
