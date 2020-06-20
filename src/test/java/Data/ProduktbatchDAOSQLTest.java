@@ -173,11 +173,36 @@ class ProduktbatchDAOSQLTest {
 
     }
 
-//    @Test
-//    @Order(8)
-//    void updateProduktBatch() {
-//    }
-//
+    @Test
+    @Order(8)
+    void updateProduktBatch() throws SQLException {
+
+        //Create batch
+        ProduktbatchDTO toSend = new ProduktbatchDTO();
+        toSend.setPbId(1);
+        toSend.setReceptId(10);
+        toSend.setStatus("Under Produktion");
+        toSend.setDato("2019-05-11");
+
+        //Send and get batch
+        DAO.updateProduktBatch(toSend);
+        DTO = DAO.getBatchLine(1);
+
+        //Check product batch line
+        assertEquals(1, DTO.getPbId());
+        assertEquals(10, DTO.getReceptId());
+        assertEquals("Under Produktion", DTO.getStatus());
+
+        //Cleanup
+        toSend.setPbId(1);
+        toSend.setReceptId(10);
+        toSend.setStatus("Afsluttet");
+        toSend.setDato("2020-06-12");
+
+        DAO.updateProduktBatch(toSend);
+
+    }
+
 //    @Test
 //    @Order(9)
 //    void updateProduktBatchkomponent() {
