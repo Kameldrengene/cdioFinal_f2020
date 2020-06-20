@@ -69,26 +69,20 @@ public class RaavarevbatchController {
     //Create raavarebatch
     public RaavarebatchDTO opretRaavarebatch(RaavarebatchDTO dto) {
 
-        //Valider startmængde
-        String startMaengdeMsg = func.startMaengdeOk(dto);
-        if( !startMaengdeMsg.equals("OK") ){
-            throw buildError(Response.Status.NOT_ACCEPTABLE, startMaengdeMsg);
-        }
-
         try {
+            String validationMsg = func.raavarebatchOk(dto);
 
-            //Valider batch ID
-            String batchIdMsg = func.batchIdOk(dto);
-            if( !batchIdMsg.equals("OK") )
-                throw buildError(Response.Status.NOT_ACCEPTABLE, batchIdMsg);
-
-            DAOSQL.createRaavarebatch(dto);
+            if(validationMsg.equals("OK"))
+                DAOSQL.createRaavarebatch(dto);
+            else
+                throw buildError(Response.Status.NOT_ACCEPTABLE, validationMsg);
 
         } catch (SQLException e) {
             throw buildError(Response.Status.NOT_ACCEPTABLE, SQLErrorMsg);
         }
 
         return dto;
+
     }
 
     //Update raavarebatch
