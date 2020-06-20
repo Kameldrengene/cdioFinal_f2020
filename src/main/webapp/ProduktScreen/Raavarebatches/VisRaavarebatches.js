@@ -33,9 +33,9 @@ function viewTable(data){
     tabelData += "<tr>";
     tabelData += "<th>Batch ID</th>";
     tabelData += "<th>Råvare ID</th>";
+    tabelData += "<th>Råvarenavn</th>";
     tabelData += "<th>Oprindelig mængde [kg]</th>";
     tabelData += "<th>Aktuel mængde [kg]</th>";
-    tabelData += "<th>Råvarenavn</th>";
     tabelData += "<th>Leverandør</th>";
     tabelData += "</tr>";
 
@@ -46,6 +46,7 @@ function viewTable(data){
         tabelData += "<tr>";
         tabelData += "<td>"+value.rbId+"</td>";
         tabelData += "<td>"+value.raavareId+"</td>";
+        tabelData += "<td>"+value.raavareNavn+"</td>";
 
         //Ensure numbers always show 4 decimal places
         const startM = value.startMaengde.toFixed(4);
@@ -54,7 +55,6 @@ function viewTable(data){
         tabelData += "<td>"+startM+"</td>";
         tabelData += "<td>"+aktuelM+"</td>";
 
-        tabelData += "<td>"+value.raavareNavn+"</td>";
         tabelData += "<td>"+value.leverandoer+"</td>";
         tabelData += "</tr>";
 

@@ -1,6 +1,5 @@
 package Controllers;
 
-import Data.IDALException;
 import Data.ReceptDAOSQL;
 import Data.dto.ReceptDTO;
 import Funktionalitet.ReceptFunc;
@@ -11,7 +10,9 @@ import java.sql.SQLException;
 import java.util.List;
 
 public class ReceptController {
+
     public final ReceptDAOSQL receptDAOSQL;
+    private final String SQLErrorMsg = "ERROR: Fejl i forbindelse med kontakt af databasen";
 
     public ReceptController(){
         receptDAOSQL = new ReceptDAOSQL();
@@ -29,18 +30,16 @@ public class ReceptController {
         try {
             return receptDAOSQL.getReceptList();
         }catch (SQLException e){
-            e.printStackTrace();
+            throw buildError(Response.Status.NOT_ACCEPTABLE, SQLErrorMsg);
         }
-        return null;
     }
 
     public List<ReceptDTO> getuniqueRecept (int receptId) {
         try {
             return receptDAOSQL.getRecepts(receptId);
-        }catch (SQLException e){
-            e.printStackTrace();
+        catch (SQLException e){
+            throw buildError(Response.Status.NOT_ACCEPTABLE, SQLErrorMsg);
         }
-        return null;
     }
 
     public ReceptDTO opretRecept (ReceptDTO recept, int check){
@@ -55,12 +54,13 @@ public class ReceptController {
                 receptDAOSQL.createRecept(recept);
             }
         }catch (SQLException e){
-            e.printStackTrace();
+            throw buildError(Response.Status.NOT_ACCEPTABLE, SQLErrorMsg);
         }
         return recept;
     }
 
     public List<ReceptDTO> opretRecept (List<ReceptDTO> recept){
+
         try {
             int i = 0;
             int j = 0;
@@ -99,11 +99,16 @@ public class ReceptController {
             if(receptFunc.isReceptOk(recept) && receptFunc.doesIdExist(recept,getData())){
                 receptDAOSQL.updateRecept(recept);
             }
-            }catch (SQLException e){
-            e.printStackTrace();
+            catch (SQLException e){
+            throw buildError(Response.Status.NOT_ACCEPTABLE, SQLErrorMsg);
         }
         return recept;
     }
+
+    public WebApplicationException buildError(Response.Status status, String msg){
+        return new WebApplicationException(Response.status(status).entity(msg).build());
+    }
+
 }
 
 

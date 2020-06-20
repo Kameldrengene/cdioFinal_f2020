@@ -8,10 +8,8 @@ public class RaavareDTO {
     private String raavareNavn;
     /** min. 2 max. 20 karakterer */
     private String leverandoer;
-    //Lagerbeholdning DECIMAL(4,4)
+    /*Lagerbeholdning DECIMAL(4,4)*/
     private double lagerBeholdning;
-
-
 
     public double getLagerBeholdning() {
         return lagerBeholdning;

@@ -1,6 +1,6 @@
 package dal;
 
-import Data.IDALException;
+
 import Data.ReceptDAOSQL;
 import Data.SQLDatabaseIO;
 import Data.dto.ReceptDTO;
@@ -22,9 +22,9 @@ class ReceptDAOSQLTest {
     @Test
     @Order(1)
     void getRecept() {
-        receptDAOSQL.db.setDB("cdioTest_2020");
         try {
-            testRecept = receptDAOSQL.getRecept(10,1);
+            receptDAOSQL.db.setDB("cdioTest_2020");
+            testRecept = receptDAOSQL.getReceptKomponent(10,1);
             assertEquals(10,testRecept.getReceptId());
         } catch (SQLException e){
             e.printStackTrace();
@@ -34,8 +34,8 @@ class ReceptDAOSQLTest {
     @Test
     @Order(2)
     void getReceptList() {
-        receptDAOSQL.db.setDB("cdioTest_2020");
         try {
+            receptDAOSQL.db.setDB("cdioTest_2020");
             listRecept = receptDAOSQL.getReceptList();
             assertEquals(11,listRecept.get(1).getReceptId());
         } catch (SQLException e){
@@ -48,20 +48,18 @@ class ReceptDAOSQLTest {
     @Test
     @Order(3)
     void createRecept() {
-        receptDAOSQL.db.setDB("cdioTest_2020");
-        int expected = 99;
-        ReceptDTO newRecept = new ReceptDTO();
-        newRecept.setNonNetto(5.5);
-        newRecept.setRaavareId(3);
-        newRecept.setReceptId(99);
-        newRecept.setReceptNavn("Morfin");
-        newRecept.setTolerance(9.5);
         try {
+            receptDAOSQL.db.setDB("cdioTest_2020");
+            int expected = 99;
+            ReceptDTO newRecept = new ReceptDTO();
+            newRecept.setNonNetto(5.5);
+            newRecept.setRaavareId(3);
+            newRecept.setReceptId(99);
+            newRecept.setReceptNavn("Morfin");
+            newRecept.setTolerance(9.5);
             receptDAOSQL.createRecept(newRecept);
-            testRecept = receptDAOSQL.getRecept(99,3);
+            testRecept = receptDAOSQL.getReceptKomponent(99,3);
             assertEquals(expected,testRecept.getReceptId());
-
-
         }catch (SQLException e){
             e.printStackTrace();
         }
@@ -71,20 +69,18 @@ class ReceptDAOSQLTest {
     @Test
     @Order(4)
     void updateRecept() {
-        receptDAOSQL.db.setDB("cdioTest_2020");
-        double expected = 3.5;
-        ReceptDTO newRecept = new ReceptDTO();
-        newRecept.setNonNetto(3.5);
-        newRecept.setRaavareId(3);
-        newRecept.setReceptId(99);
-        newRecept.setReceptNavn("Morfin");
-        newRecept.setTolerance(5.5);
         try {
+            receptDAOSQL.db.setDB("cdioTest_2020");
+            double expected = 3.5;
+            ReceptDTO newRecept = new ReceptDTO();
+            newRecept.setNonNetto(3.5);
+            newRecept.setRaavareId(3);
+            newRecept.setReceptId(99);
+            newRecept.setReceptNavn("Morfin");
+            newRecept.setTolerance(5.5);
             receptDAOSQL.updateRecept(newRecept);
-            testRecept = receptDAOSQL.getRecept(99,3);
+            testRecept = receptDAOSQL.getReceptKomponent(99,3);
             assertEquals(expected,testRecept.getNonNetto());
-
-
         }catch (SQLException e){
             e.printStackTrace();
         }

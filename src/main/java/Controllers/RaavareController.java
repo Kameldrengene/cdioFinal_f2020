@@ -1,7 +1,7 @@
 package Controllers;
 
 import Funktionalitet.RaavareFunc;
-import Data.IDALException;
+
 import Data.RaavareDAOSQL;
 import Data.dto.RaavareDTO;
 
@@ -11,7 +11,9 @@ import java.sql.SQLException;
 import java.util.List;
 
 public class RaavareController {
+
     public final RaavareDAOSQL raavareDAOSQL;
+    private final String SQLErrorMsg = "ERROR: Fejl i forbindelse med kontakt af databasen";
 
     public RaavareController (){
         raavareDAOSQL = new RaavareDAOSQL();
@@ -21,9 +23,8 @@ public class RaavareController {
         try {
             return raavareDAOSQL.getRaavareList();
         }catch (SQLException e){
-            e.printStackTrace();
+            throw buildError(Response.Status.NOT_ACCEPTABLE, SQLErrorMsg);
         }
-        return null;
     }
 
     public RaavareDTO getRaavare(int id) {
@@ -32,7 +33,6 @@ public class RaavareController {
         }catch (SQLException e){
             e.printStackTrace();
         }
-        return null;
     }
 
     public RaavareDTO opretRaavare (RaavareDTO raavareDTO) {
@@ -64,6 +64,10 @@ public class RaavareController {
             e.printStackTrace();
         }
         return raavareDTO;
+    }
+
+    public WebApplicationException buildError(Response.Status status, String msg){
+        return new WebApplicationException(Response.status(status).entity(msg).build());
     }
 
 

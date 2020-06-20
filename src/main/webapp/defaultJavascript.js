@@ -58,3 +58,8 @@ async function error(err) {
     if (status != 500) alert(err.responseText);
     else alert("ERROR: Intern serverfejl. Prøv igen")
 }
+
+function currentUser(){
+    var loginID = localStorage.getItem("loginID");
+    $("#brugerInfo").text("Bruger ID: " + loginID);
+}

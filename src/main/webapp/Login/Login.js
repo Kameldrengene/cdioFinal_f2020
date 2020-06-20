@@ -6,12 +6,9 @@ $("document").ready(async function () {
 
     //Keeps the different users in local storage. So they don't have to be reloaded multiple times
     //await to ensure functionality is only added after resources are fetched
-
-    console.log("loadtest");
     await loadUsers();
-    console.log("loadtest1");
-    //Only load user data and sign in button when everything is ready
-    $("#login").load("Login/LoginTable.html");
+
+    //Hide user table until a role is selected
     $(".brugertable").hide();
 
     $(".rolletabel").on('click','input',function () {
@@ -67,7 +64,7 @@ $("document").ready(async function () {
             else if (loginRole == "farma")
                 switchP("FarmaScreen/index.html");
             else if (loginRole == "prodLeder")
-                switchP("ProduktScreen/ProduktScreen.html");
+                switchP("ProduktScreen/ProduktScreen.html")
             else if (loginRole == "laborant")
                 switchP("LabScreen/Lab.html");
         }
@@ -86,7 +83,7 @@ async function loadUsers(){
 
 async function loadUser(role, redo=0) {
 
-    $(".loads").show();
+    $(".loads").show()
 
     await $.ajax({
         url: "/BoilerPlate_war_exploded/rest/user/getRole?role=" + role,
@@ -98,7 +95,7 @@ async function loadUser(role, redo=0) {
         error: (response, error) => load(response, error)
     });
 
-    $(".loads").hide();
+    $(".loads").hide()
 
 }
 

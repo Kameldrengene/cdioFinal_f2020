@@ -7,13 +7,16 @@ import java.sql.SQLException;
 import java.util.*;
 
 public class RaavareDAOSQL implements IRaavareDAO{
+
     public SQLDatabaseIO db = new SQLDatabaseIO("kamel", "dreng", "runerne.dk", 8003); //Makes new SQLDatabaseIO object.
 
+    //Get all raavarer
     @Override
     public RaavareDTO getRaavare(int raavareId) throws SQLException{
         db.connect();
         ResultSet rs = db.query("SELECT * FROM raavareLager where raavareID=" + raavareId); //Select all columns from recept where receptID is input
         RaavareDTO raavare = new RaavareDTO();
+        try {
             rs.next();
             raavare.setRaavareID(rs.getInt("raavareID"));
             raavare.setRaavareNavn(rs.getString("raavareNavn"));
@@ -44,6 +47,8 @@ public class RaavareDAOSQL implements IRaavareDAO{
         return raavareList;
     }
 
+
+    //Create raavare
     @Override
     public void createRaavare(RaavareDTO raavare) throws SQLException{ //TODO take care of exception if ID alredy exists
         db.connect();

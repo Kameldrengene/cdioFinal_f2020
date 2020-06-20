@@ -50,7 +50,7 @@ public class  RaavarebatchService {
 
     @Path("opdaterRaavarebatch")
     @POST
-    public RaavarebatchDTO updateRaavarebatch(RaavarebatchDTO raavarebatchDTO) {
+    public RaavarebatchDTO updateRaavarebatch(RaavarebatchDTO raavarebatchDTO) throws WebApplicationException{
         return raavarebatchController.updateRaavarebatch(raavarebatchDTO);
     }
 

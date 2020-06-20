@@ -1,6 +1,6 @@
 package dal;
 
-import Data.IDALException;
+
 import Data.SQLDatabaseIO;
 import Data.UserDAOSQL;
 import Data.dto.UserDTO;
@@ -9,6 +9,7 @@ import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
 
+import java.sql.SQLException;
 import java.util.List;
 
 
@@ -23,10 +24,14 @@ class UserDAOSQLTest {
     @Test
     @Order(1)
     void getUser() {
-        userDAOSQL.db.setDB("cdioTest_2020");
+        try {
+            userDAOSQL.db.setDB("cdioTest_2020");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         try {
             testUser = userDAOSQL.getUser(11);
-        }catch (IDALException.DALException e){
+        }catch (SQLException e){
             e.printStackTrace();
         }
 
@@ -37,19 +42,31 @@ class UserDAOSQLTest {
     @Test
     @Order(2)
     void getRole() {
-        userDAOSQL.db.setDB("cdioTest_2020");
+        try {
+            userDAOSQL.db.setDB("cdioTest_2020");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         int expected = 1;
-        testList = userDAOSQL.getRole("Administrator");
+        try {
+            testList = userDAOSQL.getRole("Administrator");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         assertEquals(expected,testList.size());
     }
 
     @Test
     @Order(3)
     void getData() {
-        userDAOSQL.db.setDB("cdioTest_2020");
+        try {
+            userDAOSQL.db.setDB("cdioTest_2020");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         try {
             testList = userDAOSQL.getData();
-        }catch (IDALException.DALException e){
+        }catch (SQLException e){
             e.printStackTrace();
         }
         assertEquals("FD",testList.get(1).getIni());
@@ -59,7 +76,11 @@ class UserDAOSQLTest {
     @Test
     @Order(4)
     void createUser() {
-        userDAOSQL.db.setDB("cdioTest_2020");
+        try {
+            userDAOSQL.db.setDB("cdioTest_2020");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         UserDTO newUser = new UserDTO();
         newUser.setAktiv(false);
         newUser.setUserName("Test");
@@ -71,7 +92,7 @@ class UserDAOSQLTest {
             testUser = userDAOSQL.getUser(19);
             assertEquals("Test",testUser.getUserName());
 
-        }catch (IDALException.DALException e){
+        }catch (SQLException e){
             e.printStackTrace();
         }
     }
@@ -79,7 +100,11 @@ class UserDAOSQLTest {
     @Test
     @Order(5)
     void updateUser() {
-        userDAOSQL.db.setDB("cdioTest_2020");
+        try {
+            userDAOSQL.db.setDB("cdioTest_2020");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         UserDTO newUser = new UserDTO();
         newUser.setAktiv(false);
         newUser.setUserName("Test");
@@ -92,7 +117,7 @@ class UserDAOSQLTest {
             testUser = userDAOSQL.getUser(19);
             assertEquals("Produktionsleder",testUser.getJob());
 
-        }catch (IDALException.DALException e){
+        }catch (SQLException e){
             e.printStackTrace();
         }
     }
@@ -100,11 +125,15 @@ class UserDAOSQLTest {
     @Test
     @Order(6)
     void getActivity() {
-        userDAOSQL.db.setDB("cdioTest_2020");
+        try {
+            userDAOSQL.db.setDB("cdioTest_2020");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         try {
             boolean aktual = userDAOSQL.getActivity(19);
             assertFalse(aktual);
-        }catch (IDALException.DALException e){
+        }catch (SQLException e){
             e.printStackTrace();
         }
     }
@@ -112,12 +141,16 @@ class UserDAOSQLTest {
     @Test
     @Order(7)
     void aktivitySwitchUser() {
-        userDAOSQL.db.setDB("cdioTest_2020");
+        try {
+            userDAOSQL.db.setDB("cdioTest_2020");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         try{
             userDAOSQL.aktivitySwitchUser(19);
             boolean aktual = userDAOSQL.getUser(19).getAktiv();
             assertTrue(aktual);
-        }catch (IDALException.DALException e){
+        }catch (SQLException e){
             e.printStackTrace();
         }
     }

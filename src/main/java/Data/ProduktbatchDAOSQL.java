@@ -13,6 +13,7 @@ public class ProduktbatchDAOSQL implements IProduktbatchDAO {
     final SQLDatabaseIO db = new SQLDatabaseIO("kamel", "dreng", "runerne.dk", 8003);
     public SQLDatabaseIO getdb(){return db;}
 
+
     //Get list of all productbatches
     @Override
     public List<ProduktbatchDTO> getProduktBatchList() throws SQLException{
@@ -96,7 +97,7 @@ public class ProduktbatchDAOSQL implements IProduktbatchDAO {
     }
 
     // -Mikkel
-    //Get the heighest productbatch ID
+    //Get the heighest productbatch ID-number
     @Override
     public int getMaxPDID() throws SQLException{
         db.connect();
@@ -178,7 +179,7 @@ public class ProduktbatchDAOSQL implements IProduktbatchDAO {
         db.close();
     }
 
-    //todo slet - også i rapport og test!
+    //todo slet - også i rapport og test
     public void eraseProduktBatch(int pbId, int RBID) throws SQLException{
         db.connect();
         db.update("DELETE FROM ProduktBatches WHERE PBID = " + pbId + " AND RBID = " + RBID);

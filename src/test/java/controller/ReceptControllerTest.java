@@ -8,6 +8,7 @@ import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,7 +21,11 @@ class ReceptControllerTest {
     @Test
     @Order(1)
     void getData() {
-        receptController.receptDAOSQL.db.setDB("cdioTest_2020");
+        try {
+            receptController.receptDAOSQL.db.setDB("cdioTest_2020");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         int expected = 11;
         listRecept = receptController.getData();
         assertEquals(expected,listRecept.get(1).getReceptId());
@@ -29,7 +34,11 @@ class ReceptControllerTest {
     @Test
     @Order(2)
     void getRecept() {
-        receptController.receptDAOSQL.db.setDB("cdioTest_2020");
+        try {
+            receptController.receptDAOSQL.db.setDB("cdioTest_2020");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         int expected = 11;
         int RaavarID = 1;
         testRecept= receptController.getRecept(11,RaavarID);
@@ -39,7 +48,11 @@ class ReceptControllerTest {
     @Test
     @Order(3)
     void opretRecept() {
-        receptController.receptDAOSQL.db.setDB("cdioTest_2020");
+        try {
+            receptController.receptDAOSQL.db.setDB("cdioTest_2020");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         int expected = 99;
         List<ReceptDTO> receptDTOList = new ArrayList<>();
         ReceptDTO newRecept = new ReceptDTO();
