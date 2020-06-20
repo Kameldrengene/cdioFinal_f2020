@@ -33,6 +33,7 @@ public class RaavareController {
         }catch (SQLException e){
             e.printStackTrace();
         }
+        return null;
     }
 
     public RaavareDTO opretRaavare (RaavareDTO raavareDTO) {
