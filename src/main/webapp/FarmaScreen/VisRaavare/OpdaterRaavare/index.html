@@ -16,12 +16,10 @@
     <input id="confirmbtn" type="button" onclick="
         if (confirm('Er du sikker?')) {
             if(document.getElementById('raavareNavn').value != '' && document.getElementById('leverandoer').value != ''){
-                raavareData('Update')
-                switchP('FarmaScreen/VisRaavare/index.html'); {
+                raavareData('Update');
 
-                }
             } else {
-                alert('Ikke alt udfyldt')
+                alert('Ikke alt udfyldt');
             }
         }"
            class="hvr-pop" value="Opdater">

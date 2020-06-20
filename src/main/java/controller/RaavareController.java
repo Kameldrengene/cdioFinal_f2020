@@ -13,13 +13,14 @@ import java.util.List;
 public class RaavareController {
 
     public final RaavareDAOSQL raavareDAOSQL;
+    private RaavareFunc rvFunc;
     private final String SQLErrorMsg = "ERROR: Fejl i forbindelse med kontakt af databasen";
 
     public RaavareController (){
         raavareDAOSQL = new RaavareDAOSQL();
+        rvFunc = new RaavareFunc();
     }
 
-    //Get all raavarer
     public List<RaavareDTO> getData()  {
         try {
             return raavareDAOSQL.getRaavareList();
@@ -28,38 +29,37 @@ public class RaavareController {
         }
     }
 
-    //Get specific raavare
     public RaavareDTO getRaavare(int id) {
         try {
             return raavareDAOSQL.getRaavare(id);
         }catch (SQLException e){
-            throw buildError(Response.Status.NOT_ACCEPTABLE, SQLErrorMsg);
+            e.printStackTrace();
         }
+        return null;
     }
 
-    //Create raavare
     public RaavareDTO opretRaavare (RaavareDTO raavareDTO) {
-        RaavareFunc rvFunc = new RaavareFunc();
+        String str = "POST";
         try {
-            if (rvFunc.isNewRaavareOk(raavareDTO,getData())) {
-                raavareDAOSQL.createRaavare(raavareDTO);
+            if (!rvFunc.isNewRaavareOk(raavareDTO,getData())) {
+                throw new WebApplicationException(Response.status(Response.Status.NOT_ACCEPTABLE).entity(rvFunc.raavaremsg(raavareDTO,getData(),str)).build());
             }
+            raavareDAOSQL.createRaavare(raavareDTO);
         }catch (SQLException e){
-            throw buildError(Response.Status.NOT_ACCEPTABLE, SQLErrorMsg);
+            e.printStackTrace();
         }
         return raavareDTO;
     }
 
-    //Update on raavare
-    //todo slet? også i test og rapport
     public RaavareDTO updateRaavare(RaavareDTO raavareDTO) {
-        RaavareFunc rvFunc = new RaavareFunc();
+
         try {
-            if (rvFunc.isUpdateRaavareOk(raavareDTO,getData())) {
-                raavareDAOSQL.updateRaavare(raavareDTO);
+            if (!rvFunc.isUpdateRaavareOk(raavareDTO,getData())) {
+                throw new WebApplicationException(Response.status(Response.Status.NOT_ACCEPTABLE).entity(rvFunc.raavaremsg(raavareDTO,getData(),null)).build());
             }
+            raavareDAOSQL.updateRaavare(raavareDTO);
         }catch (SQLException e){
-            throw buildError(Response.Status.NOT_ACCEPTABLE, SQLErrorMsg);
+            e.printStackTrace();
         }
         return raavareDTO;
     }

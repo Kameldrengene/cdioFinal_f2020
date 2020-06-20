@@ -6,17 +6,45 @@ import java.util.List;
 
 public class RaavareFunc {
 
+    public String raavaremsg(RaavareDTO rv,List<RaavareDTO> rvList, String type) {
+        if (!isIDOk(rv) && type.equals("POST")) {
+            return "Leverandør ID skal være mellem  1 og 99999999";
+        }
+        if (!isNavnOk(rv)) {
+            return "Råvare navn skal være mellem  2 til 20 tegn";
+        }
+        if (!isleverandoerOk(rv)) {
+            return "leverandør navn skal være mellem  2 til 20 tegn";
+        }
+        if(IDExists(rv,rvList) && type.equals("POST")){
+            return "Råvare ID'et er optaget\nVælg en anden";
+        }
+        if(NavnExists(rv,rvList)){
+            return "Råvare navn er optaget\nVælg en anden";
+        }
+        return null;
+    }
+
     public boolean isNewRaavareOk(RaavareDTO rv, List<RaavareDTO> rvList) {
-        return (!IDExists(rv, rvList) && isIDOk(rv) && isNavnOk(rv) && isleverandoerOk(rv));
+        return (!NavnExists(rv,rvList) && !IDExists(rv,rvList) && isIDOk(rv) && isNavnOk(rv) && isleverandoerOk(rv));
     }
 
     public boolean isUpdateRaavareOk(RaavareDTO rv, List<RaavareDTO> rvList) {
-        return (IDExists(rv,rvList) && isIDOk(rv) && isNavnOk(rv) && isleverandoerOk(rv));
+        return (!NavnExists(rv,rvList) && isNavnOk(rv) && isleverandoerOk(rv));
     }
 
-    private boolean IDExists(RaavareDTO rv, List<RaavareDTO> rvList) {
+    public boolean IDExists(RaavareDTO rv, List<RaavareDTO> rvList) {
         for(int i = 0; i < rvList.size(); i++){
             if(rv.getRaavareID() == rvList.get(i).getRaavareID()){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean NavnExists(RaavareDTO rv, List<RaavareDTO> rvList) {
+        for(int i = 0; i < rvList.size(); i++){
+            if(rv.getRaavareNavn().equals(rvList.get(i).getRaavareNavn())){
                 return true;
             }
         }

@@ -1,5 +1,7 @@
-package dal;
+package Data;
 
+import dal.RaavarebatchDAOSQL;
+import dal.SQLDatabaseIO;
 import dal.dto.RaavarebatchDTO;
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Order;
@@ -12,6 +14,7 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 class RaavarebatchDAOSQLTest {
+
     final RaavarebatchDAOSQL raavarebatchDAOSQL = new RaavarebatchDAOSQL();
     RaavarebatchDTO testRaavarebatch;
     List<RaavarebatchDTO> listRaavarebatch;
@@ -57,12 +60,10 @@ class RaavarebatchDAOSQLTest {
     void getAktuelRaavarebatchList() {
         try {
             raavarebatchDAOSQL.db.setDB("cdioTest_2020");
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        int expected = 3;
-        int expectedSize = 20;
-        try {
+
+            int expected = 3;
+            int expectedSize = 20;
+
             listRaavarebatch = raavarebatchDAOSQL.getAktuelRaavarebatchList();
             assertEquals(expected,listRaavarebatch.get(2).getRbId());
             assertEquals(expectedSize,listRaavarebatch.size());
@@ -123,6 +124,7 @@ class RaavarebatchDAOSQLTest {
             e.printStackTrace();
         }
     }
+
     @Test
     @Order(6)
     void cleanUP(){
