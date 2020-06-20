@@ -1,25 +1,31 @@
 package controller;
 
-import dal.SQLDatabaseIO;
-import dal.dto.ReceptDTO;
+import Controllers.ReceptController;
+import Data.SQLDatabaseIO;
+import Data.dto.ReceptDTO;
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 class ReceptControllerTest {
-    ReceptController receptController = new ReceptController();
+    final ReceptController receptController = new ReceptController();
     ReceptDTO testRecept;
     List<ReceptDTO> listRecept;
     @Test
     @Order(1)
     void getData() {
-        receptController.receptDAOSQL.db.setDB("cdioTest_2020");
+        try {
+            receptController.receptDAOSQL.db.setDB("cdioTest_2020");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         int expected = 11;
         listRecept = receptController.getData();
         assertEquals(expected,listRecept.get(1).getReceptId());
@@ -28,7 +34,11 @@ class ReceptControllerTest {
     @Test
     @Order(2)
     void getRecept() {
-        receptController.receptDAOSQL.db.setDB("cdioTest_2020");
+        try {
+            receptController.receptDAOSQL.db.setDB("cdioTest_2020");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         int expected = 11;
         int RaavarID = 1;
         testRecept= receptController.getRecept(11,RaavarID);
@@ -38,13 +48,17 @@ class ReceptControllerTest {
     @Test
     @Order(3)
     void opretRecept() {
-        receptController.receptDAOSQL.db.setDB("cdioTest_2020");
-        int expected = 10;
+        try {
+            receptController.receptDAOSQL.db.setDB("cdioTest_2020");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        int expected = 99;
         List<ReceptDTO> receptDTOList = new ArrayList<>();
         ReceptDTO newRecept = new ReceptDTO();
         newRecept.setNonNetto(5.5);
         newRecept.setRaavareId(3);
-        newRecept.setReceptId(10);
+        newRecept.setReceptId(99);
         newRecept.setReceptNavn("Morfin");
         newRecept.setTolerance(9.5);
 
@@ -55,7 +69,7 @@ class ReceptControllerTest {
         ReceptDTO neRecept = new ReceptDTO();
         neRecept.setNonNetto(5.5);
         neRecept.setRaavareId(2);
-        neRecept.setReceptId(10);
+        neRecept.setReceptId(99);
         neRecept.setReceptNavn("Morfin");
         neRecept.setTolerance(9.5);
         receptController.opretRecept(neRecept,1);

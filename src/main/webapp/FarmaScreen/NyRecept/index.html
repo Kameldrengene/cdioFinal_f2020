@@ -3,19 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <title>Recept</title>
-    <script src="jquery/jquery-3.5.1.min.js"></script>
+    <script src="jquery-3.5.1.min.js"></script>
     <script src="FarmaScreen/NyRecept/opretRecept.js"></script>
-    <script src="jqScripts.js"></script>
+    <script src="defaultJavascript.js"></script>
     <link rel="stylesheet" type="text/css" href="addrecept.css">
     <link rel="stylesheet" href="addrecept.css">
     <link rel="stylesheet" href="../../default.css">
-    <script src="opretRecept.js"></script>
-    <script src="../../PLeadScreen/Produktbatches/VisProduktbatches/VisProduktbatches/VisProduktbatches.js"></script>
+
 
 </head>
 <body>
-
-<div id='loading'></div>
+<div class="loads"><div id="loading"></div> </div>
 <div id="opretRecept"><h1>Opret ny Recept</h1>
     <br>
 
@@ -39,8 +37,8 @@
     </div>
 </div>
 <div id="opretReceptBtn">
-<input type="submit" id="videre" class="hvr-buzz screenbtn" onclick="addLinje(); return false" value="TilføjeRåvare" ><br>
-<input type="submit" class="hvr-buzz screenbtn" value="Retur" onclick="retur(); return false">
+<input type="submit" id="videre" class="hvr-pop" onclick="addLinje(); return false" value="TilføjeRåvare" ><br>
+<input type="submit" class="hvr-pop" value="Retur" onclick="retur(); return false">
 </div>
 </body>
 </html>

@@ -1,4 +1,4 @@
-
+$.ajaxSetup({async: false});
 
 var alleMap = new Map();  //indeholder alle rååvare med navn som key.
 
@@ -19,11 +19,24 @@ function ledeligeRaavare() {   // gemmer alle råvare i en Map.
                 alleMap.set(raavarNavn,raavarID);
             });
         });
+       // await sendAjax("/BoilerPlate_war_exploded/rest/Raavare/getRaavarer",function (data) {
+       //      $.each(data,function (key,value) {
+       //          //console.log(value);
+       //          var raavarID = value.raavareID;
+       //          var raavarNavn = value.raavareNavn;
+       //
+       //          alleRaavare.push(raavarID);
+       //          alleRaavareNavn.push(raavarNavn);
+       //          alleMap.set(raavarNavn,raavarID);
+       //      });
+       //  }, function (data) {
+       //      alert("kunne ikke fetche raavar, prøve igen")
+       //  });
         localStorage.setItem("ledeligeRaavarID",alleRaavare);
         localStorage.setItem("ledeligeRaavarNavn",alleRaavareNavn);
     });
 }
-localStorage.setItem("counter",0);
+
 counter = 0;  //bruges til at give at tilføje id's til elementer.
 function addLinje() {    //tilføjer ekstra råvare
     if(($("#recepID").val() === null) || ($("#recepnavn").val() === '')){
@@ -32,7 +45,7 @@ function addLinje() {    //tilføjer ekstra råvare
         ledeligeRaavare();
         counter++;
         console.log(counter);
-        let coutnum = counter;
+        let coutnum = counter;   //indeholder præcise ledeligeNavn + nr=countnum
         console.log(coutnum);
         $("#raavareLinjer").append(
             '<tr id="raavareLines' + counter + '">\n' +
@@ -63,58 +76,48 @@ function fjernRaavar(counter1) {
     $(document).ready(function () {
         $("#raavareLines"+counter1+"").remove();
         console.log(counter);
-        //  document.getElementById("raavareLinjer"+counter+"").innerHTML +=
-        // '<div id="raavareLinjer'+(counter + 1)+'"></div>'
     });
 
 }
 
 function selectbtn(counter) {
     $(document).ready(function () {
-        // var select = document.getElementById('ledeligeID');
         let selectNavn = document.getElementById('ledeligeNavn'+counter+'');
         let ledeliglist = localStorage.getItem("ledeligeRaavarID").split(",");
         let ledeligNavnList = localStorage.getItem("ledeligeRaavarNavn").split(",");
         for (i = 0; i < ledeliglist.length; i++) {
-            //   var option = document.createElement('option');
             var option2 = document.createElement('option');
-            //  option.value = option.text = ledeliglist[i];
             option2.value = option2.text = ledeligNavnList[i];
-            //  select.add(option);
             selectNavn.add(option2);
         }
         localStorage.setItem("ledeligeRaavarID", "");
         localStorage.setItem("ledeligeRaavarNavn", "");
-        // document.getElementById("recepID").readOnly = true;
-        // document.getElementById("recepnavn").readOnly = true;
 
         if(counter===1) {
             $("#addRaavare").show();
         }
-
-        //   $("#videre").hide();
     });
 }
 
 function retur() {
     $(document).ready(function () {
         delete counter;
-        switchP('FarmaScreen/ProcesserProduktbatch.html');
+        switchP('FarmaScreen/index.html');
     });
 }
 
-async function confirmOpretRecept() {
+function confirmOpretRecept() {
     $(document).ready(async function () {
         if (confirm('Er du sikker?')) {
+            $("#loading").show();
             console.log("test1");
-            if(document.getElementById('recepID').value != '' && document.getElementById('recepnavn').value != ''){
+            if (document.getElementById('recepID').value != '' && document.getElementById('recepnavn').value != '') {
                 console.log("test2");
-                if(ingenDublicate()){
-                    $("#opretRecept").hide();
-                    $("#opretReceptBtn").hide();
-                    $("#loading").show();
-                    await opretReceptList();
-                }else {
+                if(!ingenRaavare()){
+                    alert("Tilføje en Råvare");
+                }else if (ingenDublicate()) {
+                     await opretReceptList();
+                } else {
                     alert("må ikke vælge samme råvare flere gang!")
                 }
             } else {
@@ -149,6 +152,21 @@ function ingenDublicate() {  //funktion checker for samtlige raavar navn.
     return true;
 }
 
+function ingenRaavare() {  //funktion checker for samtlige raavar navn.
+    let checkraavarNr = [];
+    for (let i = 1; i <= counter ; i++) {
+        if($('#ledeligeNavn'+i+'').length) {
+            console.log(i);
+            const RaaNavn = document.getElementById('ledeligeNavn' + i + '').value;
+            checkraavarNr.push(RaaNavn);
+        }
+    }
+
+    return checkraavarNr.length !== 0;
+
+}
+
+
 
 async function opretReceptList() {
     let ReceptList = [];
@@ -158,11 +176,11 @@ async function opretReceptList() {
             const RNavn = $("#recepnavn").val();
             const RaaNavn = document.getElementById('ledeligeNavn' + i + '').value;
             const RaaID = alleMap.get(RaaNavn);
-            console.log("test3 " + RaaID);
+            //console.log("test3 " + RaaID);
             const Rnetto = $("#netto" + i + "").val();
-            console.log("test4 " + Rnetto);
+            // console.log("test4 " + Rnetto);
             const Rtol = $("#tol" + i + "").val();
-            console.log("test4 " + Rtol);
+            //console.log("test4 " + Rtol);
             const ReceptListobj = {
                 receptId: RID,
                 receptNavn: RNavn,
@@ -171,36 +189,25 @@ async function opretReceptList() {
                 tolerance: Rtol
             };
             ReceptList.push(ReceptListobj);
-            console.log(ReceptList[i-1]);
+            console.log(ReceptList[i - 1]);
         }
     }
+    var receptData = JSON.stringify(ReceptList);
     console.log(JSON.stringify(ReceptList));
-    await $.ajax({
-        url: "/BoilerPlate_war_exploded/rest/Recept/OpretRecept",
-        type: 'POST',
-        contentType: "application/json",
-        dataType: 'json',
-        data: JSON.stringify(ReceptList),
-        success: function (data) {
-            console.log("before"+ counter);
-            retur();
-            console.log("after" + counter);
+    console.log("before ajax");
+    await sendAjax("/BoilerPlate_war_exploded/rest/Recept/OpretRecept", function (data) {
+        console.log("before" + counter);
+        retur();
+        console.log("after" + counter);
+    }, function (data) {
+        if (data.status === 406) {
+            alert(data.responseText);
+            console.log(counter);
 
-        },
-        error: function (data) {
-            if (data.status === 406){
-                alert(data.responseText);
-                console.log(counter);
-                $("#loading").hide();
-                $("#opretRecept").show();
-                $("#opretReceptBtn").show();
-            }else {
-                alert('Enternal Error: Prøve igen!');
-                $("#loading").hide();
-                $("#opretRecept").show();
-                $("#opretReceptBtn").show();
-            }
+        } else {
+            alert('Enternal Error: Prøve igen!');
+
         }
-    });
+    },"POST",receptData);
 }
 

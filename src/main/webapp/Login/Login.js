@@ -8,8 +8,7 @@ $("document").ready(async function () {
     //await to ensure functionality is only added after resources are fetched
     await loadUsers();
 
-    //Only load user data and sign in button when everything is ready
-    $("#login").load("Login/LoginTable.html");
+    //Hide user table until a role is selected
     $(".brugertable").hide();
 
     $(".rolletabel").on('click','input',function () {
@@ -63,9 +62,9 @@ $("document").ready(async function () {
             if (loginRole == "admin")
                 switchP("AdminScreen/Admin.html");
             else if (loginRole == "farma")
-                switchP("FarmaScreen/Farma.html");
+                switchP("FarmaScreen/index.html");
             else if (loginRole == "prodLeder")
-                switchP("PLeadScreen/PLeadScreen.html")
+                switchP("ProduktScreen/ProduktScreen.html")
             else if (loginRole == "laborant")
                 switchP("LabScreen/Lab.html");
         }

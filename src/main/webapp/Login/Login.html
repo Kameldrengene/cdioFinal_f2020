@@ -6,6 +6,8 @@
     <title>Title</title>
 
     <link rel="stylesheet" type="text/css" href="Login/Login.css">
+    <script src="Login.js"></script>
+
 
 
 </head>
@@ -16,7 +18,44 @@
     <div class="loads"><div id="loading"></div> </div>
 
     <!--  To be loaded with content when fecthing of data is done  -->
-    <div id="login"></div>
+    <div id="login">
+        <form>
+            <h3>Vælg rolle</h3>
+            <table class="rolletabel">
+                <tr>
+                    <td> <input type="radio" name="rolle" id="administrator" class="administrator"> </td>
+                    <td> <Label for="administrator">Administrator</Label> </td>
+                </tr>
+                <tr>
+                    <td> <input type="radio" name="rolle" id="farmaceut"> </td>
+                    <td> <Label for="farmaceut">Farmaceut</Label> </td>
+                </tr>
+                <tr>
+                    <td><input type="radio" name="rolle" id="produktionsleder"></td>
+                    <td><Label for="produktionsleder">Produktionsleder</Label></td>
+                </tr>
+                <tr>
+                    <td><input type="radio" name="rolle" id="laborant"></td>
+                    <td><Label for="laborant">Laborant</Label></td>
+                </tr>
+            </table>
+
+            <table class="brugertable">
+                <thead>
+                <tr>
+                    <th></th>
+                    <th>ID</th>
+                    <th>Navn</th>
+                </tr>
+                </thead>
+                <tbody id="personer">
+                </tbody>
+            </table>
+
+            <br>
+            <button class='hvr-buzz'>Sign in</button>
+        </form>
+    </div>
 
     <!-- Logo med style defineret direkte i HTML -->
     <img id="logo" src="dtu_logo.png" style="margin-top: 2%" width="50" height="72.5">

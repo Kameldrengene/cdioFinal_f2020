@@ -1,6 +1,6 @@
 package Funktionalitet;
 
-import dal.dto.RaavareDTO;
+import Data.dto.RaavareDTO;
 
 import java.util.List;
 
@@ -24,24 +24,15 @@ public class RaavareFunc {
     }
 
     private boolean isIDOk(RaavareDTO rv) {
-        if (rv.getRaavareID() <= 99999999 && rv.getRaavareID() >= 1) {
-            return true;
-        }
-        return false;
+        return rv.getRaavareID() <= 99999999 && rv.getRaavareID() >= 1;
     }
 
     private boolean isNavnOk(RaavareDTO rv) {
-        if (rv.getRaavareNavn().length() < 21 && rv.getRaavareNavn().length() > 1) {
-            return true;
-        }
-        return false;
+        return rv.getRaavareNavn().length() < 21 && rv.getRaavareNavn().length() > 1;
     }
 
     private boolean isleverandoerOk(RaavareDTO rv) {
-        if (rv.getLeverandoer().length() < 21 && rv.getLeverandoer().length() > 1) {
-            return true;
-        }
-        return false;
+        return rv.getLeverandoer().length() < 21 && rv.getLeverandoer().length() > 1;
     }
 
 }

@@ -1,18 +1,16 @@
 package Funktionalitet;
 
 
-import dal.RaavarebatchDAOSQL;
-import dal.dto.RaavarebatchDTO;
+import Data.RaavarebatchDAOSQL;
+import Data.dto.RaavarebatchDTO;
 
-import javax.ws.rs.WebApplicationException;
-import javax.ws.rs.core.Response;
 import java.sql.SQLException;
 import java.util.List;
 
 // -Mikkel
 public class RaavarebatchFunc {
 
-    private RaavarebatchDAOSQL dao = new RaavarebatchDAOSQL();
+    private final RaavarebatchDAOSQL dao = new RaavarebatchDAOSQL();
 
     public String startMaengdeOk(RaavarebatchDTO dto){
 

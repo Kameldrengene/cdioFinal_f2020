@@ -2,10 +2,16 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Farma Screen</title>
-    <link rel="stylesheet" type="text/css" href="../../default.css">
+    <title>Recept</title>
+    <script src="jquery-3.5.1.min.js"></script>
+    <script src="defaultJavascript.js"></script>
+    <link rel="stylesheet" type="text/css" href="addrecept.css">
+    <link rel="stylesheet" href="../../default.css">
+    <script src="FarmaScreen/VisRecept/visRecepter.js"></script>
 </head>
 <body>
+
+<div class="loads"><div id="loading"></div> </div>
 <h1 id="receptheader"></h1>
 <div>
     <div id="list"  className="brugertable">
@@ -19,6 +25,6 @@
 </div>
 
 <input type="submit" class="hvr-buzz screenbtn" value="Retur" onclick="switchP('FarmaScreen/VisRecept/index.html'); return false">
-<script>visRecept();</script>
+<!--<script>visRecept();</script>-->
 </body>
 </html>

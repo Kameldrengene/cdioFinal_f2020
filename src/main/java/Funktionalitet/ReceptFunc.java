@@ -1,6 +1,6 @@
 package Funktionalitet;
 
-import dal.dto.ReceptDTO;
+import Data.dto.ReceptDTO;
 
 import java.util.List;
 
@@ -25,6 +25,15 @@ public class ReceptFunc {
         }
         return false;
 
+    }
+
+    public boolean doesNameExist(ReceptDTO recept, List<ReceptDTO> receptDTOList){
+        for (int i = 0; i < receptDTOList.size() ; i++) {
+            if (receptDTOList.get(i).getReceptNavn().equals(recept.getReceptNavn())) {
+                return true;
+            }
+        }
+        return false;
     }
 
 

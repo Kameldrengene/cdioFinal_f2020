@@ -1,8 +1,7 @@
 package API;
 
-import controller.RaavarevbatchController;
-import dal.IDALException;
-import dal.dto.RaavarebatchDTO;
+import Controllers.RaavarevbatchController;
+import Data.dto.RaavarebatchDTO;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
@@ -11,9 +10,9 @@ import java.util.List;
 @Path("Raavarebatch")
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
-public class RaavarebatchService {
+public class  RaavarebatchService {
 
-    public RaavarevbatchController raavarebatchController = new RaavarevbatchController();
+    public final RaavarevbatchController raavarebatchController = new RaavarevbatchController();
 
     // -Mikkel
     @Path("getAlle")
@@ -49,10 +48,9 @@ public class RaavarebatchService {
         return raavarebatchController.getBatch(batchID);
     }
 
-    //todo slet?
     @Path("opdaterRaavarebatch")
     @POST
-    public RaavarebatchDTO updateRaavarebatch(RaavarebatchDTO raavarebatchDTO) {
+    public RaavarebatchDTO updateRaavarebatch(RaavarebatchDTO raavarebatchDTO) throws WebApplicationException{
         return raavarebatchController.updateRaavarebatch(raavarebatchDTO);
     }
 
