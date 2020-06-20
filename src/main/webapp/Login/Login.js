@@ -92,7 +92,7 @@ async function loadUser(role, redo=0) {
         contentType: "application/json",
         dataType: "json",
         success: data => createTable(data, role),
-        error: (response, error) => load(response, error)
+        error: (response, error) => loadError(response, error)
     });
 
     $(".loads").hide()
