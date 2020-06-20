@@ -11,7 +11,9 @@ import java.util.List;
 public class ProduktbatchDAOSQL implements IProduktbatchDAO {
 
     //Makes new SQLDatabaseIO object.
-    final SQLDatabaseIO db = new SQLDatabaseIO("kamel", "dreng", "runerne.dk", 8003);
+    public final SQLDatabaseIO db = new SQLDatabaseIO("kamel", "dreng", "runerne.dk", 8003);
+
+
     public SQLDatabaseIO getdb(){return db;}
 
 

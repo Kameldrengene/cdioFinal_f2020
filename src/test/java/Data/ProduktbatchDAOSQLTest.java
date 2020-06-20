@@ -1,7 +1,9 @@
 package Data;
 
-import Data.dto.ProduktbatchDTO;
-import Data.dto.ProduktbatchKompDTO;
+import dal.ProduktbatchDAOSQL;
+import dal.SQLDatabaseIO;
+import dal.dto.ProduktbatchDTO;
+import dal.dto.ProduktbatchKompDTO;
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
