@@ -7,46 +7,53 @@ function confirmRaavareUpdate(id){
             switchP('FarmaScreen/VisRaavare/OpdaterRaavare/index.html');
             console.log("updateafter");
             localStorage.setItem("raavareUpdateID", id);
-           // $(document).ready(function () {
-               await $.getJSON("/BoilerPlate_war_exploded/rest/Raavare/getRaavare/"+ localStorage.getItem("raavareUpdateID"), function (data) {
-                    document.getElementById("raavareID").innerText = "ID: " + data.raavareID;
-                    document.getElementById("raavareNavn").value = data.raavareNavn;
-                    document.getElementById("leverandoer").value = data.leverandoer;
-               // })
+            // $(document).ready(function () {
+            await $.getJSON("/BoilerPlate_war_exploded/rest/Raavare/getRaavare/"+ localStorage.getItem("raavareUpdateID"), function (data) {
+                document.getElementById("raavareID").innerText = "ID: " + data.raavareID;
+                document.getElementById("raavareNavn").value = data.raavareNavn;
+                document.getElementById("leverandoer").value = data.leverandoer;
+                // })
             });
         }
     });
 }
 
 async function raavareData(modType) {
-        var APILink = "/BoilerPlate_war_exploded/rest/Raavare/";
-        var httpType = "";
-        var IID;
-        switch (modType) {
-            case "Create":
-                APILink += "opretRaavare";
-                httpType += "POST";
-                IID = document.getElementById("raavareID").value;
-                break;
-            case "Update":
-                APILink += "updaterRaavare";
-                httpType += "PUT";
-                IID = localStorage.getItem("raavareUpdateID");
-                break;
-        }
-        const INavn = $("#raavareNavn").val();
-        const ILeve = $("#leverandoer").val();
-        const jsonData = {raavareID: IID, raavareNavn: INavn, leverandoer: ILeve};
-        await sendAjax(APILink, function (data) {
+    var APILink = "/BoilerPlate_war_exploded/rest/Raavare/";
+    var httpType = "";
+    var IID;
+    var checkmodtype = modType;
+    switch (checkmodtype) {
+        case "Create":
+            APILink += "opretRaavare";
+            httpType += "POST";
+            IID = document.getElementById("raavareID").value;
+            break;
+        case "Update":
+            APILink += "updaterRaavare";
+            httpType += "PUT";
+            IID = localStorage.getItem("raavareUpdateID");
+            break;
+    }
+    const INavn = $("#raavareNavn").val();
+    const ILeve = $("#leverandoer").val();
+    const jsonData = {raavareID: IID, raavareNavn: INavn, leverandoer: ILeve};
+    await sendAjax(APILink, function (data) {
+        if(checkmodtype === "Create"){
             alert("Opret success!");
             switchP("FarmaScreen/index.html");
-        }, function (data) {
-            if (data.status != 500) {
-                alert(data.responseText);
-            } else {
-                alert('Enternal Error: Prøve igen!');
-            }
-        }, httpType, JSON.stringify(jsonData))
+        }else if(checkmodtype === "Update"){
+            alert("Opdateret success!" + localStorage.getItem("raavareUpdateID"));
+            switchP("FarmaScreen/VisRaavare/index.html");
+        }
+
+    }, function (data) {
+        if (data.status != 500) {
+            alert(data.responseText);
+        } else {
+            alert('Enternal Error: Prøve igen!');
+        }
+    }, httpType, JSON.stringify(jsonData))
 }
 
 
@@ -61,7 +68,7 @@ function postRaavareUpdate() {
 
 }
 
-function toOpretrecept() { /** åbner opret recept side */
+function toOpretrecept() {
     switchP('FarmaScreen/NyRecept/index.html');
     $("#addRaavare").hide();
     $("#loading").hide();
