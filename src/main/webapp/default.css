@@ -20,6 +20,15 @@ h1, h2, h3 {
     color: var(--color-primary);
 }
 
+h5{
+    color: var(--col-textsecondary);
+    font-weight: normal;
+    line-height: 0.8;
+    font-size: 100%;
+    margin-top: 5px;
+    margin-bottom: 10px;
+}
+
 /* Centerer alt text i <body> */
 body {
     margin-top: 5%;
@@ -300,15 +309,6 @@ form{
 
 #retur{
     margin: 20px;
-}
-
-h5{
-    color: var(--col-textsecondary);
-    font-weight: normal;
-    line-height: 0.8;
-    font-size: 100%;
-    margin-top: 5px;
-    margin-bottom: 10px;
 }
 
 /* Source: https://www.w3schools.com/howto/howto_css_loader.asp */

@@ -3,8 +3,6 @@ $.ajaxSetup({async: false});
 var ID = 'delete';
 
 async function Personslist() {
-    $("#Person_table").hide();
-    $("#loading").show();
     await sendAjax("/BoilerPlate_war_exploded/rest/user/getUsers", function (data) {
             var person_data = '<tr>\n' +
                 '                <th>ID</th>\n' +
@@ -38,8 +36,6 @@ async function Personslist() {
             alert("Error making personList: ERR.NO.02");
             console.log(data);
         })
-    $("#Person_table").show();
-    $("#loading").hide();
 }
 
 function checkIfNew() {
