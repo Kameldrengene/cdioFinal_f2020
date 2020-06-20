@@ -81,7 +81,7 @@ function changeCurrentActivity(ID) { /**opdatere brugerens aktivitet til det mod
             const jsondata = {userID: USERID + "", aktiv: !currentactivity + ""};
             if (jsondata.userID.toString() !== localStorage.getItem("loginID").toString()) {
                 sendAjax("/BoilerPlate_war_exploded/rest/user/activeUser", function (data) {
-                    Personslist();
+                    checkIfNew();
                 }, function (data) {
                     alert("Error changing activity: ERR.NO.04");
                     console.log(data);
@@ -94,15 +94,15 @@ function changeCurrentActivity(ID) { /**opdatere brugerens aktivitet til det mod
     });
 }
 
-var updatedID; //gemmer ID'et
-function confirmUserUpdate(ID) { //metoden sender videre til update html siden.
+var updatedID; /** gemmer ID'et for personnen man opdaterer til senere brug */
+function confirmUserUpdate(ID) { /** metoden sender videre til update html siden. */
     $(document).ready(function () {
         if (confirm("are you sure, you want to update user " + ID + "?")) {
             updatedID = ID;
             switchP("AdminScreen/Brugeroversigt/Updatebruger/UpdateBruger.html")
             //load info from user into page
             $(document).ready(function () {
-                sendAjax("/BoilerPlate_war_exploded/rest/user/getUser/" + updatedID, function (data) {
+                sendAjax("/BoilerPlate_war_exploded/rest/user/getUser/" + updatedID, function (data) { /**Her indsættes startverdierne for den bruger man opdaterer på */
                     document.getElementById("username").value = data.userName;
                     document.getElementById("ini").value = data.ini;
                     document.getElementById("pass").value = data.password;
@@ -133,7 +133,7 @@ function confirmUserUpdate(ID) { //metoden sender videre til update html siden.
 }
 
 
-function userCheck() {
+function userCheck() { /** Tester om data indtastet er i korrekt format */
     var errorMsg = "";
     const UPuser = $("#username").val();
     if (UPuser.length < 2 || UPuser.length > 20) {
@@ -151,7 +151,7 @@ function userCheck() {
     return errorMsg;
 }
 
-function userHandler(z) {
+function userHandler(z) { /** behandler data fra User og sender det afsted til backenden. */
     var APILink = "/BoilerPlate_war_exploded/rest/user/";
     var requestType = "";
     var alertMsg = "";
@@ -165,7 +165,7 @@ function userHandler(z) {
         alertMsg = "Error updating user: ERR.NO.07";
     }
 
-    var errorMsg = userCheck();
+    var errorMsg = userCheck(); /** indhenter data */
     var UPid = updatedID;
     var UPuser = $("#username").val();
     var UPini = $("#ini").val();
@@ -189,7 +189,7 @@ function userHandler(z) {
     if (errorMsg != "") {
         alert(errorMsg);
     } else {
-        sendAjax(APILink, function (data) {
+        sendAjax(APILink, function (data) { /** Opdaterer/opretter bruger i db */
             adminHomepage()
         }, function (data) {
             alert(alertMsg);
@@ -198,7 +198,7 @@ function userHandler(z) {
     }
 }
 
-function adminHomepage() {
+function adminHomepage() { /** sender tilbage til adminHomepage */ //TODO Redundant?? ift switchP?
     $(function () {
         function switchPage(page) {
             return $("body").load(page);
