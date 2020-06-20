@@ -203,11 +203,36 @@ class ProduktbatchDAOSQLTest {
 
     }
 
-//    @Test
-//    @Order(9)
-//    void updateProduktBatchkomponent() {
-//    }
-//
+    @Test
+    @Order(9)
+    void updateProduktBatchkomponent() throws SQLException {
+
+        ProduktbatchKompDTO toSend = new ProduktbatchKompDTO();
+        toSend.setPbId(1);
+        toSend.setRbID(1);
+
+        toSend.setUserId(10);
+        toSend.setTara(3);
+        toSend.setNetto(5.4321);
+        toSend.setStatus("Afsluttet");
+
+        //Send and get batch
+        DAO.updateProduktBatchkomponent(toSend);
+        DTOKomp = DAO.getBatchkomponent(1,1);
+
+        assertEquals(10, DTOKomp.getUserId());
+        assertEquals(3.0000, DTOKomp.getTara());
+        assertEquals(5.4321, DTOKomp.getNetto());
+
+        //Cleanup
+        toSend.setUserId(14);
+        toSend.setTara(4);
+        toSend.setNetto(5);
+
+        DAO.updateProduktBatchkomponent(toSend);
+
+    }
+
 //    @Test
 //    @Order(10)
 //    void updateNewpb() {
