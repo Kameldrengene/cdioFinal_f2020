@@ -1,7 +1,7 @@
-package dal;
+package Data;
 
 
-import dal.dto.ReceptDTO;
+import Data.dto.ReceptDTO;
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;

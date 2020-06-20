@@ -1,4 +1,4 @@
-package dal;
+package Data;
 
 import org.junit.jupiter.api.Test;
 
