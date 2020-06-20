@@ -8,6 +8,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
 
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -23,7 +24,7 @@ class ProduktbatchDAOSQLTest {
     private List<ProduktbatchDTO> listDTO;
 
     private ProduktbatchKompDTO DTOKomp;
-    private List<ProduktbatchDTO> listDTOKomp;
+    private List<ProduktbatchKompDTO> listDTOKomp;
 
     //Constructor. Change to testdatabase
     public ProduktbatchDAOSQLTest() throws SQLException {
@@ -86,31 +87,21 @@ class ProduktbatchDAOSQLTest {
 
     }
 
-//    @Test
-//    void getBatchLine() throws SQLException {
-//
-//        DTO = DAO.getBatchLine(1);
-//
-//        assertEquals(1, );
-//
-//    }
+    @Test
+    void getBatchLine() throws SQLException {
 
-//    @Test
-//    void getBatchkomponent() {
-//    }
-//
-//    @Test
-//    void getBatchkomponents() {
-//    }
-//
-//    @Test
-//    void getMaxPDID() {
-//    }
-//
-//    @Test
-//    void createProduktBatch() {
-//    }
-//
+        DTO = DAO.getBatchLine(1);
+
+        //Check product batch line
+        assertEquals(1, DTO.getPbId());
+        assertEquals(10, DTO.getReceptId());
+        assertEquals("Afsluttet", DTO.getStatus());
+        assertEquals("2020-06-12", DTO.getDato());
+
+    }
+
+
+
 //    @Test
 //    void updateProduktBatch() {
 //    }
