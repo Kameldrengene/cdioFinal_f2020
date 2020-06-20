@@ -100,6 +100,40 @@ class ProduktbatchDAOSQLTest {
 
     }
 
+    @Test
+    void getBatchkomponent() throws SQLException {
+
+        DTOKomp = DAO.getBatchkomponent(1, 3);
+
+        //Check component lines
+        assertEquals(1, DTOKomp.getPbId());
+        assertEquals(3, DTOKomp.getRbID());
+        assertEquals(14, DTOKomp.getUserId());
+        assertEquals(4.00, DTOKomp.getTara());
+        assertEquals(5.00, DTOKomp.getNetto());
+
+    }
+
+    @Test
+    void getBatchkomponents() throws SQLException {
+
+        listDTOKomp = DAO.getBatchkomponents(1);
+
+        //Check first component
+        assertEquals(1, listDTOKomp.get(0).getPbId());
+        assertEquals(1, listDTOKomp.get(0).getRbID());
+        assertEquals(14, listDTOKomp.get(0).getUserId());
+        assertEquals(4.00, listDTOKomp.get(0).getTara());
+        assertEquals(5.00, listDTOKomp.get(0).getNetto());
+
+        //Check second component
+        assertEquals(1, listDTOKomp.get(1).getPbId());
+        assertEquals(3, listDTOKomp.get(1).getRbID());
+        assertEquals(14, listDTOKomp.get(1).getUserId());
+        assertEquals(4.00, listDTOKomp.get(1).getTara());
+        assertEquals(5.00, listDTOKomp.get(1).getNetto());
+
+    }
 
 
 //    @Test
