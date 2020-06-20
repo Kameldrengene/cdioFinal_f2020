@@ -11,21 +11,24 @@
 </head>
 <body>
 
-<div class="loads"><div id="loading"></div> </div>
-<h1>Recept oversigt</h1>
-<div>
-    <div id="list" class="container" className="brugertable">
-        <br/>
-        <table class="brugertable" id="recept_table">
+    <h5 id="brugerInfo">Loading</h5> <!-- bruger info -->
+    <script>currentUser();</script>
+    <div class="loads"><div id="loading"></div> </div>
 
-        </table>
-        <h1 id="error"></h1>
+    <h1>Recept oversigt</h1>
+    <div>
+        <div id="list" class="container" className="brugertable">
+            <br/>
+            <table class="brugertable" id="recept_table">
+
+            </table>
+            <h1 id="error"></h1>
+        </div>
     </div>
-</div>
 
-<input type="submit" class="hvr-buzz screenbtn" value="Retur" onclick="switchP('FarmaScreen/index.html'); return false">
+    <input type="submit" class="hvr-buzz screenbtn" value="Retur" onclick="switchP('FarmaScreen/index.html'); return false">
 
-<script>visRecept();</script>
+    <script>visRecept();</script>
 
 </body>
 </html>
