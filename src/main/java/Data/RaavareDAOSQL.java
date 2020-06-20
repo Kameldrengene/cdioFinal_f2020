@@ -46,7 +46,6 @@ public class RaavareDAOSQL implements IRaavareDAO{
         return raavare;
     }
 
-
     //Create raavare
     @Override
     public void createRaavare(RaavareDTO raavare) throws SQLException{ //TODO take care of exception if ID alredy exists

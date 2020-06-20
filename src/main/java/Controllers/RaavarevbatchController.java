@@ -22,6 +22,7 @@ public class RaavarevbatchController {
     }
 
     // -Mikkel
+    //Get list of all raavarebatches
     public List<RaavarebatchDTO> getData(){
         try {
             return DAOSQL.getRaavarebatchList();
@@ -31,6 +32,7 @@ public class RaavarevbatchController {
     }
 
     // -Mikkel
+    //Get list of all active raavarebatches
     public List<RaavarebatchDTO> getAktuelle(){
         try {
             return DAOSQL.getAktuelRaavarebatchList();
@@ -39,7 +41,32 @@ public class RaavarevbatchController {
         }
     }
 
+    //Get one specific raavarebatch
+    public RaavarebatchDTO getBatch(String batchID){
+
+        int batchIDint = Integer.parseInt(batchID);
+        try {
+            return DAOSQL.getRaavarebatch(batchIDint);
+        } catch (SQLException e) {
+            throw buildError(Response.Status.NOT_ACCEPTABLE, SQLErrorMsg);
+        }
+    }
+
+    //todo comment
+    public List<RaavarebatchDTO> getRVIDBatch(String RVID){
+
+        int RVIDint = Integer.parseInt(RVID);
+
+        try{
+            return DAOSQL.getRVIDBatch(RVIDint);
+        } catch(SQLException e){
+            throw buildError(Response.Status.NOT_ACCEPTABLE, SQLErrorMsg);
+        }
+
+    }
+
     // -Mikkel
+    //Create raavarebatch
     public RaavarebatchDTO opretRaavarebatch(RaavarebatchDTO dto) {
 
         //Valider startmængde
@@ -64,30 +91,7 @@ public class RaavarevbatchController {
         return dto;
     }
 
-    public List<RaavarebatchDTO> getRVIDBatch(String RVID){
-
-        int RVIDint = Integer.parseInt(RVID);
-
-        try{
-            return DAOSQL.getRVIDBatch(RVIDint);
-        } catch(SQLException e){
-            throw buildError(Response.Status.NOT_ACCEPTABLE, SQLErrorMsg);
-        }
-
-    }
-
-    //todo slet?
-    public RaavarebatchDTO getBatch(String batchID){
-
-        int batchIDint = Integer.parseInt(batchID);
-        try {
-            return DAOSQL.getRaavarebatch(batchIDint);
-        } catch (SQLException e) {
-            throw buildError(Response.Status.NOT_ACCEPTABLE, SQLErrorMsg);
-        }
-    }
-
-    //todo slet?
+    //Update raavarebatch
     public RaavarebatchDTO updateRaavarebatch(RaavarebatchDTO raavarebatchDTO) {
         try {
             DAOSQL.updateRaavarebatch(raavarebatchDTO);

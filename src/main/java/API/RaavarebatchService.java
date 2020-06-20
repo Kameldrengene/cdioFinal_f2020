@@ -15,6 +15,7 @@ public class  RaavarebatchService {
     public final RaavarevbatchController raavarebatchController = new RaavarevbatchController();
 
     // -Mikkel
+    //Get list of all raavarebatches
     @Path("getAlle")
     @GET
     public List<RaavarebatchDTO> getData() throws WebApplicationException{
@@ -22,12 +23,21 @@ public class  RaavarebatchService {
     }
 
     // -Mikkel
+    //Get list of all active raavarebatches
     @Path("getAktuelle")
     @GET
     public List<RaavarebatchDTO> getAktuelle() throws WebApplicationException {
         return raavarebatchController.getAktuelle();
     }
 
+    //Get one specific raavarebatch
+    @Path("getBatch/{batchID}")
+    @GET
+    public RaavarebatchDTO getBatch(@PathParam("batchID") String batchID) throws WebApplicationException {
+        return raavarebatchController.getBatch(batchID);
+    }
+
+    //todo comment
     @Path("getRVIDBatch/{batchID}")
     @GET
     public List<RaavarebatchDTO> getRVIDBatch(@PathParam("batchID") String raavareID) throws WebApplicationException {
@@ -35,19 +45,14 @@ public class  RaavarebatchService {
     }
 
     // -Mikkel
+    //Create raavarebatch
     @Path("opretRaavarebatch")
     @POST
     public RaavarebatchDTO opretRaavarebatch(RaavarebatchDTO raavarebatchDTO) throws WebApplicationException{
         return raavarebatchController.opretRaavarebatch(raavarebatchDTO);
     }
 
-    //todo slet?
-    @Path("getBatch/{batchID}")
-    @GET
-    public RaavarebatchDTO getBatch(@PathParam("batchID") String batchID) throws WebApplicationException {
-        return raavarebatchController.getBatch(batchID);
-    }
-
+    //Update raavarebatch
     @Path("opdaterRaavarebatch")
     @POST
     public RaavarebatchDTO updateRaavarebatch(RaavarebatchDTO raavarebatchDTO) throws WebApplicationException{

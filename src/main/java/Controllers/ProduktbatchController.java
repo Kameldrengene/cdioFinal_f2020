@@ -19,6 +19,7 @@ public class ProduktbatchController {
     }
 
     // -Mikkel
+    //Get list of all productbatches
     public List<ProduktbatchDTO> getAlle(){
         try {
             return DAOSQL.getProduktBatchList();
@@ -28,6 +29,7 @@ public class ProduktbatchController {
     }
 
     // -Mikkel
+    //Get list of all active productbatches
     public List<ProduktbatchDTO> getAktuelle(){
         try {
             return DAOSQL.getAktuelProduktBatchList();
@@ -37,26 +39,7 @@ public class ProduktbatchController {
     }
 
     // -Mikkel
-    public int getMaxPDID(){
-        try{
-            return DAOSQL.getMaxPDID();
-        } catch(SQLException e) {
-            throw buildError(Response.Status.NOT_ACCEPTABLE, SQLErrorMsg);
-        }
-    }
-
-    // -Mikkel
-    public ProduktbatchDTO opretProduktbatch(ProduktbatchDTO produktbatchDTO){
-
-        try {
-            DAOSQL.createProduktBatch(produktbatchDTO);
-        } catch (SQLException e) {
-            throw buildError(Response.Status.NOT_ACCEPTABLE, SQLErrorMsg);
-        }
-        return produktbatchDTO;
-    }
-
-    // -Mikkel
+    //Get one productbatch
     public ProduktbatchDTO getBatchLine(String batchID){
         int batchIDint = Integer.parseInt(batchID);
 
@@ -67,6 +50,7 @@ public class ProduktbatchController {
         }
     }
 
+    //Get one productbatch component
     public ProduktbatchKompDTO getBatchComponent(String batchID, String RBID){
         int batchIDint = Integer.parseInt(batchID);
         int RBIDint = Integer.parseInt(RBID);
@@ -78,6 +62,7 @@ public class ProduktbatchController {
         }
     }
 
+    //Get all productbatch components of one productbatch
     public List<ProduktbatchKompDTO> getBatchComponents(String batchID){
         int batchIDint = Integer.parseInt(batchID);
 
@@ -88,15 +73,29 @@ public class ProduktbatchController {
         }
     }
 
-    public ProduktbatchKompDTO opdaterProduktbatchLine(ProduktbatchKompDTO produktbatchKompDTO){
+    // -Mikkel
+    //Get the heighest productbatch ID-number
+    public int getMaxPDID(){
+        try{
+            return DAOSQL.getMaxPDID();
+        } catch(SQLException e) {
+            throw buildError(Response.Status.NOT_ACCEPTABLE, SQLErrorMsg);
+        }
+    }
+
+    // -Mikkel
+    //Create product batch
+    public ProduktbatchDTO opretProduktbatch(ProduktbatchDTO produktbatchDTO){
+
         try {
-            DAOSQL.updateProduktBatchkomponent(produktbatchKompDTO);
+            DAOSQL.createProduktBatch(produktbatchDTO);
         } catch (SQLException e) {
             throw buildError(Response.Status.NOT_ACCEPTABLE, SQLErrorMsg);
         }
-        return produktbatchKompDTO;
+        return produktbatchDTO;
     }
 
+    //Update a whole product batch
     public ProduktbatchDTO opdaterProduktbatch(ProduktbatchDTO produktbatchDTO){
         try {
             DAOSQL.updateProduktBatch(produktbatchDTO);
@@ -107,6 +106,17 @@ public class ProduktbatchController {
         return produktbatchDTO;
     }
 
+    //Update one productbatch component
+    public ProduktbatchKompDTO opdaterProduktbatchLine(ProduktbatchKompDTO produktbatchKompDTO){
+        try {
+            DAOSQL.updateProduktBatchkomponent(produktbatchKompDTO);
+        } catch (SQLException e) {
+            throw buildError(Response.Status.NOT_ACCEPTABLE, SQLErrorMsg);
+        }
+        return produktbatchKompDTO;
+    }
+
+    //todo comment
     public ProduktbatchKompDTO opdaterNewProduktbatch(ProduktbatchKompDTO produktbatchKompDTO){
         try {
             DAOSQL.updateNewpb(produktbatchKompDTO);

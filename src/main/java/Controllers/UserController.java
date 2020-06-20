@@ -21,6 +21,7 @@ public class UserController {
         userDAOSQL = new UserDAOSQL();
     }
 
+    //Get all users
     public List<UserDTO> getData()  {
         try {
             return userDAOSQL.getData();
@@ -29,6 +30,7 @@ public class UserController {
         }
     }
 
+    //Get all users
     public UserDTO getUser(int id) {
         UserDAOSQL db = new UserDAOSQL();
         try {
@@ -38,6 +40,7 @@ public class UserController {
         }
     }
 
+    //Get all users with specific role
     public List<UserDTO> getRole(String role)  {
         try {
             return userDAOSQL.getRole(role);
@@ -59,6 +62,7 @@ public class UserController {
         return user;
     }
 
+    //Create user
     public UserDTO updateUser(UserDTO user) {
         UserDAOSQL db = new UserDAOSQL();
         UserFunc userF = new UserFunc();
@@ -72,6 +76,7 @@ public class UserController {
         return user;
     }
 
+    //Switch activity of user
     public UserDTO activitySwitchUser(UserDTO user) {
         UserDAOSQL db = new UserDAOSQL();
         try {
@@ -82,6 +87,7 @@ public class UserController {
         return user;
     }
 
+    //Get a users Activity
     public boolean CurrentActivity (int id){
         UserDAOSQL db = new UserDAOSQL();
         try {

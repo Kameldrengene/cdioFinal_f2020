@@ -19,6 +19,7 @@ public class RaavareController {
         raavareDAOSQL = new RaavareDAOSQL();
     }
 
+    //Get all raavarer
     public List<RaavareDTO> getData()  {
         try {
             return raavareDAOSQL.getRaavareList();
@@ -27,6 +28,7 @@ public class RaavareController {
         }
     }
 
+    //Get specific raavare
     public RaavareDTO getRaavare(int id) {
         try {
             return raavareDAOSQL.getRaavare(id);
@@ -35,6 +37,7 @@ public class RaavareController {
         }
     }
 
+    //Create raavare
     public RaavareDTO opretRaavare (RaavareDTO raavareDTO) {
         RaavareFunc rvFunc = new RaavareFunc();
         try {
@@ -47,6 +50,8 @@ public class RaavareController {
         return raavareDTO;
     }
 
+    //Update on raavare
+    //todo slet? også i test og rapport
     public RaavareDTO updateRaavare(RaavareDTO raavareDTO) {
         RaavareFunc rvFunc = new RaavareFunc();
         try {
