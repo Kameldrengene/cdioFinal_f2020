@@ -19,8 +19,8 @@ async function opretProduktbatch(activeReceptID){
         "/BoilerPlate_war_exploded/rest/produktbatch/getMaxPBID",
         async maxPBID => {
 
-            const newPBDI = maxPBID +1;
-            obj = { pbId: newPBDI, status: "Ikke påbegyndt", receptId: activeReceptID, dato: "" }
+            const newPBID = maxPBID + 1;
+            obj = { pbId: newPBID, status: "Ikke påbegyndt", receptId: activeReceptID, dato: "" }
 
             let myJson = JSON.stringify(obj);
 

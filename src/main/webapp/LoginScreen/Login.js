@@ -5,7 +5,7 @@ $("document").ready(async function () {
     localStorage.setItem('loginID', 'None');
 
     //Keeps the different users in local storage. So they don't have to be reloaded multiple times
-    //await to ensure functionality is only added after resources are fetched
+    //Await to ensure functionality is only added after resources are fetched
     await loadUsers();
 
     //Hide user table until a role is selected
@@ -92,33 +92,13 @@ async function loadUser(role, redo=0) {
         contentType: "application/json",
         dataType: "json",
         success: data => createTable(data, role),
-        error: (response, error) => loadError(response, error)
+        error: err => error(err)
     });
 
     $(".loads").hide()
 
 }
 
-async function loadError(response, error){
-    if (response.status == 500) {
-        alert("Kunne ikke forbinde korrekt til backenden. Genstarter siden");
-        location.reload();
-    }else {
-        if (redo == 0) {
-            alert("Kunne ikke forbinde til databasen. Prøver igen");
-            console.log(response);
-            await loadUser(role, 1);
-        } else if (redo < 4) {
-            console.log(response);
-            await sleep(500);
-            await loadUser(role, redo + 1);
-
-        } else {
-            alert("Fejlede 5 forsøg i træk. Kontakt System administratoren.")
-            console.log(response);
-        }
-    }
-}
 
 async function createTable(data, role){
 
