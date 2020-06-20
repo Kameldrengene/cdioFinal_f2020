@@ -1,15 +1,15 @@
 
 
-function confirmRaavareUpdate(id){
+function confirmRaavareUpdate(id){ /** function til at opdatere råvere*/
     $(document).ready(function () {
-        if(confirm("are you sure, you want to update this råvare "+ id +"?")){
+        if(confirm("Er du sikker på at du vil opdatere råvare "+ id +"?")){
             switchP('FarmaScreen/VisRaavare/OpdaterRaavare/ProcesserProduktbatch.html');
             localStorage.setItem("raavareUpdateID", id);
             $(document).ready(function () {
                 $.getJSON("/BoilerPlate_war_exploded/rest/Raavare/getRaavare/"+ localStorage.getItem("raavareUpdateID"), function (data) {
-                    document.getElementById("raavareID").innerText = "ID: " + data.raavareID;
-                    document.getElementById("raavareNavn").value = data.raavareNavn;
-                    document.getElementById("leverandoer").value = data.leverandoer;
+                    $("#raavareID").innerText = "ID: " + data.raavareID;
+                    $("#raavareNavn").val(data.raavareNavn);
+                    $("#leverandoer").val(data.leverandoer);
                 })
             });
         }
@@ -24,7 +24,7 @@ function raavareData(modType) {
         case "Create":
             APILink+="opretRaavare";
             httpType="POST";
-            IID = document.getElementById("raavareID").value;
+            IID = $("#raavareID").val();
             break;
         case "Update":
             APILink+="updaterRaavare";
