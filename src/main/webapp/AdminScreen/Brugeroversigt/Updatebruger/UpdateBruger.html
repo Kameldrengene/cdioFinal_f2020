@@ -3,19 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <title>Update bruger</title>
-
-    <!-- Henter Font fra Google's Font API
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans" > -->
-
     <!-- Linker vores stylesheet -->
     <link rel="stylesheet" type="text/css" href="AdminScreen/Brugeroversigt/Updatebruger/UpdateBruger.css">
 </head>
 <body>
-<div id="content"><h1>RET BRUGER</h1>
+<div id="content"><h1>Ret Bruger</h1>
     <br>
 
 
-    <input type="text" id="username" placeholder="Brugernavn" value="" minlength="2" maxlength="20"><br>
+    <input type="text" id="username" placeholder="Brugernavn" value="" minlength="2" maxlength="20"><br> <!-- inputs med min og max length for korrekt input -->
     <input type="text" id="ini"  placeholder="Initialer" value="" minlength="2" maxlength="4"><br>
     <input type="text" id="pass"  placeholder="Password" value=""  minlength="2" maxlength="20"><br>
 
@@ -27,7 +23,7 @@
 
         <!-- Kun én knap af dem med "name=gender" kan vælges -->
             <table class="rolletabel">
-                <tr>
+                <tr><!-- radioknapper til valg af rolle. kun 1 kan vælges. -->
                     <td><input type="radio" id="role1" name="jobs" class="jobsradio"  value="Administrator" required></td>
                     <td><label for="role1"> Administrators </label><br></td>
                 </tr>
@@ -50,14 +46,14 @@
     <div class="aktivopret">
         <table class="rolletabel">
             <h3>Vælg om aktiv</h3>
-            <tr>
-                <td><input type="checkbox" id="aktivcheckbox" name="aktive" class="jobs" value="true" required></td>
+            <tr> <!-- checkbox til aktivitet. har brugerens aktivitet som default-->
+                <td><input type="checkbox" id="aktivcheckbox" name="aktive" class="jobs" value="true"></td>
                 <td><label for="aktivcheckbox"> Active? </label><br></td>
             </tr>
         </table>
     </div>
 
-    <input type="button" onclick="userHandler('Update')" class="hvr-pop" value="Ret">
+    <input type="button" onclick="userHandler('Update')" class="hvr-pop" value="Ret"> <!-- knap til opdaterering -->
 
 </div>
 <input type="submit" class="hvr-buzz screenbtn" value="Retur" onclick="switchP('AdminScreen/Admin.html') ; return false">
