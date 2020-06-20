@@ -88,7 +88,11 @@ function taraView(){
         "<br>" +
         "<input id='tara' style='font-size: 14pt; width: 10%; text-align: center;' type='number' min='0.001' max='10' step='0.0001' placeholder='Tara [Kg]'>" +
         "<br>" +
-        "<input type='submit' class='hvr-pop screenbtn' value='Næste' onclick='taraSwitch(" + PBID + ")'>"
+        "<input type='submit' class='hvr-pop screenbtn' value='Næste' onclick='taracheck(" + PBID + ")'>"
+}
+
+function taracheck(PBID) {
+    (parseFloat($("#tara").val()) <= 10) ? taraSwitch(PBID) : (alert(" + 'Tara skal være under 10 kg' + "))
 }
 
 function nettoView() {
