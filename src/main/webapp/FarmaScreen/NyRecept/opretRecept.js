@@ -64,7 +64,6 @@ function addLinje() {    //tilføjer ekstra råvare
             '            <button class="hvr-buzz" onclick="fjernRaavar('+coutnum+');" id="fjern">fjern</button>\n' +
             '        </td>' +
             '    </tr>');
-        console.log("test1");
         coutnum = 0;
         console.log(coutnum);
         selectbtn(counter);
@@ -110,7 +109,6 @@ function confirmOpretRecept() {
     $(document).ready(async function () {
         if (confirm('Er du sikker?')) {
             $("#loading").show();
-            console.log("test1");
             if (document.getElementById('recepID').value != '' && document.getElementById('recepnavn').value != '') {
                 console.log("test2");
                 if(!ingenRaavare()){
