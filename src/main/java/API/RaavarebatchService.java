@@ -1,7 +1,7 @@
 package API;
 
-import Controllers.RaavarevbatchController;
-import Data.dto.RaavarebatchDTO;
+import controller.RaavarevbatchController;
+import dal.dto.RaavarebatchDTO;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;

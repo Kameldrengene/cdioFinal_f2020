@@ -1,12 +1,11 @@
 package API;
 
-import Controllers.UserController;
+import controller.UserController;
 
-import Data.dto.UserDTO;
+import dal.dto.UserDTO;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
-import java.sql.SQLException;
 import java.util.List;
 
 @Path("user")

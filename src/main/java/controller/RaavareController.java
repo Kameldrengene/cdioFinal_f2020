@@ -1,9 +1,9 @@
-package Controllers;
+package controller;
 
 import Funktionalitet.RaavareFunc;
 
-import Data.RaavareDAOSQL;
-import Data.dto.RaavareDTO;
+import dal.RaavareDAOSQL;
+import dal.dto.RaavareDTO;
 
 import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.Response;

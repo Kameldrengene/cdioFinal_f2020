@@ -1,7 +1,7 @@
-package Data;
+package dal;
 import java.sql.SQLException;
 import java.util.List;
-import Data.dto.UserDTO;
+import dal.dto.UserDTO;
 
 public interface IUserDAO {
 

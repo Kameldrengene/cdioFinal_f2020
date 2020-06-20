@@ -1,6 +1,6 @@
-package Data;
+package dal;
 
-import Data.dto.ReceptDTO;
+import dal.dto.ReceptDTO;
 
 import java.sql.SQLException;
 import java.util.List;

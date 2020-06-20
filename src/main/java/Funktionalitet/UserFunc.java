@@ -1,6 +1,6 @@
 package Funktionalitet;
 
-import Data.dto.UserDTO;
+import dal.dto.UserDTO;
 
 public class UserFunc {
     public boolean isUserOk(UserDTO user) {

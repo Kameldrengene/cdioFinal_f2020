@@ -1,9 +1,7 @@
-package Data;
+package dal;
 
-import Data.dto.UserDTO;
+import dal.dto.UserDTO;
 
-import javax.ws.rs.WebApplicationException;
-import javax.ws.rs.core.Response;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;

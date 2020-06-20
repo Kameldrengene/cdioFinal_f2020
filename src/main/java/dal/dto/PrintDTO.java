@@ -1,4 +1,4 @@
-package Data.dto;
+package dal.dto;
 
 public class PrintDTO {
 

@@ -1,7 +1,7 @@
-package Controllers;
+package controller;
 
-import Data.ReceptDAOSQL;
-import Data.dto.ReceptDTO;
+import dal.ReceptDAOSQL;
+import dal.dto.ReceptDTO;
 import Funktionalitet.ReceptFunc;
 
 import javax.ws.rs.WebApplicationException;

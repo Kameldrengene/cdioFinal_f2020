@@ -1,9 +1,9 @@
-package Controllers;
+package controller;
 
 import Funktionalitet.UserFunc;
 
-import Data.UserDAOSQL;
-import Data.dto.UserDTO;
+import dal.UserDAOSQL;
+import dal.dto.UserDTO;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.Response;
