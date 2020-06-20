@@ -71,7 +71,7 @@ var currentactivity = "";
 
 function getcurrentActivity(ID) { //opdatere brugerens aktivitet
     $(document).ready(function () {
-        if (confirm("are you sure, you want to update user " + ID + "?")) {
+        if (confirm("Er du sikker på at du vil opdatere Bruger " + ID + "?")) {
             sendAjax("/BoilerPlate_war_exploded/rest/user/getactivity/" + ID, function (data) {
                 currentactivity = data;
                 console.log(currentactivity);
@@ -99,7 +99,7 @@ function getcurrentActivity(ID) { //opdatere brugerens aktivitet
 var updatedID; /** gemmer ID'et for personnen man opdaterer til senere brug */
 function confirmUserUpdate(ID) { /** metoden sender videre til update html siden. */
     $(document).ready(function () {
-        if (confirm("are you sure, you want to update user " + ID + "?")) {
+        if (confirm("Er du sikker på at du vil opdatere Bruger " + ID + "?")) {
             updatedID = ID;
             switchP("AdminScreen/Brugeroversigt/Updatebruger/UpdateBruger.html")
             //load info from user into page
