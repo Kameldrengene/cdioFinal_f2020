@@ -40,7 +40,11 @@ public class ProduktbatchDTO {
 
     public void setDato(String dato) { this.dato = dato; }
 
-
-
-
+    @Override
+    public String toString() {
+        return "pdId :" + pbId +
+                "staus: " + status +
+                "receptId: " + receptId +
+                "dato: " + dato;
+    }
 }

@@ -88,6 +88,7 @@ class ProduktbatchDAOSQLTest {
     }
 
     @Test
+    @Order(3)
     void getBatchLine() throws SQLException {
 
         DTO = DAO.getBatchLine(1);
@@ -101,6 +102,7 @@ class ProduktbatchDAOSQLTest {
     }
 
     @Test
+    @Order(4)
     void getBatchkomponent() throws SQLException {
 
         DTOKomp = DAO.getBatchkomponent(1, 3);
@@ -115,6 +117,7 @@ class ProduktbatchDAOSQLTest {
     }
 
     @Test
+    @Order(5)
     void getBatchkomponents() throws SQLException {
 
         listDTOKomp = DAO.getBatchkomponents(1);
@@ -135,20 +138,59 @@ class ProduktbatchDAOSQLTest {
 
     }
 
+    @Test
+    @Order(6)
+    void getMaxPDID() throws SQLException {
+
+        int max = DAO.getMaxPDID();
+        assertEquals(3, max);
+
+    }
+
+    @Test
+    @Order(7)
+    void createProduktBatch() throws SQLException {
+
+        //Create batch
+        ProduktbatchDTO toSend = new ProduktbatchDTO();
+        toSend.setPbId(4);
+        toSend.setReceptId(10);
+        toSend.setStatus("Ikke påbegyndt");
+
+        //Send and get batch
+        DAO.createProduktBatch(toSend);
+        DTO = DAO.getBatchLine(4);
+
+        //Check product batch line
+        assertEquals(4, DTO.getPbId());
+        assertEquals(10, DTO.getReceptId());
+        assertEquals("Ikke påbegyndt", DTO.getStatus());
+
+        //Cleanup
+        SQLDatabaseIO sqlIO = new SQLDatabaseIO("kamel", "dreng", "runerne.dk", 8003);
+        sqlIO.connect();
+        sqlIO.update("delete from cdioTest_2020.ProduktBatches where PBID=4");
+
+    }
 
 //    @Test
+//    @Order(8)
 //    void updateProduktBatch() {
 //    }
 //
 //    @Test
+//    @Order(9)
 //    void updateProduktBatchkomponent() {
 //    }
 //
 //    @Test
+//    @Order(10)
 //    void updateNewpb() {
 //    }
 //
 //    @Test
+//    @Order(11)
 //    void eraseProduktBatch() {
 //    }
+
 }
