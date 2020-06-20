@@ -42,19 +42,6 @@ function raavareData(modType) {
     }, "PUT", JSON.stringify(jsonData))
 }
 
-function postRaavareData() {
-    raavareData("Create");
-
-
-}
-
-function postRaavareUpdate() {
-
-
-    raavareData("Update");
-
-}
-
 function toOpretrecept() {
     switchP('FarmaScreen/NyRecept/index.html');
     $("#addRaavare").hide();
