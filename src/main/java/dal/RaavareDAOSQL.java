@@ -12,7 +12,7 @@ public class RaavareDAOSQL implements IRaavareDAO{
 
     //Get all raavarer
     @Override
-    public RaavareDTO getRaavare(int raavareId) throws SQLException{
+    public RaavareDTO getRaavare(int raavareId) throws SQLException {
         db.connect();
         ResultSet rs = db.query("SELECT * FROM raavareLager where raavareID=" + raavareId); //Select all columns from recept where receptID is input
         RaavareDTO raavare = new RaavareDTO();
@@ -23,8 +23,12 @@ public class RaavareDAOSQL implements IRaavareDAO{
             raavare.setLeverandoer(rs.getString("leverandoer"));
             raavare.setLagerBeholdning(rs.getDouble("lagerbeholdning"));
             rs.close();
-        db.close();
-        return raavare;
+            db.close();
+            return raavare;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
 

@@ -6,8 +6,27 @@ import java.util.List;
 
 public class RaavareFunc {
 
+    public String raavaremsg(RaavareDTO rv,List<RaavareDTO> rvList) {
+        if (!isIDOk(rv)) {
+            return "Leverandør ID skal være mellem  1 og 99999999";
+        }
+        if (!isNavnOk(rv)) {
+            return "Råvare navn skal være mellem  2 til 20 tegn";
+        }
+        if (!isleverandoerOk(rv)) {
+            return "leverandør navn skal være mellem  2 til 20 tegn";
+        }
+        if(IDExists(rv,rvList)){
+            return "Råvare ID'et er optaget\nVælg en anden";
+        }
+        if(NavnExists(rv,rvList)){
+            return "Råvare navn er optaget\nVælg en anden";
+        }
+        return null;
+    }
+
     public boolean isNewRaavareOk(RaavareDTO rv, List<RaavareDTO> rvList) {
-        return (isIDOk(rv) && isNavnOk(rv) && isleverandoerOk(rv));
+        return (!NavnExists(rv,rvList) && !IDExists(rv,rvList) && isIDOk(rv) && isNavnOk(rv) && isleverandoerOk(rv));
     }
 
     public boolean isUpdateRaavareOk(RaavareDTO rv, List<RaavareDTO> rvList) {

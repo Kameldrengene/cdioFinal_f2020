@@ -5,8 +5,29 @@ import dal.dto.ReceptDTO;
 import java.util.List;
 
 public class ReceptFunc {
-    public boolean isReceptOk( ReceptDTO recept){
-        return (isIDOk(recept) && isNameOk(recept) && isNonNettoOk(recept) && isToleranceOk(recept));
+    public String receptmsg( ReceptDTO recept,List<ReceptDTO> receptDTOList){
+        if (!isIDOk(recept)) {
+            return "ID størrelse skal være >= 1 og  <= 99999999";
+        }
+        if(!isNameOk(recept)){
+            return "Navn størrelse skal være >= 1 og  <20 ";
+        }
+        if(!isNonNettoOk(recept)){
+            return "mængde skal være >= 1 og  <20 ";
+        }
+        if(!isToleranceOk(recept)){
+            return "Tolerance skal være >= 0.09 og  <10.0 ";
+        }
+        if(doesIdExist(recept,receptDTOList)){
+            return "Recept ID er optaget\nVælge en anden";
+        }
+        if(doesNameExist(recept,receptDTOList)){
+            return "Recept navn er optaget\nVælge en anden";
+        }
+        return null;
+    }
+    public boolean isReceptOk( ReceptDTO recept,List<ReceptDTO> receptDTOList){
+        return (!doesNameExist(recept,receptDTOList)&& !doesIdExist(recept,receptDTOList) && isIDOk(recept) && isNameOk(recept) && isNonNettoOk(recept) && isToleranceOk(recept));
     }
     private boolean isIDOk(ReceptDTO recept) {
         if (recept.getReceptId() <= 99999999 && recept.getReceptId() >= 1) {
