@@ -53,7 +53,7 @@ public class RaavareDAOSQL implements IRaavareDAO{
 
     //Create raavare
     @Override
-    public void createRaavare(RaavareDTO raavare) throws SQLException{ //TODO take care of exception if ID alredy exists
+    public void createRaavare(RaavareDTO raavare) throws SQLException{
         db.connect();
         db.update("insert into Raavarer (raavareID, raavareNavn, leverandoer) VALUE ('" + raavare.getRaavareID() + "','" + raavare.getRaavareNavn() + "','" + raavare.getLeverandoer()  + "')");
         db.close();

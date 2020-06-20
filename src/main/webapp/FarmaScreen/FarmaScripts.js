@@ -43,7 +43,7 @@ async function raavareData(modType) {
             alert("Opret success!");
             switchP("FarmaScreen/index.html");
         }else if(checkmodtype === "Update"){
-            alert("Opdateret success!" + localStorage.getItem("raavareUpdateID"));
+            alert("Opdateret success!\nFor RåvareID: " + localStorage.getItem("raavareUpdateID"));
             switchP("FarmaScreen/VisRaavare/index.html");
         }
 

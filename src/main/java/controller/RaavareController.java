@@ -39,9 +39,10 @@ public class RaavareController {
     }
 
     public RaavareDTO opretRaavare (RaavareDTO raavareDTO) {
+        String str = "POST";
         try {
             if (!rvFunc.isNewRaavareOk(raavareDTO,getData())) {
-                throw new WebApplicationException(Response.status(Response.Status.NOT_ACCEPTABLE).entity(rvFunc.raavaremsg(raavareDTO,getData())).build());
+                throw new WebApplicationException(Response.status(Response.Status.NOT_ACCEPTABLE).entity(rvFunc.raavaremsg(raavareDTO,getData(),str)).build());
             }
             raavareDAOSQL.createRaavare(raavareDTO);
         }catch (SQLException e){
@@ -50,12 +51,13 @@ public class RaavareController {
         return raavareDTO;
     }
 
-    public RaavareDTO updateRaavare(RaavareDTO raavareDTO) {  //todo kraven er ikke opfyldt!
+    public RaavareDTO updateRaavare(RaavareDTO raavareDTO) {
 
         try {
-            if (rvFunc.isUpdateRaavareOk(raavareDTO,getData())) {
-                raavareDAOSQL.updateRaavare(raavareDTO);
+            if (!rvFunc.isUpdateRaavareOk(raavareDTO,getData())) {
+                throw new WebApplicationException(Response.status(Response.Status.NOT_ACCEPTABLE).entity(rvFunc.raavaremsg(raavareDTO,getData(),null)).build());
             }
+            raavareDAOSQL.updateRaavare(raavareDTO);
         }catch (SQLException e){
             e.printStackTrace();
         }
