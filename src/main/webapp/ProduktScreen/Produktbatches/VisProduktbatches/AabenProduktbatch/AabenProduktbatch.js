@@ -80,7 +80,7 @@ function viewTable(data){
         tabelData += "<th align='left'>Råvare navn: </th><th align='left'>"+value.raavareNavn+"</th>";
         tabelData += "</tr>";
         tabelData += "<tr>";
-        tabelData += "<th>Mængde</th><th>Tolerance</th><th width='75px'>Tara</th><th width='75px'>Netto(kg)</th><th width='75px'>Batch</th><th width='75px'>Opr</th>"
+        tabelData += "<th>Mængde[kg]</th><th>Tolerance[%]</th><th width='75px'>Tara[kg]</th><th width='75px'>Netto[kg]</th><th width='75px'>Batch</th><th width='75px'>Opr</th>"
         tabelData += "</tr>";
         tabelData += "<tr>";
         tabelData += "<td>"+value.nonNetto+"</td>"+"<td>"+value.tolerance+"</td>"+"<td>"+sniff(value.tara)+"</td>"+"<td>"+sniff(value.netto)+"</td>"+"<td>"+sniff(value.rbID)+"</td>"+"<td>"+sniff(value.userId)+"</td>" ;
@@ -100,10 +100,10 @@ function viewTable(data){
     });
 
     tabelData += "<tr>";
-    tabelData += "<th align='left'>Sum Tara: </th>"+"<th align='left'>"+sniff(sumTara)+"</th>";
+    tabelData += "<th align='left'>Sum Tara[kg]: </th>"+"<th align='left'>"+sniff(sumTara)+"</th>";
     tabelData += "</tr>";
     tabelData += "<tr>";
-    tabelData += "<th align='left'>Sum Netto: </th>"+"<th align='left'>"+sniff(sumNetto)+"</th>";
+    tabelData += "<th align='left'>Sum Netto[kg]: </th>"+"<th align='left'>"+sniff(sumNetto)+"</th>";
     tabelData += "</tr>";
     tabelData += "<tr>";
     tabelData += "<th align='left'>Produktion Slut: </th>"+"<th align='left'>"+slutDato(status,lastDato)+"</th>"
