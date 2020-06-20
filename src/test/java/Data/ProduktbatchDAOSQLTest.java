@@ -1,6 +1,7 @@
 package Data;
 
 import dal.ProduktbatchDAOSQL;
+
 import dal.SQLDatabaseIO;
 import dal.dto.ProduktbatchDTO;
 import dal.dto.ProduktbatchKompDTO;
@@ -10,7 +11,6 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
 
 import java.sql.SQLException;
-import java.time.LocalDate;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -209,6 +209,7 @@ class ProduktbatchDAOSQLTest {
     @Order(9)
     void updateProduktBatchkomponent() throws SQLException {
 
+        //Create component
         ProduktbatchKompDTO toSend = new ProduktbatchKompDTO();
         toSend.setPbId(1);
         toSend.setRbID(1);
@@ -235,14 +236,33 @@ class ProduktbatchDAOSQLTest {
 
     }
 
-//    @Test
-//    @Order(10)
-//    void updateNewpb() {
-//    }
-//
-//    @Test
-//    @Order(11)
-//    void eraseProduktBatch() {
-//    }
+    @Test
+    @Order(10)
+    void updateNewpb() throws SQLException {
+
+        //Create batch
+        ProduktbatchKompDTO toSend = new ProduktbatchKompDTO();
+        toSend.setPbId(3);
+
+        toSend.setUserId(17);
+        toSend.setTara(3);
+        toSend.setNetto(5);
+        toSend.setRbID(3);
+        toSend.setStatus("Ikke påbegyndt");
+
+        //Send and get batch
+        DAO.updateNewpb(toSend);
+        DTOKomp = DAO.getBatchkomponent(3,3);
+
+        assertEquals(17, DTOKomp.getUserId());
+        assertEquals(3.0000, DTOKomp.getTara());
+        assertEquals(5.0000, DTOKomp.getNetto());
+
+        //Cleanup
+        SQLDatabaseIO sqlIO = new SQLDatabaseIO("kamel", "dreng", "runerne.dk", 8003);
+        sqlIO.connect();
+        sqlIO.update("update cdioTest_2020.ProduktBatches set UserID=16, Tara=null, Netto=null, RBID=0 where PBID=3 and RBID=3");
+
+    }
 
 }
