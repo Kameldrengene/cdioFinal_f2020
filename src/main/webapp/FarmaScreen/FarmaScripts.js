@@ -1,30 +1,30 @@
 
 
-function confirmRaavareUpdate(id){
+function confirmRaavareUpdate(id){ /** function til at opdatere råvere*/
     $(document).ready(function () {
-        if(confirm("are you sure, you want to update this råvare "+ id +"?")){
+        if(confirm("Er du sikker på at du vil opdatere råvare "+ id +"?")){
             switchP('FarmaScreen/VisRaavare/OpdaterRaavare/ProcesserProduktbatch.html');
             localStorage.setItem("raavareUpdateID", id);
             $(document).ready(function () {
                 $.getJSON("/BoilerPlate_war_exploded/rest/Raavare/getRaavare/"+ localStorage.getItem("raavareUpdateID"), function (data) {
-                    document.getElementById("raavareID").innerText = "ID: " + data.raavareID;
-                    document.getElementById("raavareNavn").value = data.raavareNavn;
-                    document.getElementById("leverandoer").value = data.leverandoer;
+                    $("#raavareID").innerText = "ID: " + data.raavareID;
+                    $("#raavareNavn").val(data.raavareNavn);
+                    $("#leverandoer").val(data.leverandoer);
                 })
             });
         }
     });
 }
 
-function raavareData(modType) {
+function raavareData(modType) { /** Råvare handler: sender ny eller opdateret råvare til backenden. */
     var APILink = "/BoilerPlate_war_exploded/rest/Raavare/";
     var httpType = "";
     var IID;
-    switch (modType) {
+    switch (modType) { /** Forskel mellem opret og opdater */
         case "Create":
             APILink+="opretRaavare";
             httpType="POST";
-            IID = document.getElementById("raavareID").value;
+            IID = $("#raavareID").val();
             break;
         case "Update":
             APILink+="updaterRaavare";
@@ -32,7 +32,7 @@ function raavareData(modType) {
             IID = localStorage.getItem("raavareUpdateID");
             break;
     }
-    const INavn = $("#raavareNavn").val();
+    const INavn = $("#raavareNavn").val(); /** henter data og sender det afsted */
     const ILeve = $("#leverandoer").val();
     const jsonData = {raavareID: IID, raavareNavn: INavn, leverandoer: ILeve};
     sendAjax(APILink,function (data) {
@@ -42,7 +42,7 @@ function raavareData(modType) {
     }, "PUT", JSON.stringify(jsonData))
 }
 
-function toOpretrecept() {
+function toOpretrecept() { /** åbner opret recept side */
     switchP('FarmaScreen/NyRecept/index.html');
     $("#addRaavare").hide();
     $("#loading").hide();
