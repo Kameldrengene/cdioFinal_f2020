@@ -1,0 +1,9 @@
+label:hover{
+    color: var(--col-textprimary);
+}
+
+label{
+    color: var(--col-textsecondary);
+}
+
+

@@ -1,0 +1,61 @@
+/*Stærk inspireret af Malte's løsning i for html og css
+ Vi vil ikke have at teksten er centreret i tabellen */
+.brugertable {
+    /* Auto margin i højre og venstre side (her alle), gør
+        elementet bliver centreret på skærmen. */
+    margin: auto;
+    margin-top: 2%;
+    text-align: left;
+    border: none;
+    border-radius: 10px;
+    background: var(--col-secondarybackground);
+    color: var(--col-textthird);
+}
+
+/* Giver padding på alle headers og celler i tabellen.
+    Padding er afstand fra cellens kant til cellens indhold. */
+.brugertable th, .brugertable td {
+    padding: 8px;
+}
+.brugertable th:hover {
+
+    color: var(--col-textprimary);
+}
+
+/* Vi kan vælge alle rows (<tr>), der er et "ulige index"
+    af sin parent. (dvs. hver anden række i tabellen) */
+.brugertable tr:nth-child(odd):hover {
+    color: var(--col-textprimary);
+}
+.brugertable tr:nth-child(even):hover {
+    color: var(--col-textprimary);
+}
+
+/* Vi kan vælge første celle i hver række
+.brugertable td:first-child {
+    font-style: italic;
+    text-align: center;
+}
+*/
+
+/* Vi kan ændre stylen på vores links i tabellen */
+.brugertable a {
+    color: var(--col-textsecondary);
+    text-decoration: none;
+}
+
+/* Vi kan ændre hover stylen på links i tabellen*/
+.brugertable a:hover {
+    color: var(--col-textprimary);
+}
+.slet{
+    background: #c65450;
+}
+.update{
+    background: cornflowerblue;
+}
+
+body{
+    margin-top: 10px;
+}
+

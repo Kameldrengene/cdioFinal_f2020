@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Farma Screen</title>
+</head>
+<body>
+<h1>Råvare oversigt</h1>
+<div>
+    <div id="list" class="container" className="brugertable">
+        <br/>
+        <table class="brugertable" id="raavare_table">
+
+        </table>
+        <h1 id="error"></h1>
+    </div>
+</div>
+
+<input type="submit" class="hvr-buzz screenbtn" value="Retur" onclick="switchP('FarmaScreen/index.html'); return false">
+
+<script>viewlist
+(["ID", "Navn", "Leverandør", "Lagerbehold[kg]", "Update"],
+"/BoilerPlate_war_exploded/rest/Raavare/getRaavarer",
+"raavare_table",
+function (value) {
+    const id = value.raavareID
+    let msg = "";
+    msg += "<td><input id='updateraavare' class='update' type='button' onclick='confirmRaavareUpdate("+ id + ")' value='Update'/> </td>";
+    return msg
+});</script>
+
+</body>
+</html>

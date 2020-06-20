@@ -1,22 +1,18 @@
 package dal;
+import java.sql.SQLException;
 import java.util.List;
-
-import dto.UserDTO;
+import dal.dto.UserDTO;
 
 public interface IUserDAO {
 
-	UserDTO getUser(int userId) throws DALException;
-	List<UserDTO> getData() throws DALException;
-	void createUser(UserDTO user) throws DALException;
-	void updateUser(UserDTO user) throws DALException;
-	void deleteUser(int userId) throws DALException;
-	
-	public class DALException extends Exception {
-		
-		private static final long serialVersionUID = 7355418246336739229L;
-		public DALException(String msg) {
-			super(msg);
-		}
-	}
+    public List<UserDTO> getData() throws SQLException;
+    public UserDTO getUser(int userId) throws SQLException;
+    public List<UserDTO> getRole(String role) throws SQLException;
+    public UserDTO createUser(UserDTO user) throws SQLException;
+    public void updateUser(UserDTO user) throws SQLException;
+    public boolean getActivity(int id) throws SQLException;
+    public void aktivitySwitchUser(int userId) throws SQLException;
+
+
 
 }
