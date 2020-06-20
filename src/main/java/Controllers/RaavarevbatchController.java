@@ -22,6 +22,7 @@ public class RaavarevbatchController {
     }
 
     // -Mikkel
+    //Get list of all raavarebatches
     public List<RaavarebatchDTO> getData(){
         try {
             return DAOSQL.getRaavarebatchList();
@@ -31,6 +32,7 @@ public class RaavarevbatchController {
     }
 
     // -Mikkel
+    //Get list of all active raavarebatches
     public List<RaavarebatchDTO> getAktuelle(){
         try {
             return DAOSQL.getAktuelRaavarebatchList();
@@ -39,31 +41,18 @@ public class RaavarevbatchController {
         }
     }
 
-    // -Mikkel
-    public RaavarebatchDTO opretRaavarebatch(RaavarebatchDTO dto) {
+    //Get one specific raavarebatch
+    public RaavarebatchDTO getBatch(String batchID){
 
-        //Valider startmængde
-        String startMaengdeMsg = func.startMaengdeOk(dto);
-        if( !startMaengdeMsg.equals("OK") ){
-            throw buildError(Response.Status.NOT_ACCEPTABLE, startMaengdeMsg);
-        }
-
+        int batchIDint = Integer.parseInt(batchID);
         try {
-
-            //Valider batch ID
-            String batchIdMsg = func.batchIdOk(dto);
-            if( !batchIdMsg.equals("OK") )
-                throw buildError(Response.Status.NOT_ACCEPTABLE, batchIdMsg);
-
-            DAOSQL.createRaavarebatch(dto);
-
+            return DAOSQL.getRaavarebatch(batchIDint);
         } catch (SQLException e) {
             throw buildError(Response.Status.NOT_ACCEPTABLE, SQLErrorMsg);
         }
-
-        return dto;
     }
 
+    //todo comment
     public List<RaavarebatchDTO> getRVIDBatch(String RVID){
 
         int RVIDint = Integer.parseInt(RVID);
@@ -76,18 +65,27 @@ public class RaavarevbatchController {
 
     }
 
-    //todo slet?
-    public RaavarebatchDTO getBatch(String batchID){
+    // -Mikkel
+    //Create raavarebatch
+    public RaavarebatchDTO opretRaavarebatch(RaavarebatchDTO dto) {
 
-        int batchIDint = Integer.parseInt(batchID);
         try {
-            return DAOSQL.getRaavarebatch(batchIDint);
+            String validationMsg = func.raavarebatchOk(dto);
+
+            if(validationMsg.equals("OK"))
+                DAOSQL.createRaavarebatch(dto);
+            else
+                throw buildError(Response.Status.NOT_ACCEPTABLE, validationMsg);
+
         } catch (SQLException e) {
             throw buildError(Response.Status.NOT_ACCEPTABLE, SQLErrorMsg);
         }
+
+        return dto;
+
     }
 
-    //todo slet?
+    //Update raavarebatch
     public RaavarebatchDTO updateRaavarebatch(RaavarebatchDTO raavarebatchDTO) {
         try {
             DAOSQL.updateRaavarebatch(raavarebatchDTO);

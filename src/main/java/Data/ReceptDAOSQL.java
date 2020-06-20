@@ -77,7 +77,7 @@ public class ReceptDAOSQL implements IReceptDAO{
         }
     }
 
-    //Create multiple recepts
+    //Create multiple recepts at once
     public void createReceptList(List<ReceptDTO> recept) throws SQLException {
         for (int i = 0; i < recept.size(); i++) {
             if(!getReceptList().contains(recept.get(i))){

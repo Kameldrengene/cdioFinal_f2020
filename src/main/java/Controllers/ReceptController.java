@@ -18,6 +18,7 @@ public class ReceptController {
         receptDAOSQL = new ReceptDAOSQL();
     }
 
+    //Get all recepter
     public List<ReceptDTO> getData()  {
         try {
             return receptDAOSQL.getReceptList();
@@ -26,6 +27,7 @@ public class ReceptController {
         }
     }
 
+    //Get one recept component
     public ReceptDTO getRecept (int receptID, int raavareID){
         try {
             return receptDAOSQL.getReceptKomponent(receptID,raavareID);
@@ -34,7 +36,7 @@ public class ReceptController {
         }
     }
 
-
+    //todo comment
     public List<ReceptDTO> getuniqueRecept (int receptId) {
         try {
             return receptDAOSQL.getRecepts(receptId);
@@ -44,6 +46,7 @@ public class ReceptController {
     }
 
     //todo beskeder skal komme fra func-lag
+    //Create a recept
     public ReceptDTO opretRecept (ReceptDTO recept, int check){
 
         try {
@@ -66,6 +69,7 @@ public class ReceptController {
         return recept;
     }
 
+    //Create multiple recepts at once
     public List<ReceptDTO> opretRecept (List<ReceptDTO> recept){
 
         try {
@@ -99,7 +103,7 @@ public class ReceptController {
         return recept;
     }
 
-
+    //Update a recept
     public ReceptDTO updateRecept (ReceptDTO recept){
         try {
             ReceptFunc receptFunc = new ReceptFunc();

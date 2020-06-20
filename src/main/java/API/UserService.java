@@ -16,12 +16,14 @@ public class UserService {
 
     public final UserController userController = new UserController();
 
+    //Get all users
     @Path("getUsers")
     @GET
     public List<UserDTO> getData() throws WebApplicationException{
         return userController.getData();
     }
 
+    //Get all users
     @Path("getUser/{id}")
     @Produces(MediaType.APPLICATION_JSON)
     @GET
@@ -30,6 +32,7 @@ public class UserService {
     }
 
     // -Mikkel
+    //Get all users with specific role
     @Path("getRole")
     @Produces(MediaType.APPLICATION_JSON)
     @GET
@@ -37,13 +40,7 @@ public class UserService {
         return userController.getRole(role);
     }
 
-    @Path("getactivity/{id}")
-    @Produces(MediaType.APPLICATION_JSON)
-    @GET
-    public boolean getUserActivity (@PathParam("id") int id) throws WebApplicationException{
-        return userController.CurrentActivity(id);
-    }
-
+    //Create user
     @Path("createUser")
     @POST
     public UserDTO createUser(UserDTO user) throws WebApplicationException{
@@ -51,16 +48,27 @@ public class UserService {
         return user;
     }
 
+    //Update user
     @Path("updateUser")
     @PUT
     public UserDTO updateUser(UserDTO user) throws WebApplicationException{
         return userController.updateUser(user);
     }
 
+    //Switch activity of user
     @Path("activeUser")
     @PUT
     public UserDTO activitySwitchUser(UserDTO user) throws WebApplicationException{
         return userController.activitySwitchUser(user);
     }
+
+    //Get a users Activity
+    @Path("getactivity/{id}")
+    @Produces(MediaType.APPLICATION_JSON)
+    @GET
+    public boolean getUserActivity (@PathParam("id") int id) throws WebApplicationException{
+        return userController.CurrentActivity(id);
+    }
+
 
 }
