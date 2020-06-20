@@ -1,8 +1,8 @@
-package Controllers;
+package controller;
 
-import Data.ProduktbatchDAOSQL;
-import Data.dto.ProduktbatchDTO;
-import Data.dto.ProduktbatchKompDTO;
+import dal.ProduktbatchDAOSQL;
+import dal.dto.ProduktbatchDTO;
+import dal.dto.ProduktbatchKompDTO;
 
 import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.Response;

@@ -1,8 +1,8 @@
-package Controllers;
+package controller;
 
 
-import Data.PrintDAOSQL;
-import Data.dto.PrintDTO;
+import dal.PrintDAOSQL;
+import dal.dto.PrintDTO;
 
 import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.Response;

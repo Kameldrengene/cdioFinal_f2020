@@ -1,7 +1,7 @@
 package API;
 
-import Controllers.ReceptController;
-import Data.dto.ReceptDTO;
+import controller.ReceptController;
+import dal.dto.ReceptDTO;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;

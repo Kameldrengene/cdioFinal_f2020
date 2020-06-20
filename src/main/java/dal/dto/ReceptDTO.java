@@ -1,4 +1,4 @@
-package Data.dto;
+package dal.dto;
 
 public class ReceptDTO {
     /** recept id i området 1-99999999 */

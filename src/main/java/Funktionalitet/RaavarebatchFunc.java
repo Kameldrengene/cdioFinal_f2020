@@ -1,8 +1,8 @@
 package Funktionalitet;
 
 
-import Data.RaavarebatchDAOSQL;
-import Data.dto.RaavarebatchDTO;
+import dal.RaavarebatchDAOSQL;
+import dal.dto.RaavarebatchDTO;
 
 import java.sql.SQLException;
 import java.util.List;

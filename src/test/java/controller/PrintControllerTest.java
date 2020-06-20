@@ -1,7 +1,6 @@
 package controller;
 
-import Controllers.PrintController;
-import Data.dto.PrintDTO;
+import dal.dto.PrintDTO;
 import org.junit.jupiter.api.Test;
 
 import java.sql.SQLException;

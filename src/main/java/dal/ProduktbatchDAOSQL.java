@@ -1,7 +1,8 @@
-package Data;
+package dal;
 
-import Data.dto.ProduktbatchDTO;
-import Data.dto.ProduktbatchKompDTO;
+import dal.dto.ProduktbatchDTO;
+import dal.dto.ProduktbatchKompDTO;
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;

@@ -1,4 +1,4 @@
-package Data;
+package dal;
 
 import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.Response;

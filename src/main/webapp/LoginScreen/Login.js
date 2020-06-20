@@ -6,9 +6,7 @@ $("document").ready(async function () {
 
     //Keeps the different users in local storage. So they don't have to be reloaded multiple times
     //await to ensure functionality is only added after resources are fetched
-    console.log("test0")
     await loadUsers();
-    console.log("test1")
 
     //Hide user table until a role is selected
     $(".brugertable").hide();

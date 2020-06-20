@@ -1,6 +1,6 @@
-package Data;
+package dal;
 
-import Data.dto.PrintDTO;
+import dal.dto.PrintDTO;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;

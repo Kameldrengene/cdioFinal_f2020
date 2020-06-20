@@ -1,4 +1,4 @@
-package Data.dto;
+package dal.dto;
 
 public class ProduktbatchDTO {
     /** produkt batch id i området 1-99999999. Vælges af brugerne */

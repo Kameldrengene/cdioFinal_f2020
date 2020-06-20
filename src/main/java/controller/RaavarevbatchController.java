@@ -1,8 +1,8 @@
-package Controllers;
+package controller;
 
 import Funktionalitet.RaavarebatchFunc;
-import Data.RaavarebatchDAOSQL;
-import Data.dto.RaavarebatchDTO;
+import dal.RaavarebatchDAOSQL;
+import dal.dto.RaavarebatchDTO;
 
 import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.Response;

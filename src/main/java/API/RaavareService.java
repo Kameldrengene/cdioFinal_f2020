@@ -1,8 +1,8 @@
 package API;
 
-import Controllers.RaavareController;
+import controller.RaavareController;
 
-import Data.dto.RaavareDTO;
+import dal.dto.RaavareDTO;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
