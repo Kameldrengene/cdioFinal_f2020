@@ -16,11 +16,11 @@ function confirmRaavareUpdate(id){ /** function til at opdatere råvere*/
     });
 }
 
-function raavareData(modType) {
+function raavareData(modType) { /** Råvare handler: sender ny eller opdateret råvare til backenden. */
     var APILink = "/BoilerPlate_war_exploded/rest/Raavare/";
     var httpType = "";
     var IID;
-    switch (modType) {
+    switch (modType) { /** Forskel mellem opret og opdater */
         case "Create":
             APILink+="opretRaavare";
             httpType="POST";
@@ -32,7 +32,7 @@ function raavareData(modType) {
             IID = localStorage.getItem("raavareUpdateID");
             break;
     }
-    const INavn = $("#raavareNavn").val();
+    const INavn = $("#raavareNavn").val(); /** henter data og sender det afsted */
     const ILeve = $("#leverandoer").val();
     const jsonData = {raavareID: IID, raavareNavn: INavn, leverandoer: ILeve};
     sendAjax(APILink,function (data) {
@@ -42,7 +42,7 @@ function raavareData(modType) {
     }, "PUT", JSON.stringify(jsonData))
 }
 
-function toOpretrecept() {
+function toOpretrecept() { /** åbner opret recept side */
     switchP('FarmaScreen/NyRecept/index.html');
     $("#addRaavare").hide();
     $("#loading").hide();
