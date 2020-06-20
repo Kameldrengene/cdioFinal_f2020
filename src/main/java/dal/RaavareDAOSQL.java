@@ -1,6 +1,6 @@
-package Data;
+package dal;
 
-import Data.dto.RaavareDTO;
+import dal.dto.RaavareDTO;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -46,7 +46,6 @@ public class RaavareDAOSQL implements IRaavareDAO{
         db.close();
         return raavareList;
     }
-
 
     //Create raavare
     @Override

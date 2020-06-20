@@ -61,7 +61,7 @@ function postRaavareUpdate() {
 
 }
 
-function toOpretrecept() {
+function toOpretrecept() { /** åbner opret recept side */
     switchP('FarmaScreen/NyRecept/index.html');
     $("#addRaavare").hide();
     $("#loading").hide();

@@ -1,7 +1,8 @@
-package Data;
+package dal;
 
-import Data.dto.ProduktbatchDTO;
-import Data.dto.ProduktbatchKompDTO;
+import dal.dto.ProduktbatchDTO;
+import dal.dto.ProduktbatchKompDTO;
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -107,20 +108,6 @@ public class ProduktbatchDAOSQL implements IProduktbatchDAO {
         return out;
     }
 
-    private ProduktbatchKompDTO setPB(ResultSet rs, ProduktbatchKompDTO pb, int pbId){
-        pb.setPbId(pbId);
-        try {
-            pb.setStatus(rs.getString("Standing"));
-            pb.setUserId(rs.getInt("UserID"));
-            pb.setRbID(rs.getInt("RBID"));
-            pb.setTara(rs.getDouble("Tara"));
-            pb.setNetto(rs.getDouble("Netto"));
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        }
-        return pb;
-    }
-
     //Create product batch
     @Override
     public void createProduktBatch(ProduktbatchDTO produktbatchDTO) throws SQLException{
@@ -185,4 +172,20 @@ public class ProduktbatchDAOSQL implements IProduktbatchDAO {
         db.update("DELETE FROM ProduktBatches WHERE PBID = " + pbId + " AND RBID = " + RBID);
         db.close();
     }
+
+    //todo comment
+    private ProduktbatchKompDTO setPB(ResultSet rs, ProduktbatchKompDTO pb, int pbId){
+        pb.setPbId(pbId);
+        try {
+            pb.setStatus(rs.getString("Standing"));
+            pb.setUserId(rs.getInt("UserID"));
+            pb.setRbID(rs.getInt("RBID"));
+            pb.setTara(rs.getDouble("Tara"));
+            pb.setNetto(rs.getDouble("Netto"));
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return pb;
+    }
+
 }

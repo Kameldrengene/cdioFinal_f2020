@@ -1,7 +1,7 @@
 package API;
 
-import Controllers.PrintController;
-import Data.dto.PrintDTO;
+import controller.PrintController;
+import dal.dto.PrintDTO;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;

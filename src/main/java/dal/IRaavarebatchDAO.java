@@ -1,6 +1,6 @@
-package Data;
+package dal;
 
-import Data.dto.RaavarebatchDTO;
+import dal.dto.RaavarebatchDTO;
 
 import java.sql.SQLException;
 import java.util.List;

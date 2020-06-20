@@ -1,9 +1,7 @@
-package Data;
+package dal;
 
-import Data.dto.UserDTO;
+import dal.dto.UserDTO;
 
-import javax.ws.rs.WebApplicationException;
-import javax.ws.rs.core.Response;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -30,7 +28,7 @@ public class UserDAOSQL implements IUserDAO {
         return userList;
     }
 
-    //Get a specific user
+    //Get all users
     @Override
     public UserDTO getUser(int userId) throws SQLException {
         db.connect();
@@ -103,22 +101,6 @@ public class UserDAOSQL implements IUserDAO {
         db.close();
     }
 
-    //Get a users Activity
-    @Override
-    public boolean getActivity(int id) throws SQLException {
-        UserDTO user = new UserDTO();
-        db.connect();
-        ResultSet rs = db.query("SELECT * FROM userdto where userID ='" + id + "'");
-        rs.next();
-
-        setUser(rs, user);
-
-        rs.close();
-        db.close();
-
-        return user.getAktiv();
-    }
-
     //Switch activity of user
     @Override
     public void aktivitySwitchUser(int userId) throws SQLException { //We switch the activity of the user
@@ -138,6 +120,23 @@ public class UserDAOSQL implements IUserDAO {
         db.close();
     }
 
+    //Get a users Activity
+    @Override
+    public boolean getActivity(int id) throws SQLException {
+        UserDTO user = new UserDTO();
+        db.connect();
+        ResultSet rs = db.query("SELECT * FROM userdto where userID ='" + id + "'");
+        rs.next();
+
+        setUser(rs, user);
+
+        rs.close();
+        db.close();
+
+        return user.getAktiv();
+    }
+
+    //todo comment
     private UserDTO setUser(ResultSet rs, UserDTO user) throws SQLException {
         user.setUserID(rs.getInt("userID"));
         user.setUserName(rs.getString("userName"));

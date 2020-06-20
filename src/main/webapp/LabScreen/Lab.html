@@ -35,7 +35,10 @@
                     }"
                class="hvr-pop" value="OK">
     </div>
-    <input type="submit" class="hvr-buzz screenbtn" value="Log ud" onclick="window.location.reload()">
+    <input id="logoutbtn" type="submit" class="hvr-buzz screenbtn" value="Log ud" onclick="
+    const role = localStorage.getItem('loginRole');
+    (role === 'farma') ? switchP('FarmaScreen/index.html') :
+    (role === 'prodLeder') ? switchP('ProduktScreen/ProduktScreen.html') : window.location.reload()">
     </body>
 </html>
 

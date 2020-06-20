@@ -3,16 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <title>Farma Screen</title>
-    <link rel="stylesheet" type="text/css" href="FarmaScreen/index.css">
+    <link rel="stylesheet" type="text/css" href="FarmaScreen/index.css"> <!-- loader css og JS for FarmScreen -->
     <script src="FarmaScreen/FarmaScripts.js"></script>
 
 </head>
 <body>
-<h5 id="brugerInfo">Loading</h5>
+<h5 id="brugerInfo">Loading</h5> <!-- bruger info -->
 <script>currentUser();</script>
 
 <h1>Farmaceut</h1>
-<table>
+<table> <!-- table for buttons -->
     <thead>
     <tr>
         <th><h2>Råvarer</h2></th>
@@ -33,6 +33,11 @@
     </tr>
     </tbody>
 </table>
+
+<br>
+<button class="hvr-pop screenbtn" onclick="switchP('ProduktScreen/ProduktScreen.html'); $('#logoutbtn').val('Tilbage'); $('#Labbtn').hide()">Arbejd som Produktionsleder</button>
+<button class="hvr-pop screenbtn" onclick="switchP('LabScreen/Lab.html'); $('#logoutbtn').val('Tilbage');">Arbejd som Laborant</button>
+<br>
 
 <input type="submit" class="hvr-buzz screenbtn" value="Log ud" onclick="window.location.reload()">
 

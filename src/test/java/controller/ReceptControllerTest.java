@@ -1,8 +1,7 @@
 package controller;
 
-import Controllers.ReceptController;
-import Data.SQLDatabaseIO;
-import Data.dto.ReceptDTO;
+import dal.SQLDatabaseIO;
+import dal.dto.ReceptDTO;
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;

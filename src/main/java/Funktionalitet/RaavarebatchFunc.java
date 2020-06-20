@@ -1,8 +1,8 @@
 package Funktionalitet;
 
 
-import Data.RaavarebatchDAOSQL;
-import Data.dto.RaavarebatchDTO;
+import dal.RaavarebatchDAOSQL;
+import dal.dto.RaavarebatchDTO;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -12,18 +12,30 @@ public class RaavarebatchFunc {
 
     private final RaavarebatchDAOSQL dao = new RaavarebatchDAOSQL();
 
-    public String startMaengdeOk(RaavarebatchDTO dto){
+    public String raavarebatchOk(RaavarebatchDTO dto) throws SQLException{
+
+        if(!startMaengdeOk(dto))
+            return "ERROR: Startmængde skal være et tal større end nul";
+
+        if(!batchIdOk(dto))
+            return "ERROR: Batch ID findes allerede";
+
+        return "OK";
+    }
+
+    //Valider startmængde
+    public boolean startMaengdeOk(RaavarebatchDTO dto){
 
         double subject = dto.getStartMaengde();
 
         if(subject < 0)
-            return "ERROR: Startmængde skal være et tal større end nul";
+            return false;
 
-        return "OK";
-
+        return true;
     }
 
-    public String batchIdOk(RaavarebatchDTO dto) throws SQLException {
+    //Valider batch ID
+    public boolean batchIdOk(RaavarebatchDTO dto) throws SQLException {
 
         int subject = dto.getRbId();
 
@@ -31,10 +43,9 @@ public class RaavarebatchFunc {
 
         for (int i = 0; i < dtoList.size(); i++) {
             if( dtoList.get(i).getRbId() == subject)
-                return "ERROR: Batch ID findes allerede";
+                return false;
         }
 
-        return "OK";
-
+        return true;
     }
 }

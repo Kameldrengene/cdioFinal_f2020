@@ -1,6 +1,6 @@
 package Funktionalitet;
 
-import Data.dto.RaavareDTO;
+import dal.dto.RaavareDTO;
 
 import java.util.List;
 

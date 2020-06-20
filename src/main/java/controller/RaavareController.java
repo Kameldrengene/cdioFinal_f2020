@@ -1,9 +1,9 @@
-package Controllers;
+package controller;
 
 import Funktionalitet.RaavareFunc;
 
-import Data.RaavareDAOSQL;
-import Data.dto.RaavareDTO;
+import dal.RaavareDAOSQL;
+import dal.dto.RaavareDTO;
 
 import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.Response;
@@ -19,6 +19,7 @@ public class RaavareController {
         raavareDAOSQL = new RaavareDAOSQL();
     }
 
+    //Get all raavarer
     public List<RaavareDTO> getData()  {
         try {
             return raavareDAOSQL.getRaavareList();
@@ -27,6 +28,7 @@ public class RaavareController {
         }
     }
 
+    //Get specific raavare
     public RaavareDTO getRaavare(int id) {
         try {
             return raavareDAOSQL.getRaavare(id);
@@ -36,6 +38,7 @@ public class RaavareController {
         return null;
     }
 
+    //Create raavare
     public RaavareDTO opretRaavare (RaavareDTO raavareDTO) {
         RaavareFunc rvFunc = new RaavareFunc();
         try {
@@ -62,7 +65,7 @@ public class RaavareController {
                 raavareDAOSQL.updateRaavare(raavareDTO);
             }
         }catch (SQLException e){
-            e.printStackTrace();
+            throw buildError(Response.Status.NOT_ACCEPTABLE, SQLErrorMsg);
         }
         return raavareDTO;
     }
