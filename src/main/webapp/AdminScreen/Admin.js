@@ -26,8 +26,8 @@ async function Personslist() {
                 //if (value.aktiv)
 
                 person_data += '<td>' + ((value.aktiv) ? "Aktiv" : "Ikke aktiv") + '</td>';
-                person_data += "<td><input id='updateuser' class='hvr-pop' type='button' onclick='confirmUserUpdate(" + userID + ")' value='Update'/> </td>";
-                person_data += "<td><input id='deleteuser' class='slet' type='button' value='Switch Activity' onclick='getcurrentActivity(" + userID + ")'/> </td>";
+                person_data += "<td><input id='updateuser' class='hvr-pop' type='button' onclick='confirmUserUpdate(" + userID + ")' value='Opdater'/> </td>";
+                person_data += "<td><input id='deleteuser' class='slet' type='button' value='Skift aktivitet' onclick='getcurrentActivity(" + userID + ")'/> </td>";
                 person_data += '</tr>';
             });
             $('#Person_table').html(person_data);
