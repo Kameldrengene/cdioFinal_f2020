@@ -24,11 +24,10 @@ function visAlle(id,navn) {
     $(document).ready(async function () {
         localStorage.setItem("vistID", id);
         localStorage.setItem("vistNavn",navn);
-        switchP('FarmaScreen/VisRecept/updaterecepter.html');
+        switchP('FarmaScreen/Recepter/VisRecepter/AabenRecept/Aabenrecepter.html');
         await visBestemtRecepter(id);
     });
 }
-
 
 async function visBestemtRecepter(id) {
     await sendAjax("/BoilerPlate_war_exploded/rest/Recept/getRecepts/"+id,function (data) {
@@ -67,17 +66,15 @@ async function visBestemtRecepter(id) {
         });
 }
 
-
-
 function tilbage() {
     $(document).ready(async function () {
         var receptID = localStorage.getItem("vistID");
-        switchP("FarmaScreen/VisRecept/updaterecepter.html");
+        switchP("FarmaScreen/Recepter/VisRecepter/AabenRecept/Aabenrecepter.html");
         await visBestemtRecepter(receptID);
     });
 }
 
 function toOpretrecept() {
-    switchP('FarmaScreen/NyRecept/index.html');
+    switchP('FarmaScreen/Recepter/NyRecept/NyRecept.html');
     $("#loading").hide();
 }
