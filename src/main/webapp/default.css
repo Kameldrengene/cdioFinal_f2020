@@ -344,11 +344,28 @@ form{
 
 .menubar{
     text-align: right;
+    margin-right: 0px;
+    margin-left: auto;
 }
+
+.menubar .workAs{
+    font-size: 70%;
+    margin: 5px;
+}
+
+.menubar .workAs .hvr-pop{
+    background: var( --col-textsecondary);
+    width: 100%;
+}
+
 
 .menuItemsTable .hvr-pop{
     width: 100%;
 }
+
+
+
+
 
 
 

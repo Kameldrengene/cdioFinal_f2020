@@ -8,7 +8,7 @@ $("document").ready(function () {
         //Then return page must be Farma
         const returnPage = "'FarmaScreen/index.html'";
         $(".logudEllerTilbage").html('<input id="logoutbtn" type="submit" class="hvr-buzz screenbtn" value="Tilbage" onclick="switchP(' + returnPage + ')">');
-        $(".menubar").hide();
+        $(".workAs").hide();
 
     } else{
         $(".logudEllerTilbage").html('<input id="logoutbtn" type="submit" class="hvr-buzz screenbtn" value="Log ud" onclick="window.location.reload()">')
