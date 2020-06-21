@@ -9,7 +9,10 @@
 <body>
 <h5 id="brugerInfo">Loading</h5>
 <script>currentUser();</script>
-<div id="content"><h1>Opret ny bruger</h1>
+
+<div id="content">
+
+    <h1>Opret ny bruger</h1>
     <br>
 
     <input type="text" id="username" placeholder="Brugernavn" value="" minlength="2" maxlength="20"><br> <!-- inputs med min og max length for korrekt input -->
@@ -43,7 +46,9 @@
             </table>
         </form>
     </div>
+
     <div class="aktivopret">
+
         <table class="rolletabel">
         <h3>Vælg om aktiv</h3>
         <tr> <!-- checkbox til aktivitet. Default checked -->
@@ -52,10 +57,14 @@
         </tr>
         </table>
     </div>
-        <input type="button" onclick="userHandler('Create')" class="hvr-pop" value="Opret"> <!-- knap til oprettelse -->
-    </div>
 
-<input type="submit" class="hvr-buzz screenbtn" value="Retur" onclick="switchP('AdminScreen/Admin.html') ; return false"> <!-- knap til at gå retur uden at oprette en bruger -->
+    <br>
+    <input type="button" onclick="userHandler('Create')" class="hvr-pop" value="Opret"><br> <!-- knap til oprettelse -->
+    <input type="button" class="hvr-pop" value="Retur" id="retur" onclick="switchP('AdminScreen/Admin.html') ; return false"> <!-- knap til at gå retur uden at oprette en bruger -->
+
 </div>
+
+
+
 </body>
 </html>

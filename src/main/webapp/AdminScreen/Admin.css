@@ -50,11 +50,8 @@
 }
 
 .slet{
-    background: #c65450;
-}
-
-.update{
-    background: cornflowerblue;
+    background: var(--col-defaultRed);
+    margin: auto;
 }
 
 

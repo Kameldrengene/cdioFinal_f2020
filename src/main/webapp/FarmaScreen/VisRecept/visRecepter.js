@@ -10,7 +10,7 @@ function visRecept() {
                 person_data += '<tr>';
                 person_data += '<td>'+value.receptId+'</td>';
                 person_data += '<td>'+value.receptNavn+'</td>';                                     //visalle(12,'Ipren'
-                person_data += "<td><input id='updateuser' class='update' type='button' onclick='visAlle("+value.receptId+", \"" + value.receptNavn +"\")' value='åben'/> </td>";
+                person_data += "<td><input id='updateuser' class='hvr-pop' type='button' onclick='visAlle("+value.receptId+", \"" + value.receptNavn +"\")' value='Åben'/> </td>";
                 person_data +=  '</tr>';
             });
             $('#recept_table').html(person_data);
