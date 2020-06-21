@@ -11,6 +11,10 @@
 <h5 id="brugerInfo">Loading</h5> <!-- bruger info -->
 <script>currentUser();</script>
 
+<button class="hvr-pop screenbtn" onclick="switchP('ProduktScreen/ProduktScreen.html')">Arbejd som Produktionsleder</button>
+<button class="hvr-pop screenbtn" onclick="switchP('LabScreen/Lab.html')">Arbejd som Laborant</button>
+<br>
+
 <h1>Farmaceut</h1>
 <table> <!-- table for buttons -->
     <thead>
@@ -33,11 +37,6 @@
     </tr>
     </tbody>
 </table>
-
-<br>
-<button class="hvr-pop screenbtn" onclick="switchP('ProduktScreen/ProduktScreen.html'); $('#logoutbtn').val('Tilbage'); $('#Labbtn').hide()">Arbejd som Produktionsleder</button>
-<button class="hvr-pop screenbtn" onclick="switchP('LabScreen/Lab.html'); $('#logoutbtn').val('Tilbage');">Arbejd som Laborant</button>
-<br>
 
 <input type="submit" class="hvr-buzz screenbtn" value="Log ud" onclick="window.location.reload()">
 

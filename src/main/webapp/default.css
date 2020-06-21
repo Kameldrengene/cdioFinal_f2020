@@ -29,6 +29,12 @@ h5{
     margin-bottom: 10px;
 }
 
+#brugerInfo{
+    text-align: right;
+    color: #E9E9EA;
+
+}
+
 /* Centerer alt text i <body> */
 body {
     margin-top: 5%;
@@ -294,12 +300,6 @@ form label:hover{
 
 form{
     color: var(--col-textsecondary)
-}
-
-#brugerInfo{
-    text-align: right;
-    color: #E9E9EA;
-
 }
 
 .screenbtn{
