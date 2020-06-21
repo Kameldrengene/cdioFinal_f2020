@@ -2,10 +2,8 @@
 
 function confirmRaavareUpdate(id){
     $(document).ready(async function () {
-        if(confirm("are you sure, you want to update this råvare "+ id +"?")){
-            console.log("updatebefore");
-            switchP('FarmaScreen/VisRaavare/OpdaterRaavare/Farma.html');
-            console.log("updateafter");
+        if(confirm("Are you sure, you want to update this råvare "+ id +"?")){
+            switchP('FarmaScreen/Raavarer/VisRaavarer/OpdaterRaavare/OpdaterRaavare.html');
             localStorage.setItem("raavareUpdateID", id);
             // $(document).ready(function () {
             await $.getJSON("/BoilerPlate_war_exploded/rest/Raavare/getRaavare/"+ localStorage.getItem("raavareUpdateID"), function (data) {
