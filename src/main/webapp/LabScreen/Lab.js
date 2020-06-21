@@ -244,7 +244,7 @@ function showCorrectButton(){
         else
             returnPage = "'FarmaScreen/index.html'"
 
-        $(".logudEllerTilbage").html('<input id="logoutbtn" type="submit" class="hvr-buzz screenbtn" value="Tilbage" onclick="switchP(' + returnPage + ')">');
+        $(".logudEllerTilbage").html('<input id="logoutbtn" type="submit" class="hvr-buzz screenbtn" value="Retur" onclick="switchP(' + returnPage + ')">');
 
 
     } else{

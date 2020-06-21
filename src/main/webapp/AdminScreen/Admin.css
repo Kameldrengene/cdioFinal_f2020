@@ -54,4 +54,12 @@
     margin: auto;
 }
 
+.hvr-buzz{
+    background-color: var(--col-defaultRed);
+}
+
+thead, tbody{
+    display: block;
+}
+
 
