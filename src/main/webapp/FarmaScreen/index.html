@@ -8,37 +8,39 @@
 
 </head>
 <body>
-<h5 id="brugerInfo">Loading</h5> <!-- bruger info -->
-<script>currentUser();</script>
+    <h5 id="brugerInfo">Loading</h5> <!-- bruger info -->
+    <script>currentUser();</script>
 
-<button class="hvr-pop screenbtn" onclick="switchP('ProduktScreen/ProduktScreen.html')">Arbejd som Produktionsleder</button>
-<button class="hvr-pop screenbtn" onclick="switchP('LabScreen/Lab.html')">Arbejd som Laborant</button>
-<br>
+    <div class="menubar">
+        <button class="hvr-pop screenbtn" onclick="switchP('ProduktScreen/ProduktScreen.html')">Arbejd som Produktionsleder</button>
+        <br>
+        <button class="hvr-pop screenbtn" onclick="switchP('LabScreen/Lab.html')">Arbejd som Laborant</button>
+    </div>
 
-<h1>Farmaceut</h1>
-<table> <!-- table for buttons -->
-    <thead>
-    <tr>
-        <th><h2>Råvarer</h2></th>
-        <th></th>
-        <th><h2>Recepter</h2></th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr>
-        <td> <input type="submit" class="hvr-buzz screenbtn" value="Opret ny Råvare" onclick="switchP('FarmaScreen/NyRaavare/index.html'); return false"> </td>
-        <td></td>
-        <td><input type="submit" class="hvr-buzz screenbtn" value="Opret ny Recept" onclick="toOpretrecept(); return false"></td>
-    </tr>
-    <tr>
-        <td><input type="submit" class="hvr-buzz screenbtn" value="Vis råvarer" onclick="switchP('FarmaScreen/VisRaavare/index.html'); return false"> <br> </td>
-        <td></td>
-        <td> <input type="submit" class="hvr-buzz screenbtn" value="Vis recepter" onclick="switchP('FarmaScreen/VisRecept/index.html'); return false"> </td>
-    </tr>
-    </tbody>
-</table>
+    <h1>Farmaceut</h1>
+    <table  class="menuItemsTable"> <!-- table for buttons -->
+        <thead>
+        <tr>
+            <th><h2>Råvarer</h2></th>
+            <th></th>
+            <th><h2>Recepter</h2></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td> <input type="submit" class="hvr-pop screenbtn" value="Opret ny Råvare" onclick="switchP('FarmaScreen/NyRaavare/index.html'); return false"> </td>
+            <td></td>
+            <td><input type="submit" class="hvr-pop screenbtn" value="Opret ny Recept" onclick="toOpretrecept(); return false"></td>
+        </tr>
+        <tr>
+            <td><input type="submit" class="hvr-pop screenbtn" value="Vis råvarer" onclick="switchP('FarmaScreen/VisRaavare/index.html'); return false"> <br> </td>
+            <td></td>
+            <td> <input type="submit" class="hvr-pop screenbtn" value="Vis recepter" onclick="switchP('FarmaScreen/VisRecept/index.html'); return false"> </td>
+        </tr>
+        </tbody>
+    </table>
 
-<input type="submit" class="hvr-buzz screenbtn" value="Log ud" onclick="window.location.reload()">
+    <input type="submit" class="hvr-buzz screenbtn" value="Log ud" onclick="window.location.reload()">
 
 
 
