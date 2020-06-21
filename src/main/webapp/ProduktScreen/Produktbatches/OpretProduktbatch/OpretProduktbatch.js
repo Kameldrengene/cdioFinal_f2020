@@ -26,7 +26,7 @@ async function opretProduktbatch(activeReceptID){
 
             await sendAjax(
                 "/BoilerPlate_war_exploded/rest/produktbatch/opretProduktbatch",
-                () => alert("Produktbatch oprettet successfuldt"),
+                () => success(newPBID, activeReceptID),
                 err => error(err),
                 "POST",
                 myJson
@@ -34,6 +34,26 @@ async function opretProduktbatch(activeReceptID){
         },
         err => error(err),
     )
+}
+
+function success(activePBID, activeReceptID){
+
+    alert("Produktbatch oprettet successfuldt.\n" +
+        "Du videresendes nu til print-siden")
+
+    //Save data in localstorage and immediatly open the new batch
+    localStorage.setItem("activePBId", activePBID);
+    localStorage.setItem("activeStatus", "Ikke påbegyndt");
+    localStorage.setItem("activeReceptID", activeReceptID);
+
+    var today = new Date();
+    var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+    localStorage.setItem("activeDato", date);
+
+    localStorage.setItem("cameFrom", "OpretProduktbatch");
+
+    switchP("ProduktScreen/Produktbatches/VisProduktbatches/AabenProduktbatch/AabenProduktbatch.html");
+
 }
 
 async function loadRecepter() {
