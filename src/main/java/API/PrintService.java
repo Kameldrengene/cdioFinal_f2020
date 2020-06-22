@@ -16,10 +16,7 @@ public class PrintService {
     @GET
     @Path("getData/{ID}")
     public List<PrintDTO> getData(@PathParam("ID") String ID) throws WebApplicationException{
-        String[] Ids =ID.split("-");
-        int receptID = Integer.parseInt(Ids[1]);
-        int pbID = Integer.parseInt(Ids[0]);
-
-       return printController.getData(pbID,receptID);
+        int pbID =Integer.parseInt(ID);
+       return printController.getData(pbID);
    }
 }
