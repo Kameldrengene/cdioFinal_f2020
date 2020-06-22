@@ -48,9 +48,9 @@ public class RaavarebatchDTO {
     }
 
 // --Commented out by Inspection START (22/06/2020 14.01):
-//    public String getRaavareNavn() {
-//        return raavareNavn;
-//    }
+    public String getRaavareNavn() {
+        return raavareNavn;
+    }
 // --Commented out by Inspection STOP (22/06/2020 14.01)
 
     public void setRaavareNavn(String raavareNavn) {
@@ -58,9 +58,9 @@ public class RaavarebatchDTO {
     }
 
 // --Commented out by Inspection START (22/06/2020 14.01):
-//    public String getLeverandoer() {
-//        return leverandoer;
-//    }
+    public String getLeverandoer() {
+        return leverandoer;
+    }
 // --Commented out by Inspection STOP (22/06/2020 14.01)
 
     public void setLeverandoer(String leverandoer) {

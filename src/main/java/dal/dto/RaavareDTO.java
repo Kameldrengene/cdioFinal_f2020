@@ -10,9 +10,9 @@ public class RaavareDTO {
     private String leverandoer;
 
 // --Commented out by Inspection START (22/06/2020 14.01):
-//    public double getLagerBeholdning() {
-//        return lagerBeholdning;
-//    }
+    public double getLagerBeholdning() {
+        return lagerBeholdning;
+    }
 // --Commented out by Inspection STOP (22/06/2020 14.01)
 
     public void setLagerBeholdning(double lagerBeholdning) {
