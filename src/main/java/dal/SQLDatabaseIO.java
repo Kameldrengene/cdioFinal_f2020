@@ -49,11 +49,9 @@ public class SQLDatabaseIO {
     //Runs update on mysql server.
     public void update(String query) throws SQLException {
         if(connected){
-            System.out.println("starting");
             stmt = conn.createStatement();
             stmt.executeUpdate("use "+db_name);
             stmt.executeUpdate(query);
-            System.out.println("executed!");
         }
     }
 
