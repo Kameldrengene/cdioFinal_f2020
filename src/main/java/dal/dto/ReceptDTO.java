@@ -23,11 +23,9 @@ public class ReceptDTO {
 
     }
 
-// --Commented out by Inspection START (22/06/2020 14.01):
-//    public String getRaavarNavn() {
-//        return raavarNavn;
-//    }
-// --Commented out by Inspection STOP (22/06/2020 14.01)
+    public String getRaavarNavn() {
+        return raavarNavn;
+    }
 
     public void setRaavarNavn(String raavarNavn) {
         this.raavarNavn = raavarNavn;

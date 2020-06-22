@@ -22,7 +22,7 @@ public class UserService {
         return userController.getData();
     }
 
-    //Get all users
+    //Get user with ID
     @Path("getUser/{id}")
     @Produces(MediaType.APPLICATION_JSON)
     @GET
