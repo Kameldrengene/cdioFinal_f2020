@@ -10,6 +10,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -51,13 +52,24 @@ class ReceptDAOSQLTest {
         try {
             receptDAOSQL.db.setDB("cdioTest_2020");
             int expected = 99;
+            List<ReceptDTO> receptDTOList = new ArrayList<>();
             ReceptDTO newRecept = new ReceptDTO();
             newRecept.setNonNetto(5.5);
             newRecept.setRaavareId(3);
             newRecept.setReceptId(99);
             newRecept.setReceptNavn("Morfin");
             newRecept.setTolerance(9.5);
-            receptDAOSQL.createRecept(newRecept);
+            ReceptDTO newRecept2 = new ReceptDTO();
+            newRecept2.setNonNetto(10);
+            newRecept2.setRaavareId(4);
+            newRecept2.setReceptId(99);
+            newRecept2.setReceptNavn("Morfin");
+            newRecept2.setTolerance(1.5);
+
+            receptDTOList.add(newRecept);
+            receptDTOList.add(newRecept2);
+
+            receptDAOSQL.createReceptList(receptDTOList);
             testRecept = receptDAOSQL.getRecept(99,3);
             assertEquals(expected,testRecept.getReceptId());
         }catch (SQLException e){
@@ -68,26 +80,6 @@ class ReceptDAOSQLTest {
 
     @Test
     @Order(4)
-    void updateRecept() {
-        try {
-            receptDAOSQL.db.setDB("cdioTest_2020");
-            double expected = 3.5;
-            ReceptDTO newRecept = new ReceptDTO();
-            newRecept.setNonNetto(3.5);
-            newRecept.setRaavareId(3);
-            newRecept.setReceptId(99);
-            newRecept.setReceptNavn("Morfin");
-            newRecept.setTolerance(5.5);
-            receptDAOSQL.updateRecept(newRecept);
-            testRecept = receptDAOSQL.getRecept(99,3);
-            assertEquals(expected,testRecept.getNonNetto());
-        }catch (SQLException e){
-            e.printStackTrace();
-        }
-    }
-
-    @Test
-    @Order(5)
     void cleanUp(){
 
             try {
