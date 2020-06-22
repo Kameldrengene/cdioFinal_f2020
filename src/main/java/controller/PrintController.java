@@ -17,9 +17,9 @@ public class PrintController {
     }
     private final String SQLErrorMsg = "ERROR: Fejl i forbindelse med kontakt af databasen";
 
-    public List<PrintDTO> getData(int pbID, int receptID){
+    public List<PrintDTO> getData(int pbID){
         try {
-            return printDAOSQL.getPrint(pbID,receptID);
+            return printDAOSQL.getPrint(pbID);
         } catch (SQLException e) {
             throw buildError(Response.Status.NOT_ACCEPTABLE, SQLErrorMsg);
         }

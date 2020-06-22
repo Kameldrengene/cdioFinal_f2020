@@ -18,7 +18,7 @@ class PrintControllerTest {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        printDTOList  = printController.getData(1,10);
+        printDTOList  = printController.getData(1);
         assertEquals(4,printDTOList.size());
     }
 }
