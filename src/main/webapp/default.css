@@ -8,6 +8,7 @@
     --col-textprimary: #E9E9EA;
     --col-textsecondary: #666666;
     --col-textthird: rgba(233, 233, 234, 0.6);
+    --col-defaultRed: #CD5C5C;
 
     /* Sætter Font i prioriteret rækkefølge, i tilfælde af at browseren
      ikke har en fonten. */
@@ -308,7 +309,9 @@ form{
 }
 
 #retur{
-    margin: 20px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    background: var(--col-defaultRed);
 }
 
 /* Source: https://www.w3schools.com/howto/howto_css_loader.asp */
@@ -362,6 +365,20 @@ form{
 .menuItemsTable .hvr-pop{
     width: 100%;
 }
+
+.logudEllerTilbage .hvr-buzz{
+    background: var(--col-defaultRed);
+}
+
+.afslutTable .hvr-pop{
+    width: 100%;
+    text-align: center;
+}
+
+.afslutTable{
+    margin: auto;
+}
+
 
 
 

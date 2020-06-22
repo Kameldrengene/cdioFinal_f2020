@@ -48,7 +48,7 @@ function addLinje() {    //tilføjer ekstra råvare
             '<input type="number" id="tol' + counter + '"  placeholder="Tolerance 0.1" value="" step="0.01" max="10" min="0.1"> ' +
             '</td>\n' +
             '<td>\n' +
-            '            <button class="hvr-buzz" onclick="fjernRaavar('+coutnum+');" id="fjern">fjern</button>\n' +
+            '            <button class="hvr-buzz" onclick="fjernRaavar('+coutnum+');" id="Fjern">fjern</button>\n' +
             '        </td>' +
             '    </tr>');
         console.log("test1");
@@ -82,6 +82,7 @@ function selectbtn(counter) {    //tilføjer råvare i scroll down list.
 
         if(counter===1) {
             $("#addRaavare").show();
+            $("#confirmbtn").show();
         }
     });
 }
@@ -89,7 +90,7 @@ function selectbtn(counter) {    //tilføjer råvare i scroll down list.
 function retur() {
     $(document).ready(function () {
         delete counter;
-        switchP('FarmaScreen/index.html');
+        switchP('FarmaScreen/Farma.html');
     });
 }
 
@@ -197,7 +198,7 @@ async function opretReceptList() {
     await sendAjax("/BoilerPlate_war_exploded/rest/Recept/OpretRecept", function (data) {
         console.log("before" + counter);
         alert("Recept oprettet succesfuldt");
-        switchP('FarmaScreen/index.html');
+        switchP('FarmaScreen/Farma.html');
         console.log("after" + counter);
     }, function (data) {
         if (data.status != 500) {

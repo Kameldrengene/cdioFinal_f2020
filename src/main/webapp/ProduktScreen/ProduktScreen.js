@@ -6,8 +6,8 @@ $("document").ready(function () {
     if(loginRole.localeCompare("prodLeder") != 0){
 
         //Then return page must be Farma
-        const returnPage = "'FarmaScreen/index.html'";
-        $(".logudEllerTilbage").html('<input id="logoutbtn" type="submit" class="hvr-buzz screenbtn" value="Tilbage" onclick="switchP(' + returnPage + ')">');
+        const returnPage = "'FarmaScreen/Farma.html'";
+        $(".logudEllerTilbage").html('<input id="logoutbtn" type="submit" class="hvr-buzz screenbtn" value="Retur" onclick="switchP(' + returnPage + ')">');
         $(".workAs").hide();
 
     } else{

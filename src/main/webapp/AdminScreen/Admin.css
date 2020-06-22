@@ -50,11 +50,16 @@
 }
 
 .slet{
-    background: #c65450;
+    background: var(--col-defaultRed);
+    margin: auto;
 }
 
-.update{
-    background: cornflowerblue;
+.hvr-buzz{
+    background-color: var(--col-defaultRed);
+}
+
+thead, tbody{
+    display: block;
 }
 
 

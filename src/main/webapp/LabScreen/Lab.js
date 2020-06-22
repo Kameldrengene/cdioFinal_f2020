@@ -242,9 +242,9 @@ function showCorrectButton(){
         if(loginRole.localeCompare("farma") != 0)
             returnPage = "'ProduktScreen/ProduktScreen.html'"
         else
-            returnPage = "'FarmaScreen/index.html'"
+            returnPage = "'FarmaScreen/Farma.html'"
 
-        $(".logudEllerTilbage").html('<input id="logoutbtn" type="submit" class="hvr-buzz screenbtn" value="Tilbage" onclick="switchP(' + returnPage + ')">');
+        $(".logudEllerTilbage").html('<input id="logoutbtn" type="submit" class="hvr-buzz screenbtn" value="Retur" onclick="switchP(' + returnPage + ')">');
 
 
     } else{

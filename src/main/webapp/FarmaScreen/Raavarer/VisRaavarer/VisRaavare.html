@@ -20,7 +20,7 @@
         </div>
     </div>
 
-    <input type="submit" class="hvr-buzz screenbtn" value="Retur" onclick="switchP('FarmaScreen/index.html'); return false">
+    <input type="submit" class="hvr-pop screenbtn" value="Retur" id="retur" onclick="switchP('FarmaScreen/Farma.html'); return false">
 
     <script>viewlist
     (["ID", "Navn", "Leverandør", "Lagerbehold[kg]"],
@@ -29,7 +29,7 @@
     function (value) {
         const id = value.raavareID
         let msg = "";
-        msg += "<td><input id='updateraavare' class='update' type='button' onclick='confirmRaavareUpdate("+ id + ")' value='Update'/> </td>";
+        msg += "<td><input id='updateraavare' class='hvr-pop' type='button' onclick='confirmRaavareUpdate("+ id + ")' value='Update'/> </td>";
         return msg
     });</script>
 

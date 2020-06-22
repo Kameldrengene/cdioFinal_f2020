@@ -30,18 +30,29 @@
         <br>
         <br>
 
-        <input id="confirmbtn" type="button" onclick="
+        <table>
+            <tr>
+                <td>
+                    <input id="confirmbtn" type="button" onclick="
                     const id = document.getElementById('pbvalg').value;
                     if (id == 'None') {
                         alert('Vælg en ID');
                     } else {
                         getProductBatch(id)
                     }"
-               class="hvr-pop" value="OK">
-    </div>
+                           class="hvr-pop" value="Vælg">
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <script>showCorrectButton();</script>
+                    <div class="logudEllerTilbage"></div>
+                </td>
+            </tr>
+        </table>
 
-    <script>showCorrectButton();</script>
-    <div class="logudEllerTilbage"></div>
+
+    </div>
 
     </body>
 

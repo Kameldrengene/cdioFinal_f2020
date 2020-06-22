@@ -2,10 +2,8 @@
 
 function confirmRaavareUpdate(id){
     $(document).ready(async function () {
-        if(confirm("are you sure, you want to update this råvare "+ id +"?")){
-            console.log("updatebefore");
-            switchP('FarmaScreen/VisRaavare/OpdaterRaavare/index.html');
-            console.log("updateafter");
+        if(confirm("Are you sure, you want to update this råvare "+ id +"?")){
+            switchP('FarmaScreen/Raavarer/VisRaavarer/OpdaterRaavare/OpdaterRaavare.html');
             localStorage.setItem("raavareUpdateID", id);
             // $(document).ready(function () {
             await $.getJSON("/BoilerPlate_war_exploded/rest/Raavare/getRaavare/"+ localStorage.getItem("raavareUpdateID"), function (data) {
@@ -41,10 +39,10 @@ async function raavareData(modType) {
     await sendAjax(APILink, function (data) {
         if(checkmodtype === "Create"){
             alert("Opret success!");
-            switchP("FarmaScreen/index.html");
+            switchP("FarmaScreen/Farma.html");
         }else if(checkmodtype === "Update"){
             alert("Opdateret success!\nFor RåvareID: " + localStorage.getItem("raavareUpdateID"));
-            switchP("FarmaScreen/VisRaavare/index.html");
+            switchP("FarmaScreen/VisRaavare/Farma.html");
         }
 
     }, function (data) {
@@ -69,7 +67,7 @@ function postRaavareUpdate() {
 }
 
 function toOpretrecept() {
-    switchP('FarmaScreen/NyRecept/index.html');
+    switchP('FarmaScreen/Recepter/NyRecept/NyRecept.html');
     $("#addRaavare").hide();
     $("#loading").hide();
 }
