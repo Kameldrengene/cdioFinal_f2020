@@ -10,7 +10,12 @@ import java.util.List;
 public class PrintDAOSQL implements IPrintDAO{
     public final SQLDatabaseIO db = new SQLDatabaseIO("kamel", "dreng", "runerne.dk", 8003);
 
-
+    /**
+     * Indhenter alle rækker i databasen i forhold til Produktbatch ID
+     * @param pbId Produktbatch id
+     * @return PrintDTOList: Alle linjer i PrintBatch view fra databasen
+     * @throws SQLException
+     */
     @Override
     public List<PrintDTO> getPrint(int pbId) throws SQLException {
         db.connect();

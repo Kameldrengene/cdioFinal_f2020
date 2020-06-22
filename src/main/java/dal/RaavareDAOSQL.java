@@ -10,7 +10,12 @@ public class RaavareDAOSQL implements IRaavareDAO{
 
     public final SQLDatabaseIO db = new SQLDatabaseIO("kamel", "dreng", "runerne.dk", 8003); //Makes new SQLDatabaseIO object.
 
-    //Get all raavarer
+    /**
+     * Get all raavarer
+     * @param raavareId Raavare ID
+     * @return Get all raavarer
+     * @throws SQLException
+     */
     @Override
     public RaavareDTO getRaavare(int raavareId) throws SQLException {
         db.connect();
@@ -31,7 +36,11 @@ public class RaavareDAOSQL implements IRaavareDAO{
         return null;
     }
 
-
+    /**
+     * Liste over Raavarer
+     * @return Liste over Raavarer
+     * @throws SQLException
+     */
     @Override
     public List<RaavareDTO> getRaavareList() throws SQLException{
         db.connect();
@@ -51,7 +60,11 @@ public class RaavareDAOSQL implements IRaavareDAO{
         return raavareList;
     }
 
-    //Create raavare
+    /**
+     * Create raavare
+     * @param raavare Raavare Data Transfer objekt
+     * @throws SQLException
+     */
     @Override
     public void createRaavare(RaavareDTO raavare) throws SQLException{
         db.connect();
@@ -59,6 +72,11 @@ public class RaavareDAOSQL implements IRaavareDAO{
         db.close();
     }
 
+    /**
+     * Opdatere Raavare
+     * @param raavare Raavare Data Transfer objekt
+     * @throws SQLException
+     */
     @Override
     public void updateRaavare(RaavareDTO raavare) throws SQLException{
         db.connect();
@@ -73,6 +91,12 @@ public class RaavareDAOSQL implements IRaavareDAO{
         db.close();
     }
 
+    /**
+     * Kontrollerer om Raavaren eksisterer
+     * @param raavareID Raavare ID
+     * @return True hvis raavareren eksisterer
+     * @throws SQLException
+     */
     public boolean raavareExists(int raavareID) throws SQLException {
         db.connect();
             ResultSet rs = db.query("SELECT count(raavareID) AS fundet FROM Raavarer where raavareID=" + raavareID);
