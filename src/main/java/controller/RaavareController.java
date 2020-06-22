@@ -41,7 +41,7 @@ public class RaavareController {
     public RaavareDTO opretRaavare (RaavareDTO raavareDTO) {
         String str = "POST";
         try {
-            if (!rvFunc.isNewRaavareOk(raavareDTO,getData(),str)) {
+            if (!rvFunc.isNewRaavareOk(raavareDTO,getData())) {
                 throw new WebApplicationException(Response.status(Response.Status.NOT_ACCEPTABLE).entity(rvFunc.raavaremsg(raavareDTO,getData(),str)).build());
             }
             raavareDAOSQL.createRaavare(raavareDTO);
@@ -54,7 +54,7 @@ public class RaavareController {
     public RaavareDTO updateRaavare(RaavareDTO raavareDTO) {
         String str = "PUT";
         try {
-            if (!rvFunc.isUpdateRaavareOk(raavareDTO,getData(),str)) {
+            if (!rvFunc.isUpdateRaavareOk(raavareDTO,getData())) {
                 throw buildError(Response.Status.NOT_ACCEPTABLE,rvFunc.raavaremsg(raavareDTO,getData(),str));
             }
             raavareDAOSQL.updateRaavare(raavareDTO);

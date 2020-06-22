@@ -19,7 +19,7 @@ public class RaavareFunc {
         if(IDExists(rv,rvList) && type.equals("POST")){
             return "Råvare ID'et er optaget\nVælg en anden";
         }
-        if(NavnExists(rv,rvList,type)){
+        if(NavnExists(rv,rvList)){
             if(type.equals("PUT")){
                 return "Error: Kan ikke opdatere, da Råvare navnet er optaget";
             }
@@ -28,12 +28,12 @@ public class RaavareFunc {
         return null;
     }
 
-    public boolean isNewRaavareOk(RaavareDTO rv, List<RaavareDTO> rvList, String type) {
-        return (!NavnExists(rv,rvList,type) && !IDExists(rv,rvList) && isIDOk(rv) && isNavnOk(rv) && isleverandoerOk(rv));
+    public boolean isNewRaavareOk(RaavareDTO rv, List<RaavareDTO> rvList) {
+        return (!NavnExists(rv,rvList) && !IDExists(rv,rvList) && isIDOk(rv) && isNavnOk(rv) && isleverandoerOk(rv));
     }
 
-    public boolean isUpdateRaavareOk(RaavareDTO rv, List<RaavareDTO> rvList,String type) {
-        return (!NavnExists(rv,rvList,type) && isNavnOk(rv) && isleverandoerOk(rv));
+    public boolean isUpdateRaavareOk(RaavareDTO rv, List<RaavareDTO> rvList) {
+        return (!NavnExists(rv,rvList) && isNavnOk(rv) && isleverandoerOk(rv));
     }
 
     public boolean IDExists(RaavareDTO rv, List<RaavareDTO> rvList) {
@@ -45,7 +45,7 @@ public class RaavareFunc {
         return false;
     }
 
-    public boolean NavnExists(RaavareDTO rv, List<RaavareDTO> rvList, String type) {
+    public boolean NavnExists(RaavareDTO rv, List<RaavareDTO> rvList) {
         for(int i = 0; i < rvList.size(); i++){
             if(rv.getRaavareNavn().equals(rvList.get(i).getRaavareNavn())) {
                 if(!(rv.getRaavareID() == rvList.get(i).getRaavareID())) {
