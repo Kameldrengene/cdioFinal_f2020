@@ -17,6 +17,7 @@ public class RaavareDTO {
 // --Commented out by Inspection STOP (22/06/2020 14.01)
 
     public void setLagerBeholdning(double lagerBeholdning) {
+        this.lagerBeholdning = lagerBeholdning;
         /*Lagerbeholdning DECIMAL(4,4)*/
     }
 
