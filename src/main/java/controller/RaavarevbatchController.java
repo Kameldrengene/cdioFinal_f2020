@@ -52,7 +52,7 @@ public class RaavarevbatchController {
         }
     }
 
-    //todo comment
+    //Return liste med RaavareBatchDTO'er
     public List<RaavarebatchDTO> getRVIDBatch(String RVID){
 
         int RVIDint = Integer.parseInt(RVID);

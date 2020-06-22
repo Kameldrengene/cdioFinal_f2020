@@ -116,7 +116,7 @@ public class ProduktbatchController {
         return produktbatchKompDTO;
     }
 
-    //todo comment
+    //Opdater ny produktbatch
     public ProduktbatchKompDTO opdaterNewProduktbatch(ProduktbatchKompDTO produktbatchKompDTO){
         try {
             DAOSQL.updateNewpb(produktbatchKompDTO);

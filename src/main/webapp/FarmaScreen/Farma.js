@@ -2,7 +2,7 @@
 
 function confirmRaavareUpdate(id){
     $(document).ready(async function () {
-        if(confirm("Are you sure, you want to update this råvare "+ id +"?")){
+        if(confirm("Er du sikker på at du vil opdatere råvare: "+ id +"?")){
             switchP('FarmaScreen/Raavarer/VisRaavarer/OpdaterRaavare/OpdaterRaavare.html');
             localStorage.setItem("raavareUpdateID", id);
             // $(document).ready(function () {
@@ -49,7 +49,7 @@ async function raavareData(modType) {
         if (data.status != 500) {
             alert(data.responseText);
         } else {
-            alert('Enternal Error: Prøve igen!');
+            alert('Internal Error: Prøve igen!');
         }
     }, httpType, JSON.stringify(jsonData))
 }

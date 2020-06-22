@@ -39,7 +39,7 @@ async function viewlist(headers, link, tableName, btnHtmlfunc) {
             $('#' + tableName).html(data);
         },
         function (data) {
-            alert("Error loading list: ERR.NO.01");
+            alert("Fejl i modtagelse af viewList");
         })
     );
 }

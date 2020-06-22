@@ -15,7 +15,7 @@ function visRecept() {
             });
             $('#recept_table').html(person_data);
         }, function (data) {
-            alert("Error: kan ikke hente list")
+            alert("Error: kan ikke hente liste")
         });
     });
 }
@@ -62,7 +62,7 @@ async function visBestemtRecepter(id) {
             $('#nyrecept_table').html(person_data);
         },
         function (data) {
-            alert("Error: kunne ikke hente list");
+            alert("Error: kunne ikke hente liste");
         });
 }
 
