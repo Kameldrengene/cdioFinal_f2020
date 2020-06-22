@@ -18,7 +18,7 @@ class PrintServiceTest {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        printDTOList = printService.getData("1-10");
+        printDTOList = printService.getData("1");
         assertEquals(4,printDTOList.size());
 
     }
