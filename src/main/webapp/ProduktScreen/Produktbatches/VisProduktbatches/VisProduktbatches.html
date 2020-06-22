@@ -5,28 +5,29 @@
     <title>Vis produktbatch</title>
     <script src="ProduktScreen/Produktbatches/VisProduktbatches/VisProduktbatches.js"></script>
 
-    <!-- <link rel="stylesheet" type="text/css" href="default.css"> -->
+    <!-- <link rel="stylesheet" type="text/css" href="defaultDark.css"> -->
     <link rel="stylesheet" type="text/css" href="ProduktScreen/Produktbatches/VisProduktbatches/VisProduktbacthes.css">
 
 </head>
 <body>
 
-    <h5 id="brugerInfo">Loading</h5> <!-- bruger info -->
-    <script>currentUser();</script>
-    <div class="loads"><div id="loading"></div> </div>
+    <div class="container">
+        <h5 id="brugerInfo">Loading</h5> <!-- bruger info -->
+        <script>currentUser();</script>
+        <div class="loads"><div id="loading"></div> </div>
 
-    <h1>Produktbatches</h1>
+        <h1>Produktbatches</h1>
 
-    <input  type="checkbox" type=text id="visAfsluttede">
-    <Label for="visAfsluttede">Vis afsluttede</Label>
-    <br>
+        <input  type="checkbox" type=text id="visAfsluttede">
+        <Label for="visAfsluttede">Vis afsluttede</Label>
+        <br>
 
-    <table class="brugertable" id="produktbatches"></table>
+        <table class="brugertable" id="produktbatches"></table>
 
-    <br>
-    <input id="retur" type="submit" class="hvr-pop screenbtn" value="Retur" onclick="switchP('ProduktScreen/ProduktScreen.html'); return false">
+        <br>
+        <input id="retur" type="submit" class="hvr-pop screenbtn" value="Retur" onclick="switchP('ProduktScreen/ProduktScreen.html'); return false">
 
-
+</div>
 
 </body>
 </html>

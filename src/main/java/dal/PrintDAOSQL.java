@@ -12,7 +12,7 @@ public class PrintDAOSQL implements IPrintDAO{
 
 
     @Override
-    public List<PrintDTO> getPrint(int pbId, int receptID) throws SQLException {
+    public List<PrintDTO> getPrint(int pbId) throws SQLException {
         db.connect();
         ResultSet rs = db.query("SELECT PBID, RID, raavareID, Standing, UserID, RName, raavareNavn, leverandoer," +
                 " nonNetto, Tolerance, RBID, Tara, Netto, Dato ,(SELECT SUM(Tara) FROM ProduktBatches" +

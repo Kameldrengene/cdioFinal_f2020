@@ -9,52 +9,54 @@
 
 <body>
 
-    <h5 id="brugerInfo">Loading</h5>
-    <script>currentUser();</script>
-    <div class="loads"><div id="loading"></div> </div>
+    <div class="container">
+        <h5 id="brugerInfo">Loading</h5>
+        <script>currentUser();</script>
+        <div class="loads"><div id="loading"></div> </div>
 
-    <h1>Laborant</h1>
+        <h1>Laborant</h1>
 
-    <div id="content">
+        <div id="content">
 
-        <br>
-        <h2>Vælg ID på produktbatch</h2>
+            <br>
+            <h2>Vælg ID på produktbatch</h2>
 
-        <br>
-        <select id="pbvalg" style="font-size: 14pt">
-            <option value="None">Vælg ID</option>
-        </select>
+            <br>
+            <select id="pbvalg" style="font-size: 14pt">
+                <option value="None">Vælg ID</option>
+            </select>
 
-        <script>showPBList()</script>
+            <script>showPBList()</script>
 
-        <br>
-        <br>
+            <br>
+            <br>
 
-        <table>
-            <tr>
-                <td>
-                    <input id="confirmbtn" type="button" onclick="
-                    const id = document.getElementById('pbvalg').value;
-                    if (id == 'None') {
-                        alert('Vælg en ID');
-                    } else {
-                        getProductBatch(id)
-                    }"
-                           class="hvr-pop" value="Vælg">
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <script>showCorrectButton();</script>
-                    <div class="logudEllerTilbage"></div>
-                </td>
-            </tr>
-        </table>
+            <table>
+                <tr>
+                    <td>
+                        <input id="confirmbtn" type="button" onclick="
+                        const id = document.getElementById('pbvalg').value;
+                        if (id == 'None') {
+                            alert('Vælg en ID');
+                        } else {
+                            getProductBatch(id)
+                        }"
+                               class="hvr-pop" value="Vælg">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <script>showCorrectButton();</script>
+                        <div class="logudEllerTilbage"></div>
+                    </td>
+                </tr>
+            </table>
 
 
+        </div>
     </div>
 
-    </body>
+</body>
 
 </html>
 

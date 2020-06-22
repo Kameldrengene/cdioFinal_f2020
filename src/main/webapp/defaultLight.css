@@ -2,14 +2,13 @@
 /* Du kan også bruge :root selector */
 * {
     /* Definerer en global variabel til vores "temafarve" */
-    --color-primary: #45ABB8;
-    --col-background: #2a2a2a;
-    --col-secondarybackground: #333333;
-    --col-textprimary: #E9E9EA;
-    --col-textsecondary: #666666;
-    --col-textthird: rgba(233, 233, 234, 0.6);
+    --color-primary: #317882;
+    --col-background: #dedede;
+    --col-secondarybackground: #c6c6c6;
+    --col-textprimary: #000000;
+    --col-textsecondary: #494949;
+    --col-textthird: rgba(56, 56, 62, 0.53);
     --col-defaultRed: #CD5C5C;
-
     /* Sætter Font i prioriteret rækkefølge, i tilfælde af at browseren
      ikke har en fonten. */
     font-family: Open Sans, Verdana, sans-serif;
@@ -17,8 +16,13 @@
 
 
 /* Selector på flere tags */
-h1, h2, h3  {
+h1, h2, h3 {
     color: var(--color-primary);
+}
+
+.container{
+    width:80%;
+    margin:auto;
 }
 
 h5{
@@ -32,7 +36,7 @@ h5{
 
 #brugerInfo{
     text-align: right;
-    color: var(--col-textprimary);
+    color: rgba(0, 0, 0, 0.75);
 
 }
 
@@ -378,12 +382,3 @@ form{
 .afslutTable{
     margin: auto;
 }
-
-
-
-
-
-
-
-
-

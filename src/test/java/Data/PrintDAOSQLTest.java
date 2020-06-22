@@ -18,9 +18,9 @@ class PrintDAOSQLTest {
     void getPrint() {
         try {
             printDAOSQL.db.setDB("cdioTest_2020");
-            printDTOList = printDAOSQL.getPrint(1, 10);
+            printDTOList = printDAOSQL.getPrint(1);
             assertEquals(4, printDTOList.size());
-            printDTOList = printDAOSQL.getPrint(1, 10);
+            printDTOList = printDAOSQL.getPrint(1);
             assertEquals(4, printDTOList.size());
         } catch (SQLException e) {
             e.printStackTrace();

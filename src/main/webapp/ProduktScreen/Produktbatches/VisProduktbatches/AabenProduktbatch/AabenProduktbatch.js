@@ -25,7 +25,7 @@ $("document").ready(async function () {
     dato = localStorage.getItem("activeDato");
 
     let param = "";
-    param += batchID+"-"+receptID;
+    param += batchID;
 
     $("#batchID").html("Batch ID: " + batchID);
     $("#receptID").html("Recept ID: " + receptID);

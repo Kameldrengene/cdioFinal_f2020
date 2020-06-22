@@ -8,43 +8,45 @@
     <script src="defaultJavascript.js"></script>
     <link rel="stylesheet" type="text/css" href="NyRecept.css">
     <link rel="stylesheet" href="NyRecept.css">
-    <link rel="stylesheet" href="../../../default.css">
+    <link rel="stylesheet" href="../../../defaultDark.css">
 
 
 </head>
 <body>
+<div class="container">
 <h5 id="brugerInfo">Loading</h5> <!-- bruger info -->
 <script>currentUser();</script>
-<div class="loads"><div id="loading"></div> </div>
-<div id="opretRecept"><h1>Opret ny Recept</h1>
-    <br>
+    <div class="loads"><div id="loading"></div> </div>
+        <div id="opretRecept"><h1>Opret ny Recept</h1>
+            <br>
 
-    <div id="nyRecept">
-        <input type="number" id="recepID" placeholder="ReceptID" value="" minlength="1" maxlength="8" ><br>
-        <input type="text" id="recepnavn" placeholder="ReceptNavn" value="" minlength="2" maxlength="20" ><br>
-    </div>
-    <div id="alleRaavare">
-        <div id="addRaavare">
-            <div>
-                <table class="brugertable" id="raavareLinjer">
-                    <tr>
-                        <th>Råvare</th>
-                        <th>Mængde</th>
-                        <th>Tolerance</th>
-                    </tr>
-                </table>
+            <div id="nyRecept">
+                <input type="number" id="recepID" placeholder="ReceptID" value="" minlength="1" maxlength="8" ><br>
+                <input type="text" id="recepnavn" placeholder="ReceptNavn" value="" minlength="2" maxlength="20" ><br>
+            </div>
+            <div id="alleRaavare">
+                <div id="addRaavare">
+                    <div>
+                        <table class="brugertable" id="raavareLinjer">
+                            <tr>
+                                <th>Råvare</th>
+                                <th>Mængde</th>
+                                <th>Tolerance</th>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
             </div>
         </div>
+        <div id="opretReceptBtn">
+
+            <input type="submit" id="videre" class="hvr-pop" onclick="addLinje(); return false" value="Tilføj råvare"><br>
+
+            <input id="confirmbtn" type="button" onclick="confirmOpretRecept()" class="hvr-pop" value="Opret recept"><br>
+            <script> $("#confirmbtn").hide()</script>
+
+            <input type="submit" class="hvr-pop" value="Retur" id="retur" onclick="retur(); return false">
+        </div>
     </div>
-</div>
-<div id="opretReceptBtn">
-
-    <input type="submit" id="videre" class="hvr-pop" onclick="addLinje(); return false" value="Tilføj råvare"><br>
-
-    <input id="confirmbtn" type="button" onclick="confirmOpretRecept()" class="hvr-pop" value="Opret recept"><br>
-    <script> $("#confirmbtn").hide()</script>
-
-    <input type="submit" class="hvr-pop" value="Retur" id="retur" onclick="retur(); return false">
-</div>
 </body>
 </html>

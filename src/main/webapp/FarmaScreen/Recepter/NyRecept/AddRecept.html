@@ -8,28 +8,30 @@
 
 </head>
 <body>
-<h5 id="brugerInfo">Loading</h5> <!-- bruger info -->
-<script>currentUser();</script>
-<div id="">
-    <h1 id="addReceptmedID"></h1>
-    <br>
+    <div class="container">
+        <h5 id="brugerInfo">Loading</h5> <!-- bruger info -->
+        <script>currentUser();</script>
+        <div id="">
+            <h1 id="addReceptmedID"></h1>
+            <br>
 
-    <input type="text" id="recID" placeholder="ReceptID" value="" minlength="1" maxlength="8" pattern="[0-9]+" readonly="readonly"><br>
-    <input type="text" id="recnavn" placeholder="ReceptNavn" value="" minlength="2" maxlength="20" readonly="readonly"><br>
-<!--    <input type="number" id="raaID"  placeholder="RaavareID" value="" min="1" max="99999999" readonly="readonly">-->
-<!--    <select name="RaavarID" id="ledeligeID">-->
-<!--        <option value="" disabled selected>Vælge RåvareID</option>-->
-<!--    </select><br>-->
-    <select name="RaavarID" id="ledeligeNavn">
-        <option value="" disabled selected>Vælg Råvare</option>
-    </select><br>
-    <input type="number" id="netto"  placeholder="Mængde 1.0001" value="" step="0.0001" max="20" min="0.05"><br>
-    <input type="number" id="tol"  placeholder="Tolerance 0.1" value="" step="0.01" max="10" min="0.1"><br>
-    <input id="confirmbtn" type="button" onclick="confirmaddRecept()" class="hvr-pop" value="OpretRecept">
-</div>
+            <input type="text" id="recID" placeholder="ReceptID" value="" minlength="1" maxlength="8" pattern="[0-9]+" readonly="readonly"><br>
+            <input type="text" id="recnavn" placeholder="ReceptNavn" value="" minlength="2" maxlength="20" readonly="readonly"><br>
+        <!--    <input type="number" id="raaID"  placeholder="RaavareID" value="" min="1" max="99999999" readonly="readonly">-->
+        <!--    <select name="RaavarID" id="ledeligeID">-->
+        <!--        <option value="" disabled selected>Vælge RåvareID</option>-->
+        <!--    </select><br>-->
+            <select name="RaavarID" id="ledeligeNavn">
+                <option value="" disabled selected>Vælg Råvare</option>
+            </select><br>
+            <input type="number" id="netto"  placeholder="Mængde 1.0001" value="" step="0.0001" max="20" min="0.05"><br>
+            <input type="number" id="tol"  placeholder="Tolerance 0.1" value="" step="0.01" max="10" min="0.1"><br>
+            <input id="confirmbtn" type="button" onclick="confirmaddRecept()" class="hvr-pop" value="OpretRecept">
+        </div>
 
-<input type="submit" class="hvr-pop screenbtn" id="retur" value="Retur" onclick="tilbage(); return false">
+        <input type="submit" class="hvr-pop screenbtn" id="retur" value="Retur" onclick="tilbage(); return false">
 
+    </div>
 </body>
 <script>getledeligeRaavare();</script>
 <script>

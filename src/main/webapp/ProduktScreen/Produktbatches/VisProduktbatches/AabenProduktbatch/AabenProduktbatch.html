@@ -4,34 +4,33 @@
     <meta charset="UTF-8">
     <title>AAben produktbatch</title>
 
-
     <script src="ProduktScreen/Produktbatches/VisProduktbatches/AabenProduktbatch/AabenProduktbatch.js"></script>
-
 
 </head>
 <body>
 
-    <h5 id="brugerInfo">Loading</h5> <!-- bruger info -->
-    <script>currentUser();</script>
-    <div class="loads"><div id="loading"></div> </div>
+    <div class="container">
+        <h5 id="brugerInfo">Loading</h5> <!-- bruger info -->
+        <script>currentUser();</script>
+        <div class="loads"><div id="loading"></div> </div>
 
-    <h1>Produktbatch</h1>
+        <h1>Produktbatch</h1>
 
-    <h5 id="batchID"></h5>
-    <h5 id="receptID"></h5>
-    <h5 id="status"></h5>
-    <h5 id="dato"></h5>
+        <h5 id="batchID"></h5>
+        <h5 id="receptID"></h5>
+        <h5 id="status"></h5>
+        <h5 id="dato"></h5>
 
-    <button class="hvr-pop" id="opret" onclick=printDiv('print')>Print</button>
+        <button class="hvr-pop" id="opret" onclick=printDiv('print')>Print</button>
 
-    <div id="print" style="text-align: center">
-    <table class="brugertable" id="produktbatch"></table>
+        <div id="print" style="text-align: center">
+        <table class="brugertable" id="produktbatch"></table>
+        </div>
+
+        <br>
+        <div class="logudEllerTilbage"></div>
+
     </div>
-
-    <br>
-    <div class="logudEllerTilbage"></div>
-
-
 
 </body>
 </html>
