@@ -42,7 +42,7 @@ async function raavareData(modType) {
             switchP("FarmaScreen/Farma.html");
         }else if(checkmodtype === "Update"){
             alert("Opdateret success!\nFor RåvareID: " + localStorage.getItem("raavareUpdateID"));
-            switchP("FarmaScreen/VisRaavare/Farma.html");
+            switchP("FarmaScreen/Raavarer/VisRaavarer/VisRaavare.html");
         }
 
     }, function (data) {
@@ -52,18 +52,6 @@ async function raavareData(modType) {
             alert('Enternal Error: Prøve igen!');
         }
     }, httpType, JSON.stringify(jsonData))
-}
-
-
-function postRaavareData() {
-    raavareData("Create");
-}
-
-function postRaavareUpdate() {
-
-
-    raavareData("Update");
-
 }
 
 function toOpretrecept() {

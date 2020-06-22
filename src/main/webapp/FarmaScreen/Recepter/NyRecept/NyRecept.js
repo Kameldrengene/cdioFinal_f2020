@@ -42,10 +42,10 @@ function addLinje() {    //tilføjer ekstra råvare
             '</select>' +
             '</td>\n' +
             '        <td >' +
-            '<input type="number" id="netto' + counter + '" placeholder="Mængde 1.0001" value="" step="0.0001" max="20" min="0.05">' +
+            '<input type="number" id="netto' + counter + '" placeholder="Mængde 1.001" value="" step="0.001" max="20" min="0.05">' +
             '</td>\n' +
             '        <td >' +
-            '<input type="number" id="tol' + counter + '"  placeholder="Tolerance 0.1" value="" step="0.01" max="10" min="0.1"> ' +
+            '<input type="number" id="tol' + counter + '"  placeholder="Tolerance 0.1" value="" step="0.1" max="10" min="0.1"> ' +
             '</td>\n' +
             '<td>\n' +
             '            <button class="hvr-buzz" onclick="fjernRaavar('+coutnum+');" id="Fjern">fjern</button>\n' +

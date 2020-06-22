@@ -6,7 +6,10 @@ import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
+import org.junit.platform.engine.TestExecutionResult;
 
+import javax.ws.rs.WebApplicationException;
+import javax.ws.rs.core.Response;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -61,9 +64,37 @@ class ReceptControllerTest {
         newRecept.setReceptNavn("Morfin");
         newRecept.setTolerance(9.5);
 
-        receptController.opretRecept(newRecept,0);
-        testRecept = receptController.getRecept(99,3);
+        ReceptDTO neRecept = new ReceptDTO();
+        neRecept.setNonNetto(5.5);
+        neRecept.setRaavareId(2);
+        neRecept.setReceptId(99);
+        neRecept.setReceptNavn("Morfin");
+        neRecept.setTolerance(9.5);
+
+        receptDTOList.add(newRecept);
+        receptDTOList.add(neRecept);
+
+        receptController.opretRecept(receptDTOList);
+        testRecept = receptController.getRecept(99,2);
         assertEquals(expected,testRecept.getReceptId());
+    }
+
+    @Test
+    @Order(4)
+    void opretReceptfunc(){
+        try {
+            receptController.receptDAOSQL.db.setDB("cdioTest_2020");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        int expected = 99;
+        List<ReceptDTO> receptDTOList1 = new ArrayList<>();
+        ReceptDTO newRecept = new ReceptDTO();
+        newRecept.setNonNetto(5.5);
+        newRecept.setRaavareId(3);
+        newRecept.setReceptId(99);
+        newRecept.setReceptNavn("Morfin");
+        newRecept.setTolerance(9.5);
 
         ReceptDTO neRecept = new ReceptDTO();
         neRecept.setNonNetto(5.5);
@@ -71,30 +102,18 @@ class ReceptControllerTest {
         neRecept.setReceptId(99);
         neRecept.setReceptNavn("Morfin");
         neRecept.setTolerance(9.5);
-        receptController.opretRecept(neRecept,1);
-        testRecept = receptController.getRecept(99,2);
-        assertEquals(expected,testRecept.getReceptId());
+
+        receptDTOList1.add(newRecept);
+        receptDTOList1.add(neRecept);
+
+        assertThrows(WebApplicationException.class,()->{
+            receptController.opretRecept(receptDTOList1);
+        });
 
     }
 
-//    @Test
-//    @Order(4)
-//    void updateRecept() {
-//        receptController.receptDAOSQL.db.setDB("cdioTest_2020");
-//        double expected = 3.5;
-//        ReceptDTO newRecept = new ReceptDTO();
-//        newRecept.setNonNetto(3.5);
-//        newRecept.setRaavareId(3);
-//        newRecept.setReceptId(99);
-//        newRecept.setReceptNavn("Morfin");
-//        newRecept.setTolerance(5.5);
-//        receptController.updateRecept(newRecept);
-//        testRecept = receptController.getRecept(99,3);
-//        assertEquals(expected,testRecept.getNonNetto());
-//
-//    }
     @Test
-    @Order(4)
+    @Order(5)
     void cleanUp(){
 
         try {
