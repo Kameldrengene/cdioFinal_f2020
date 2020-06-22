@@ -3,12 +3,17 @@ package dal.dto;
 import java.io.Serializable;
 
 public class UserDTO implements Serializable{
-
+	/** Bruger ID 10 til 99 */
 	private int userID;
+	/** Bruger navn 2 til 20 tegn */
 	private String userName;
+	/** Bruger Initial 2 til 4 tegn */
 	private String ini;
+	/** Bruger passsword 6 til 50 tegn */
 	private String password;
+	/** Bruger rolle (Admin,Farmaceut,Produktionsleder,Laborant) */
 	private String job;
+	/** Bruger aktivitet status*/
 	private boolean aktiv;
 	private static int counter = 11;
 
