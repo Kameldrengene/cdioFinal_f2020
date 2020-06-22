@@ -7,58 +7,60 @@
     <link rel="stylesheet" type="text/css" href="AdminScreen/Brugeroversigt/Updatebruger/UpdateBruger.css">
 </head>
 <body>
-<h5 id="brugerInfo">Loading</h5>
-<script>currentUser();</script>
-<div id="content"><h1>Ret Bruger</h1>
-    <br>
+    <div class="container">
+        <h5 id="brugerInfo">Loading</h5>
+        <script>currentUser();</script>
+        <div id="content"><h1>Ret Bruger</h1>
+            <br>
 
-    <input type="text" id="username" placeholder="Brugernavn" value="" minlength="2" maxlength="20"><br> <!-- inputs med min og max length for korrekt input -->
-    <input type="text" id="ini"  placeholder="Initialer" value="" minlength="2" maxlength="4"><br>
-    <input type="text" id="pass"  placeholder="Password" value=""  minlength="2" maxlength="20"><br>
+            <input type="text" id="username" placeholder="Brugernavn" value="" minlength="2" maxlength="20"><br> <!-- inputs med min og max length for korrekt input -->
+            <input type="text" id="ini"  placeholder="Initialer" value="" minlength="2" maxlength="4"><br>
+            <input type="text" id="pass"  placeholder="Password" value=""  minlength="2" maxlength="20"><br>
 
 
-    <!-- En <div> (gruppe) der indeholder en serie labels og 'radio'-knapper -->
-    <div class="radiogroup">
-        <form>
-        <h3>Vælg Job</h3>
+            <!-- En <div> (gruppe) der indeholder en serie labels og 'radio'-knapper -->
+            <div class="radiogroup">
+                <form>
+                <h3>Vælg Job</h3>
 
-        <!-- Kun én knap af dem med "name=gender" kan vælges -->
-            <table class="rolletabel">
-                <tr><!-- radioknapper til valg af rolle. kun 1 kan vælges. -->
-                    <td><input type="radio" id="role1" name="jobs" class="jobsradio"  value="Administrator" required></td>
-                    <td><label for="role1"> Administrators </label><br></td>
-                </tr>
-                <tr>
-                    <td><input type="radio" id="role2" name="jobs" class="jobsradio" value="Farmaceut" required></td>
-                    <td><label for="role2"> Farmaceut </label><br></td>
-                </tr>
-                <tr>
-                    <td><input type="radio" id="role3" name="jobs" class="jobsradio" value="Produktionsleder" required></td>
-                    <td><label for="role3"> Produktionsleder</label><br></td>
-                </tr>
-                <tr>
-                    <td><input type="radio" id="role4" name="jobs" class="jobsradio" value="Laborant" required></td>
-                    <td><label for="role4"> Laborant </label><br></td>
-                </tr>
-            </table>
-        </form>
+                <!-- Kun én knap af dem med "name=gender" kan vælges -->
+                    <table class="rolletabel">
+                        <tr><!-- radioknapper til valg af rolle. kun 1 kan vælges. -->
+                            <td><input type="radio" id="role1" name="jobs" class="jobsradio"  value="Administrator" required></td>
+                            <td><label for="role1"> Administrators </label><br></td>
+                        </tr>
+                        <tr>
+                            <td><input type="radio" id="role2" name="jobs" class="jobsradio" value="Farmaceut" required></td>
+                            <td><label for="role2"> Farmaceut </label><br></td>
+                        </tr>
+                        <tr>
+                            <td><input type="radio" id="role3" name="jobs" class="jobsradio" value="Produktionsleder" required></td>
+                            <td><label for="role3"> Produktionsleder</label><br></td>
+                        </tr>
+                        <tr>
+                            <td><input type="radio" id="role4" name="jobs" class="jobsradio" value="Laborant" required></td>
+                            <td><label for="role4"> Laborant </label><br></td>
+                        </tr>
+                    </table>
+                </form>
+            </div>
+
+            <div class="aktivopret">
+                <table class="rolletabel">
+                    <h3>Vælg om aktiv</h3>
+                    <tr> <!-- checkbox til aktivitet. har brugerens aktivitet som default-->
+                        <td><input type="checkbox" id="aktivcheckbox" name="aktive" class="jobs" value="true"></td>
+                        <td><label for="aktivcheckbox"> Active? </label><br></td>
+                    </tr>
+                </table>
+            </div>
+
+            <br>
+            <input type="button" onclick="userHandler('Update')" class="hvr-pop" value="Opdater"><br> <!-- knap til opdaterering -->
+            <input type="submit" class="hvr-pop screenbtn" value="Retur" id="retur" onclick="switchP('AdminScreen/Admin.html') ; return false">
+
+        </div>
     </div>
-
-    <div class="aktivopret">
-        <table class="rolletabel">
-            <h3>Vælg om aktiv</h3>
-            <tr> <!-- checkbox til aktivitet. har brugerens aktivitet som default-->
-                <td><input type="checkbox" id="aktivcheckbox" name="aktive" class="jobs" value="true"></td>
-                <td><label for="aktivcheckbox"> Active? </label><br></td>
-            </tr>
-        </table>
-    </div>
-
-    <br>
-    <input type="button" onclick="userHandler('Update')" class="hvr-pop" value="Opdater"><br> <!-- knap til opdaterering -->
-    <input type="submit" class="hvr-pop screenbtn" value="Retur" id="retur" onclick="switchP('AdminScreen/Admin.html') ; return false">
-
-</div>
 
 </body>
 </html>

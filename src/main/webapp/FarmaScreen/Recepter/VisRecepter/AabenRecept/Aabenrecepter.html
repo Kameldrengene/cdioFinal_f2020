@@ -11,22 +11,24 @@
 </head>
 <body>
 
-<h5 id="brugerInfo">Loading</h5> <!-- bruger info -->
-<script>currentUser();</script>
-<div class="loads"><div id="loading"></div> </div>
-<h1 id="receptheader"></h1>
-<div>
-    <div id="list"  className="brugertable">
-        <br/>
-        <table class="brugertable" id="nyrecept_table">
+    <div class="container">
+        <h5 id="brugerInfo">Loading</h5> <!-- bruger info -->
+        <script>currentUser();</script>
+        <div class="loads"><div id="loading"></div> </div>
+        <h1 id="receptheader"></h1>
+        <div>
+            <div id="list"  className="brugertable">
+                <br/>
+                <table class="brugertable" id="nyrecept_table">
 
-        </table>
-<!--        <input type="submit" class="hvr-buzz screenbtn" onclick="tiladdReceptHtml(); return false" value="addRecept" >-->
-        <h1 id="error"></h1>
+                </table>
+        <!--        <input type="submit" class="hvr-buzz screenbtn" onclick="tiladdReceptHtml(); return false" value="addRecept" >-->
+                <h1 id="error"></h1>
+            </div>
+        </div>
+
+        <input type="submit" class="hvr-pop screenbtn" id="retur" value="Retur" onclick="switchP('FarmaScreen/Recepter/VisRecepter/VisRecepter.html'); return false">
+        <!--<script>visRecept();</script>-->
     </div>
-</div>
-
-<input type="submit" class="hvr-pop screenbtn" id="retur" value="Retur" onclick="switchP('FarmaScreen/Recepter/VisRecepter/VisRecepter.html'); return false">
-<!--<script>visRecept();</script>-->
 </body>
 </html>

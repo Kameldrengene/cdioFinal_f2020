@@ -5,30 +5,31 @@
     <title>raavareEdit</title>
 </head>
 <body>
-<h5 id="brugerInfo">Loading</h5> <!-- bruger info -->
-<script>currentUser();</script>
-<div class="loads"><div id="loading"></div> </div>
-<div id="content"><h1>Opdater råvare</h1>
-    <br>
+    <div class="container">
+        <h5 id="brugerInfo">Loading</h5> <!-- bruger info -->
+        <script>currentUser();</script>
+        <div class="loads"><div id="loading"></div> </div>
+        <div id="content"><h1>Opdater råvare</h1>
+            <br>
 
-    <h5 id="raavareID"></h5>
-    <br>
-    <input type="text" id="raavareNavn" placeholder="RåvareNavn" value="" minlength="2" maxlength="20"><br>
-    <input type="text" id="leverandoer"  placeholder="Leverandør" value="" minlength="2" maxlength="20"><br>
+            <h5 id="raavareID"></h5>
+            <br>
+            <input type="text" id="raavareNavn" placeholder="RåvareNavn" value="" minlength="2" maxlength="20"><br>
+            <input type="text" id="leverandoer"  placeholder="Leverandør" value="" minlength="2" maxlength="20"><br>
 
 
-    <input id="confirmbtn" type="button" onclick="
-        if (confirm('Er du sikker?')) {
-            if(document.getElementById('raavareNavn').value != '' && document.getElementById('leverandoer').value != ''){
-                raavareData('Update');
+            <input id="confirmbtn" type="button" onclick="
+                if (confirm('Er du sikker?')) {
+                    if(document.getElementById('raavareNavn').value != '' && document.getElementById('leverandoer').value != ''){
+                        raavareData('Update');
 
-            } else {
-                alert('Ikke alt udfyldt');
-            }
-        }"
-           class="hvr-pop" value="Opdater">
-</div>
-
+                    } else {
+                        alert('Ikke alt udfyldt');
+                    }
+                }"
+                   class="hvr-pop" value="Opdater">
+        </div>
+    </div>
 
 <input type="submit" class="hvr-pop screenbtn" id="retur" value="Retur" onclick="switchP('FarmaScreen/Raavarer/VisRaavarer/VisRaavare.html'); return false">
 

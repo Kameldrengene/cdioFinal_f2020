@@ -9,53 +9,54 @@
 </head>
 <body>
 
+    <div class="container">
+        <table class="menubar">
+            <tbody>
+                <tr>
+                    <td>
+                        <h5 id="brugerInfo">Loading</h5> <!-- bruger info -->
+                        <script>currentUser();</script>
+                    </td>
+                </tr>
+                <tr class="workAs">
+                    <td>
+                        <button class="hvr-pop screenbtn" onclick="switchP('ProduktScreen/ProduktScreen.html')">Arbejd som Produktionsleder</button>
+                    </td>
+                </tr>
+                <tr class="workAs">
+                    <td>
+                        <button class="hvr-pop screenbtn" onclick="switchP('LabScreen/Lab.html')">Arbejd som Laborant</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
 
-    <table class="menubar">
-        <tbody>
+        <h1>Farmaceut</h1>
+        <table  class="menuItemsTable"> <!-- table for buttons -->
+            <thead>
             <tr>
-                <td>
-                    <h5 id="brugerInfo">Loading</h5> <!-- bruger info -->
-                    <script>currentUser();</script>
-                </td>
+                <th><h2>Råvarer</h2></th>
+                <th></th>
+                <th><h2>Recepter</h2></th>
             </tr>
-            <tr class="workAs">
-                <td>
-                    <button class="hvr-pop screenbtn" onclick="switchP('ProduktScreen/ProduktScreen.html')">Arbejd som Produktionsleder</button>
-                </td>
+            </thead>
+            <tbody>
+            <tr>
+                <td><input type="submit" class="hvr-pop screenbtn" value="Vis råvarer" onclick="switchP('FarmaScreen/Raavarer/VisRaavarer/VisRaavare.html'); return false"> <br> </td>
+                <td></td>
+                <td> <input type="submit" class="hvr-pop screenbtn" value="Vis recepter" onclick="switchP('FarmaScreen/Recepter/VisRecepter/VisRecepter.html'); return false"> </td>
             </tr>
-            <tr class="workAs">
-                <td>
-                    <button class="hvr-pop screenbtn" onclick="switchP('LabScreen/Lab.html')">Arbejd som Laborant</button>
-                </td>
+            <tr>
+                <td> <input type="submit" class="hvr-pop screenbtn" value="Opret råvare" onclick="switchP('FarmaScreen/Raavarer/NyRaavare/NyRaavare.html'); return false"> </td>
+                <td></td>
+                <td><input type="submit" class="hvr-pop screenbtn" value="Opret recept" onclick="toOpretrecept(); return false"></td>
             </tr>
-        </tbody>
-    </table>
+            </tbody>
+        </table>
 
-    <h1>Farmaceut</h1>
-    <table  class="menuItemsTable"> <!-- table for buttons -->
-        <thead>
-        <tr>
-            <th><h2>Råvarer</h2></th>
-            <th></th>
-            <th><h2>Recepter</h2></th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr>
-            <td><input type="submit" class="hvr-pop screenbtn" value="Vis råvarer" onclick="switchP('FarmaScreen/Raavarer/VisRaavarer/VisRaavare.html'); return false"> <br> </td>
-            <td></td>
-            <td> <input type="submit" class="hvr-pop screenbtn" value="Vis recepter" onclick="switchP('FarmaScreen/Recepter/VisRecepter/VisRecepter.html'); return false"> </td>
-        </tr>
-        <tr>
-            <td> <input type="submit" class="hvr-pop screenbtn" value="Opret råvare" onclick="switchP('FarmaScreen/Raavarer/NyRaavare/NyRaavare.html'); return false"> </td>
-            <td></td>
-            <td><input type="submit" class="hvr-pop screenbtn" value="Opret recept" onclick="toOpretrecept(); return false"></td>
-        </tr>
-        </tbody>
-    </table>
-
-    <div class="logudEllerTilbage">
-        <input type="submit" class="hvr-buzz screenbtn" value="Log ud" onclick="window.location.reload()">
+        <div class="logudEllerTilbage">
+            <input type="submit" class="hvr-buzz screenbtn" value="Log ud" onclick="window.location.reload()">
+        </div>
     </div>
 
 

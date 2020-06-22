@@ -11,51 +11,53 @@
 </head>
 <body>
 
-    <div class="loads"><div id="loading"></div> </div>
-
-    <table class="menubar">
-        <tbody>
-            <tr>
-                <td>
-                    <h5 id="brugerInfo">Loading</h5> <!-- bruger info -->
-                    <script>currentUser();</script>
-                </td>
-            </tr>
-            <tr>
-                <td class="workAs">
-                    <button class="hvr-pop screenbtn" onclick="switchP('LabScreen/Lab.html');">Arbejd som Laborant</button>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-
-    <h1>Produktionsleder</h1>
-
-    <table class="menuItemsTable">
-        <thead>
-            <tr>
-                <th><h2>Råvarebatches</h2></th>
-                <th></th>
-                <th><h2>Produktbatches</h2></th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td><button class="hvr-pop screenbtn" onclick="switchP('ProduktScreen/Raavarebatches/VisRaavarebatches.html');">Vis råvarebatches</button><br> </td>
-                <td></td>
-                <td> <button class="hvr-pop screenbtn" onclick="switchP('ProduktScreen/Produktbatches/VisProduktbatches/VisProduktbatches.html');">Vis produktbatches</button> </td>
-            </tr>
-            <tr>
-                <td> <button class="hvr-pop screenbtn" onclick="switchP('ProduktScreen/Raavarebatches/OpretRaavarebatch/VaelgRaavare.html');">Opret råvarebatch</button> </td>
-                <td></td>
-                <td> <button class="hvr-pop screenbtn" onclick="switchP('ProduktScreen/Produktbatches/OpretProduktbatch/OpretProduktbatch.html');">Opret produktbatch</button> </td>
-            </tr>
-        </tbody>
-    </table>
+    <div class="container">
+        <div class="loads"><div id="loading"></div> </div>
 
 
-    <div class="logudEllerTilbage"></div>
+        <table class="menubar">
+            <tbody>
+                <tr>
+                    <td>
+                        <h5 id="brugerInfo">Loading</h5> <!-- bruger info -->
+                        <script>currentUser();</script>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="workAs">
+                        <button class="hvr-pop screenbtn" onclick="switchP('LabScreen/Lab.html');">Arbejd som Laborant</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
 
+        <h1>Produktionsleder</h1>
+
+        <table class="menuItemsTable">
+            <thead>
+                <tr>
+                    <th><h2>Råvarebatches</h2></th>
+                    <th></th>
+                    <th><h2>Produktbatches</h2></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><button class="hvr-pop screenbtn" onclick="switchP('ProduktScreen/Raavarebatches/VisRaavarebatches.html');">Vis råvarebatches</button><br> </td>
+                    <td></td>
+                    <td> <button class="hvr-pop screenbtn" onclick="switchP('ProduktScreen/Produktbatches/VisProduktbatches/VisProduktbatches.html');">Vis produktbatches</button> </td>
+                </tr>
+                <tr>
+                    <td> <button class="hvr-pop screenbtn" onclick="switchP('ProduktScreen/Raavarebatches/OpretRaavarebatch/VaelgRaavare.html');">Opret råvarebatch</button> </td>
+                    <td></td>
+                    <td> <button class="hvr-pop screenbtn" onclick="switchP('ProduktScreen/Produktbatches/OpretProduktbatch/OpretProduktbatch.html');">Opret produktbatch</button> </td>
+                </tr>
+            </tbody>
+        </table>
+
+
+        <div class="logudEllerTilbage"></div>
+    </div>
 
 
 </body>
