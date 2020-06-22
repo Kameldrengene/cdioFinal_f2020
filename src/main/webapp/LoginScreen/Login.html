@@ -5,76 +5,70 @@
     <title>Login</title>
     <link rel="stylesheet" type="text/css" href="LoginScreen/Login.css">
     <script src="LoginScreen/Login.js"></script>
-    <script>
-        $("document").ready(function () {
-            var darkTheme = "<link rel=\"stylesheet\" id=\"theme\" type=\"text/css\" href=\"default.css\">";
-            var lightTheme = "<link rel=\"stylesheet\" id=\"theme\" type=\"text/css\" href=\"light.css\">";
-            $("#dark").click(function () {
-                $("#theme").replaceWith(darkTheme);
-            });
-
-            $("#light").click(function () {
-                $("#theme").replaceWith(lightTheme);
-            });
-        });
-
-
-    </script>
 
 </head>
 
 <body>
-    <h1>CDIO Final</h1>
 
-    <div class="loads"><div id="loading"></div> </div>
+    <div class="container">
 
-    <!--  To be loaded with content when fecthing of data is done  -->
-    <div id="login">
-        <form>
-            <h3>Vælg rolle</h3>
-            <table class="rolletabel">
-                <tr>
-                    <td> <input type="radio" name="rolle" id="administrator" class="administrator"> </td>
-                    <td> <Label for="administrator">Administrator</Label> </td>
-                </tr>
-                <tr>
-                    <td> <input type="radio" name="rolle" id="farmaceut"> </td>
-                    <td> <Label for="farmaceut">Farmaceut</Label> </td>
-                </tr>
-                <tr>
-                    <td><input type="radio" name="rolle" id="produktionsleder"></td>
-                    <td><Label for="produktionsleder">Produktionsleder</Label></td>
-                </tr>
-                <tr>
-                    <td><input type="radio" name="rolle" id="laborant"></td>
-                    <td><Label for="laborant">Laborant</Label></td>
-                </tr>
-            </table>
+        <div class="toggle">
 
-            <table class="brugertable">
-                <thead>
-                <tr>
-                    <th></th>
-                    <th>ID</th>
-                    <th>Navn</th>
-                </tr>
-                </thead>
-                <tbody id="personer">
-                </tbody>
-            </table>
+            <h5>Light theme</h5>
+            <label class="switch">
+                <input type="checkbox" unchecked>
+                <span class="slider round"></span>
+            </label>
+        </div>
 
-            <br>
-            <button class='hvr-buzz'>Sign in</button>
-        </form>
+        <h1>CDIO Final</h1>
+
+        <div class="loads"><div id="loading"></div> </div>
+
+        <!--  To be loaded with content when fecthing of data is done  -->
+        <div id="login">
+            <form>
+                <h3>Vælg rolle</h3>
+                <table class="rolletabel">
+                    <tr>
+                        <td> <input type="radio" name="rolle" id="administrator" class="administrator"> </td>
+                        <td> <Label for="administrator">Administrator</Label> </td>
+                    </tr>
+                    <tr>
+                        <td> <input type="radio" name="rolle" id="farmaceut"> </td>
+                        <td> <Label for="farmaceut">Farmaceut</Label> </td>
+                    </tr>
+                    <tr>
+                        <td><input type="radio" name="rolle" id="produktionsleder"></td>
+                        <td><Label for="produktionsleder">Produktionsleder</Label></td>
+                    </tr>
+                    <tr>
+                        <td><input type="radio" name="rolle" id="laborant"></td>
+                        <td><Label for="laborant">Laborant</Label></td>
+                    </tr>
+                </table>
+
+                <table class="brugertable">
+                    <thead>
+                    <tr>
+                        <th></th>
+                        <th>ID</th>
+                        <th>Navn</th>
+                    </tr>
+                    </thead>
+                    <tbody id="personer">
+                    </tbody>
+                </table>
+
+                <br>
+                <button class='hvr-buzz'>Sign in</button>
+            </form>
+        </div>
+
+        <!-- Logo med style defineret direkte i HTML -->
+        <img id="logo" src="dtu_logo.png" style="margin-top: 2%" width="50" height="72.5">
+
     </div>
-    <div id="themes">
-        <div style="height: 30px"></div>
-        <h3>Tema:</h3>
-        <button class="hvr-pop" id="dark">Mørk</button> <button class="hvr-pop" id="light">Lys</button>
-
-    </div>
-    <!-- Logo med style defineret direkte i HTML -->
-    <img id="logo" src="dtu_logo.png" style="margin-top: 2%" width="50" height="72.5">
 
 </body>
 </html>

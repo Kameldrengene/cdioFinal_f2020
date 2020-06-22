@@ -68,6 +68,27 @@ $("document").ready(async function () {
                 switchP("LabScreen/Lab.html");
         }
     });
+
+    //Activate theme switching functionality
+    const darkTheme = "<link rel=\"stylesheet\" id=\"theme\" type=\"text/css\" href=\"defaultDark.css\">";
+    const lightTheme = "<link rel=\"stylesheet\" id=\"theme\" type=\"text/css\" href=\"defaultLight.css\">";
+    let currentTheme = "dark";
+
+    $(".slider").click(function () {
+
+        if(currentTheme.localeCompare("dark") != 0){
+            // console.log("2")
+            currentTheme = "dark";
+            $("#theme").replaceWith(darkTheme);
+
+        } else {
+            // console.log("3")
+            currentTheme = "light";
+            $("#theme").replaceWith(lightTheme);
+
+        }
+    });
+
 });
 
 async function loadUsers(){
