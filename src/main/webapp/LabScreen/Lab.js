@@ -201,7 +201,9 @@ function nettoSwitch(PBID) { /** Metode der bliver kørt, når siden skifter fra
                 }, "GET", "None", false)
             }
         } else {
-            alert("Vægt ikke acceptabel, prøv igen")
+            alert("Vægt ikke inden for acceptabel tolerance: \n" +
+                "Netto: " + data.nonNetto + "Kg\n" +
+                "Tolerance: " + data.tolerance + "%" )
             nettoView()
         }
     }, function (data) {
