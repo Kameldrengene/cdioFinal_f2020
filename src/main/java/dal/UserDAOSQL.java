@@ -136,7 +136,7 @@ public class UserDAOSQL implements IUserDAO {
         return user.getAktiv();
     }
 
-    //todo comment
+    //Set user udfra ResultSet og returner
     private UserDTO setUser(ResultSet rs, UserDTO user) throws SQLException {
         user.setUserID(rs.getInt("userID"));
         user.setUserName(rs.getString("userName"));

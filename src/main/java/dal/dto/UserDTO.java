@@ -4,29 +4,26 @@ import java.io.Serializable;
 
 public class UserDTO implements Serializable{
 
-	//todo comments
 	private int userID;
-	private String userName;                
+	private String userName;
 	private String ini;
-	//private String cpr;
 	private String password;
 	private String job;
 	private boolean aktiv;
 	private static int counter = 11;
-	
-//TODO Add relevant fields
-	
+
+
 	public UserDTO() {
 	}
-	
+
 	public String getPassword(){
 	    return password;
     }
-    
+
     public void setPassword(String newPassword){
 	    this.password = newPassword;
     }
-	
+
 	public int getUserID() {
 		return userID;
 	}
@@ -45,11 +42,6 @@ public class UserDTO implements Serializable{
 	public void setIni(String ini) {
 		this.ini = ini;
 	}
-//	public String getCpr() { return cpr;}
-//	public void setCpr(String cpr) {
-//		this.cpr = cpr;
-//	}
-
 	public String getJob() {
 		return job;
 	}
@@ -59,11 +51,11 @@ public class UserDTO implements Serializable{
 	public boolean getAktiv(){return aktiv;}
 	public void setAktiv(boolean aktiv) {this.aktiv = aktiv;}
 
-	
+
 	public void removeRole(){
 		this.job = null;
 	}
-	
+
 	public static int getCounter() {
 		return counter;
 	}

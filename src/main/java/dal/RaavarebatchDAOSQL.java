@@ -77,7 +77,7 @@ public class RaavarebatchDAOSQL implements IRaavarebatchDAO {
         return rb;
     }
 
-    //todo comment
+    //Return liste af RaavareBatchDTO'er
     @Override
     public List<RaavarebatchDTO> getRVIDBatch(int RVID) throws SQLException{
         db.connect();

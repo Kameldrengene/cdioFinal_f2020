@@ -150,7 +150,7 @@ public class ProduktbatchDAOSQL implements IProduktbatchDAO {
         db.close();
     }
 
-    //todo comment
+    //Opdater ny ProduktBatchKomp
     @Override
     public void updateNewpb(ProduktbatchKompDTO ProduktbatchKomp) throws SQLException{
         db.connect();
@@ -168,7 +168,7 @@ public class ProduktbatchDAOSQL implements IProduktbatchDAO {
         db.close();
     }
 
-    //todo comment
+    //Set produktBatch
     private ProduktbatchKompDTO setPB(ResultSet rs, ProduktbatchKompDTO pb, int pbId){
         pb.setPbId(pbId);
         try {
