@@ -8,6 +8,7 @@
     --col-textprimary: #E9E9EA;
     --col-textsecondary: #666666;
     --col-textthird: rgba(233, 233, 234, 0.6);
+    --col-defaultRed: #CD5C5C;
 
     /* Sætter Font i prioriteret rækkefølge, i tilfælde af at browseren
      ikke har en fonten. */
@@ -18,6 +19,21 @@
 /* Selector på flere tags */
 h1, h2, h3 {
     color: var(--color-primary);
+}
+
+h5{
+    color: var(--col-textsecondary);
+    font-weight: normal;
+    line-height: 0.8;
+    font-size: 100%;
+    margin-top: 5px;
+    margin-bottom: 10px;
+}
+
+#brugerInfo{
+    text-align: right;
+    color: #E9E9EA;
+
 }
 
 /* Centerer alt text i <body> */
@@ -287,28 +303,15 @@ form{
     color: var(--col-textsecondary)
 }
 
-#brugerInfo{
-    text-align: right;
-    color: #E9E9EA;
-
-}
-
 .screenbtn{
     margin-left: auto;
     margin-right: auto;
 }
 
 #retur{
-    margin: 20px;
-}
-
-h5{
-    color: var(--col-textsecondary);
-    font-weight: normal;
-    line-height: 0.8;
-    font-size: 100%;
-    margin-top: 5px;
-    margin-bottom: 10px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    background: var(--col-defaultRed);
 }
 
 /* Source: https://www.w3schools.com/howto/howto_css_loader.asp */
@@ -341,6 +344,45 @@ h5{
     background: var(--col-background);
     display:none;
 }
+
+.menubar{
+    text-align: right;
+    margin-right: 0px;
+    margin-left: auto;
+}
+
+.menubar .workAs{
+    font-size: 70%;
+    margin: 5px;
+}
+
+.menubar .workAs .hvr-pop{
+    background: var( --col-textsecondary);
+    width: 100%;
+}
+
+
+.menuItemsTable .hvr-pop{
+    width: 100%;
+}
+
+.logudEllerTilbage .hvr-buzz{
+    background: var(--col-defaultRed);
+}
+
+.afslutTable .hvr-pop{
+    width: 100%;
+    text-align: center;
+}
+
+.afslutTable{
+    margin: auto;
+}
+
+
+
+
+
 
 
 

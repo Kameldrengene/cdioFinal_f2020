@@ -2,13 +2,15 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-
+    <title>Vaelg raavare</title>
     <script src="ProduktScreen/Raavarebatches/OpretRaavarebatch/VaelgRaavare.js"></script>
 
 
 </head>
 <body>
 
+    <h5 id="brugerInfo">Loading</h5> <!-- bruger info -->
+    <script>currentUser();</script>
     <div class="loads"><div id="loading"></div> </div>
 
     <h1>Opret råvarebatch</h1>
@@ -19,7 +21,7 @@
     </table>
 
     <br>
-    <input type="submit" class="hvr-buzz" value="Retur" id="retur" onclick="switchP('ProduktScreen/ProduktScreen.html'); return false">
+    <input type="submit" class="hvr-pop" value="Retur" id="retur" onclick="switchP('ProduktScreen/ProduktScreen.html'); return false">
 
 </body>
 </html>

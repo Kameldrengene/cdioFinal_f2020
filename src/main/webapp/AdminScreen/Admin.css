@@ -48,14 +48,18 @@
 .brugertable a:hover {
     color: var(--col-textprimary);
 }
+
 .slet{
-    background: #c65450;
-}
-.update{
-    background: cornflowerblue;
+    background: var(--col-defaultRed);
+    margin: auto;
 }
 
-body{
-    margin-top: 10px;
+.hvr-buzz{
+    background-color: var(--col-defaultRed);
 }
+
+thead, tbody{
+    display: block;
+}
+
 

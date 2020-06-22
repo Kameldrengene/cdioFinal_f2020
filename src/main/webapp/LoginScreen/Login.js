@@ -5,7 +5,7 @@ $("document").ready(async function () {
     localStorage.setItem('loginID', 'None');
 
     //Keeps the different users in local storage. So they don't have to be reloaded multiple times
-    //await to ensure functionality is only added after resources are fetched
+    //Await to ensure functionality is only added after resources are fetched
     await loadUsers();
 
     //Hide user table until a role is selected
@@ -18,7 +18,6 @@ $("document").ready(async function () {
     //Saves the ID of the selected user in localStorage
     $("#personer").on("click", "input", function () {
         localStorage.setItem("loginID", this.id);
-        console.log(this.id);
     });
 
     //Attach the appropiate actions to the role tabel
@@ -50,19 +49,19 @@ $("document").ready(async function () {
         $('#personer').html(labos);
     });
 
-    //Switches to the right page when "sing in" is pressed
+    //Switches to the right page when "sign in" is pressed
     $(".hvr-buzz").click(function () {
         const loginRole = localStorage.getItem("loginRole");
         const ID = localStorage.getItem("loginID");
 
         if (ID === "None") {
-            alert("Vælg venligst en rolle"); return false;
+            alert("Vælg venligst en rolle");
         } else {
             localStorage.setItem("localID",ID);
             if (loginRole == "admin")
                 switchP("AdminScreen/Admin.html");
             else if (loginRole == "farma")
-                switchP("FarmaScreen/index.html");
+                switchP("FarmaScreen/Farma.html");
             else if (loginRole == "prodLeder")
                 switchP("ProduktScreen/ProduktScreen.html")
             else if (loginRole == "laborant")
@@ -92,33 +91,13 @@ async function loadUser(role, redo=0) {
         contentType: "application/json",
         dataType: "json",
         success: data => createTable(data, role),
-        error: (response, error) => loadError(response, error)
+        error: err => error(err)
     });
 
     $(".loads").hide()
 
 }
 
-async function loadError(response, error){
-    if (response.status == 500) {
-        alert("Kunne ikke forbinde korrekt til backenden. Genstarter siden");
-        location.reload();
-    }else {
-        if (redo == 0) {
-            alert("Kunne ikke forbinde til databasen. Prøver igen");
-            console.log(response);
-            await loadUser(role, 1);
-        } else if (redo < 4) {
-            console.log(response);
-            await sleep(500);
-            await loadUser(role, redo + 1);
-
-        } else {
-            alert("Fejlede 5 forsøg i træk. Kontakt System administratoren.")
-            console.log(response);
-        }
-    }
-}
 
 async function createTable(data, role){
 

@@ -1,5 +1,6 @@
-package Data;
+package dal;
 
+import dal.SQLDatabaseIO;
 import org.junit.jupiter.api.Test;
 
 import java.sql.ResultSet;

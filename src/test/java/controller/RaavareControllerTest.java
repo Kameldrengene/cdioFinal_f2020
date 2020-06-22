@@ -63,24 +63,24 @@ class RaavareControllerTest {
         assertEquals(expected,testraavare.getRaavareID());
     }
 
-    @Test
-    @Order(4)
-    void updateRaavare() {
-        try {
-            raavareController.raavareDAOSQL.db.setDB("cdioTest_2020");
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        String expected = "Novo";
-        RaavareDTO newRaavare = new RaavareDTO();
-        newRaavare.setLagerBeholdning(10.5);
-        newRaavare.setLeverandoer("Novo");
-        newRaavare.setRaavareID(99);
-        newRaavare.setRaavareNavn("Vodka");
-        raavareController.updateRaavare(newRaavare);
-        testraavare=raavareController.getRaavare(99);
-        assertEquals(expected,testraavare.getLeverandoer());
-    }
+//    @Test
+//    @Order(4)
+//    void updateRaavare() {
+//        try {
+//            raavareController.raavareDAOSQL.db.setDB("cdioTest_2020");
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//        }
+//        String expected = "Novo";
+//        RaavareDTO newRaavare = new RaavareDTO();
+//        newRaavare.setLagerBeholdning(10.5);
+//        newRaavare.setLeverandoer("Novo");
+//        newRaavare.setRaavareID(99);
+//        newRaavare.setRaavareNavn("Vodka");
+//        raavareController.updateRaavare(newRaavare);
+//        testraavare=raavareController.getRaavare(99);
+//        assertEquals(expected,testraavare.getLeverandoer());
+//    }
 
     @Test
     @Order(5)

@@ -229,3 +229,26 @@ function completepb(PBID){ /** Kører for at afslutte PB */
     })
 }
 
+function showCorrectButton(){
+
+    const loginRole = localStorage.getItem("loginRole");
+
+    //Load the correct button: "logud" or "tilbage". Depending what role is logged in.
+    if(loginRole.localeCompare("laborant") != 0){
+
+        //Find the correct return page
+        let returnPage;
+
+        if(loginRole.localeCompare("farma") != 0)
+            returnPage = "'ProduktScreen/ProduktScreen.html'"
+        else
+            returnPage = "'FarmaScreen/Farma.html'"
+
+        $(".logudEllerTilbage").html('<input id="logoutbtn" type="submit" class="hvr-buzz screenbtn" value="Retur" onclick="switchP(' + returnPage + ')">');
+
+
+    } else{
+        $(".logudEllerTilbage").html('<input id="logoutbtn" type="submit" class="hvr-buzz screenbtn" value="Log ud" onclick="window.location.reload()">')
+    }
+
+}

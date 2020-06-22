@@ -7,9 +7,10 @@
     <link rel="stylesheet" type="text/css" href="AdminScreen/Brugeroversigt/Updatebruger/UpdateBruger.css">
 </head>
 <body>
+<h5 id="brugerInfo">Loading</h5>
+<script>currentUser();</script>
 <div id="content"><h1>Ret Bruger</h1>
     <br>
-
 
     <input type="text" id="username" placeholder="Brugernavn" value="" minlength="2" maxlength="20"><br> <!-- inputs med min og max length for korrekt input -->
     <input type="text" id="ini"  placeholder="Initialer" value="" minlength="2" maxlength="4"><br>
@@ -53,9 +54,11 @@
         </table>
     </div>
 
-    <input type="button" onclick="userHandler('Update')" class="hvr-pop" value="Ret"> <!-- knap til opdaterering -->
+    <br>
+    <input type="button" onclick="userHandler('Update')" class="hvr-pop" value="Opdater"><br> <!-- knap til opdaterering -->
+    <input type="submit" class="hvr-pop screenbtn" value="Retur" id="retur" onclick="switchP('AdminScreen/Admin.html') ; return false">
 
 </div>
-<input type="submit" class="hvr-buzz screenbtn" value="Retur" onclick="switchP('AdminScreen/Admin.html') ; return false">
+
 </body>
 </html>

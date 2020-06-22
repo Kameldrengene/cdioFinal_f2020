@@ -2,6 +2,9 @@ table{
     margin:auto;
 }
 
+.logudEllerTilbage{
+    margin-top: 20px;
+}
 
 th, td{
     min-width: 20px;

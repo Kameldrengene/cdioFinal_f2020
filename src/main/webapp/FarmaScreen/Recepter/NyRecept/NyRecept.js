@@ -19,19 +19,6 @@ function ledeligeRaavare() {   // gemmer alle råvare i en Map.
                 alleMap.set(raavarNavn,raavarID);
             });
         });
-       // await sendAjax("/BoilerPlate_war_exploded/rest/Raavare/getRaavarer",function (data) {
-       //      $.each(data,function (key,value) {
-       //          //console.log(value);
-       //          var raavarID = value.raavareID;
-       //          var raavarNavn = value.raavareNavn;
-       //
-       //          alleRaavare.push(raavarID);
-       //          alleRaavareNavn.push(raavarNavn);
-       //          alleMap.set(raavarNavn,raavarID);
-       //      });
-       //  }, function (data) {
-       //      alert("kunne ikke fetche raavar, prøve igen")
-       //  });
         localStorage.setItem("ledeligeRaavarID",alleRaavare);
         localStorage.setItem("ledeligeRaavarNavn",alleRaavareNavn);
     });
@@ -61,9 +48,10 @@ function addLinje() {    //tilføjer ekstra råvare
             '<input type="number" id="tol' + counter + '"  placeholder="Tolerance 0.1" value="" step="0.01" max="10" min="0.1"> ' +
             '</td>\n' +
             '<td>\n' +
-            '            <button class="hvr-buzz" onclick="fjernRaavar('+coutnum+');" id="fjern">fjern</button>\n' +
+            '            <button class="hvr-buzz" onclick="fjernRaavar('+coutnum+');" id="Fjern">fjern</button>\n' +
             '        </td>' +
             '    </tr>');
+        console.log("test1");
         coutnum = 0;
         console.log(coutnum);
         selectbtn(counter);
@@ -79,7 +67,7 @@ function fjernRaavar(counter1) {
 
 }
 
-function selectbtn(counter) {
+function selectbtn(counter) {    //tilføjer råvare i scroll down list.
     $(document).ready(function () {
         let selectNavn = document.getElementById('ledeligeNavn'+counter+'');
         let ledeliglist = localStorage.getItem("ledeligeRaavarID").split(",");
@@ -94,6 +82,7 @@ function selectbtn(counter) {
 
         if(counter===1) {
             $("#addRaavare").show();
+            $("#confirmbtn").show();
         }
     });
 }
@@ -101,7 +90,7 @@ function selectbtn(counter) {
 function retur() {
     $(document).ready(function () {
         delete counter;
-        switchP('FarmaScreen/index.html');
+        switchP('FarmaScreen/Farma.html');
     });
 }
 
@@ -109,12 +98,16 @@ function confirmOpretRecept() {
     $(document).ready(async function () {
         if (confirm('Er du sikker?')) {
             $("#loading").show();
+            console.log("test1");
             if (document.getElementById('recepID').value != '' && document.getElementById('recepnavn').value != '') {
                 console.log("test2");
                 if(!ingenRaavare()){
                     alert("Tilføje en Råvare");
-                }else if (ingenDublicate()) {
-                     await opretReceptList();
+                } else if(rigtigRaavar()){
+                    alert("vælge en Råvare");
+                }
+                else if (ingenDublicate()) {
+                    await opretReceptList();
                 } else {
                     alert("må ikke vælge samme råvare flere gang!")
                 }
@@ -164,6 +157,15 @@ function ingenRaavare() {  //funktion checker for samtlige raavar navn.
 
 }
 
+function rigtigRaavar(){
+    for (let i = 1; i <= counter ; i++) {
+        if($("#ledeligeNavn"+i+"").find(':selected').prop('disabled')){
+            return true;
+        }
+    }
+    return false;
+}
+
 
 
 async function opretReceptList() {
@@ -195,16 +197,15 @@ async function opretReceptList() {
     console.log("before ajax");
     await sendAjax("/BoilerPlate_war_exploded/rest/Recept/OpretRecept", function (data) {
         console.log("before" + counter);
-        retur();
+        alert("Recept oprettet succesfuldt");
+        switchP('FarmaScreen/Farma.html');
         console.log("after" + counter);
     }, function (data) {
-        if (data.status === 406) {
+        if (data.status != 500) {
             alert(data.responseText);
             console.log(counter);
-
         } else {
             alert('Enternal Error: Prøve igen!');
-
         }
     },"POST",receptData);
 }

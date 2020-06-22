@@ -11,7 +11,7 @@ import java.util.List;
 
 public class ProduktbatchController {
 
-    private final ProduktbatchDAOSQL DAOSQL;
+    public final ProduktbatchDAOSQL DAOSQL;
     private final String SQLErrorMsg = "ERROR: Fejl i forbindelse med kontakt af databasen";
 
     public ProduktbatchController(){

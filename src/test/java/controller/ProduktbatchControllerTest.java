@@ -1,6 +1,5 @@
-package API;
+package controller;
 
-import controller.ProduktbatchController;
 import dal.SQLDatabaseIO;
 import dal.dto.ProduktbatchDTO;
 import dal.dto.ProduktbatchKompDTO;
@@ -14,13 +13,12 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 
-class ProduktbatchServiceTest {
+class ProduktbatchControllerTest {
 
     //Initialize variables for easier use
-    private ProduktbatchService API;
+    private ProduktbatchController Controller;
 
     private ProduktbatchDTO DTO;
     private List<ProduktbatchDTO> listDTO;
@@ -29,16 +27,16 @@ class ProduktbatchServiceTest {
     private List<ProduktbatchKompDTO> listDTOKomp;
 
     //Constructor. Change to testdatabase
-    public ProduktbatchServiceTest() throws SQLException {
-        API = new ProduktbatchService();
-        API.produktbatchController.DAOSQL.db.setDB("cdioTest_2020");
+    public ProduktbatchControllerTest() throws SQLException {
+        Controller = new ProduktbatchController();
+        Controller.DAOSQL.db.setDB("cdioTest_2020");
     }
 
     @Test
     @Order(1)
     void getAlle() {
 
-        listDTO = API.getAlle();
+        listDTO = Controller.getAlle();
 
         assertEquals(3, listDTO.size());
 
@@ -68,7 +66,7 @@ class ProduktbatchServiceTest {
     @Order(2)
     void getAktuelle() {
 
-        listDTO = API.getAktuelle();
+        listDTO = Controller.getAktuelle();
         assertEquals(2, listDTO.size());
 
         //Check ID is correct
@@ -93,7 +91,7 @@ class ProduktbatchServiceTest {
     @Order(3)
     void getBatchLine() {
 
-        DTO = API.getBatchLine("1");
+        DTO = Controller.getBatchLine("1");
 
         //Check product batch line
         assertEquals(1, DTO.getPbId());
@@ -107,7 +105,7 @@ class ProduktbatchServiceTest {
     @Order(4)
     void getBatchComponent() {
 
-        DTOKomp = API.getBatchComponent("1", "3");
+        DTOKomp = Controller.getBatchComponent("1", "3");
 
         //Check component lines
         assertEquals(1, DTOKomp.getPbId());
@@ -122,7 +120,7 @@ class ProduktbatchServiceTest {
     @Order(5)
     void getBatchComponents() {
 
-        listDTOKomp = API.getBatchComponents("1");
+        listDTOKomp = Controller.getBatchComponents("1");
 
         //Check first component
         assertEquals(1, listDTOKomp.get(0).getPbId());
@@ -142,9 +140,9 @@ class ProduktbatchServiceTest {
 
     @Test
     @Order(6)
-    void getMaxPBID() {
+    void getMaxPDID() {
 
-        int max = API.getMaxPBID();
+        int max = Controller.getMaxPDID();
         assertEquals(3, max);
 
     }
@@ -160,8 +158,8 @@ class ProduktbatchServiceTest {
         toSend.setStatus("Ikke påbegyndt");
 
         //Send and get batch
-        API.opretProduktbatch(toSend);
-        DTO = API.getBatchLine("4");
+        Controller.opretProduktbatch(toSend);
+        DTO = Controller.getBatchLine("4");
 
         //Check product batch line
         assertEquals(4, DTO.getPbId());
@@ -177,7 +175,7 @@ class ProduktbatchServiceTest {
 
     @Test
     @Order(8)
-    void updateProduktbatch() {
+    void opdaterProduktbatch() {
 
         //Create batch
         ProduktbatchDTO toSend = new ProduktbatchDTO();
@@ -187,8 +185,8 @@ class ProduktbatchServiceTest {
         toSend.setDato("2019-05-11");
 
         //Send and get batch
-        API.updateProduktbatch(toSend);
-        DTO = API.getBatchLine("1");
+        Controller.opdaterProduktbatch(toSend);
+        DTO = Controller.getBatchLine("1");
 
         //Check product batch line
         assertEquals(1, DTO.getPbId());
@@ -201,14 +199,13 @@ class ProduktbatchServiceTest {
         toSend.setStatus("Afsluttet");
         toSend.setDato("2020-06-12");
 
-        API.updateProduktbatch(toSend);
-
+        Controller.opdaterProduktbatch(toSend);
 
     }
 
     @Test
     @Order(9)
-    void updateProduktbatchLine() {
+    void opdaterProduktbatchLine() {
 
         //Create component
         ProduktbatchKompDTO toSend = new ProduktbatchKompDTO();
@@ -221,8 +218,8 @@ class ProduktbatchServiceTest {
         toSend.setStatus("Afsluttet");
 
         //Send and get batch
-        API.updateProduktbatchLine(toSend);
-        DTOKomp = API.getBatchComponent("1","1");
+        Controller.opdaterProduktbatchLine(toSend);
+        DTOKomp = Controller.getBatchComponent("1","1");
 
         assertEquals(10, DTOKomp.getUserId());
         assertEquals(3.0000, DTOKomp.getTara());
@@ -233,13 +230,13 @@ class ProduktbatchServiceTest {
         toSend.setTara(4);
         toSend.setNetto(5);
 
-        API.updateProduktbatchLine(toSend);
+        Controller.opdaterProduktbatchLine(toSend);
 
     }
 
     @Test
     @Order(10)
-    void updateNewProduktbatch() throws SQLException {
+    void opdaterNewProduktbatch() throws SQLException {
 
         //Create batch
         ProduktbatchKompDTO toSend = new ProduktbatchKompDTO();
@@ -252,8 +249,8 @@ class ProduktbatchServiceTest {
         toSend.setStatus("Ikke påbegyndt");
 
         //Send and get batch
-        API.updateNewProduktbatch(toSend);
-        DTOKomp = API.getBatchComponent("3","3");
+        Controller.opdaterNewProduktbatch(toSend);
+        DTOKomp = Controller.getBatchComponent("3","3");
 
         assertEquals(17, DTOKomp.getUserId());
         assertEquals(3.0000, DTOKomp.getTara());
@@ -265,4 +262,5 @@ class ProduktbatchServiceTest {
         sqlIO.update("update cdioTest_2020.ProduktBatches set UserID=16, Tara=null, Netto=null, RBID=0 where PBID=3 and RBID=3");
 
     }
+
 }

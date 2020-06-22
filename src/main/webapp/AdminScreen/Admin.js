@@ -3,8 +3,6 @@ $.ajaxSetup({async: false});
 var ID = 'delete';
 
 async function Personslist() {
-    $("#Person_table").hide();
-    $("#loading").show();
     await sendAjax("/BoilerPlate_war_exploded/rest/user/getUsers", function (data) {
             var person_data = '<tr>\n' +
                 '                <th>ID</th>\n' +
@@ -28,8 +26,8 @@ async function Personslist() {
                 //if (value.aktiv)
 
                 person_data += '<td>' + ((value.aktiv) ? "Aktiv" : "Ikke aktiv") + '</td>';
-                person_data += "<td><input id='updateuser' class='update' type='button' onclick='confirmUserUpdate(" + userID + ")' value='Update'/> </td>";
-                person_data += "<td><input id='deleteuser' class='slet' type='button' value='Switch Activity' onclick='getcurrentActivity(" + userID + ")'/> </td>";
+                person_data += "<td><input id='updateuser' class='hvr-pop' type='button' onclick='confirmUserUpdate(" + userID + ")' value='Opdater'/> </td>";
+                person_data += "<td><input id='deleteuser' class='slet' type='button' value='Skift aktivitet' onclick='getcurrentActivity(" + userID + ")'/> </td>";
                 person_data += '</tr>';
             });
             $('#Person_table').html(person_data);
@@ -38,8 +36,6 @@ async function Personslist() {
             alert("Error making personList: ERR.NO.02");
             console.log(data);
         })
-    $("#Person_table").show();
-    $("#loading").hide();
 }
 
 function checkIfNew() {
@@ -71,7 +67,7 @@ var currentactivity = "";
 
 function getcurrentActivity(ID) { //opdatere brugerens aktivitet
     $(document).ready(function () {
-        if (confirm("Er du sikker på at du vil opdatere Bruger " + ID + "?")) {
+        if (confirm("are you sure, you want to update user " + ID + "?")) {
             sendAjax("/BoilerPlate_war_exploded/rest/user/getactivity/" + ID, function (data) {
                 currentactivity = data;
                 console.log(currentactivity);
@@ -99,7 +95,7 @@ function getcurrentActivity(ID) { //opdatere brugerens aktivitet
 var updatedID; /** gemmer ID'et for personnen man opdaterer til senere brug */
 function confirmUserUpdate(ID) { /** metoden sender videre til update html siden. */
     $(document).ready(function () {
-        if (confirm("Er du sikker på at du vil opdatere Bruger " + ID + "?")) {
+        if (confirm("are you sure, you want to update user " + ID + "?")) {
             updatedID = ID;
             switchP("AdminScreen/Brugeroversigt/Updatebruger/UpdateBruger.html")
             //load info from user into page

@@ -1,7 +1,9 @@
 package Data;
 
 
-import Data.dto.ReceptDTO;
+import dal.ReceptDAOSQL;
+import dal.SQLDatabaseIO;
+import dal.dto.ReceptDTO;
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
@@ -22,7 +24,7 @@ class ReceptDAOSQLTest {
     void getRecept() {
         try {
             receptDAOSQL.db.setDB("cdioTest_2020");
-            testRecept = receptDAOSQL.getReceptKomponent(10,1);
+            testRecept = receptDAOSQL.getRecept(10,1);
             assertEquals(10,testRecept.getReceptId());
         } catch (SQLException e){
             e.printStackTrace();
@@ -56,7 +58,7 @@ class ReceptDAOSQLTest {
             newRecept.setReceptNavn("Morfin");
             newRecept.setTolerance(9.5);
             receptDAOSQL.createRecept(newRecept);
-            testRecept = receptDAOSQL.getReceptKomponent(99,3);
+            testRecept = receptDAOSQL.getRecept(99,3);
             assertEquals(expected,testRecept.getReceptId());
         }catch (SQLException e){
             e.printStackTrace();
@@ -77,7 +79,7 @@ class ReceptDAOSQLTest {
             newRecept.setReceptNavn("Morfin");
             newRecept.setTolerance(5.5);
             receptDAOSQL.updateRecept(newRecept);
-            testRecept = receptDAOSQL.getReceptKomponent(99,3);
+            testRecept = receptDAOSQL.getRecept(99,3);
             assertEquals(expected,testRecept.getNonNetto());
         }catch (SQLException e){
             e.printStackTrace();

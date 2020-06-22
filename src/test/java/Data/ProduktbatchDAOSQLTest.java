@@ -1,14 +1,16 @@
 package Data;
 
-import Data.dto.ProduktbatchDTO;
-import Data.dto.ProduktbatchKompDTO;
+import dal.ProduktbatchDAOSQL;
+
+import dal.SQLDatabaseIO;
+import dal.dto.ProduktbatchDTO;
+import dal.dto.ProduktbatchKompDTO;
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
 
 import java.sql.SQLException;
-import java.time.LocalDate;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -166,7 +168,7 @@ class ProduktbatchDAOSQLTest {
         assertEquals(10, DTO.getReceptId());
         assertEquals("Ikke påbegyndt", DTO.getStatus());
 
-        //Cleanup
+        //Database cleanup
         SQLDatabaseIO sqlIO = new SQLDatabaseIO("kamel", "dreng", "runerne.dk", 8003);
         sqlIO.connect();
         sqlIO.update("delete from cdioTest_2020.ProduktBatches where PBID=4");
@@ -193,7 +195,7 @@ class ProduktbatchDAOSQLTest {
         assertEquals(10, DTO.getReceptId());
         assertEquals("Under Produktion", DTO.getStatus());
 
-        //Cleanup
+        //Database cleanup
         toSend.setPbId(1);
         toSend.setReceptId(10);
         toSend.setStatus("Afsluttet");
@@ -207,6 +209,7 @@ class ProduktbatchDAOSQLTest {
     @Order(9)
     void updateProduktBatchkomponent() throws SQLException {
 
+        //Create component
         ProduktbatchKompDTO toSend = new ProduktbatchKompDTO();
         toSend.setPbId(1);
         toSend.setRbID(1);
@@ -224,7 +227,7 @@ class ProduktbatchDAOSQLTest {
         assertEquals(3.0000, DTOKomp.getTara());
         assertEquals(5.4321, DTOKomp.getNetto());
 
-        //Cleanup
+        //Database cleanup
         toSend.setUserId(14);
         toSend.setTara(4);
         toSend.setNetto(5);
@@ -233,14 +236,33 @@ class ProduktbatchDAOSQLTest {
 
     }
 
-//    @Test
-//    @Order(10)
-//    void updateNewpb() {
-//    }
-//
-//    @Test
-//    @Order(11)
-//    void eraseProduktBatch() {
-//    }
+    @Test
+    @Order(10)
+    void updateNewpb() throws SQLException {
+
+        //Create batch
+        ProduktbatchKompDTO toSend = new ProduktbatchKompDTO();
+        toSend.setPbId(3);
+
+        toSend.setUserId(17);
+        toSend.setTara(3);
+        toSend.setNetto(5);
+        toSend.setRbID(3);
+        toSend.setStatus("Ikke påbegyndt");
+
+        //Send and get batch
+        DAO.updateNewpb(toSend);
+        DTOKomp = DAO.getBatchkomponent(3,3);
+
+        assertEquals(17, DTOKomp.getUserId());
+        assertEquals(3.0000, DTOKomp.getTara());
+        assertEquals(5.0000, DTOKomp.getNetto());
+
+        //Database cleanup
+        SQLDatabaseIO sqlIO = new SQLDatabaseIO("kamel", "dreng", "runerne.dk", 8003);
+        sqlIO.connect();
+        sqlIO.update("update cdioTest_2020.ProduktBatches set UserID=16, Tara=null, Netto=null, RBID=0 where PBID=3 and RBID=3");
+
+    }
 
 }

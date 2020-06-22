@@ -3,11 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <title>Recept</title>
-    <link rel="stylesheet" type="text/css" href="FarmaScreen/NyRecept/addrecept.css">
-    <script src="../FarmaScreen/FarmaScripts.js"></script>
+    <link rel="stylesheet" type="text/css" href="FarmaScreen/Recepter/NyRecept/NyRecept.css">
+    <script src="../FarmaScreen/Farma.js"></script>
 
 </head>
 <body>
+<h5 id="brugerInfo">Loading</h5> <!-- bruger info -->
+<script>currentUser();</script>
 <div id="">
     <h1 id="addReceptmedID"></h1>
     <br>
@@ -26,8 +28,7 @@
     <input id="confirmbtn" type="button" onclick="confirmaddRecept()" class="hvr-pop" value="OpretRecept">
 </div>
 
-
-<input type="submit" class="hvr-buzz screenbtn" value="Retur" onclick="tilbage(); return false">
+<input type="submit" class="hvr-pop screenbtn" id="retur" value="Retur" onclick="tilbage(); return false">
 
 </body>
 <script>getledeligeRaavare();</script>

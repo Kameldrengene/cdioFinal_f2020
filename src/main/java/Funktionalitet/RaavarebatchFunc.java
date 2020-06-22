@@ -41,6 +41,7 @@ public class RaavarebatchFunc {
 
         List<RaavarebatchDTO> dtoList = dao.getRaavarebatchList();
 
+        //Check if it already exists
         for (int i = 0; i < dtoList.size(); i++) {
             if( dtoList.get(i).getRbId() == subject)
                 return false;

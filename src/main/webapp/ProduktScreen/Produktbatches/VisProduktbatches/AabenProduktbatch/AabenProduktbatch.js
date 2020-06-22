@@ -8,6 +8,17 @@ var lastDato;
 
 $("document").ready(async function () {
 
+    const cameFrom = localStorage.getItem("cameFrom");
+    let returnPage;
+
+    //Set the correct return page
+    if(cameFrom.localeCompare("OpretProduktbatch") != 0)
+        returnPage = "'ProduktScreen/Produktbatches/VisProduktbatches/VisProduktbatches.html'";
+    else
+        returnPage = "'ProduktScreen/Produktbatches/OpretProduktbatch/OpretProduktbatch.html'";
+
+    $(".logudEllerTilbage").html('<input id="retur" type="submit" class="hvr-pop" value="Retur" onclick="switchP('+returnPage+'); return false">');
+
     batchID = localStorage.getItem("activePBId");
     receptID = localStorage.getItem("activeReceptID");
     status = localStorage.getItem("activeStatus");
@@ -23,9 +34,8 @@ $("document").ready(async function () {
 
     await loadBatch(param);
 
-    $("#produktbatch").on("click", "button", function () {
-        localStorage.setItem("activeRBId", this.id);
-        switchP("ProduktScreen/Produktbatches/RedigerProduktbatch.html");
+    $(".logudEllerTilbage").click(function () {
+        localStorage.setItem("cameFrom", "AabenProduktbatch")
     })
 
 });
@@ -37,7 +47,6 @@ async function loadBatch(param) {
         data => viewTable(data),
         err => error(err)
     )
-
 }
 
 function viewTable(data){

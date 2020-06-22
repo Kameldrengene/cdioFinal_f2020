@@ -8,11 +8,15 @@
 </head>
 
 <body>
+
     <h5 id="brugerInfo">Loading</h5>
     <script>currentUser();</script>
+    <div class="loads"><div id="loading"></div> </div>
+
     <h1>Laborant</h1>
+
     <div id="content">
-        <div class="loads"><div id="loading"></div> </div>
+
         <br>
         <h2>Vælg ID på produktbatch</h2>
 
@@ -26,20 +30,32 @@
         <br>
         <br>
 
-        <input id="confirmbtn" type="button" onclick="
+        <table>
+            <tr>
+                <td>
+                    <input id="confirmbtn" type="button" onclick="
                     const id = document.getElementById('pbvalg').value;
                     if (id == 'None') {
                         alert('Vælg en ID');
                     } else {
                         getProductBatch(id)
                     }"
-               class="hvr-pop" value="OK">
+                           class="hvr-pop" value="Vælg">
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <script>showCorrectButton();</script>
+                    <div class="logudEllerTilbage"></div>
+                </td>
+            </tr>
+        </table>
+
+
     </div>
-    <input id="logoutbtn" type="submit" class="hvr-buzz screenbtn" value="Log ud" onclick="
-    const role = localStorage.getItem('loginRole');
-    (role === 'farma') ? switchP('FarmaScreen/index.html') :
-    (role === 'prodLeder') ? switchP('ProduktScreen/ProduktScreen.html') : window.location.reload()">
+
     </body>
+
 </html>
 
 </body>

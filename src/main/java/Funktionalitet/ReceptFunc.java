@@ -5,8 +5,35 @@ import dal.dto.ReceptDTO;
 import java.util.List;
 
 public class ReceptFunc {
-    public boolean isReceptOk( ReceptDTO recept){
-        return (isNameOk(recept) && isNonNettoOk(recept) && isToleranceOk(recept));
+    public String receptmsg( ReceptDTO recept,List<ReceptDTO> receptDTOList){
+        if (!isIDOk(recept)) {
+            return "ID størrelse skal være mellem 1 til 99999999 decimaler";
+        }
+        if(!isNameOk(recept)){
+            return "Recept navnet skal være mellem 2 til 20 tegn ";
+        }
+        if(!isNonNettoOk(recept)){
+            return "mængde skal være mellem  1 til  20 decimaler ";
+        }
+        if(!isToleranceOk(recept)){
+            return "Tolerance skal være mellem 0.09 til 10.0 decimaler ";
+        }
+        if(doesIdExist(recept,receptDTOList)){
+            return "Recept ID er optaget\nVælge en anden";
+        }
+        if(doesNameExist(recept,receptDTOList)){
+            return "Recept navn er optaget\nVælge en anden";
+        }
+        return null;
+    }
+    public boolean isReceptOk( ReceptDTO recept,List<ReceptDTO> receptDTOList){
+        return (!doesNameExist(recept,receptDTOList)&& !doesIdExist(recept,receptDTOList) && isIDOk(recept) && isNameOk(recept) && isNonNettoOk(recept) && isToleranceOk(recept));
+    }
+    private boolean isIDOk(ReceptDTO recept) {
+        if (recept.getReceptId() <= 99999999 && recept.getReceptId() >= 1) {
+            return true;
+        }
+        return false;
     }
     private boolean isNameOk(ReceptDTO recept){
         return (!(recept.getReceptNavn().length() <= 1 || recept.getReceptNavn().length() > 20));
