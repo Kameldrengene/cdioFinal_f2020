@@ -87,7 +87,7 @@ function taraView(){
     const raavareNavn = raavareNavnList[parseInt(raavareList[counter])]
 
     /** indsætter html */
-    $("#content").innerHTML ="<h2>Indtast Tara for Råvare " + raavareNavn + " (ID: " + raavareList[counter] + ")</h2>" +
+    document.getElementById("content").innerHTML ="<h2>Indtast Tara for Råvare " + raavareNavn + " (ID: " + raavareList[counter] + ")</h2>" +
         "<br>" +
         "<input id='tara' style='font-size: 14pt; width: 10%; text-align: center;' type='number' min='0.001' max='10' step='0.0001' placeholder='Tara [Kg]'>" +
         "<br>" +
@@ -104,7 +104,7 @@ function nettoView() {
     const raavareNavnList = JSON.parse(localStorage.getItem("raavareNavnList"));
     const counter = localStorage.getItem("raavareCounter");
     const raavareNavn = raavareNavnList[raavareList[counter]]
-    $("#content").innerHTML = "" +
+    document.getElementById("content").innerHTML = "" +
         "<h2>Indtast RåvareBatch og Nettovægt for Råvare " + raavareNavn + " (ID: " + raavareList[counter] + ")</h2>" +
         "<br>" +
         "<div style='margin: 1% 30%;'>" +
