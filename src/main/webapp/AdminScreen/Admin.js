@@ -4,6 +4,7 @@ var ID = 'delete';
 
 async function Personslist() {
     await sendAjax("/BoilerPlate_war_exploded/rest/user/getUsers", function (data) {
+            localStorage.setItem("userTable", JSON.stringify(data));
             var person_data = '<tr>\n' +
                 '                <th>ID</th>\n' +
                 '                <th>Name</th>\n' +
@@ -40,20 +41,27 @@ async function Personslist() {
 
 function checkIfNew() {
     if ($('#Person_table').length) {
-        sendAjax("/BoilerPlate_war_exploded/rest/user/getUsers", function (data) {
-                var x = JSON.parse(localStorage.getItem("userTable"));
+
+        $.ajax({
+            url: "/BoilerPlate_war_exploded/rest/user/getUsers",
+            type: "GET",
+            async: false,
+            contentType: "application/json",
+            dataType: "json",
+            success: function (data) {
+                const x = JSON.parse(localStorage.getItem("userTable"));
                 if (JSON.stringify(x) !== JSON.stringify(data)) {
-                    localStorage.setItem("userTable", JSON.stringify(data));
                     console.log("Updated");
                     Personslist();
                 } else {
                     console.log("Not updated");
                 }
             },
-            function (data) {
+            error: function (data) {
                 alert("Error Checking if new User Data: ERR.NO.03");
                 console.log(data);
-            });
+            }
+        });
     }
 }
 
