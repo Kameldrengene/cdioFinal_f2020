@@ -49,7 +49,7 @@ public class UserController {
         }
     }
 
-    public UserDTO createUser(UserDTO user) {
+    public void createUser(UserDTO user) {
         UserDAOSQL db = new UserDAOSQL();
         UserFunc userF = new UserFunc();
         try {
@@ -59,7 +59,6 @@ public class UserController {
         } catch (SQLException e) {
             throw buildError(Response.Status.NOT_ACCEPTABLE, SQLErrorMsg);
         }
-        return user;
     }
 
     //Create user

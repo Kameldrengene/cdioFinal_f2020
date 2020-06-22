@@ -107,7 +107,7 @@ public class UserDAOSQL implements IUserDAO {
         db.connect();
         ResultSet rs = db.query("SELECT aktiv FROM userdto where userID=" + userId);
         boolean b;
-        int boolVal = 0;
+        int boolVal;
         rs.next();
         b = rs.getBoolean("aktiv");
         if(b){
@@ -137,14 +137,13 @@ public class UserDAOSQL implements IUserDAO {
     }
 
     //Set user udfra ResultSet og returner
-    private UserDTO setUser(ResultSet rs, UserDTO user) throws SQLException {
+    private void setUser(ResultSet rs, UserDTO user) throws SQLException {
         user.setUserID(rs.getInt("userID"));
         user.setUserName(rs.getString("userName"));
         user.setIni(rs.getString("ini"));
         user.setPassword(rs.getString("password"));
         user.setJob(rs.getString("job"));
         user.setAktiv(rs.getBoolean("aktiv"));
-        return user;
     }
 
 }

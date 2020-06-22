@@ -32,14 +32,13 @@ public class RaavarebatchDAOSQL implements IRaavarebatchDAO {
     }
 
     //Used in the above
-    private RaavarebatchDTO setRb(ResultSet rs, RaavarebatchDTO rb) throws SQLException {
+    private void setRb(ResultSet rs, RaavarebatchDTO rb) throws SQLException {
         rb.setRbId(rs.getInt("rBID"));
         rb.setRaavareNavn(rs.getString("raavareNavn"));
         rb.setLeverandoer(rs.getString("leverandoer"));
         rb.setRaavareId(rs.getInt("raavareID"));
         rb.setStartMaengde(rs.getDouble("maengde"));
         rb.setAktuelMaengde(rs.getDouble("aktuelMaengde"));
-        return rb;
     }
 
     // -Mikkel

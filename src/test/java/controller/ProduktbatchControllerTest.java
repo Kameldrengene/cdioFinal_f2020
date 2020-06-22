@@ -18,13 +18,12 @@ import static org.junit.jupiter.api.Assertions.*;
 class ProduktbatchControllerTest {
 
     //Initialize variables for easier use
-    private ProduktbatchController Controller;
+    private final ProduktbatchController Controller;
 
     private ProduktbatchDTO DTO;
     private List<ProduktbatchDTO> listDTO;
 
     private ProduktbatchKompDTO DTOKomp;
-    private List<ProduktbatchKompDTO> listDTOKomp;
 
     //Constructor. Change to testdatabase
     public ProduktbatchControllerTest() throws SQLException {
@@ -120,7 +119,7 @@ class ProduktbatchControllerTest {
     @Order(5)
     void getBatchComponents() {
 
-        listDTOKomp = Controller.getBatchComponents("1");
+        List<ProduktbatchKompDTO> listDTOKomp = Controller.getBatchComponents("1");
 
         //Check first component
         assertEquals(1, listDTOKomp.get(0).getPbId());

@@ -106,8 +106,7 @@ public class ProduktbatchDAOSQL implements IProduktbatchDAO {
         db.connect();
         ResultSet rs = db.query("SELECT MAX(PBID) AS max FROM ProduktBatches");
         rs.next();
-        int out = rs.getInt("max");
-        return out;
+        return rs.getInt("max");
     }
 
     //Create product batch
@@ -169,7 +168,7 @@ public class ProduktbatchDAOSQL implements IProduktbatchDAO {
     }
 
     //Set produktBatch
-    private ProduktbatchKompDTO setPB(ResultSet rs, ProduktbatchKompDTO pb, int pbId){
+    private void setPB(ResultSet rs, ProduktbatchKompDTO pb, int pbId){
         pb.setPbId(pbId);
         try {
             pb.setStatus(rs.getString("Standing"));
@@ -180,7 +179,6 @@ public class ProduktbatchDAOSQL implements IProduktbatchDAO {
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
-        return pb;
     }
 
 }

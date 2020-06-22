@@ -13,7 +13,7 @@ import java.util.List;
 public class RaavareController {
 
     public final RaavareDAOSQL raavareDAOSQL;
-    private RaavareFunc rvFunc;
+    private final RaavareFunc rvFunc;
     private final String SQLErrorMsg = "ERROR: Fejl i forbindelse med kontakt af databasen";
 
     // kontrutøren initialisere råvareDaoSql og råvarefunc.

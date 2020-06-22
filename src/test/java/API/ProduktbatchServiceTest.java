@@ -1,6 +1,5 @@
 package API;
 
-import controller.ProduktbatchController;
 import dal.SQLDatabaseIO;
 import dal.dto.ProduktbatchDTO;
 import dal.dto.ProduktbatchKompDTO;
@@ -20,13 +19,12 @@ import static org.junit.jupiter.api.Assertions.*;
 class ProduktbatchServiceTest {
 
     //Initialize variables for easier use
-    private ProduktbatchService API;
+    private final ProduktbatchService API;
 
     private ProduktbatchDTO DTO;
     private List<ProduktbatchDTO> listDTO;
 
     private ProduktbatchKompDTO DTOKomp;
-    private List<ProduktbatchKompDTO> listDTOKomp;
 
     //Constructor. Change to testdatabase
     public ProduktbatchServiceTest() throws SQLException {
@@ -122,7 +120,7 @@ class ProduktbatchServiceTest {
     @Order(5)
     void getBatchComponents() {
 
-        listDTOKomp = API.getBatchComponents("1");
+        List<ProduktbatchKompDTO> listDTOKomp = API.getBatchComponents("1");
 
         //Check first component
         assertEquals(1, listDTOKomp.get(0).getPbId());

@@ -15,12 +15,12 @@ public class PrintController {
     public PrintController(){
         printDAOSQL = new PrintDAOSQL();
     }
-    private final String SQLErrorMsg = "ERROR: Fejl i forbindelse med kontakt af databasen";
 
     public List<PrintDTO> getData(int pbID){
         try {
             return printDAOSQL.getPrint(pbID);
         } catch (SQLException e) {
+            String SQLErrorMsg = "ERROR: Fejl i forbindelse med kontakt af databasen";
             throw buildError(Response.Status.NOT_ACCEPTABLE, SQLErrorMsg);
         }
     }

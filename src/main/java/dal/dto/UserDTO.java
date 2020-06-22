@@ -52,13 +52,19 @@ public class UserDTO implements Serializable{
 	public void setAktiv(boolean aktiv) {this.aktiv = aktiv;}
 
 
-	public void removeRole(){
-		this.job = null;
-	}
-
-	public static int getCounter() {
-		return counter;
-	}
+// --Commented out by Inspection START (22/06/2020 14.01):
+//	public void removeRole(){
+// --Commented out by Inspection START (22/06/2020 14.01):
+////		this.job = null;
+////	}
+//// --Commented out by Inspection STOP (22/06/2020 14.01)
+//
+//// --Commented out by Inspection START (22/06/2020 14.01):
+// --Commented out by Inspection STOP (22/06/2020 14.01)
+//	public static int getCounter() {
+//		return counter;
+//	}
+// --Commented out by Inspection STOP (22/06/2020 14.01)
 
 	public static void setCounter(int counter) {
 		UserDTO.counter = counter;

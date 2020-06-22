@@ -30,10 +30,7 @@ public class ReceptFunc {
         return (!doesNameExist(recept,receptDTOList)&& !doesIdExist(recept,receptDTOList) && isIDOk(recept) && isNameOk(recept) && isNonNettoOk(recept) && isToleranceOk(recept));
     }
     private boolean isIDOk(ReceptDTO recept) {
-        if (recept.getReceptId() <= 99999999 && recept.getReceptId() >= 1) {
-            return true;
-        }
-        return false;
+        return recept.getReceptId() <= 99999999 && recept.getReceptId() >= 1;
     }
     private boolean isNameOk(ReceptDTO recept){
         return (!(recept.getReceptNavn().length() <= 1 || recept.getReceptNavn().length() > 20));

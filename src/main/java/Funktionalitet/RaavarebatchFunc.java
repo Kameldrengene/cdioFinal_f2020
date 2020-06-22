@@ -28,10 +28,7 @@ public class RaavarebatchFunc {
 
         double subject = dto.getStartMaengde();
 
-        if(subject < 0)
-            return false;
-
-        return true;
+        return !(subject < 0);
     }
 
     //Valider batch ID

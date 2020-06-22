@@ -1,4 +1,4 @@
-package dal;
+package Data;
 
 import dal.SQLDatabaseIO;
 import org.junit.jupiter.api.Test;
@@ -38,7 +38,7 @@ class SQLDatabaseIOTest {
     @Test
     void query() {
         int expected = 10;
-        int actual = 0;
+        int actual;
         try {
             sqlDatabaseIO.setDB("cdioTest_2020");
             sqlDatabaseIO.connect();
@@ -53,16 +53,13 @@ class SQLDatabaseIOTest {
 
     }
 
-    @Test
-    void setDB() {
-    }
 
 
 
     @Test
     void update() {
         int expected = 99;
-        int actual = 0;
+        int actual;
 
         try {
             sqlDatabaseIO.setDB("cdioTest_2020");

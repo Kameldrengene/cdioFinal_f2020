@@ -12,7 +12,7 @@ import java.util.List;
 public class ReceptController {
 
     public final ReceptDAOSQL receptDAOSQL;
-    private ReceptFunc receptFunc;
+    private final ReceptFunc receptFunc;
     private final String SQLErrorMsg = "ERROR: Fejl i forbindelse med kontakt af databasen";
 
     public ReceptController() {

@@ -8,7 +8,7 @@ import java.util.*;
 
 public class RaavareDAOSQL implements IRaavareDAO{
 
-    public SQLDatabaseIO db = new SQLDatabaseIO("kamel", "dreng", "runerne.dk", 8003); //Makes new SQLDatabaseIO object.
+    public final SQLDatabaseIO db = new SQLDatabaseIO("kamel", "dreng", "runerne.dk", 8003); //Makes new SQLDatabaseIO object.
 
     //Get all raavarer
     @Override
@@ -77,8 +77,7 @@ public class RaavareDAOSQL implements IRaavareDAO{
         db.connect();
             ResultSet rs = db.query("SELECT count(raavareID) AS fundet FROM Raavarer where raavareID=" + raavareID);
             rs.next();
-            if (rs.getInt("fundet") == 1) {return true;}
-            return false;
+        return rs.getInt("fundet") == 1;
     }
 
 }
