@@ -14,7 +14,7 @@ async function sendAjax(link, successFunc, errorFunc=function (data) {console.lo
         dataType: "json",
         data: ((jsonData==="None") ? "" : jsonData),
         success: function (data) {successFunc(data)},
-        error: function (data) {errorFunc(data)},
+        error: function (data) {$(".loads").hide(); errorFunc(data);},
         complete: () => ((showbool) ? $(".loads").hide() : 0)
     });
 }
@@ -56,7 +56,7 @@ function switchP(page) {
 async function error(err) {
     const status = err.status;
     if (status != 500) alert(err.responseText);
-    else alert("ERROR: Intern serverfejl. Prøv igen")
+    else alert("ERROR: Intern serverfejl. Prøv at genstarte siden")
 }
 
 function currentUser(){
