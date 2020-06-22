@@ -5,6 +5,21 @@
     <title>Login</title>
     <link rel="stylesheet" type="text/css" href="LoginScreen/Login.css">
     <script src="LoginScreen/Login.js"></script>
+    <script>
+        $("document").ready(function () {
+            var darkTheme = "<link rel=\"stylesheet\" id=\"theme\" type=\"text/css\" href=\"default.css\">";
+            var lightTheme = "<link rel=\"stylesheet\" id=\"theme\" type=\"text/css\" href=\"light.css\">";
+            $("#dark").click(function () {
+                $("#theme").replaceWith(darkTheme);
+            });
+
+            $("#light").click(function () {
+                $("#theme").replaceWith(lightTheme);
+            });
+        });
+
+
+    </script>
 
 </head>
 
@@ -49,11 +64,15 @@
             </table>
 
             <br>
+            <button class='hvr-buzz'>Sign in</button>
         </form>
     </div>
+    <div id="themes">
+        <div style="height: 30px"></div>
+        <h3>Tema:</h3>
+        <button class="hvr-pop" id="dark">Mørk</button> <button class="hvr-pop" id="light">Lys</button>
 
-    <button class='hvr-buzz'>Sign in</button>
-
+    </div>
     <!-- Logo med style defineret direkte i HTML -->
     <img id="logo" src="dtu_logo.png" style="margin-top: 2%" width="50" height="72.5">
 
