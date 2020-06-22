@@ -16,7 +16,7 @@
 
 
 /* Selector på flere tags */
-h1, h2, h3 ,h4 {
+h1, h2, h3 {
     color: var(--color-primary);
 }
 
@@ -31,7 +31,7 @@ h5{
 
 #brugerInfo{
     text-align: right;
-    color: #E9E9EA;
+    color: rgba(0, 0, 0, 0.75);
 
 }
 
