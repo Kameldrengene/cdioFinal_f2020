@@ -3,17 +3,15 @@ $.ajaxSetup({async: false});
 var alleMap = new Map();  //indeholder alle rååvare med navn som key.
 
 
-function ledeligeRaavare() {   // gemmer alle råvare i en Map.
+function ledigeRaavare() {   // gemmer alle råvare i en Map.
     $(document).ready(function () {
         var alleRaavare = [];
         var alleRaavareNavn = [];
 
         $.getJSON("/BoilerPlate_war_exploded/rest/Raavare/getRaavarer",function (data) {
             $.each(data,function (key,value) {
-                //console.log(value);
                 var raavarID = value.raavareID;
                 var raavarNavn = value.raavareNavn;
-
                 alleRaavare.push(raavarID);
                 alleRaavareNavn.push(raavarNavn);
                 alleMap.set(raavarNavn,raavarID);
@@ -29,11 +27,9 @@ function addLinje() {    //tilføjer ekstra råvare
     if(($("#recepID").val() === null) || ($("#recepnavn").val() === '')){
         alert('udfyld alle felter');
     }else {
-        ledeligeRaavare();
+        ledigeRaavare();
         counter++;
-        console.log(counter);
         let coutnum = counter;   //indeholder præcise ledeligeNavn + nr=countnum
-        console.log(coutnum);
         $("#raavareLinjer").append(
             '<tr id="raavareLines' + counter + '">\n' +
             '        <td id="RåvareID">' +
@@ -52,7 +48,6 @@ function addLinje() {    //tilføjer ekstra råvare
             '        </td>' +
             '    </tr>');
         coutnum = 0;
-        console.log(coutnum);
         selectbtn(counter);
     }
 }

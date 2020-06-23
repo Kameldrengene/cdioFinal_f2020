@@ -66,13 +66,6 @@ async function visBestemtRecepter(id) {
         });
 }
 
-function tilbage() {
-    $(document).ready(async function () {
-        var receptID = localStorage.getItem("vistID");
-        switchP("FarmaScreen/Recepter/VisRecepter/AabenRecept/Aabenrecepter.html");
-        await visBestemtRecepter(receptID);
-    });
-}
 
 function toOpretrecept() {
     switchP('FarmaScreen/Recepter/NyRecept/NyRecept.html');

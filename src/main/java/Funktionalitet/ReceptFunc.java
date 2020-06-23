@@ -40,7 +40,8 @@ public class ReceptFunc {
      * @return true hvis krav opfyldt
      */
     public boolean isReceptOk( ReceptDTO recept,List<ReceptDTO> receptDTOList){
-        return (!doesNameExist(recept,receptDTOList)&& !doesIdExist(recept,receptDTOList) && isIDOk(recept) && isNameOk(recept) && isNonNettoOk(recept) && isToleranceOk(recept));
+        return (!doesNameExist(recept,receptDTOList)&& !doesIdExist(recept,receptDTOList)
+                && isIDOk(recept) && isNameOk(recept) && isNonNettoOk(recept) && isToleranceOk(recept));
     }
 
     /**
