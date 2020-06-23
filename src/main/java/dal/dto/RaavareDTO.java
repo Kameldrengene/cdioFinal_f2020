@@ -11,11 +11,9 @@ public class RaavareDTO {
     /** Lager beholdning i databasen */
     private double lagerBeholdning;
 
-// --Commented out by Inspection START (22/06/2020 14.01):
     public double getLagerBeholdning() {
         return lagerBeholdning;
     }
-// --Commented out by Inspection STOP (22/06/2020 14.01)
 
     public void setLagerBeholdning(double lagerBeholdning) {
         this.lagerBeholdning = lagerBeholdning;

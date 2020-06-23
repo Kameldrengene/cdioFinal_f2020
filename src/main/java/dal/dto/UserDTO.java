@@ -25,35 +25,47 @@ public class UserDTO implements Serializable{
 	public String getPassword(){
 	    return password;
     }
+
     public void setPassword(String newPassword){
 	    this.password = newPassword;
     }
+
 	public int getUserID() {
 		return userID;
 	}
+
 	public void setUserID(int userID) {
 		this.userID = userID;
 	}
+
 	public String getUserName() {
 		return userName;
 	}
+
 	public void setUserName(String userName) {
 		this.userName = userName;
 	}
+
 	public String getIni() {
 		return ini;
 	}
+
 	public void setIni(String ini) {
 		this.ini = ini;
 	}
+
 	public String getJob() {
 		return job;
 	}
+
 	public void setJob(String job) {
 		this.job = job;
 	}
+
 	public boolean getAktiv(){return aktiv;}
+
 	public void setAktiv(boolean aktiv) {this.aktiv = aktiv;}
+
 	public static void setCounter(int counter) {
 		UserDTO.counter = counter;
 	}
