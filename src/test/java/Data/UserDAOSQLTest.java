@@ -69,6 +69,7 @@ class UserDAOSQLTest {
         }catch (SQLException e){
             e.printStackTrace();
         }
+        assertEquals(8,testList.size());
         assertEquals("FD",testList.get(1).getIni());
         assertEquals("Lasse",testList.get(4).getUserName());
     }
