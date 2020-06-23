@@ -12,6 +12,12 @@ public class RaavarebatchFunc {
 
     private final RaavarebatchDAOSQL dao = new RaavarebatchDAOSQL();
 
+    /**
+     * Kontrollerer om alle kravene opfyldt og sender en fejl besked hvis ikke.
+     * @param dto Raavarebatch data transfer objekt
+     * @return Fejl besked hvis der opstår fejl
+     * @throws SQLException
+     */
     public String raavarebatchOk(RaavarebatchDTO dto) throws SQLException{
 
         if(!startMaengdeOk(dto))
@@ -23,7 +29,11 @@ public class RaavarebatchFunc {
         return "OK";
     }
 
-    //Valider startmængde
+    /**
+     * Valider startmængde
+     * @param dto Raavarebatch data transfer objekt
+     * @return true hvis kravet opfyldt
+     */
     public boolean startMaengdeOk(RaavarebatchDTO dto){
 
         double subject = dto.getStartMaengde();
@@ -31,7 +41,12 @@ public class RaavarebatchFunc {
         return !(subject < 0);
     }
 
-    //Valider batch ID
+    /**
+     * Valider batch ID
+     * @param dto  Raavarebatch data transfer objekt
+     * @return true hvis kravet er opfyldt
+     * @throws SQLException
+     */
     public boolean batchIdOk(RaavarebatchDTO dto) throws SQLException {
 
         int subject = dto.getRbId();

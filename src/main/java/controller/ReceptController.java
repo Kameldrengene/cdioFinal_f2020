@@ -21,6 +21,12 @@ public class ReceptController {
 
     }
 
+    /**
+     * henter den enkelt recept med en recept komponent.
+     * @param receptID Recept ID
+     * @param raavareID Raavare ID
+     * @return Returnerer en specifik raavare som tilhører en recept
+     */
     public ReceptDTO getRecept(int receptID, int raavareID) {
         try {
             return receptDAOSQL.getRecept(receptID, raavareID);
@@ -29,6 +35,10 @@ public class ReceptController {
         }
     }
 
+    /**
+     * henter alle recept komponenter af en recept fra SQLdatabasen
+     * @return henter alle recept komponenter af en recept fra SQLdatabasen
+     */
     public List<ReceptDTO> getData() {
         try {
             return receptDAOSQL.getReceptList();
@@ -38,7 +48,11 @@ public class ReceptController {
 
     }
 
-    //henter alle recept komponenter for en recept
+    /**
+     * henter alle recept komponenter af en recept
+     * @param receptId Recept ID
+     * @return henter alle recept komponenter af en recept
+     */
     public List<ReceptDTO> getuniqueReceptkomponents(int receptId) {
         try {
             return receptDAOSQL.getReceptKomponents(receptId);
@@ -49,7 +63,11 @@ public class ReceptController {
 
     }
 
-    //Opretter hele recepten med alle ens komponenter på en gang, hvis alle kravene er opfyldt.
+    /**
+     * Opretter hele recepten med alle ens komponenter på en gang, hvis alle kravene er opfyldt.
+     * @param recept Alle rækker i en recept(komponenter)
+     * @return Hele recepten med komponenter
+     */
     public List<ReceptDTO> opretRecept (List < ReceptDTO > recept) {
 
         try {
@@ -66,7 +84,12 @@ public class ReceptController {
         }
         return recept;
     }
-
+    /**
+     * Kaster en Exception videre hvis der sker en fejl i systemet
+     * @param status Web status
+     * @param msg Besked der skal stå i fejl meddelelse
+     * @return returner en Webapplication Exception
+     */
     public WebApplicationException buildError (Response.Status status, String msg){
         return new WebApplicationException(Response.status(status).entity(msg).build());
     }
