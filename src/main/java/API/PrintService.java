@@ -13,13 +13,16 @@ import java.util.List;
 public class PrintService {
    public final PrintController printController = new PrintController();
 
+    /**
+     * Indenholder de informationer der skal printes
+     * @param ID Produktbatch ID
+     * @return Liste over informationer på en produktbatch
+     * @throws WebApplicationException
+     */
     @GET
     @Path("getData/{ID}")
     public List<PrintDTO> getData(@PathParam("ID") String ID) throws WebApplicationException{
-        String[] Ids =ID.split("-");
-        int receptID = Integer.parseInt(Ids[1]);
-        int pbID = Integer.parseInt(Ids[0]);
-
-       return printController.getData(pbID,receptID);
+        int pbID =Integer.parseInt(ID);
+       return printController.getData(pbID);
    }
 }

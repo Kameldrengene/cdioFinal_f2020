@@ -7,6 +7,7 @@ import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
 
+import javax.ws.rs.WebApplicationException;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -63,27 +64,46 @@ class RaavareControllerTest {
         assertEquals(expected,testraavare.getRaavareID());
     }
 
-//    @Test
-//    @Order(4)
-//    void updateRaavare() {
-//        try {
-//            raavareController.raavareDAOSQL.db.setDB("cdioTest_2020");
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//        }
-//        String expected = "Novo";
-//        RaavareDTO newRaavare = new RaavareDTO();
-//        newRaavare.setLagerBeholdning(10.5);
-//        newRaavare.setLeverandoer("Novo");
-//        newRaavare.setRaavareID(99);
-//        newRaavare.setRaavareNavn("Vodka");
-//        raavareController.updateRaavare(newRaavare);
-//        testraavare=raavareController.getRaavare(99);
-//        assertEquals(expected,testraavare.getLeverandoer());
-//    }
+    @Test
+    @Order(4)
+    void opretRaavareFunc() {
+        try {
+            raavareController.raavareDAOSQL.db.setDB("cdioTest_2020");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        RaavareDTO newRaavare = new RaavareDTO();
+        newRaavare.setLagerBeholdning(10.5);
+        newRaavare.setLeverandoer("Leo");
+        newRaavare.setRaavareID(99);
+        newRaavare.setRaavareNavn("Vodka");
+
+        assertThrows(WebApplicationException.class,()->{
+            raavareController.opretRaavare(newRaavare);
+        });
+    }
 
     @Test
     @Order(5)
+    void updateRaavare() {
+        try {
+            raavareController.raavareDAOSQL.db.setDB("cdioTest_2020");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        String expected = "Novo";
+        RaavareDTO newRaavare = new RaavareDTO();
+        newRaavare.setLagerBeholdning(10.5);
+        newRaavare.setLeverandoer("Novo");
+        newRaavare.setRaavareID(99);
+        newRaavare.setRaavareNavn("Vodka");
+        raavareController.updateRaavare(newRaavare);
+        testraavare=raavareController.getRaavare(99);
+        assertEquals(expected,testraavare.getLeverandoer());
+    }
+
+    @Test
+    @Order(6)
     void cleanUp(){
         try {
             SQLDatabaseIO sqlDatabaseIO = new SQLDatabaseIO("kamel", "dreng", "runerne.dk", 8003);

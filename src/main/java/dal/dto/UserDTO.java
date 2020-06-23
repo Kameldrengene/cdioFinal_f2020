@@ -4,29 +4,30 @@ import java.io.Serializable;
 
 public class UserDTO implements Serializable{
 
-	//todo comments
+	/** Bruger ID 10 til 99 */
 	private int userID;
-	private String userName;                
+	/** Bruger navn 2 til 20 tegn */
+	private String userName;
+	/** Bruger Initial 2 til 4 tegn */
 	private String ini;
-	//private String cpr;
+	/** Bruger passsword 6 til 50 tegn */
 	private String password;
+	/** Bruger rolle (Admin,Farmaceut,Produktionsleder,Laborant) */
 	private String job;
+	/** Bruger aktivitet status*/
 	private boolean aktiv;
+
 	private static int counter = 11;
-	
-//TODO Add relevant fields
-	
+
 	public UserDTO() {
 	}
-	
+
 	public String getPassword(){
 	    return password;
     }
-    
     public void setPassword(String newPassword){
 	    this.password = newPassword;
     }
-	
 	public int getUserID() {
 		return userID;
 	}
@@ -45,11 +46,6 @@ public class UserDTO implements Serializable{
 	public void setIni(String ini) {
 		this.ini = ini;
 	}
-//	public String getCpr() { return cpr;}
-//	public void setCpr(String cpr) {
-//		this.cpr = cpr;
-//	}
-
 	public String getJob() {
 		return job;
 	}
@@ -58,16 +54,6 @@ public class UserDTO implements Serializable{
 	}
 	public boolean getAktiv(){return aktiv;}
 	public void setAktiv(boolean aktiv) {this.aktiv = aktiv;}
-
-	
-	public void removeRole(){
-		this.job = null;
-	}
-	
-	public static int getCounter() {
-		return counter;
-	}
-
 	public static void setCounter(int counter) {
 		UserDTO.counter = counter;
 	}

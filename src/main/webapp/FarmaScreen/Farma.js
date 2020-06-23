@@ -2,10 +2,8 @@
 
 function confirmRaavareUpdate(id){
     $(document).ready(async function () {
-        if(confirm("are you sure, you want to update this råvare "+ id +"?")){
-            console.log("updatebefore");
-            switchP('FarmaScreen/VisRaavare/OpdaterRaavare/index.html');
-            console.log("updateafter");
+        if(confirm("Er du sikker på at du vil opdatere råvare: "+ id +"?")){
+            switchP('FarmaScreen/Raavarer/VisRaavarer/OpdaterRaavare/OpdaterRaavare.html');
             localStorage.setItem("raavareUpdateID", id);
             // $(document).ready(function () {
             await $.getJSON("/BoilerPlate_war_exploded/rest/Raavare/getRaavare/"+ localStorage.getItem("raavareUpdateID"), function (data) {
@@ -41,35 +39,23 @@ async function raavareData(modType) {
     await sendAjax(APILink, function (data) {
         if(checkmodtype === "Create"){
             alert("Opret success!");
-            switchP("FarmaScreen/index.html");
+            switchP("FarmaScreen/Farma.html");
         }else if(checkmodtype === "Update"){
             alert("Opdateret success!\nFor RåvareID: " + localStorage.getItem("raavareUpdateID"));
-            switchP("FarmaScreen/VisRaavare/index.html");
+            switchP("FarmaScreen/Raavarer/VisRaavarer/VisRaavare.html");
         }
 
     }, function (data) {
         if (data.status != 500) {
             alert(data.responseText);
         } else {
-            alert('Enternal Error: Prøve igen!');
+            alert('Internal Error: Prøve igen!');
         }
     }, httpType, JSON.stringify(jsonData))
 }
 
-
-function postRaavareData() {
-    raavareData("Create");
-}
-
-function postRaavareUpdate() {
-
-
-    raavareData("Update");
-
-}
-
 function toOpretrecept() {
-    switchP('FarmaScreen/NyRecept/index.html');
+    switchP('FarmaScreen/Recepter/NyRecept/NyRecept.html');
     $("#addRaavare").hide();
     $("#loading").hide();
 }

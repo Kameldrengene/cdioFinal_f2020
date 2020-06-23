@@ -20,13 +20,12 @@ import static org.junit.jupiter.api.Assertions.*;
 class ProduktbatchDAOSQLTest {
 
     //Initialize variables for easier use
-    private ProduktbatchDAOSQL DAO;
+    private final ProduktbatchDAOSQL DAO;
 
     private ProduktbatchDTO DTO;
     private List<ProduktbatchDTO> listDTO;
 
     private ProduktbatchKompDTO DTOKomp;
-    private List<ProduktbatchKompDTO> listDTOKomp;
 
     //Constructor. Change to testdatabase
     public ProduktbatchDAOSQLTest() throws SQLException {
@@ -122,7 +121,7 @@ class ProduktbatchDAOSQLTest {
     @Order(5)
     void getBatchkomponents() throws SQLException {
 
-        listDTOKomp = DAO.getBatchkomponents(1);
+        List<ProduktbatchKompDTO> listDTOKomp = DAO.getBatchkomponents(1);
 
         //Check first component
         assertEquals(1, listDTOKomp.get(0).getPbId());
@@ -168,7 +167,7 @@ class ProduktbatchDAOSQLTest {
         assertEquals(10, DTO.getReceptId());
         assertEquals("Ikke påbegyndt", DTO.getStatus());
 
-        //Cleanup
+        //Database cleanup
         SQLDatabaseIO sqlIO = new SQLDatabaseIO("kamel", "dreng", "runerne.dk", 8003);
         sqlIO.connect();
         sqlIO.update("delete from cdioTest_2020.ProduktBatches where PBID=4");
@@ -195,7 +194,7 @@ class ProduktbatchDAOSQLTest {
         assertEquals(10, DTO.getReceptId());
         assertEquals("Under Produktion", DTO.getStatus());
 
-        //Cleanup
+        //Database cleanup
         toSend.setPbId(1);
         toSend.setReceptId(10);
         toSend.setStatus("Afsluttet");
@@ -227,7 +226,7 @@ class ProduktbatchDAOSQLTest {
         assertEquals(3.0000, DTOKomp.getTara());
         assertEquals(5.4321, DTOKomp.getNetto());
 
-        //Cleanup
+        //Database cleanup
         toSend.setUserId(14);
         toSend.setTara(4);
         toSend.setNetto(5);
@@ -258,7 +257,7 @@ class ProduktbatchDAOSQLTest {
         assertEquals(3.0000, DTOKomp.getTara());
         assertEquals(5.0000, DTOKomp.getNetto());
 
-        //Cleanup
+        //Database cleanup
         SQLDatabaseIO sqlIO = new SQLDatabaseIO("kamel", "dreng", "runerne.dk", 8003);
         sqlIO.connect();
         sqlIO.update("update cdioTest_2020.ProduktBatches set UserID=16, Tara=null, Netto=null, RBID=0 where PBID=3 and RBID=3");

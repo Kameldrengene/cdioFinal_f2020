@@ -2,13 +2,16 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Angiv raavarebatchdata</title>
 
     <script src="ProduktScreen/Raavarebatches/OpretRaavarebatch/AngivData.js"></script>
 
 </head>
 <body>
 
+<div class="container">
+    <h5 id="brugerInfo">Loading</h5> <!-- bruger info -->
+    <script>currentUser();</script>
     <div class="loads"><div id="loading"></div> </div>
 
     <h1>Opret råvarebatch</h1>
@@ -27,8 +30,8 @@
     <button class = hvr-buzz id="opret">Opret</button>
 
     <br>
-    <input type="submit" id="retur" class="hvr-buzz" value="Retur" onclick="switchP('ProduktScreen/Raavarebatches/OpretRaavarebatch/VaelgRaavare.html'); return false">
-
+    <input type="submit" id="retur" class="hvr-pop" value="Retur" onclick="switchP('ProduktScreen/Raavarebatches/OpretRaavarebatch/VaelgRaavare.html'); return false">
+</div>
 
 </body>
 </html>

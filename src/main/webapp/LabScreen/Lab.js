@@ -12,7 +12,7 @@ function showPBList() { /** Loader data ind i Selecten "pbvalg" */
             })
             document.getElementById("pbvalg").innerHTML += inner;
         }, function (data) {
-            alert("Error getting actual pb for laborant: ERR.NO.17");
+            alert("Fejl i modtagelse af produktbatch");
             console.log(data);
         })
     )
@@ -35,7 +35,7 @@ function getProductBatch(id){ /** Henter data om en PB: PBID, ReceptID, og en r�
                         raavareNavnObjekt[value.raavareId] = data.raavareNavn
                         localStorage.setItem("raavareNavnList", JSON.stringify(raavareNavnObjekt));
                     }, function (data) {
-                        alert("Error getting Raavarer")
+                        alert("Fejl i modtagelse af råvare")
                         console.log(data)
                     }, "GET", "None", false)
                 })
@@ -46,11 +46,11 @@ function getProductBatch(id){ /** Henter data om en PB: PBID, ReceptID, og en r�
                 initPB(data); /** starter arbejdet med PBen */
             }
         }, function (data) {
-            alert("Error getting recept: ERR.NO.18");
+            alert("Internal error: Prøv igen!");
             console.log(data)
         }, "GET", "None", false)
     }, function (data) {
-        alert("Error getting recept: ERR.NO.19");
+        alert("Internal error: Prøv igen!");
         console.log(data)
     }, "GET", "None", false)
 }
@@ -73,7 +73,7 @@ function initPB(data) { /** Påbegynder arbejdet med PB. Forskelligt for hvis de
             localStorage.setItem("raavareCounter", data.length - 1); /** sætter counteren til at være antallet af PBer i db -1, da der er en ekstra "tom" PB, som skal bruges til den næste råvare */
             taraView()
         }, function (data) {
-            alert("Error getting batch components: ERR.NO.33")
+            alert("Fejl i modtagelse af batch")
             console.log(data)
         })
     }
@@ -87,7 +87,7 @@ function taraView(){
     const raavareNavn = raavareNavnList[parseInt(raavareList[counter])]
 
     /** indsætter html */
-    $("#content").innerHTML ="<h2>Indtast Tara for Råvare " + raavareNavn + " (ID: " + raavareList[counter] + ")</h2>" +
+    document.getElementById("content").innerHTML ="<h2>Indtast Tara for Råvare " + raavareNavn + " (ID: " + raavareList[counter] + ")</h2>" +
         "<br>" +
         "<input id='tara' style='font-size: 14pt; width: 10%; text-align: center;' type='number' min='0.001' max='10' step='0.0001' placeholder='Tara [Kg]'>" +
         "<br>" +
@@ -104,7 +104,7 @@ function nettoView() {
     const raavareNavnList = JSON.parse(localStorage.getItem("raavareNavnList"));
     const counter = localStorage.getItem("raavareCounter");
     const raavareNavn = raavareNavnList[raavareList[counter]]
-    $("#content").innerHTML = "" +
+    document.getElementById("content").innerHTML = "" +
         "<h2>Indtast RåvareBatch og Nettovægt for Råvare " + raavareNavn + " (ID: " + raavareList[counter] + ")</h2>" +
         "<br>" +
         "<div style='margin: 1% 30%;'>" +
@@ -120,7 +120,7 @@ function nettoView() {
             document.getElementById("batchSelect").innerHTML += "<option value='" + value.rbId + "'>" + value.rbId + ": aktuel mængde: " + value.aktuelMaengde + "Kg</option>"
         })
     }, function (data) {
-        alert("Error getting RVIDB List: ERR.NO.25");
+        alert("Fejl i modtagelse af råvare batch ID");
         console.log(data)
     })
 }
@@ -132,11 +132,11 @@ function taraSwitch(PBID) { /** Metode der bliver kørt, når siden skifter fra 
         sendAjax("/BoilerPlate_war_exploded/rest/produktbatch/opdaterNewProduktbatch/", function (data) { /** opdaterer den i backenden */
             nettoView()
         }, function (data) {
-            alert("Error updating new batch: ERR.NO.23")
+            alert("Fejl i opdatering af ny Batch")
             console.log(data)
         }, "POST", JSON.stringify(data), false)
     }, function (data) {
-        alert("Error getting batchline: ERR.NO.24")
+        alert("Fejl i modtagelse af Batchline")
         console.log(data)
     }, "GET", "None", false)
 }
@@ -176,36 +176,38 @@ function nettoSwitch(PBID) { /** Metode der bliver kørt, når siden skifter fra
                                         sendAjax("/BoilerPlate_war_exploded/rest/produktbatch/opretProduktbatch", function (data) { /** opretter ny PB */
                                             taraView(); /** går tilbage til taraView */
                                         }, function (data) {
-                                            alert("Error creating new pbLine: ERR.NO.30")
+                                            alert("Fejl i ny ProduktBatch linje")
                                             console.log(data)
                                         }, "POST", JSON.stringify(newPBLine))
                                     } else {
                                         completepb(PBID); /** bliver kaldt for at afslutte PB, når den sidste er blevet helt opdateret */
                                     }
                                 }, function (data) {
-                                    alert("Error updating new batch: ERR.NO.26")
+                                    alert("Fejl i opdatering af ny Batch")
                                     console.log(data)
                                 }, "POST", JSON.stringify(data), false)
                             }, function (data) {
-                                alert("Error getting batchline: ERR.NO.27")
+                                alert("Fejl i modtagelse af Batchline")
                                 console.log(data)
                             }, "GET", "None", false)
                         }, function (data) {
-                            alert("Error updating RaavareBatch: ERR.NO.31");
+                            alert("Fejl i opdatering af Batchline");
                             console.log(data)
                         }, "POST", JSON.stringify(data), false)
                     }
                 }, function (data) {
-                    alert("Error getting RaavareBatch: ERR.NO.32");
+                    alert("Fejl i modtagelse af RåvareBatch");
                     console.log(data)
                 }, "GET", "None", false)
             }
         } else {
-            alert("Vægt ikke acceptabel, prøv igen")
+            alert("Vægt ikke inden for acceptabel tolerance: \n" +
+                "Netto: " + data.nonNetto + "Kg\n" +
+                "Tolerance: " + data.tolerance + "%" )
             nettoView()
         }
     }, function (data) {
-        alert("Error getting Recept: ERR.NO.34");
+        alert("Fejl i modtagelse af recept");
         console.log(data)
     }, "GET", "None", false)
 
@@ -219,13 +221,36 @@ function completepb(PBID){ /** Kører for at afslutte PB */
             alert("Success");
             switchP("LabScreen/Lab.html"); /** bliver returneret til startskærmen for Laboranter */
         }, function (data) {
-            alert("Error updating produktbatch: ERR.NO.28");
+            alert("Fejl i modtagelse af Produktbatch");
             console.log(data);
             completepb(PBID);
         }, "POST", JSON.stringify(data))
     }, function (data) {
-        alert("Error getting batchline: ERR.NO.29");
+        alert("Fejl i modtagelse af ProduktLinje");
         console.log(data);
     })
 }
 
+function showCorrectButton(){
+
+    const loginRole = localStorage.getItem("loginRole");
+
+    //Load the correct button: "logud" or "tilbage". Depending what role is logged in.
+    if(loginRole.localeCompare("laborant") != 0){
+
+        //Find the correct return page
+        let returnPage;
+
+        if(loginRole.localeCompare("farma") != 0)
+            returnPage = "'ProduktScreen/ProduktScreen.html'"
+        else
+            returnPage = "'FarmaScreen/Farma.html'"
+
+        $(".logudEllerTilbage").html('<input id="logoutbtn" type="submit" class="hvr-buzz screenbtn" value="Retur" onclick="switchP(' + returnPage + ')">');
+
+
+    } else{
+        $(".logudEllerTilbage").html('<input id="logoutbtn" type="submit" class="hvr-buzz screenbtn" value="Log ud" onclick="window.location.reload()">')
+    }
+
+}

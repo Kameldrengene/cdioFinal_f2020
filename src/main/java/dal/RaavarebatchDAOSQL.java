@@ -8,10 +8,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class RaavarebatchDAOSQL implements IRaavarebatchDAO {
-    public final SQLDatabaseIO db = new SQLDatabaseIO("kamel", "dreng", "runerne.dk", 8003); //Makes new SQLDatabaseIO object.
+
+    public SQLDatabaseIO db = new SQLDatabaseIO("kamel", "dreng", "runerne.dk", 8003); //Makes new SQLDatabaseIO object.
 
     // -Mikkel
-    //Get list of all raavarebatches
+
+    /**
+     * Get list of all raavarebatches
+     * @return Get list of all raavarebatches
+     * @throws SQLException
+     */
     @Override
     public List<RaavarebatchDTO> getRaavarebatchList() throws SQLException{
 
@@ -31,19 +37,13 @@ public class RaavarebatchDAOSQL implements IRaavarebatchDAO {
         return RBList;
     }
 
-    //Used in the above
-    private RaavarebatchDTO setRb(ResultSet rs, RaavarebatchDTO rb) throws SQLException {
-        rb.setRbId(rs.getInt("rBID"));
-        rb.setRaavareNavn(rs.getString("raavareNavn"));
-        rb.setLeverandoer(rs.getString("leverandoer"));
-        rb.setRaavareId(rs.getInt("raavareID"));
-        rb.setStartMaengde(rs.getDouble("maengde"));
-        rb.setAktuelMaengde(rs.getDouble("aktuelMaengde"));
-        return rb;
-    }
-
     // -Mikkel
-    //Get list of all active raavarebatches
+
+    /**
+     * Get list of all active raavarebatches
+     * @return /Get list of all active raavarebatches
+     * @throws SQLException
+     */
     @Override
     public List<RaavarebatchDTO> getAktuelRaavarebatchList() throws SQLException{
 
@@ -60,7 +60,12 @@ public class RaavarebatchDAOSQL implements IRaavarebatchDAO {
         return newRBList;
     }
 
-    //Get one specific raavarebatch
+    /**
+     * Get one specific raavarebatch
+     * @param rbId Raavarebatch ID
+     * @return /Get one specific raavarebatch
+     * @throws SQLException
+     */
     @Override
     public RaavarebatchDTO getRaavarebatch(int rbId) throws SQLException{
 
@@ -77,7 +82,12 @@ public class RaavarebatchDAOSQL implements IRaavarebatchDAO {
         return rb;
     }
 
-    //todo comment
+    /**
+     * Return liste af RaavareBatchDTO'er
+     * @param RVID RaavareBatch ID
+     * @return Return liste af RaavareBatchDTO'er
+     * @throws SQLException
+     */
     @Override
     public List<RaavarebatchDTO> getRVIDBatch(int RVID) throws SQLException{
         db.connect();
@@ -96,7 +106,12 @@ public class RaavarebatchDAOSQL implements IRaavarebatchDAO {
     }
 
     // -Mikkel
-    //Create raavarebatch
+
+    /**
+     * Create raavarebatch
+     * @param raavarebatch Raavarebatch Data Transfer Objekt
+     * @throws SQLException
+     */
     @Override
     public void createRaavarebatch(RaavarebatchDTO raavarebatch) throws SQLException{
         db.connect();
@@ -104,7 +119,11 @@ public class RaavarebatchDAOSQL implements IRaavarebatchDAO {
         db.close();
     }
 
-    //Update raavarebatch
+    /**
+     * Update raavarebatch
+     * @param raavarebatch Raavarebatch Data Transfer Objekt
+     * @throws SQLException
+     */
     @Override
     public void updateRaavarebatch(RaavarebatchDTO raavarebatch) throws SQLException {
 
@@ -120,4 +139,18 @@ public class RaavarebatchDAOSQL implements IRaavarebatchDAO {
         db.close();
     }
 
+    /**
+     * Used in the above
+     * @param rs Rækker fra databasen
+     * @param rb Raavarebatch Data Transfer Objekt
+     * @throws SQLException
+     */
+    private void setRb(ResultSet rs, RaavarebatchDTO rb) throws SQLException {
+        rb.setRbId(rs.getInt("rBID"));
+        rb.setRaavareNavn(rs.getString("raavareNavn"));
+        rb.setLeverandoer(rs.getString("leverandoer"));
+        rb.setRaavareId(rs.getInt("raavareID"));
+        rb.setStartMaengde(rs.getDouble("maengde"));
+        rb.setAktuelMaengde(rs.getDouble("aktuelMaengde"));
+    }
 }

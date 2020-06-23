@@ -42,16 +42,15 @@ function addLinje() {    //tilføjer ekstra råvare
             '</select>' +
             '</td>\n' +
             '        <td >' +
-            '<input type="number" id="netto' + counter + '" placeholder="Mængde 1.0001" value="" step="0.0001" max="20" min="0.05">' +
+            '<input type="number" id="netto' + counter + '" placeholder="Mængde 1.001" value="" step="0.001" max="20" min="0.05">' +
             '</td>\n' +
             '        <td >' +
-            '<input type="number" id="tol' + counter + '"  placeholder="Tolerance 0.1" value="" step="0.01" max="10" min="0.1"> ' +
+            '<input type="number" id="tol' + counter + '"  placeholder="Tolerance 0.1" value="" step="0.1" max="10" min="0.1"> ' +
             '</td>\n' +
             '<td>\n' +
-            '            <button class="hvr-buzz" onclick="fjernRaavar('+coutnum+');" id="fjern">fjern</button>\n' +
+            '            <button class="hvr-buzz" onclick="fjernRaavar('+coutnum+');" id="Fjern">Fjern</button>\n' +
             '        </td>' +
             '    </tr>');
-        console.log("test1");
         coutnum = 0;
         console.log(coutnum);
         selectbtn(counter);
@@ -82,6 +81,7 @@ function selectbtn(counter) {    //tilføjer råvare i scroll down list.
 
         if(counter===1) {
             $("#addRaavare").show();
+            $("#confirmbtn").show();
         }
     });
 }
@@ -89,7 +89,7 @@ function selectbtn(counter) {    //tilføjer råvare i scroll down list.
 function retur() {
     $(document).ready(function () {
         delete counter;
-        switchP('FarmaScreen/index.html');
+        switchP('FarmaScreen/Farma.html');
     });
 }
 
@@ -101,9 +101,9 @@ function confirmOpretRecept() {
             if (document.getElementById('recepID').value != '' && document.getElementById('recepnavn').value != '') {
                 console.log("test2");
                 if(!ingenRaavare()){
-                    alert("Tilføje en Råvare");
+                    alert("Tilføj en Råvare");
                 } else if(rigtigRaavar()){
-                    alert("vælge en Råvare");
+                    alert("vælg en Råvare");
                 }
                 else if (ingenDublicate()) {
                     await opretReceptList();
@@ -197,7 +197,7 @@ async function opretReceptList() {
     await sendAjax("/BoilerPlate_war_exploded/rest/Recept/OpretRecept", function (data) {
         console.log("before" + counter);
         alert("Recept oprettet succesfuldt");
-        switchP('FarmaScreen/index.html');
+        switchP('FarmaScreen/Farma.html');
         console.log("after" + counter);
     }, function (data) {
         if (data.status != 500) {

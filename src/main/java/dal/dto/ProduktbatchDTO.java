@@ -1,14 +1,15 @@
 package dal.dto;
 
 public class ProduktbatchDTO {
+
     /** produkt batch id i området 1-99999999. Vælges af brugerne */
-    int pbId;
+    private int pbId;
     /** status 0: ikke påbegyndt, 1: under produktion, 2: afsluttet */
-    String status;
+    private String status;
     /** recept id i området 1-99999999. Vælges af brugerne */
-    int receptId;
+    private int receptId;
     /** Dato. Tildeles automatisk i databasen*/
-    String dato;
+    private String dato;
 
     public int getPbId() {
         return pbId;

@@ -104,7 +104,7 @@ class RaavarebatchDAOSQLTest {
     void updateRaavarebatch() {
         try {
             raavarebatchDAOSQL.db.setDB("cdioTest_2020");
-        } catch (SQLException e) {
+        } catch (SQLException ignored) {
 
 
         }

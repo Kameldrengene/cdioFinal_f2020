@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>raavareEdit</title>
+    <script src="../../Recepter/NyRecept/NyRecept.js"></script>
+</head>
+<body>
+    <div class="container">
+        <h5 id="brugerInfo">Loading</h5> <!-- bruger info -->
+        <script>currentUser();</script>
+        <div class="loads"><div id="loading"></div> </div>
+        <div id="content"><h1>Opret ny Råvare</h1>
+            <br>
+
+
+            <input type="number" id="raavareID" placeholder="RåvareID" value="" minlength="1" maxlength="8"><br>
+            <input type="text" id="raavareNavn" placeholder="RåvareNavn" value="" minlength="2" maxlength="20"><br>
+            <input type="text" id="leverandoer"  placeholder="Leverandør" value="" minlength="2" maxlength="20"><br>
+
+
+            <input id="confirmbtn" type="button" onclick="
+                $(document).ready(async function() {
+                  if (confirm('Er du sikker?')) {
+                    if(document.getElementById('raavareID').value != '' && document.getElementById('raavareNavn').value != '' && document.getElementById('leverandoer').value != ''){
+                        raavareData('Create')
+                    } else {
+                        alert('Ikke alt udfyldt')
+                    }
+                }
+                });
+                "
+            class="hvr-pop" value="Opret">
+        </div>
+    </div>
+
+
+<input type="submit" class="hvr-pop screenbtn" id="retur" value="Retur" onclick="switchP('FarmaScreen/Farma.html') ; return false">
+
+</body>
+</html>

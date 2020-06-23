@@ -1,28 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+        <title>Administrator</title>
         <link rel="stylesheet" type="text/css" href="AdminScreen/Admin.css">
         <script src="AdminScreen/Admin.js"></script>
 </head>
 
 <body>
-        <h5 id="brugerInfo">Loading</h5>
-        <script>currentUser();</script>
+        <div class="container">
+                <h5 id="brugerInfo">Loading</h5>
+                <script>currentUser();</script>
+                <div class="loads"><div id="loading"></div> </div>
 
-        <h1>Admin screen</h1>
-        <div id='loading'></div>
-        <button class="hvr-pop" onclick="switchP('AdminScreen/Brugeroversigt/Opretbruger/OpretBruger.html');">create new person</button>
-        <div id="list" class="container" className="brugertable">
-                <br/>
-                <table class="brugertable" id="Person_table">
+                <h1>Administrator</h1>
+                <button class="hvr-pop" onclick="switchP('AdminScreen/Brugeroversigt/Opretbruger/OpretBruger.html');">Opret ny person</button>
+                <div id="list" class="container" className="brugertable">
+                        <br/>
+                        <table class="brugertable" id="Person_table">
+                        </table>
+                        <h1 id="error"></h1>
+                </div>
 
-                </table>
-                <h1 id="error"></h1>
+                <input type="submit" style="margin-top: 0%;" class="hvr-buzz screenbtn" value="Log ud" onclick="window.location.reload()">
+
+                <script>Personslist();</script>
         </div>
-
-
-        <input type="submit" style="margin-top: 0%;" class="hvr-buzz screenbtn" value="Log ud" onclick="window.location.reload()">
-
-        <script>Personslist();</script>
 </body>
 </html>

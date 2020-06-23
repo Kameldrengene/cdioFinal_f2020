@@ -2,8 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
-
+    <title>Vis raavarebatches</title>
 
     <script src="ProduktScreen/Raavarebatches/VisRaavarebatches.js"></script>
 
@@ -12,19 +11,24 @@
 </head>
 <body>
 
-    <div class="loads"><div id="loading"></div> </div>
+    <div class="container">
+        <h5 id="brugerInfo">Loading</h5> <!-- bruger info -->
+        <script>currentUser();</script>
+        <div class="loads"><div id="loading"></div> </div>
 
-    <h1>Råvarebatches</h1>
+        <h1>Råvarebatches</h1>
 
-    <input  type="checkbox" type=text id="visTomme">
-    <Label for="visTomme">Vis tomme</Label>
-    <br>
+        <input  type="checkbox" type=text id="visTomme">
+        <Label for="visTomme">Vis tomme</Label>
+        <br>
 
-    <table class="brugertable" id="raavarebatches">
-    </table>
+        <table class="brugertable" id="raavarebatches">
+        </table>
 
-    <br>
-    <input type="submit" id="retur" class="hvr-buzz" value="Retur" onclick="switchP('ProduktScreen/ProduktScreen.html'); return false">
+        <br>
+        <input type="submit" id="retur" class="hvr-pop" value="Retur" onclick="switchP('ProduktScreen/ProduktScreen.html'); return false">
+    </div>
+
 
 </body>
 </html>

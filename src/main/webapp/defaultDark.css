@@ -1,0 +1,394 @@
+/*Stærk inspireret af Malte's løsning i for html og css */
+/* Du kan også bruge :root selector */
+* {
+    /* Definerer en global variabel til vores "temafarve" */
+    --color-primary: #45ABB8;
+    --col-background: #2a2a2a;
+    --col-secondarybackground: #333333;
+    --col-textprimary: #E9E9EA;
+    --col-textsecondary: #666666;
+    --col-textthird: rgba(233, 233, 234, 0.6);
+    --col-defaultRed: #CD5C5C;
+
+    /* Sætter Font i prioriteret rækkefølge, i tilfælde af at browseren
+     ikke har en fonten. */
+    font-family: Open Sans, Verdana, sans-serif;
+}
+
+
+/* Selector på flere tags */
+h1, h2, h3  {
+    color: var(--color-primary);
+}
+
+h5{
+    color: var(--col-textsecondary);
+    font-weight: normal;
+    line-height: 0.8;
+    font-size: 100%;
+    margin-top: 5px;
+    margin-bottom: 10px;
+}
+
+#brugerInfo{
+    text-align: right;
+    color: var(--col-textprimary);
+
+}
+
+/* Centerer alt text i <body> */
+body {
+    margin-top: 5%;
+    text-align: center;
+    background-color: var(--col-background);
+}
+
+
+/* Selector, der vælger alle <input> tags som har sin 'type' attribut
+    sat til enten 'text' eller 'password'.*/
+input[type=text], input[type=password], input[type=number] {
+    margin-bottom: 1%;
+    /* Fjerner boxen rundt om tekstfeltet  */
+    border: none;
+    border-bottom: 1px solid var(--color-primary);
+    background-color: var(--col-background);
+    color: var(--col-textprimary);
+}
+
+input:invalid{
+    border-style: dotted;
+    border-width: 2px;
+    border-color: #c65450;
+}
+
+
+/* Selector der vælger de samme som ovenstående, blot
+    når der 'focused', dvs */
+input[type=number]:focus, input[type=password]:focus, input[type=number]:focus {
+    outline: none;
+    border-bottom: 2px solid var(--color-primary);
+    background-color: var(--col-background);
+}
+
+input[type=number]:focus, input[type=password]:focus, input[type=number]:focus {
+    outline: none;
+    border-bottom: 2px solid var(--color-primary);
+    background-color: var(--col-background);
+}
+
+
+/* Styler klassen 'primarybutton' */
+.primarybutton {
+    font-size: 100%;
+    color: var(--col-textprimary);
+    font-weight: bold;
+    background-color: var(--color-primary);
+    padding: 8px;
+    margin-top: 1%;
+    border-radius: 10px; /* Border radius gør vores kanter runde*/
+    border: none;
+    outline: none;
+    /* Bonus: Brug transitions til flydende at skifte properties (her
+        'background-color' og 'color', når der skiftes til denne */
+    transition: background-color 0.25s, color 0.25s;
+}
+
+/* Styler hvordan knappen skal set ud, når
+    der hovers over den.*/
+.primarybutton:hover{
+    border: none;
+    color: var(--col-background);
+    transition: background-color 0.25s, color 0.25s;
+}
+
+/* Note til primary button:
+    Da alle de "knapper" vi styler, faktisk er input elementer
+    med attributten 'type=submit', kan vi selecte dem alle med
+    selectoren:
+
+        input[type=submit] {
+            <css>
+        }
+
+    Den vælger alle <input> elementer, der har attributten 'type'
+    sat til 'submit'.
+ */
+
+/* Buzz---https://ianlunn.github.io/Hover/ */
+@-webkit-keyframes hvr-buzz {
+    50% {
+        -webkit-transform: translateX(3px) rotate(2deg);
+        transform: translateX(3px) rotate(2deg);
+    }
+    100% {
+        -webkit-transform: translateX(-3px) rotate(-2deg);
+        transform: translateX(-3px) rotate(-2deg);
+    }
+}
+@keyframes hvr-buzz {
+    50% {
+        -webkit-transform: translateX(3px) rotate(2deg);
+        transform: translateX(3px) rotate(2deg);
+    }
+    100% {
+        -webkit-transform: translateX(-3px) rotate(-2deg);
+        transform: translateX(-3px) rotate(-2deg);
+    }
+}
+.hvr-buzz {
+    font-size: 100%;
+
+    color: var(--col-background);
+    font-weight: bold;
+    background-color: var(--color-primary);
+    padding: 8px;
+    margin-top: 3%;
+    border-radius: 10px; /* Border radius gør vores kanter runde*/
+    border: none;
+    outline: none;
+    /* Bonus: Brug transitions til flydende at skifte properties (her
+        'background-color' og 'color', når der skiftes til denne */
+    transition: background-color 0.25s, color 0.25s;
+
+    display: inline-block;
+    vertical-align: middle;
+    -webkit-transform: perspective(1px) translateZ(0);
+    transform: perspective(1px) translateZ(0);
+    box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+}
+.hvr-buzz:hover, .hvr-buzz:focus, .hvr-buzz:active {
+    -webkit-animation-name: hvr-buzz;
+    animation-name: hvr-buzz;
+    -webkit-animation-duration: 0.15s;
+    animation-duration: 0.15s;
+    -webkit-animation-timing-function: linear;
+    animation-timing-function: linear;
+    -webkit-animation-iteration-count: infinite;
+    animation-iteration-count: infinite;
+    color: var(--col-textprimary);
+    transition: background-color 0.25s, color 0.25s;
+    border: none;
+}
+
+/* Pop -----https://ianlunn.github.io/Hover/*/
+@-webkit-keyframes hvr-pop {
+    50% {
+        -webkit-transform: scale(1.2);
+        transform: scale(1.2);
+    }
+}
+@keyframes hvr-pop {
+    50% {
+        -webkit-transform: scale(1.2);
+        transform: scale(1.2);
+    }
+}
+.hvr-pop,.slet, .update {
+    font-size: 100%;
+    color: var(--col-background);
+    font-weight: bold;
+    background-color: var(--color-primary);
+    padding: 8px;
+    margin-top: 1%;
+    border-radius: 10px; /* Border radius gør vores kanter runde*/
+    border: none;
+    outline: none;
+    /* Bonus: Brug transitions til flydende at skifte properties (her
+        'background-color' og 'color', når der skiftes til denne */
+    transition: background-color 0.25s, color 0.25s;
+
+    display: inline-block;
+    vertical-align: middle;
+    -webkit-transform: perspective(1px) translateZ(0);
+    transform: perspective(1px) translateZ(0);
+    box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+}
+.hvr-pop:hover, .slet:hover, .update:hover,  .hvr-pop:focus , .slet:focus, .update:focus, .hvr-pop:active , .slet:active, .update:active {
+    -webkit-animation-name: hvr-pop;
+    animation-name: hvr-pop;
+    -webkit-animation-duration: 0.3s;
+    animation-duration: 0.3s;
+    -webkit-animation-timing-function: linear;
+    animation-timing-function: linear;
+    -webkit-animation-iteration-count: 1;
+    animation-iteration-count: 1;
+    color: var(--col-textprimary);
+    transition: background-color 0.25s, color 0.25s;
+    border: none;
+}
+
+#content object {
+    height:700px;
+    width: 850px;
+}
+
+/*html, body{
+    height: 100%;
+    width: 100%;
+}*/
+
+/*Stærk inspireret af Malte's løsning i for html og css
+ Vi vil ikke have at teksten er centreret i tabellen */
+.brugertable {
+    /* Auto margin i højre og venstre side (her alle), gør
+        elementet bliver centreret på skærmen. */
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 2%;
+    text-align: left;
+    border: none;
+    border-radius: 10px;
+    background: var(--col-secondarybackground);
+    color: var(--col-textthird);
+    display: inline-block;
+    overflow-x: hidden;
+    overflow-y: auto;
+    max-height: 560px;
+}
+
+/*todo slet?*/
+/*::-webkit-scrollbar {*/
+/*    width: 0px;*/
+/*    background: transparent; !* make scrollbar transparent *!*/
+/*}*/
+
+/* Giver padding på alle headers og celler i tabellen.
+    Padding er afstand fra cellens kant til cellens indhold. */
+.brugertable th, .brugertable td {
+    padding: 8px;
+}
+.brugertable th:hover {
+
+    color: var(--col-textprimary);
+}
+
+/* Vi kan vælge alle rows (<tr>), der er et "ulige index"
+    af sin parent. (dvs. hver anden række i tabellen) */
+.brugertable tr:nth-child(odd):hover {
+    color: var(--col-textprimary);
+}
+.brugertable tr:nth-child(even):hover {
+    color: var(--col-textprimary);
+}
+
+/* Vi kan vælge første celle i hver række
+.brugertable td:first-child {
+    font-style: italic;
+    text-align: center;
+}
+*/
+
+/* Vi kan ændre stylen på vores links i tabellen */
+.brugertable a {
+    color: var(--col-textsecondary);
+    text-decoration: none;
+}
+
+/* Vi kan ændre hover stylen på links i tabellen*/
+.brugertable a:hover {
+    color: var(--col-textprimary);
+}
+.slet{
+    background: #c65450;
+}
+.update{
+    background: cornflowerblue;
+}
+
+form label:hover{
+    color: var(--col-textprimary);
+}
+
+form{
+    color: var(--col-textsecondary)
+}
+
+.screenbtn{
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.container{
+    width:80%;
+    margin:auto;
+}
+
+#retur{
+    margin-top: 20px;
+    margin-bottom: 20px;
+    background: var(--col-defaultRed);
+}
+
+/* Source: https://www.w3schools.com/howto/howto_css_loader.asp */
+#loading {
+    margin: 20px auto;
+    border: 5px solid #f3f3f3;
+    border-top: 5px solid #555;
+    border-radius: 50%;
+    width: 35px;
+    height: 35px;
+    animation: spin 2s linear infinite;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.loads{
+    position: fixed;
+    z-index: 99;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--col-background);
+    display:none;
+}
+
+.menubar{
+    text-align: right;
+    margin-right: 0px;
+    margin-left: auto;
+}
+
+.menubar .workAs{
+    font-size: 70%;
+    margin: 5px;
+}
+
+.menubar .workAs .hvr-pop{
+    background: var( --col-textsecondary);
+    width: 100%;
+}
+
+
+.menuItemsTable .hvr-pop{
+    width: 100%;
+}
+
+.logudEllerTilbage .hvr-buzz{
+    background: var(--col-defaultRed);
+}
+
+.afslutTable .hvr-pop{
+    width: 100%;
+    text-align: center;
+}
+
+.afslutTable{
+    margin: auto;
+}
+
+
+
+
+
+
+
+
+

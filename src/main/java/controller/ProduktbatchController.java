@@ -11,7 +11,7 @@ import java.util.List;
 
 public class ProduktbatchController {
 
-    private final ProduktbatchDAOSQL DAOSQL;
+    public final ProduktbatchDAOSQL DAOSQL;
     private final String SQLErrorMsg = "ERROR: Fejl i forbindelse med kontakt af databasen";
 
     public ProduktbatchController(){
@@ -19,7 +19,11 @@ public class ProduktbatchController {
     }
 
     // -Mikkel
-    //Get list of all productbatches
+
+    /**
+     * Get list of all productbatches
+     * @return Liste over alle produktbatches
+     */
     public List<ProduktbatchDTO> getAlle(){
         try {
             return DAOSQL.getProduktBatchList();
@@ -29,7 +33,11 @@ public class ProduktbatchController {
     }
 
     // -Mikkel
-    //Get list of all active productbatches
+
+    /**
+     * Get list of all active productbatches
+     * @return Liste over alle aktive produktbatches
+     */
     public List<ProduktbatchDTO> getAktuelle(){
         try {
             return DAOSQL.getAktuelProduktBatchList();
@@ -39,7 +47,12 @@ public class ProduktbatchController {
     }
 
     // -Mikkel
-    //Get one productbatch
+
+    /**
+     * Get one productbatch
+     * @param batchID Produktbatch ID
+     * @return Produktbatchet som svarer til produktbatch ID
+     */
     public ProduktbatchDTO getBatchLine(String batchID){
         int batchIDint = Integer.parseInt(batchID);
 
@@ -50,7 +63,12 @@ public class ProduktbatchController {
         }
     }
 
-    //Get one productbatch component
+    /**
+     * Get one productbatch component
+     * @param batchID Produktbatch ID
+     * @param RBID Produktbatchkomp ID
+     * @return Produktbatchkomp svarer til den angivet ID
+     */
     public ProduktbatchKompDTO getBatchComponent(String batchID, String RBID){
         int batchIDint = Integer.parseInt(batchID);
         int RBIDint = Integer.parseInt(RBID);
@@ -62,7 +80,11 @@ public class ProduktbatchController {
         }
     }
 
-    //Get all productbatch components of one productbatch
+    /**
+     * Get all productbatch components of one productbatch
+     * @param batchID Produktbatch ID
+     * @return LIste over alle komponenter i en produktbatch
+     */
     public List<ProduktbatchKompDTO> getBatchComponents(String batchID){
         int batchIDint = Integer.parseInt(batchID);
 
@@ -74,7 +96,11 @@ public class ProduktbatchController {
     }
 
     // -Mikkel
-    //Get the heighest productbatch ID-number
+
+    /**
+     * Get the heighest productbatch ID-number
+     * @return Den højeste produktbatch nummer
+     */
     public int getMaxPDID(){
         try{
             return DAOSQL.getMaxPDID();
@@ -84,7 +110,12 @@ public class ProduktbatchController {
     }
 
     // -Mikkel
-    //Create product batch
+
+    /**
+     * Create product batch
+     * @param produktbatchDTO Produktbatch Data transfer Objekt
+     * @return Den oprettede produktbatch objekt
+     */
     public ProduktbatchDTO opretProduktbatch(ProduktbatchDTO produktbatchDTO){
 
         try {
@@ -95,7 +126,11 @@ public class ProduktbatchController {
         return produktbatchDTO;
     }
 
-    //Update a whole product batch
+    /**
+     * Update a whole product batch
+     * @param produktbatchDTO Produktbatch Data transfer Objekt
+     * @return Den opdaterede produktbatch objekt
+     */
     public ProduktbatchDTO opdaterProduktbatch(ProduktbatchDTO produktbatchDTO){
         try {
             DAOSQL.updateProduktBatch(produktbatchDTO);
@@ -106,7 +141,11 @@ public class ProduktbatchController {
         return produktbatchDTO;
     }
 
-    //Update one productbatch component
+    /**
+     * Update one productbatch component
+     * @param produktbatchKompDTO Produktbatch Data transfer Objekt
+     * @return Den opdaterede Produktbatch række
+     */
     public ProduktbatchKompDTO opdaterProduktbatchLine(ProduktbatchKompDTO produktbatchKompDTO){
         try {
             DAOSQL.updateProduktBatchkomponent(produktbatchKompDTO);
@@ -116,7 +155,11 @@ public class ProduktbatchController {
         return produktbatchKompDTO;
     }
 
-    //todo comment
+    /**
+     * Opdater ny produktbatch
+     * @param produktbatchKompDTO Produktbatch Data transfer Objekt
+     * @return Den opretede produktbatch række
+     */
     public ProduktbatchKompDTO opdaterNewProduktbatch(ProduktbatchKompDTO produktbatchKompDTO){
         try {
             DAOSQL.updateNewpb(produktbatchKompDTO);
@@ -125,7 +168,12 @@ public class ProduktbatchController {
         }
         return produktbatchKompDTO;
     }
-
+    /**
+     * Kaster en Exception videre hvis der sker en fejl i systemet
+     * @param status Web status
+     * @param msg Besked der skal stå i fejl meddelelse
+     * @return returner en Webapplication Exception
+     */
     public WebApplicationException buildError(Response.Status status, String msg){
         return new WebApplicationException(Response.status(status).entity(msg).build());
     }
