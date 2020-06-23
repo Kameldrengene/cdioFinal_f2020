@@ -15,14 +15,18 @@ public class RaavarevbatchController {
     private final RaavarebatchFunc func;
     private final String SQLErrorMsg = "ERROR: Fejl i forbindelse med kontakt af databasen";
 
-    //Konstruktør
+    /** Konstruktør */
     public RaavarevbatchController() {
         DAOSQL = new RaavarebatchDAOSQL();
         func = new RaavarebatchFunc();
     }
 
     // -Mikkel
-    //Get list of all raavarebatches
+
+    /**
+     * Get list of all raavarebatches
+     * @return LIste over alle raavarebatches
+     */
     public List<RaavarebatchDTO> getData(){
         try {
             return DAOSQL.getRaavarebatchList();
@@ -32,7 +36,11 @@ public class RaavarevbatchController {
     }
 
     // -Mikkel
-    //Get list of all active raavarebatches
+
+    /**
+     * Get list of all active raavarebatches
+     * @return Liste over alle raavarebatches som er er i lager
+     */
     public List<RaavarebatchDTO> getAktuelle(){
         try {
             return DAOSQL.getAktuelRaavarebatchList();
@@ -41,7 +49,11 @@ public class RaavarevbatchController {
         }
     }
 
-    //Get one specific raavarebatch
+    /**
+     * Get one specific raavarebatch
+     * @param batchID Raavarebatch ID
+     * @return raavarebatch som passer til batch ID
+     */
     public RaavarebatchDTO getBatch(String batchID){
 
         int batchIDint = Integer.parseInt(batchID);
@@ -52,7 +64,11 @@ public class RaavarevbatchController {
         }
     }
 
-    //Return liste med RaavareBatchDTO'er
+    /**
+     * Return liste med RaavareBatchDTO'er
+     * @param RVID RaavareBatch ID
+     * @return Return liste af RaavareBatchDTO'er
+     */
     public List<RaavarebatchDTO> getRVIDBatch(String RVID){
 
         int RVIDint = Integer.parseInt(RVID);
@@ -66,7 +82,12 @@ public class RaavarevbatchController {
     }
 
     // -Mikkel
-    //Create raavarebatch
+
+    /**
+     * Create raavarebatch
+     * @param dto Raavarebatch Data Transfer Objekt
+     * @return Den oprettede raavarebatch
+     */
     public RaavarebatchDTO opretRaavarebatch(RaavarebatchDTO dto) {
 
         try {
@@ -85,7 +106,11 @@ public class RaavarevbatchController {
 
     }
 
-    //Update raavarebatch
+    /**
+     * Update raavarebatch
+     * @param raavarebatchDTO Raavarebatch Data Transfer Objekt
+     * @return den opdaterede raaavareBatch
+     */
     public RaavarebatchDTO updateRaavarebatch(RaavarebatchDTO raavarebatchDTO) {
         try {
             DAOSQL.updateRaavarebatch(raavarebatchDTO);

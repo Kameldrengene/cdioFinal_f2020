@@ -16,6 +16,11 @@ public class PrintController {
         printDAOSQL = new PrintDAOSQL();
     }
 
+    /**
+     * Indenholder de informationer der skal printes
+     * @param pbID Produktbatch ID
+     * @return Liste over informationer på en produktbatch
+     */
     public List<PrintDTO> getData(int pbID){
         try {
             return printDAOSQL.getPrint(pbID);
@@ -24,7 +29,12 @@ public class PrintController {
             throw buildError(Response.Status.NOT_ACCEPTABLE, SQLErrorMsg);
         }
     }
-
+    /**
+     * Kaster en Exception videre hvis der sker en fejl i systemet
+     * @param status Web status
+     * @param msg Besked der skal stå i fejl meddelelse
+     * @return returner en Webapplication Exception
+     */
     public WebApplicationException buildError(Response.Status status, String msg){
         return new WebApplicationException(Response.status(status).entity(msg).build());
     }

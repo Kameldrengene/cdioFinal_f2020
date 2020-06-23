@@ -16,12 +16,17 @@ public class UserController {
     public final UserDAOSQL userDAOSQL;
     private final String SQLErrorMsg = "ERROR: Fejl i forbindelse med kontakt af databasen";
 
-    //Constructor
+    /**
+     * Constructor
+     */
     public UserController(){
         userDAOSQL = new UserDAOSQL();
     }
 
-    //Get all users
+    /**
+     * Get all users
+     * @return Liste over alle bruger
+     */
     public List<UserDTO> getData()  {
         try {
             return userDAOSQL.getData();
@@ -30,7 +35,11 @@ public class UserController {
         }
     }
 
-    //Get all users
+    /**
+     * Returnerer en Bruger
+     * @param id Bruger ID
+     * @return En specifik bruger som har angivet ID
+     */
     public UserDTO getUser(int id) {
         UserDAOSQL db = new UserDAOSQL();
         try {
@@ -40,7 +49,11 @@ public class UserController {
         }
     }
 
-    //Get all users with specific role
+    /**
+     * Get all users with specific role
+     * @param role Bruger rolle
+     * @return Returnerer alle bruger som har en specifik rolle
+     */
     public List<UserDTO> getRole(String role)  {
         try {
             return userDAOSQL.getRole(role);
@@ -49,6 +62,10 @@ public class UserController {
         }
     }
 
+    /**
+     * Create a user
+     * @param user User Data Transfer Objekt
+     */
     public void createUser(UserDTO user) {
         UserDAOSQL db = new UserDAOSQL();
         UserFunc userF = new UserFunc();
@@ -61,7 +78,11 @@ public class UserController {
         }
     }
 
-    //Create user
+    /**
+     * Update user
+     * @param user User Data Transfer Objekt
+     * @return created User
+     */
     public UserDTO updateUser(UserDTO user) {
         UserDAOSQL db = new UserDAOSQL();
         UserFunc userF = new UserFunc();
@@ -75,7 +96,11 @@ public class UserController {
         return user;
     }
 
-    //Switch activity of user
+    /**
+     * Switch activity of user
+     * @param user User Data Transfer Objekt
+     * @return User object
+     */
     public UserDTO activitySwitchUser(UserDTO user) {
         UserDAOSQL db = new UserDAOSQL();
         try {
@@ -86,7 +111,11 @@ public class UserController {
         return user;
     }
 
-    //Get a users Activity
+    /**
+     * Get a users Activity
+     * @param id Bruger ID
+     * @return Bruger aktitet status
+     */
     public boolean CurrentActivity (int id){
         UserDAOSQL db = new UserDAOSQL();
         try {
@@ -96,7 +125,12 @@ public class UserController {
         }
     }
 
-
+    /**
+     * Kaster en Exception videre hvis der sker en fejl i systemet
+     * @param status Web status
+     * @param msg Besked der skal stå i fejl meddelelse
+     * @return returner en Webapplication Exception
+     */
     public WebApplicationException buildError(Response.Status status, String msg){
         return new WebApplicationException(Response.status(status).entity(msg).build());
     }

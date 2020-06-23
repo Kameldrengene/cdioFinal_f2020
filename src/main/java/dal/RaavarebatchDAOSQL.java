@@ -99,7 +99,7 @@ public class RaavarebatchDAOSQL implements IRaavarebatchDAO {
     /**
      * Return liste af RaavareBatchDTO'er
      * @param RVID RaavareBatch ID
-     * @return /Return liste af RaavareBatchDTO'er
+     * @return Return liste af RaavareBatchDTO'er
      * @throws SQLException
      */
     @Override
