@@ -48,10 +48,9 @@ function addLinje() {    //tilføjer ekstra råvare
             '<input type="number" id="tol' + counter + '"  placeholder="Tolerance 0.1" value="" step="0.1" max="10" min="0.1"> ' +
             '</td>\n' +
             '<td>\n' +
-            '            <button class="hvr-buzz" onclick="fjernRaavar('+coutnum+');" id="Fjern">fjern</button>\n' +
+            '            <button class="hvr-buzz" onclick="fjernRaavar('+coutnum+');" id="Fjern">Fjern</button>\n' +
             '        </td>' +
             '    </tr>');
-        console.log("test1");
         coutnum = 0;
         console.log(coutnum);
         selectbtn(counter);
@@ -102,9 +101,9 @@ function confirmOpretRecept() {
             if (document.getElementById('recepID').value != '' && document.getElementById('recepnavn').value != '') {
                 console.log("test2");
                 if(!ingenRaavare()){
-                    alert("Tilføje en Råvare");
+                    alert("Tilføj en Råvare");
                 } else if(rigtigRaavar()){
-                    alert("vælge en Råvare");
+                    alert("vælg en Råvare");
                 }
                 else if (ingenDublicate()) {
                     await opretReceptList();

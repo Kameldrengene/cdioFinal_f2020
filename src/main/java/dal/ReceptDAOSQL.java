@@ -10,7 +10,13 @@ import java.util.List;
 public class ReceptDAOSQL implements IReceptDAO{
     public final SQLDatabaseIO db = new SQLDatabaseIO("kamel", "dreng", "runerne.dk", 8003); //Makes new SQLDatabaseIO object.
 
-    //henter den enkelt recept med en recept komponent.
+    /**
+     * henter den enkelt recept med en recept komponent.
+     * @param receptId Recept ID
+     * @param RaavareID Raavare ID
+     * @return Returnerer en specifik raavare som tilhører en recept
+     * @throws SQLException
+     */
     @Override
     public ReceptDTO getRecept(int receptId, int RaavareID) throws SQLException {
         db.connect();
@@ -27,7 +33,12 @@ public class ReceptDAOSQL implements IReceptDAO{
         return recept;
     }
 
-    //henter alle recept komponenter af en recept fra SQLdatabasen
+    /**
+     * henter alle recept komponenter af en recept fra SQLdatabasen
+     * @param id Recept ID
+     * @return henter alle recept komponenter af en recept fra SQLdatabasen
+     * @throws SQLException
+     */
     @Override
     public List<ReceptDTO> getReceptKomponents(int id) throws SQLException {
         db.connect();
@@ -50,7 +61,11 @@ public class ReceptDAOSQL implements IReceptDAO{
     }
 
 
-    //henter alle recepter fra SQL databasen
+    /**
+     * henter alle recepter fra SQL databasen
+     * @return henter alle recepter fra SQL databasen
+     * @throws SQLException
+     */
     @Override
     public List<ReceptDTO> getReceptList() throws SQLException {
         db.connect();
@@ -68,7 +83,11 @@ public class ReceptDAOSQL implements IReceptDAO{
         return receptList;
     }
 
-    //opretter en recept med alle af sine komponeneter
+    /**
+     * opretter en recept med alle af sine komponeneter
+     * @param recept opretter en recept med alle af sine komponeneter
+     * @throws SQLException
+     */
     public void createReceptList(List<ReceptDTO> recept) throws SQLException {
         for (int i = 0; i < recept.size(); i++) {
                 db.connect();

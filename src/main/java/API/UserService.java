@@ -15,14 +15,23 @@ public class UserService {
 
     public final UserController userController = new UserController();
 
-    //Get all users
+    /**
+     * Get all users
+     * @return Liste over alle bruger
+     * @throws WebApplicationException
+     */
     @Path("getUsers")
     @GET
     public List<UserDTO> getData() throws WebApplicationException{
         return userController.getData();
     }
 
-    //Get all users
+    /**
+     * Returnerer en Bruger
+     * @param id Bruger ID
+     * @return En specifik bruger som har angivet ID
+     * @throws WebApplicationException
+     */
     @Path("getUser/{id}")
     @Produces(MediaType.APPLICATION_JSON)
     @GET
@@ -31,7 +40,13 @@ public class UserService {
     }
 
     // -Mikkel
-    //Get all users with specific role
+
+    /**
+     * Get all users with specific role
+     * @param role Bruger rolle
+     * @return Returnerer alle bruger som har en specifik rolle
+     * @throws WebApplicationException
+     */
     @Path("getRole")
     @Produces(MediaType.APPLICATION_JSON)
     @GET
@@ -39,7 +54,12 @@ public class UserService {
         return userController.getRole(role);
     }
 
-    //Create user
+    /**
+     * Create a user
+     * @param user User Data Transfer Objekt
+     * @return Brugeren der oprettes
+     * @throws WebApplicationException
+     */
     @Path("createUser")
     @POST
     public UserDTO createUser(UserDTO user) throws WebApplicationException{
@@ -47,21 +67,36 @@ public class UserService {
         return user;
     }
 
-    //Update user
+    /**
+     * Update user
+     * @param user  User Data Transfer Objekt
+     * @return created User
+     * @throws WebApplicationException
+     */
     @Path("updateUser")
     @PUT
     public UserDTO updateUser(UserDTO user) throws WebApplicationException{
         return userController.updateUser(user);
     }
 
-    //Switch activity of user
+    /**
+     * Switch activity of user
+     * @param user User Data Transfer Objekt
+     * @return User object
+     * @throws WebApplicationException
+     */
     @Path("activeUser")
     @PUT
     public UserDTO activitySwitchUser(UserDTO user) throws WebApplicationException{
         return userController.activitySwitchUser(user);
     }
 
-    //Get a users Activity
+    /**
+     * Get a users Activity
+     * @param id Bruger ID
+     * @return Bruger aktitet status
+     * @throws WebApplicationException
+     */
     @Path("getactivity/{id}")
     @Produces(MediaType.APPLICATION_JSON)
     @GET

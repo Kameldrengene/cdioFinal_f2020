@@ -9,7 +9,11 @@ import java.util.List;
 public class UserDAOSQL implements IUserDAO {
     public final SQLDatabaseIO db = new SQLDatabaseIO("kamel", "dreng", "runerne.dk", 8003); //Makes new SQLDatabaseIO object.
 
-    //Get all users
+    /**
+     * Get all users
+     * @return Returnerer alle bruger
+     * @throws SQLException
+     */
     @Override
     public List<UserDTO> getData() throws SQLException { //We get a list of users here
         db.connect();
@@ -28,7 +32,12 @@ public class UserDAOSQL implements IUserDAO {
         return userList;
     }
 
-    //Get all users
+    /**
+     * Returnerer en bruger
+     * @param userId Bruger ID
+     * @return En specifik bruger som har angivet ID
+     * @throws SQLException
+     */
     @Override
     public UserDTO getUser(int userId) throws SQLException {
         db.connect();
@@ -44,7 +53,13 @@ public class UserDAOSQL implements IUserDAO {
     }
 
     // -Mikkel
-    //Get all users with specific role
+
+    /**
+     * Get all users with specific role
+     * @param role Bruger rolle
+     * @return Returnerer alle bruger som har en specifik rolle
+     * @throws SQLException
+     */
     @Override
     public List<UserDTO> getRole(String role) throws SQLException {
 
@@ -64,7 +79,12 @@ public class UserDAOSQL implements IUserDAO {
         return userList;
     }
 
-    //Create user
+    /**
+     * Create user
+     * @param user User Data Transfer Objekt
+     * @return Den oprettede bruger
+     * @throws SQLException
+     */
     @Override
     public UserDTO createUser(UserDTO user) throws SQLException { //We make a new user
         List<UserDTO> users = getData();
@@ -76,7 +96,11 @@ public class UserDAOSQL implements IUserDAO {
         return user;
     }
 
-    //Update user
+    /**
+     * Update user
+     * @param user User Data Transfer Objekt
+     * @throws SQLException
+     */
     @Override
     public void updateUser(UserDTO user) throws SQLException { //We update user with a new user
         db.connect();
@@ -101,13 +125,17 @@ public class UserDAOSQL implements IUserDAO {
         db.close();
     }
 
-    //Switch activity of user
+    /**
+     * Switch activity of user
+     * @param userId Bruger ID
+     * @throws SQLException
+     */
     @Override
     public void aktivitySwitchUser(int userId) throws SQLException { //We switch the activity of the user
         db.connect();
         ResultSet rs = db.query("SELECT aktiv FROM userdto where userID=" + userId);
         boolean b;
-        int boolVal = 0;
+        int boolVal;
         rs.next();
         b = rs.getBoolean("aktiv");
         if(b){
@@ -120,7 +148,12 @@ public class UserDAOSQL implements IUserDAO {
         db.close();
     }
 
-    //Get a users Activity
+    /**
+     * Get a users Activity
+     * @param id Bruger ID
+     * @return Bruger aktitet status
+     * @throws SQLException
+     */
     @Override
     public boolean getActivity(int id) throws SQLException {
         UserDTO user = new UserDTO();
@@ -136,15 +169,19 @@ public class UserDAOSQL implements IUserDAO {
         return user.getAktiv();
     }
 
-    //todo comment
-    private UserDTO setUser(ResultSet rs, UserDTO user) throws SQLException {
+    /**
+     * Set user udfra ResultSet og returner
+     * @param rs Række Database
+     * @param user User Data Transfer Objekt
+     * @throws SQLException
+     */
+    private void setUser(ResultSet rs, UserDTO user) throws SQLException {
         user.setUserID(rs.getInt("userID"));
         user.setUserName(rs.getString("userName"));
         user.setIni(rs.getString("ini"));
         user.setPassword(rs.getString("password"));
         user.setJob(rs.getString("job"));
         user.setAktiv(rs.getBoolean("aktiv"));
-        return user;
     }
 
 }

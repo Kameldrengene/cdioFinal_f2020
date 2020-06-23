@@ -2,20 +2,23 @@ package dal.dto;
 
 public class ReceptDTO {
     /** recept id i området 1-99999999 */
-    int receptId;
+    private int receptId;
     /** Receptnavn min. 2 max. 20 karakterer */
     String receptNavn;
+    private  String receptNavn;
+    /** raavare id i området 1-99999999. Vælges af brugerne
+     *  i opgaver står der (1..N) derfor er det en array */
 
+    private String raavarNavn;
     /** raavare Navn tilføjes for at gøre hjemmesiden brugervenligt Vælges af brugerne*/
-    String raavarNavn;
 
+    private int raavareId;
     /** raavare id i området 1-99999999. Vælges af brugerne*/
-    int raavareId;
 
     /** nonnetto i kilogram med 4 decimaler */
-    double nonNetto;
+    private double nonNetto;
     /** tolerance i kilogram med 4 decimaler */
-    double tolerance;
+    private double tolerance;
 
 
     public ReceptDTO(){

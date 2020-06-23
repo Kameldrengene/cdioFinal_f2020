@@ -73,23 +73,43 @@ $("document").ready(async function () {
     const darkTheme = "<link rel=\"stylesheet\" id=\"theme\" type=\"text/css\" href=\"defaultDark.css\">";
     const lightTheme = "<link rel=\"stylesheet\" id=\"theme\" type=\"text/css\" href=\"defaultLight.css\">";
     let currentTheme = "dark";
+    if (getCookie("Theme") === "light") {currentTheme = "light"; document.getElementById("themebtn").checked = "checked"; $("#theme").replaceWith(lightTheme);}
 
     $(".slider").click(function () {
 
         if(currentTheme.localeCompare("dark") != 0){
+
             // console.log("2")
             currentTheme = "dark";
+            document.cookie = "Theme=dark;"
             $("#theme").replaceWith(darkTheme);
 
         } else {
             // console.log("3")
             currentTheme = "light";
+            document.cookie = "Theme=light;"
             $("#theme").replaceWith(lightTheme);
 
         }
     });
 
 });
+
+function getCookie(cname) { //https://www.w3schools.com/js/js_cookies.asp
+    var name = cname + "=";
+    var decodedCookie = decodeURIComponent(document.cookie);
+    var ca = decodedCookie.split(';');
+    for(var i = 0; i <ca.length; i++) {
+        var c = ca[i];
+        while (c.charAt(0) == ' ') {
+            c = c.substring(1);
+        }
+        if (c.indexOf(name) == 0) {
+            return c.substring(name.length, c.length);
+        }
+    }
+    return "";
+}
 
 async function loadUsers(){
 

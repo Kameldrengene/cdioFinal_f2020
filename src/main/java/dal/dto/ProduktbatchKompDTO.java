@@ -3,18 +3,18 @@ package dal.dto;
 public class ProduktbatchKompDTO {
 
     /** produkt batch id i området 1-99999999. Vælges af brugerne */
-    int pbId;
+    private int pbId;
     /** status 0: ikke påbegyndt, 1: under produktion, 2: afsluttet */
-    String status;
+    private String status;
     /** user id i området 1-99999999. Vælges af brugerne
      *  i opgaver står der (1..N) derfor er det en array */
-    int userId;
+    private int userId;
     /** raavarebatch id  1-99999999. vælges af brugere */
-    int rbID;
+    private int rbID;
     /** tara i kilogram med 4 decimaler */
-    double tara;
+    private double tara;
     /** netto i kilogram med 4 decimaler */
-    double netto;
+    private double netto;
 
     public int getPbId() {
         return pbId;

@@ -75,12 +75,12 @@ var currentactivity = "";
 
 function getcurrentActivity(ID) { //opdatere brugerens aktivitet
     $(document).ready(function () {
-        if (confirm("are you sure, you want to update user " + ID + "?")) {
+        if (confirm("Er du sikker på at du vil opdatere bruger: " + ID + " aktivitet?")) {
             sendAjax("/BoilerPlate_war_exploded/rest/user/getactivity/" + ID, function (data) {
                 currentactivity = data;
                 console.log(currentactivity);
             }, function (data) {
-                alert("Error getting activity: ERR.NO.05");
+                alert("Fejl i valg af bruger aktivitet opdatering");
                 console.log(data);
             });
             var USERID = ID;
@@ -89,12 +89,12 @@ function getcurrentActivity(ID) { //opdatere brugerens aktivitet
                 sendAjax("/BoilerPlate_war_exploded/rest/user/activeUser", function (data) {
                     checkIfNew();
                 }, function (data) {
-                    alert("Error changing activity: ERR.NO.04");
+                    alert("Fejl i skift af bruger tilstand");
                     console.log(data);
                     console.log(jsondata)
                 }, "PUT", JSON.stringify(jsondata));
             } else {
-                alert("Unable to change activity on self");
+                alert("Du kan ikke ændre din egen aktivitet");
             }
         }
     });
@@ -103,7 +103,7 @@ function getcurrentActivity(ID) { //opdatere brugerens aktivitet
 var updatedID; /** gemmer ID'et for personnen man opdaterer til senere brug */
 function confirmUserUpdate(ID) { /** metoden sender videre til update html siden. */
     $(document).ready(function () {
-        if (confirm("are you sure, you want to update user " + ID + "?")) {
+        if (confirm("Er du sikker på at du vil opdatere bruger: " + ID + "?")) {
             updatedID = ID;
             switchP("AdminScreen/Brugeroversigt/Updatebruger/UpdateBruger.html")
             //load info from user into page
@@ -121,7 +121,7 @@ function confirmUserUpdate(ID) { /** metoden sender videre til update html siden
                     } else if (data.job === "Laborant") {
                         document.getElementById("role4").checked = "checked";
                     } else {
-                        alert("Error: No or wrong role");
+                        alert("Ingen rolle valgt!");
                     }
 
                     if (data.aktiv) {
@@ -130,7 +130,7 @@ function confirmUserUpdate(ID) { /** metoden sender videre til update html siden
 
 
                 }, function (data) {
-                    alert("Error getting user by ID: ERR.NO.08")
+                    alert("Fejl i opdatering af bruger")
                     console.log(data);
                 })
             });
@@ -143,16 +143,15 @@ function userCheck() { /** Tester om data indtastet er i korrekt format */
     var errorMsg = "";
     const UPuser = $("#username").val();
     if (UPuser.length < 2 || UPuser.length > 20) {
-        console.log("why in here!!!");
-        errorMsg += "Please enter a username between 2-20 characters \n";
+        errorMsg += "Indtast et brugernavn mellem 2-20 karakterer \n";
     }
     const UPini = $("#ini").val();
     if (UPini.length < 2 || UPini.length > 4) {
-        errorMsg += "Please enter initials between 2-4 characters \n";
+        errorMsg += "Indtast initialer mellem 2-4 karakterer \n";
     }
     const UPpass = $("#pass").val();
     if (UPpass.length < 6 || UPpass.length > 50) {
-        errorMsg += "Please enter a password between 6-50 characters \n";
+        errorMsg += "Indtast et password mellem 6-50 karakterer \n";
     }
     return errorMsg;
 }
@@ -164,11 +163,11 @@ function userHandler(z) { /** behandler data fra User og sender det afsted til b
     if (z === "Update") {
         APILink += "updateUser";
         requestType = "PUT";
-        alertMsg = "Error updating user: ERR.NO.06";
+        alertMsg = "Fejl i bruger update";
     } else if (z === "Create") {
         APILink += "createUser";
         requestType = "POST";
-        alertMsg = "Error updating user: ERR.NO.07";
+        alertMsg = "Fejl i bruger oprettelse";
     }
 
     var errorMsg = userCheck(); /** indhenter data */
@@ -187,7 +186,7 @@ function userHandler(z) { /** behandler data fra User og sender det afsted til b
     } else if ($('#role4').is(":checked")) {
         UPjob = "Laborant";
     } else {
-        errorMsg += "No role selected \n";
+        errorMsg += "Ingen rolle valgt \n";
     }
     $('#aktivcheckbox').is(':checked') ? UPboolean = 1 : UPboolean = 0;
     var jsondata = {userID: UPid, userName: UPuser, ini: UPini, password: UPpass, job: UPjob, aktiv: UPboolean};

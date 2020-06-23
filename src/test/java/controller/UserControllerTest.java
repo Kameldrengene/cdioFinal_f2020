@@ -13,44 +13,35 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 class UserControllerTest {
-    final UserController userController = new UserController();
+    UserController userController;
     UserDTO testUser;
     List<UserDTO> testList;
+public UserControllerTest() throws SQLException{
+    userController =new UserController();
+    userController.userDAOSQL.db.setDB("cdioTest_2020");
+}
 
     @Test
     @Order(1)
     void getData() {
-        try {
-            userController.userDAOSQL.db.setDB("cdioTest_2020");
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        String name = "Mark";
+        String name = "testr";
         testList = userController.getData();
-        assertEquals(name,testList.get(0).getUserName());
+        assertEquals(name,testList.get(7).getUserName());
     }
 
     @Test
     @Order(2)
     void getUser() {
-        try {
-            userController.userDAOSQL.db.setDB("cdioTest_2020");
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        String initial ="FD";
-        testUser = userController.getUser(12);
+
+        String initial ="ter";
+        testUser = userController.getUser(18);
         assertEquals(initial,testUser.getIni());
     }
 
     @Test
     @Order(3)
     void getRole() {
-        try {
-            userController.userDAOSQL.db.setDB("cdioTest_2020");
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+
         int expected = 2;
         testList = userController.getRole("Produktionsleder");
         assertEquals(expected,testList.size());
@@ -59,11 +50,6 @@ class UserControllerTest {
     @Test
     @Order(4)
     void currentActivity() {
-        try {
-            userController.userDAOSQL.db.setDB("cdioTest_2020");
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
         boolean aktual = userController.CurrentActivity(11);
         assertTrue(aktual);
     }
@@ -71,11 +57,6 @@ class UserControllerTest {
     @Test
     @Order(5)
     void createUser() {
-        try {
-            userController.userDAOSQL.db.setDB("cdioTest_2020");
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
         String expected = "Test";
         UserDTO newUser = new UserDTO();
         newUser.setAktiv(false);
@@ -92,11 +73,6 @@ class UserControllerTest {
     @Test
     @Order(6)
     void activitySwitchUser() {
-        try {
-            userController.userDAOSQL.db.setDB("cdioTest_2020");
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
         testUser = userController.getUser(19);
         userController.activitySwitchUser(testUser);
         boolean aktual = userController.CurrentActivity(19);
@@ -107,11 +83,6 @@ class UserControllerTest {
     @Test
     @Order(7)
     void updateUser() {
-        try {
-            userController.userDAOSQL.db.setDB("cdioTest_2020");
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
         String expected = "Produktionsleder";
 
         UserDTO newUser = new UserDTO();
@@ -133,6 +104,7 @@ class UserControllerTest {
         try {
             SQLDatabaseIO sqlDatabaseIO = new SQLDatabaseIO("kamel", "dreng", "runerne.dk", 8003);
             sqlDatabaseIO.connect();
+            sqlDatabaseIO.update("DELETE FROM cdioFinal_2020.userdto WHERE userName = 'Test'");
             sqlDatabaseIO.update("DELETE FROM cdioTest_2020.userdto WHERE userName = 'Test'");
         } catch (Exception e){
             e.printStackTrace();

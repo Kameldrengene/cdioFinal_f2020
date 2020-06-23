@@ -8,15 +8,18 @@ public class RaavareDTO {
     private String raavareNavn;
     /** min. 2 max. 20 karakterer */
     private String leverandoer;
-    /*Lagerbeholdning DECIMAL(4,4)*/
+    /** Lager beholdning i databasen */
     private double lagerBeholdning;
 
+// --Commented out by Inspection START (22/06/2020 14.01):
     public double getLagerBeholdning() {
         return lagerBeholdning;
     }
+// --Commented out by Inspection STOP (22/06/2020 14.01)
 
     public void setLagerBeholdning(double lagerBeholdning) {
         this.lagerBeholdning = lagerBeholdning;
+        /*Lagerbeholdning DECIMAL(4,4)*/
     }
 
     public void setRaavareID(int raavareID) {

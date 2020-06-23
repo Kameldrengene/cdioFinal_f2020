@@ -16,12 +16,17 @@ public class UserController {
     public final UserDAOSQL userDAOSQL;
     private final String SQLErrorMsg = "ERROR: Fejl i forbindelse med kontakt af databasen";
 
-    //Constructor
+    /**
+     * Constructor
+     */
     public UserController(){
         userDAOSQL = new UserDAOSQL();
     }
 
-    //Get all users
+    /**
+     * Get all users
+     * @return Liste over alle bruger
+     */
     public List<UserDTO> getData()  {
         try {
             return userDAOSQL.getData();
@@ -30,17 +35,25 @@ public class UserController {
         }
     }
 
-    //Get all users
+    /**
+     * Returnerer en Bruger
+     * @param id Bruger ID
+     * @return En specifik bruger som har angivet ID
+     */
     public UserDTO getUser(int id) {
-        UserDAOSQL db = new UserDAOSQL();
+
         try {
-            return db.getUser(id);
+            return userDAOSQL.getUser(id);
         } catch (SQLException e) {
             throw buildError(Response.Status.NOT_ACCEPTABLE, SQLErrorMsg);
         }
     }
 
-    //Get all users with specific role
+    /**
+     * Get all users with specific role
+     * @param role Bruger rolle
+     * @return Returnerer alle bruger som har en specifik rolle
+     */
     public List<UserDTO> getRole(String role)  {
         try {
             return userDAOSQL.getRole(role);
@@ -49,26 +62,31 @@ public class UserController {
         }
     }
 
-    public UserDTO createUser(UserDTO user) {
-        UserDAOSQL db = new UserDAOSQL();
+    /**
+     * Create a user
+     * @param user User Data Transfer Objekt
+     */
+    public void createUser(UserDTO user) {
         UserFunc userF = new UserFunc();
         try {
             if(userF.isUserOk(user)){
-                db.createUser(user);
+                userDAOSQL.createUser(user);
             }
         } catch (SQLException e) {
             throw buildError(Response.Status.NOT_ACCEPTABLE, SQLErrorMsg);
         }
-        return user;
     }
 
-    //Create user
+    /**
+     * Update user
+     * @param user User Data Transfer Objekt
+     * @return created User
+     */
     public UserDTO updateUser(UserDTO user) {
-        UserDAOSQL db = new UserDAOSQL();
         UserFunc userF = new UserFunc();
         try {
             if(userF.isUserOk(user)) {
-                db.updateUser(user);
+                userDAOSQL.updateUser(user);
             }
         } catch (SQLException e) {
             throw buildError(Response.Status.NOT_ACCEPTABLE, SQLErrorMsg);
@@ -76,28 +94,39 @@ public class UserController {
         return user;
     }
 
-    //Switch activity of user
+    /**
+     * Switch activity of user
+     * @param user User Data Transfer Objekt
+     * @return User object
+     */
     public UserDTO activitySwitchUser(UserDTO user) {
-        UserDAOSQL db = new UserDAOSQL();
         try {
-            db.aktivitySwitchUser(user.getUserID());
+            userDAOSQL.aktivitySwitchUser(user.getUserID());
         } catch (SQLException e) {
             throw buildError(Response.Status.NOT_ACCEPTABLE, SQLErrorMsg);
         }
         return user;
     }
 
-    //Get a users Activity
+    /**
+     * Get a users Activity
+     * @param id Bruger ID
+     * @return Bruger aktitet status
+     */
     public boolean CurrentActivity (int id){
-        UserDAOSQL db = new UserDAOSQL();
         try {
-            return db.getActivity(id);
+            return userDAOSQL.getActivity(id);
         } catch (SQLException e) {
             throw buildError(Response.Status.NOT_ACCEPTABLE, SQLErrorMsg);
         }
     }
 
-
+    /**
+     * Kaster en Exception videre hvis der sker en fejl i systemet
+     * @param status Web status
+     * @param msg Besked der skal stå i fejl meddelelse
+     * @return returner en Webapplication Exception
+     */
     public WebApplicationException buildError(Response.Status status, String msg){
         return new WebApplicationException(Response.status(status).entity(msg).build());
     }

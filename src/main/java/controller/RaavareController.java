@@ -13,15 +13,19 @@ import java.util.List;
 public class RaavareController {
 
     public final RaavareDAOSQL raavareDAOSQL;
-    private RaavareFunc rvFunc;
+    private final RaavareFunc rvFunc;
     private final String SQLErrorMsg = "ERROR: Fejl i forbindelse med kontakt af databasen";
 
-    // kontrutøren initialisere råvareDaoSql og råvarefunc.
+    /** kontrutøren initialisere råvareDaoSql og råvarefunc. */
     public RaavareController (){
         raavareDAOSQL = new RaavareDAOSQL();
         rvFunc = new RaavareFunc();
     }
-    //henter alle råvare fra databasen
+
+    /**
+     * henter alle råvare fra databasen
+     * @return Liste over raacarer
+     */
     public List<RaavareDTO> getData()  {
         try {
             return raavareDAOSQL.getRaavareList();
@@ -29,7 +33,12 @@ public class RaavareController {
             throw buildError(Response.Status.NOT_ACCEPTABLE, SQLErrorMsg);
         }
     }
-    // henter en råvare fra databasen
+
+    /**
+     * henter en råvare fra databasen
+     * @param id raavare ID
+     * @return Raavare objekt
+     */
     public RaavareDTO getRaavare(int id) {
         try {
             return raavareDAOSQL.getRaavare(id);
@@ -37,7 +46,12 @@ public class RaavareController {
             throw buildError(Response.Status.NOT_ACCEPTABLE, SQLErrorMsg);
         }
     }
-    //opretter råvare hvis alle kravene er opfyldt
+
+    /**
+     * opretter råvare hvis alle kravene er opfyldt
+     * @param raavareDTO Raavare Data Transfer objekt
+     * @return Den oprettet raavare
+     */
     public RaavareDTO opretRaavare (RaavareDTO raavareDTO) {
         String str = "POST";
         try {
@@ -50,7 +64,12 @@ public class RaavareController {
         }
         return raavareDTO;
     }
-    //opdatere råvare hvis alle kravene er opfyldt.
+
+    /**
+     * opdatere råvare hvis alle kravene er opfyldt.
+     * @param raavareDTO Raavare Data Transfer objekt
+     * @return den opdaterede raavare
+     */
     public RaavareDTO updateRaavare(RaavareDTO raavareDTO) {
         String str = "PUT";
         try {
@@ -64,7 +83,12 @@ public class RaavareController {
 
         return raavareDTO;
     }
-
+    /**
+     * Kaster en Exception videre hvis der sker en fejl i systemet
+     * @param status Web status
+     * @param msg Besked der skal stå i fejl meddelelse
+     * @return returner en Webapplication Exception
+     */
     public WebApplicationException buildError(Response.Status status, String msg){
         return new WebApplicationException(Response.status(status).entity(msg).build());
     }

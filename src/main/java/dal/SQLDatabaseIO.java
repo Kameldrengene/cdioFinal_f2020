@@ -14,25 +14,43 @@ public class SQLDatabaseIO {
     private Connection conn = null;
     private Statement stmt = null;
 
-    public boolean isConnected() {
-        return connected;
-    }
-
+    /**
+     * Forbindelses parametre for databasen
+     * @param USER Bruger Navn
+     * @param PASSWORD Password
+     * @param URL URL adressen
+     * @param PORT Port nummer til database serveren
+     */
     public SQLDatabaseIO(String USER, String PASSWORD, String URL, int PORT) {
         this.USER = USER;
         this.PASS = PASSWORD;
         this.DatabaseURL = "jdbc:mysql://" + URL + ":"+PORT+"/"+db_name+"?characterEncoding=latin1&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
     }
 
-    //Tells object what DB to use
+    /**
+     * Returnerer connected variabel
+     * @return Returnerer connected variabel
+     */
+    public boolean isConnected() {
+        return connected;
+    }
+
+    /**
+     * /Tells object what DB to use
+     * @param db Definerer en specifik database
+     * @throws SQLException
+     */
     public void setDB(String db) throws SQLException {
         this.db_name = db;
         connect();
-        query("use "+db+";");
+        query("use "+db);
         close();
     }
 
-    //Try to connect to DB
+    /**
+     * Try to connect to DB
+     * @throws SQLException
+     */
     public void connect() throws SQLException {
         if(!connected){
             String JDBC_DRIVER = "com.mysql.cj.jdbc.Driver";
@@ -46,18 +64,25 @@ public class SQLDatabaseIO {
         }
     }
 
-    //Runs update on mysql server.
+    /**
+     * Runs update on mysql server.
+     * @param query Database navn
+     * @throws SQLException
+     */
     public void update(String query) throws SQLException {
         if(connected){
-            System.out.println("starting");
             stmt = conn.createStatement();
             stmt.executeUpdate("use "+db_name);
             stmt.executeUpdate(query);
-            System.out.println("executed!");
         }
     }
 
-    //Runs query on mysql server, and returns ResultSet object.
+    /**
+     * Runs query on mysql server, and returns ResultSet object.
+     * @param query efterspørgesels string til database
+     * @return Runs query on mysql server, and returns ResultSet object.
+     * @throws SQLException
+     */
     public ResultSet query(String query) throws SQLException {
         ResultSet result = null;
         if(!connected){
@@ -70,7 +95,10 @@ public class SQLDatabaseIO {
         return result;
     }
 
-    //Close connection to mysql server
+    /**
+     * Close connection to mysql server
+     * @throws SQLException
+     */
     public void close() throws SQLException {
         if(connected){
             conn.close();
@@ -78,6 +106,12 @@ public class SQLDatabaseIO {
         }
     }
 
+    /**
+     * Kaster en Exception videre hvis der sker en fejl i systemet
+     * @param status Web status
+     * @param msg Besked der skal stå i fejl meddelelse
+     * @return returner en Webapplication Exception
+     */
     public WebApplicationException buildError(Status status, String msg){
         return new WebApplicationException(Response.status(status).entity(msg).build());
     }

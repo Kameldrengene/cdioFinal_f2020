@@ -17,7 +17,11 @@ public class ProduktbatchDAOSQL implements IProduktbatchDAO {
     public SQLDatabaseIO getdb(){return db;}
 
 
-    //Get list of all productbatches
+    /**
+     * Get list of all productbatches
+     * @return Get list of all productbatches
+     * @throws SQLException
+     */
     @Override
     public List<ProduktbatchDTO> getProduktBatchList() throws SQLException{
         db.connect();
@@ -39,7 +43,11 @@ public class ProduktbatchDAOSQL implements IProduktbatchDAO {
         return pbList;
     }
 
-    //Get list of all active productbatches
+    /**
+     * Get list of all active productbatches
+     * @return Get list of all active productbatches
+     * @throws SQLException
+     */
     @Override
     public List<ProduktbatchDTO> getAktuelProduktBatchList() throws SQLException {
 
@@ -54,7 +62,12 @@ public class ProduktbatchDAOSQL implements IProduktbatchDAO {
         return newRBList;
     }
 
-    //Get one productbatch
+    /**
+     * Get one productbatch
+     * @param pbId Produktbatch ID
+     * @return Get one productbatch
+     * @throws SQLException
+     */
     @Override
     public ProduktbatchDTO getBatchLine(int pbId) throws SQLException{
         db.connect();
@@ -70,7 +83,13 @@ public class ProduktbatchDAOSQL implements IProduktbatchDAO {
         return pb;
     }
 
-    //Get one productbatch component
+    /**
+     * Get one productbatch component
+     * @param pbId Produktbatch ID
+     * @param rbID Recept ID
+     * @return Get one productbatch component
+     * @throws SQLException
+     */
     @Override
     public ProduktbatchKompDTO getBatchkomponent(int pbId, int rbID) throws SQLException{
         db.connect();
@@ -83,7 +102,12 @@ public class ProduktbatchDAOSQL implements IProduktbatchDAO {
         return pb;
     }
 
-    //Get all productbatch components of one productbatch
+    /**
+     * Get all productbatch components of one productbatch
+     * @param pbId Produktbatch ID
+     * @return Get all productbatch components of one productbatch
+     * @throws SQLException
+     */
     @Override
     public List<ProduktbatchKompDTO> getBatchkomponents(int pbId)  throws SQLException{
         db.connect();
@@ -100,17 +124,25 @@ public class ProduktbatchDAOSQL implements IProduktbatchDAO {
     }
 
     // -Mikkel
-    //Get the heighest productbatch ID-number
+
+    /**
+     * Get the heighest productbatch ID-number
+     * @return Get the heighest productbatch ID-number
+     * @throws SQLException
+     */
     @Override
     public int getMaxPDID() throws SQLException{
         db.connect();
         ResultSet rs = db.query("SELECT MAX(PBID) AS max FROM ProduktBatches");
         rs.next();
-        int out = rs.getInt("max");
-        return out;
+        return rs.getInt("max");
     }
 
-    //Create product batch
+    /**
+     *
+     * @param produktbatchDTO Create product batch
+     * @throws SQLException
+     */
     @Override
     public void createProduktBatch(ProduktbatchDTO produktbatchDTO) throws SQLException{
         db.connect();
@@ -118,7 +150,11 @@ public class ProduktbatchDAOSQL implements IProduktbatchDAO {
         db.close();
     }
 
-    //Update a whole product batch
+    /**
+     * Update a whole product batch
+     * @param Produktbatch Produktbatch Data transfer objekt
+     * @throws SQLException
+     */
     @Override
     public void updateProduktBatch(ProduktbatchDTO Produktbatch) throws SQLException{
         db.connect();
@@ -133,7 +169,11 @@ public class ProduktbatchDAOSQL implements IProduktbatchDAO {
         db.close();
     }
 
-    //Update one productbatch component
+    /**
+     * Update one productbatch component
+     * @param ProduktbatchKomp Produktbatchkomp Data transfer objekt
+     * @throws SQLException
+     */
     @Override
     public void updateProduktBatchkomponent(ProduktbatchKompDTO ProduktbatchKomp) throws SQLException{
         db.connect();
@@ -150,7 +190,11 @@ public class ProduktbatchDAOSQL implements IProduktbatchDAO {
         db.close();
     }
 
-    //todo comment
+    /**
+     * Opdater ny ProduktBatchKomp
+     * @param ProduktbatchKomp Produktbatchkomp Data transfer objekt
+     * @throws SQLException
+     */
     @Override
     public void updateNewpb(ProduktbatchKompDTO ProduktbatchKomp) throws SQLException{
         db.connect();
@@ -168,8 +212,13 @@ public class ProduktbatchDAOSQL implements IProduktbatchDAO {
         db.close();
     }
 
-    //todo comment
-    private ProduktbatchKompDTO setPB(ResultSet rs, ProduktbatchKompDTO pb, int pbId){
+    /**
+     * Set produktBatch
+     * @param rs Rækker fra databasen
+     * @param pb Produktbatch Data transfer objekt
+     * @param pbId Produktbatch ID
+     */
+    private void setPB(ResultSet rs, ProduktbatchKompDTO pb, int pbId){
         pb.setPbId(pbId);
         try {
             pb.setStatus(rs.getString("Standing"));
@@ -180,7 +229,6 @@ public class ProduktbatchDAOSQL implements IProduktbatchDAO {
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
-        return pb;
     }
 
 }
