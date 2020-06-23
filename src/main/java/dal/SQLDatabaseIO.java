@@ -43,7 +43,7 @@ public class SQLDatabaseIO {
     public void setDB(String db) throws SQLException {
         this.db_name = db;
         connect();
-        query("use "+db+";");
+        query("use "+db);
         close();
     }
 
