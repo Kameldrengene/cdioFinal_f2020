@@ -48,7 +48,7 @@ function addLinje() {    //tilføjer ekstra råvare
             '<input type="number" id="tol' + counter + '"  placeholder="Tolerance 0.1" value="" step="0.1" max="10" min="0.1"> ' +
             '</td>\n' +
             '<td>\n' +
-            '            <button class="hvr-buzz" onclick="fjernRaavar('+coutnum+');" id="Fjern">fjern</button>\n' +
+            '            <button class="hvr-buzz" onclick="fjernRaavar('+coutnum+');" id="Fjern">Fjern</button>\n' +
             '        </td>' +
             '    </tr>');
         coutnum = 0;
