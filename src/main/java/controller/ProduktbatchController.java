@@ -36,7 +36,7 @@ public class ProduktbatchController {
 
     /**
      * Get list of all active productbatches
-     * @return LIste over alle aktive produktbatches
+     * @return Liste over alle aktive produktbatches
      */
     public List<ProduktbatchDTO> getAktuelle(){
         try {
