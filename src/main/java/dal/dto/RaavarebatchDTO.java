@@ -3,17 +3,17 @@ package dal.dto;
 public class RaavarebatchDTO {
 
     /** raavare batch id i området 1-99999999. Vælges af brugerne */
-    int rbId;
+    private int rbId;
     /** raavare id i området 1-99999999 vælges af brugerne */
-    int raavareId;
+    private int raavareId;
     /** Start mængde. Skal være større end nul */
-    double startMaengde;
+    private double startMaengde;
     /** mængde på lager */
-    double aktuelMaengde;
+    private double aktuelMaengde;
     /** Råvarens navn */
-    String raavareNavn;
+    private String raavareNavn;
     /** Navn på leverandør 2-20 tegn */
-    String leverandoer;
+    private String leverandoer;
 
     public int getRbId() {
         return rbId;

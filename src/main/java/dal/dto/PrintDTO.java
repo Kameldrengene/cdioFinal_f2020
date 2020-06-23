@@ -3,20 +3,20 @@ package dal.dto;
 public class PrintDTO {
 
     /** produkt batch id i området 1-99999999. Vælges af brugerne */
-    int pbId;
+    private int pbId;
     /** status 0: ikke påbegyndt, 1: under produktion, 2: afsluttet */
-    String status;
+    private String status;
     /** recept id i området 1-99999999. Vælges af brugerne */
-    int receptId;
+    private int receptId;
     /** user id i området 1-99999999. Vælges af brugerne
      *  i opgaver står der (1..N) derfor er det en array */
-    int userId;
+    private int userId;
     /** raavarebatch id  1-99999999. vælges af brugere */
-    int rbID;
+    private int rbID;
     /** tara i kilogram med 4 decimaler */
-    double tara;
+    private double tara;
     /** netto i kilogram med 4 decimaler */
-    double netto;
+    private double netto;
     /** raavare id i området 1-99999999 vælges af brugerne */
     private int raavareID;
     /** min. 2 max. 20 karakterer */
@@ -24,17 +24,17 @@ public class PrintDTO {
     /** min. 2 max. 20 karakterer */
     private String leverandoer;
     /** nonnetto i kilogram med 4 decimaler */
-    double nonNetto;
+    private double nonNetto;
     /** tolerance i kilogram med 4 decimaler */
-    double tolerance;
+    private double tolerance;
     /** Receptnavn min. 2 max. 20 karakterer */
-    String receptNavn;
+    private String receptNavn;
     /** Produktbatch oprettelses dato */
-    String dato;
+    private String dato;
     /** Summen af tara */
-    double sumTara;
+    private double sumTara;
     /** Summen af Netto */
-    double sumNetto;
+    private double sumNetto;
 
     public double getSumTara() {
         return sumTara;

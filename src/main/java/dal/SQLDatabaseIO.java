@@ -15,14 +15,6 @@ public class SQLDatabaseIO {
     private Statement stmt = null;
 
     /**
-     * Returnerer connected variabel
-     * @return Returnerer connected variabel
-     */
-    public boolean isConnected() {
-        return connected;
-    }
-
-    /**
      * Forbindelses parametre for databasen
      * @param USER Bruger Navn
      * @param PASSWORD Password
@@ -33,6 +25,14 @@ public class SQLDatabaseIO {
         this.USER = USER;
         this.PASS = PASSWORD;
         this.DatabaseURL = "jdbc:mysql://" + URL + ":"+PORT+"/"+db_name+"?characterEncoding=latin1&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
+    }
+
+    /**
+     * Returnerer connected variabel
+     * @return Returnerer connected variabel
+     */
+    public boolean isConnected() {
+        return connected;
     }
 
     /**

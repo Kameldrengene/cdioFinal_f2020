@@ -8,9 +8,7 @@ public class RaavareDTO {
     private String raavareNavn;
     /** min. 2 max. 20 karakterer */
     private String leverandoer;
-    /**
-     * Lager beholdning i databasen
-     */
+    /** Lager beholdning i databasen */
     private double lagerBeholdning;
 
 // --Commented out by Inspection START (22/06/2020 14.01):

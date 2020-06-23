@@ -3,6 +3,7 @@ package dal.dto;
 import java.io.Serializable;
 
 public class UserDTO implements Serializable{
+
 	/** Bruger ID 10 til 99 */
 	private int userID;
 	/** Bruger navn 2 til 20 tegn */
@@ -15,8 +16,8 @@ public class UserDTO implements Serializable{
 	private String job;
 	/** Bruger aktivitet status*/
 	private boolean aktiv;
-	private static int counter = 11;
 
+	private static int counter = 11;
 
 	public UserDTO() {
 	}
@@ -24,11 +25,9 @@ public class UserDTO implements Serializable{
 	public String getPassword(){
 	    return password;
     }
-
     public void setPassword(String newPassword){
 	    this.password = newPassword;
     }
-
 	public int getUserID() {
 		return userID;
 	}
@@ -55,22 +54,6 @@ public class UserDTO implements Serializable{
 	}
 	public boolean getAktiv(){return aktiv;}
 	public void setAktiv(boolean aktiv) {this.aktiv = aktiv;}
-
-
-// --Commented out by Inspection START (22/06/2020 14.01):
-//	public void removeRole(){
-// --Commented out by Inspection START (22/06/2020 14.01):
-////		this.job = null;
-////	}
-//// --Commented out by Inspection STOP (22/06/2020 14.01)
-//
-//// --Commented out by Inspection START (22/06/2020 14.01):
-// --Commented out by Inspection STOP (22/06/2020 14.01)
-//	public static int getCounter() {
-//		return counter;
-//	}
-// --Commented out by Inspection STOP (22/06/2020 14.01)
-
 	public static void setCounter(int counter) {
 		UserDTO.counter = counter;
 	}

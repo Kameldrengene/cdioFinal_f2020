@@ -78,7 +78,6 @@ public class RaavarevbatchController {
         } catch(SQLException e){
             throw buildError(Response.Status.NOT_ACCEPTABLE, SQLErrorMsg);
         }
-
     }
 
     // -Mikkel
@@ -103,7 +102,6 @@ public class RaavarevbatchController {
         }
 
         return dto;
-
     }
 
     /**
@@ -123,5 +121,4 @@ public class RaavarevbatchController {
     public WebApplicationException buildError(Response.Status status, String msg){
         return new WebApplicationException(Response.status(status).entity(msg).build());
     }
-
 }

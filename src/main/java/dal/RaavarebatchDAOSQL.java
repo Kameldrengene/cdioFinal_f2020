@@ -8,7 +8,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class RaavarebatchDAOSQL implements IRaavarebatchDAO {
-    public final SQLDatabaseIO db = new SQLDatabaseIO("kamel", "dreng", "runerne.dk", 8003); //Makes new SQLDatabaseIO object.
+
+    public SQLDatabaseIO db = new SQLDatabaseIO("kamel", "dreng", "runerne.dk", 8003); //Makes new SQLDatabaseIO object.
 
     // -Mikkel
 
@@ -34,21 +35,6 @@ public class RaavarebatchDAOSQL implements IRaavarebatchDAO {
 
         db.close();
         return RBList;
-    }
-
-    /**
-     * Used in the above
-     * @param rs Rækker fra databasen
-     * @param rb Raavarebatch Data Transfer Objekt
-     * @throws SQLException
-     */
-    private void setRb(ResultSet rs, RaavarebatchDTO rb) throws SQLException {
-        rb.setRbId(rs.getInt("rBID"));
-        rb.setRaavareNavn(rs.getString("raavareNavn"));
-        rb.setLeverandoer(rs.getString("leverandoer"));
-        rb.setRaavareId(rs.getInt("raavareID"));
-        rb.setStartMaengde(rs.getDouble("maengde"));
-        rb.setAktuelMaengde(rs.getDouble("aktuelMaengde"));
     }
 
     // -Mikkel
@@ -153,4 +139,18 @@ public class RaavarebatchDAOSQL implements IRaavarebatchDAO {
         db.close();
     }
 
+    /**
+     * Used in the above
+     * @param rs Rækker fra databasen
+     * @param rb Raavarebatch Data Transfer Objekt
+     * @throws SQLException
+     */
+    private void setRb(ResultSet rs, RaavarebatchDTO rb) throws SQLException {
+        rb.setRbId(rs.getInt("rBID"));
+        rb.setRaavareNavn(rs.getString("raavareNavn"));
+        rb.setLeverandoer(rs.getString("leverandoer"));
+        rb.setRaavareId(rs.getInt("raavareID"));
+        rb.setStartMaengde(rs.getDouble("maengde"));
+        rb.setAktuelMaengde(rs.getDouble("aktuelMaengde"));
+    }
 }

@@ -34,7 +34,7 @@ public class RaavarebatchFunc {
      * @param dto Raavarebatch data transfer objekt
      * @return true hvis kravet opfyldt
      */
-    public boolean startMaengdeOk(RaavarebatchDTO dto){
+    private boolean startMaengdeOk(RaavarebatchDTO dto){
 
         double subject = dto.getStartMaengde();
 
@@ -47,7 +47,7 @@ public class RaavarebatchFunc {
      * @return true hvis kravet er opfyldt
      * @throws SQLException
      */
-    public boolean batchIdOk(RaavarebatchDTO dto) throws SQLException {
+    private boolean batchIdOk(RaavarebatchDTO dto) throws SQLException {
 
         int subject = dto.getRbId();
 
