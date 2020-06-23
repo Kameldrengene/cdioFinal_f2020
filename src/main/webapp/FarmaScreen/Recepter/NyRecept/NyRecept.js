@@ -143,7 +143,7 @@ function ingenDublicate() {  //funktion checker for samtlige raavar navn.
     return true;
 }
 
-function ingenRaavare() {  //funktion checker for samtlige raavar navn.
+function ingenRaavare() {  //funktion checker for
     let checkraavarNr = [];
     for (let i = 1; i <= counter ; i++) {
         if($('#ledeligeNavn'+i+'').length) {
@@ -176,11 +176,8 @@ async function opretReceptList() {
             const RNavn = $("#recepnavn").val();
             const RaaNavn = document.getElementById('ledeligeNavn' + i + '').value;
             const RaaID = alleMap.get(RaaNavn);
-            //console.log("test3 " + RaaID);
             const Rnetto = $("#netto" + i + "").val();
-            // console.log("test4 " + Rnetto);
             const Rtol = $("#tol" + i + "").val();
-            //console.log("test4 " + Rtol);
             const ReceptListobj = {
                 receptId: RID,
                 receptNavn: RNavn,
