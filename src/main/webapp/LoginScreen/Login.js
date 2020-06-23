@@ -95,7 +95,7 @@ $("document").ready(async function () {
 
 });
 
-function getCookie(cname) {
+function getCookie(cname) { //https://www.w3schools.com/js/js_cookies.asp
     var name = cname + "=";
     var decodedCookie = decodeURIComponent(document.cookie);
     var ca = decodedCookie.split(';');

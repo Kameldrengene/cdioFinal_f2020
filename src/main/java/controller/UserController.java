@@ -41,9 +41,9 @@ public class UserController {
      * @return En specifik bruger som har angivet ID
      */
     public UserDTO getUser(int id) {
-        UserDAOSQL db = new UserDAOSQL();
+
         try {
-            return db.getUser(id);
+            return userDAOSQL.getUser(id);
         } catch (SQLException e) {
             throw buildError(Response.Status.NOT_ACCEPTABLE, SQLErrorMsg);
         }
@@ -67,11 +67,10 @@ public class UserController {
      * @param user User Data Transfer Objekt
      */
     public void createUser(UserDTO user) {
-        UserDAOSQL db = new UserDAOSQL();
         UserFunc userF = new UserFunc();
         try {
             if(userF.isUserOk(user)){
-                db.createUser(user);
+                userDAOSQL.createUser(user);
             }
         } catch (SQLException e) {
             throw buildError(Response.Status.NOT_ACCEPTABLE, SQLErrorMsg);
@@ -84,11 +83,10 @@ public class UserController {
      * @return created User
      */
     public UserDTO updateUser(UserDTO user) {
-        UserDAOSQL db = new UserDAOSQL();
         UserFunc userF = new UserFunc();
         try {
             if(userF.isUserOk(user)) {
-                db.updateUser(user);
+                userDAOSQL.updateUser(user);
             }
         } catch (SQLException e) {
             throw buildError(Response.Status.NOT_ACCEPTABLE, SQLErrorMsg);
@@ -102,9 +100,8 @@ public class UserController {
      * @return User object
      */
     public UserDTO activitySwitchUser(UserDTO user) {
-        UserDAOSQL db = new UserDAOSQL();
         try {
-            db.aktivitySwitchUser(user.getUserID());
+            userDAOSQL.aktivitySwitchUser(user.getUserID());
         } catch (SQLException e) {
             throw buildError(Response.Status.NOT_ACCEPTABLE, SQLErrorMsg);
         }
@@ -117,9 +114,8 @@ public class UserController {
      * @return Bruger aktitet status
      */
     public boolean CurrentActivity (int id){
-        UserDAOSQL db = new UserDAOSQL();
         try {
-            return db.getActivity(id);
+            return userDAOSQL.getActivity(id);
         } catch (SQLException e) {
             throw buildError(Response.Status.NOT_ACCEPTABLE, SQLErrorMsg);
         }
