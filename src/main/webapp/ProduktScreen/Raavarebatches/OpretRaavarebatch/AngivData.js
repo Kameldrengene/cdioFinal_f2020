@@ -26,8 +26,8 @@ async function opretRaavarebatch(){
     }
 
     //To avoid ajax conversion error
-    if( !wholeNumberTest(activeStartMaengde)){
-        alert("Kun heltal større end 0 er tilladte som startmængde");
+    if( isNaN(activeStartMaengde) || activeStartMaengde.localeCompare("") ==0 ){
+        alert("Kun tal er tilladte som startmængde");
         return
     }
 
