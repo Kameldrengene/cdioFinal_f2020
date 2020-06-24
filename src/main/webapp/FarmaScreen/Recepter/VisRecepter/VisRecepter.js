@@ -25,16 +25,16 @@ function visAlle(id,navn) {
         localStorage.setItem("vistID", id);
         localStorage.setItem("vistNavn",navn);
         switchP('FarmaScreen/Recepter/VisRecepter/AabenRecept/Aabenrecepter.html');
-        await visBestemtRecepter(id);
+        await visBestemtRecepter(id,navn);
     });
 }
 
-async function visBestemtRecepter(id) {
+async function visBestemtRecepter(id,navn) {
     await sendAjax("/BoilerPlate_war_exploded/rest/Recept/getRecepts/"+id,function (data) {
-            document.getElementById("receptheader").textContent = "Recept med ID: "+id;
+            document.getElementById("receptheader").textContent = "Recept Komponent oversigt";
+            document.getElementById("ReceptID").textContent = "Recept id: "+id+"";
+            document.getElementById("ReceptNavn").textContent = "Recept navn: "+navn+"";
             var person_data = '<tr>\n' +
-                '                <th>ReceptID</th>\n' +
-                '                <th>Navn</th>\n' +
                 '                <th>RåvareID</th>\n' +
                 '                <th>RåvareNavn</th>\n' +
                 '                <th>nonNetto kg</th>\n' +
@@ -42,16 +42,11 @@ async function visBestemtRecepter(id) {
                 '            </tr>';
             var intid = 0;
             $.each(data,function (key,value) {
-                //console.log(value);
-                var RID = value.receptId;
-                var Rname = value.receptNavn;
                 var RaaID = value.raavareId;
                 var RaaNavn = value.raavarNavn;
                 var Rnonnetto = value.nonNetto.toFixed(3);
                 var Rtolerance = value.tolerance;
                 person_data += '<tr>';
-                person_data += '<td>'+RID+'</td>';
-                person_data += '<td>'+Rname+'</td>';
                 person_data += '<td>'+RaaID+'</td>';
                 person_data += '<td>'+RaaNavn+'</td>';
                 person_data += '<td id="nonnetto" >'+Rnonnetto+'</td>';

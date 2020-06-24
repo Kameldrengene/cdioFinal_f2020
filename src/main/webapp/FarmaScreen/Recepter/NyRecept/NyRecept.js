@@ -38,10 +38,10 @@ function addLinje() {    //tilføjer ekstra råvare
             '</select>' +
             '</td>\n' +
             '        <td >' +
-            '<input type="number" id="netto' + counter + '" placeholder="Mængde 1.001" value="" step="0.001" max="20" min="0.05">' +
+            '<input type="number" id="netto' + counter + '" placeholder="nonNetto" value="" step="0.001" max="20" min="0.05">' +
             '</td>\n' +
             '        <td >' +
-            '<input type="number" id="tol' + counter + '"  placeholder="Tolerance 0.1" value="" step="0.1" max="10" min="0.1"> ' +
+            '<input type="number" id="tol' + counter + '"  placeholder="Tolerance" value="" step="0.1" max="10" min="0.1"> ' +
             '</td>\n' +
             '<td>\n' +
             '            <button class="hvr-buzz" onclick="fjernRaavar('+coutnum+');" id="Fjern">Fjern</button>\n' +
@@ -96,7 +96,7 @@ function confirmOpretRecept() {
             if (document.getElementById('recepID').value != '' && document.getElementById('recepnavn').value != '') {
                 console.log("test2");
                 if(!ingenRaavare()){
-                    alert("Tilføj en Råvare");
+                    alert("Tilføj en Recept Komponent");
                 } else if(rigtigRaavar()){
                     alert("vælg en Råvare");
                 }
@@ -151,7 +151,7 @@ function ingenRaavare() {  //funktion checker for
 
 }
 
-function rigtigRaavar(){
+function rigtigRaavar(){   //tester om råvaren er valgt i scroll down menu (HTML select -tag)
     for (let i = 1; i <= counter ; i++) {
         if($("#ledeligeNavn"+i+"").find(':selected').prop('disabled')){
             return true;
@@ -196,7 +196,7 @@ async function opretReceptList() {
             alert(data.responseText);
             console.log(counter);
         } else {
-            alert('Enternal Error: Prøve igen!');
+            alert('Internal Server Error: Prøve venligst igen!');
         }
     },"POST",receptData);
 }
