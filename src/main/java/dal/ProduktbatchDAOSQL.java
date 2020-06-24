@@ -13,10 +13,6 @@ public class ProduktbatchDAOSQL implements IProduktbatchDAO {
     //Makes new SQLDatabaseIO object.
     public final SQLDatabaseIO db = new SQLDatabaseIO("kamel", "dreng", "runerne.dk", 8003);
 
-
-    public SQLDatabaseIO getdb(){return db;}
-
-
     /**
      * Get list of all productbatches
      * @return Get list of all productbatches
@@ -211,6 +207,8 @@ public class ProduktbatchDAOSQL implements IProduktbatchDAO {
         rs.close();
         db.close();
     }
+
+    public SQLDatabaseIO getdb(){return db;}
 
     /**
      * Set produktBatch

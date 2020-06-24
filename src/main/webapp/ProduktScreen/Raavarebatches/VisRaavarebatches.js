@@ -1,3 +1,5 @@
+//Created by Mikkel
+
 $("document").ready(async function(){
 
     await updateTable();
@@ -12,11 +14,13 @@ async function updateTable(){
 
     let path;
 
+    //Check is "vis tomme" is checked
     if($("#visTomme").is(":checked"))
         path = "getAlle";
     else
         path = "getAktuelle"
 
+    //Get the data
     await sendAjax(
         "/BoilerPlate_war_exploded/rest/Raavarebatch/" + path,
         data => viewTable(data),
@@ -30,6 +34,7 @@ function viewTable(data){
     //Variable to hold all the tabel rows
     let tabelData = "";
 
+    //Header
     tabelData += "<tr>";
     tabelData += "<th>Batch ID</th>";
     tabelData += "<th>Råvare ID</th>";
@@ -39,10 +44,9 @@ function viewTable(data){
     tabelData += "<th>Leverandør</th>";
     tabelData += "</tr>";
 
-    //Loop through
+    //Loop through data and add dynamically
     $.each(data, function (key, value) {
 
-        //Uses userID for label reference
         tabelData += "<tr>";
         tabelData += "<td>"+value.rbId+"</td>";
         tabelData += "<td>"+value.raavareId+"</td>";
@@ -60,6 +64,7 @@ function viewTable(data){
 
     });
 
+    //Fill table
     $("#raavarebatches").html(tabelData);
 
 }

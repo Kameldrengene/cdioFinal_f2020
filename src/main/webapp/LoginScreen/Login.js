@@ -1,3 +1,4 @@
+//Created by Mikkel
 
 $("document").ready(async function () {
 
@@ -82,14 +83,11 @@ $("document").ready(async function () {
     $(".slider").click(function () {
 
         if(currentTheme.localeCompare("dark") != 0){
-
-            // console.log("2")
             currentTheme = "dark";
             document.cookie = "Theme=dark;"
             $("#theme").replaceWith(darkTheme);
 
         } else {
-            // console.log("3")
             currentTheme = "light";
             document.cookie = "Theme=light;"
             $("#theme").replaceWith(lightTheme);
@@ -157,7 +155,7 @@ async function createTable(data, role){
         tabelData += "</tr>";
     }
 
-    //Loop through
+    //Add to tableData dynamically
     $.each(data, function (key, value) {
         if (value.aktiv) {
             const userID = value.userID;
