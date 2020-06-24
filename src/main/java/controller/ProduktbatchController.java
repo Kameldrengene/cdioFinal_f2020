@@ -18,8 +18,6 @@ public class ProduktbatchController {
         DAOSQL = new ProduktbatchDAOSQL();
     }
 
-    // -Mikkel
-
     /**
      * Get list of all productbatches
      * @return Liste over alle produktbatches
@@ -32,8 +30,6 @@ public class ProduktbatchController {
         }
     }
 
-    // -Mikkel
-
     /**
      * Get list of all active productbatches
      * @return Liste over alle aktive produktbatches
@@ -45,8 +41,6 @@ public class ProduktbatchController {
             throw buildError(Response.Status.NOT_ACCEPTABLE, SQLErrorMsg);
         }
     }
-
-    // -Mikkel
 
     /**
      * Get one productbatch
@@ -95,8 +89,6 @@ public class ProduktbatchController {
         }
     }
 
-    // -Mikkel
-
     /**
      * Get the heighest productbatch ID-number
      * @return Den højeste produktbatch nummer
@@ -108,8 +100,6 @@ public class ProduktbatchController {
             throw buildError(Response.Status.NOT_ACCEPTABLE, SQLErrorMsg);
         }
     }
-
-    // -Mikkel
 
     /**
      * Create product batch

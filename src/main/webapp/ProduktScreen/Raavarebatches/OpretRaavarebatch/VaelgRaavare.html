@@ -1,3 +1,5 @@
+<!--    Created by Mikkel    -->
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,17 +12,23 @@
 <body>
 
     <div class="container">
-        <h5 id="brugerInfo">Loading</h5> <!-- bruger info -->
+
+        <!--    Bruger ID    -->
+        <h5 id="brugerInfo">Loading</h5>
         <script>currentUser();</script>
+
+        <!--    Loader    -->
         <div class="loads"><div id="loading"></div> </div>
 
         <h1>Opret råvarebatch</h1>
 
         <h3>Vælg råvare</h3>
 
+        <!--    Raavare table to be loaded dynamically    -->
         <table class="brugertable" id="raavareTable">
         </table>
 
+        <!--    Return button    -->
         <br>
         <input type="submit" class="hvr-pop" value="Retur" id="retur" onclick="switchP('ProduktScreen/ProduktScreen.html'); return false">
     </div>

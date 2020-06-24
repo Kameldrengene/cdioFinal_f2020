@@ -36,6 +36,8 @@ public class PrintDTO {
     /** Summen af Netto */
     private double sumNetto;
 
+    public PrintDTO() { }
+
     public double getSumTara() {
         return sumTara;
     }
@@ -50,9 +52,6 @@ public class PrintDTO {
 
     public void setSumNetto(double sumNetto) {
         this.sumNetto = sumNetto;
-    }
-
-    public PrintDTO() {
     }
 
     public int getPbId() {

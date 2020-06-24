@@ -1,3 +1,5 @@
+<!--    Created by Mikkel    -->
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,8 +12,12 @@
 <body>
 
 <div class="container">
-    <h5 id="brugerInfo">Loading</h5> <!-- bruger info -->
+
+    <!--    Bruger ID    -->
+    <h5 id="brugerInfo">Loading</h5>
     <script>currentUser();</script>
+
+    <!--    Loader    -->
     <div class="loads"><div id="loading"></div> </div>
 
     <h1>Opret råvarebatch</h1>
@@ -22,13 +28,16 @@
 
     <br>
 
+    <!--    Form to type data    -->
     <form>
         <input type="text" id="batchID" placeholder="Batch ID" autofocus><br>
         <input type="number" id="startMaengde" placeholder="Startmængde [kg]" step="0.0001"><br>
     </form>
 
+    <!--    Create button    -->
     <button class = hvr-buzz id="opret">Opret</button>
 
+    <!--    Return button    -->
     <br>
     <input type="submit" id="retur" class="hvr-pop" value="Retur" onclick="switchP('ProduktScreen/Raavarebatches/OpretRaavarebatch/VaelgRaavare.html'); return false">
 </div>

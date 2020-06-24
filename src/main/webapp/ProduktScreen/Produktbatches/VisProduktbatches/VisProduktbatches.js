@@ -1,11 +1,15 @@
+//Created by Mikkel
+
 $("document").ready(async function(){
 
     await updateTable();
 
+    //Checkbox functionality
     $("#visAfsluttede").click(async function () {
         await updateTable()
     });
 
+    //Store info when produktbatch is choosen and change page
     $("#produktbatches").on("click", "button", function () {
 
         localStorage.setItem("activePBId", this.id);
@@ -31,6 +35,7 @@ async function updateTable(){
 
     let path;
 
+    //Check is "vis afsluttede" is checked
     if($("#visAfsluttede").is(":checked"))
         path = "getAlle";
     else
