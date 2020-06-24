@@ -19,10 +19,10 @@ public class ReceptFunc {
             return "Recept navnet skal være mellem 2 til 20 tegn ";
         }
         if(!isNonNettoOk(recept)){
-            return "mængde skal være mellem  1 til  20 decimaler ";
+            return "Mængden skal være fra 0.05 til 20 kg";
         }
         if(!isToleranceOk(recept)){
-            return "Tolerance skal være mellem 0.09 til 10.0 decimaler ";
+            return "Tolerance skal være mellem 0.1 til 10.0 decimaler ";
         }
         if(doesIdExist(recept,receptDTOList)){
             return "Recept ID er optaget\nVælge en anden";
@@ -40,7 +40,8 @@ public class ReceptFunc {
      * @return true hvis krav opfyldt
      */
     public boolean isReceptOk( ReceptDTO recept,List<ReceptDTO> receptDTOList){
-        return (!doesNameExist(recept,receptDTOList)&& !doesIdExist(recept,receptDTOList) && isIDOk(recept) && isNameOk(recept) && isNonNettoOk(recept) && isToleranceOk(recept));
+        return (!doesNameExist(recept,receptDTOList)&& !doesIdExist(recept,receptDTOList)
+                && isIDOk(recept) && isNameOk(recept) && isNonNettoOk(recept) && isToleranceOk(recept));
     }
 
     /**

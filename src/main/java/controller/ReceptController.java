@@ -73,7 +73,7 @@ public class ReceptController {
         try {
             int i = 0;
             while (i < recept.size()) {
-                if (!(receptFunc.isReceptOk(recept.get(i),getData()))) { //checker for hvis en kraven er ikke opfyldt
+                if (!(receptFunc.isReceptOk(recept.get(i),getData()))) { //checker for hvis en kraven er ikke opfyldt og sender den meddelelse der tilhør fejlen.
                     throw new WebApplicationException(Response.status(Response.Status.NOT_ACCEPTABLE).entity(receptFunc.receptmsg(recept.get(i),getData())).build());
                 }
                 i++;

@@ -3,17 +3,15 @@ $.ajaxSetup({async: false});
 var alleMap = new Map();  //indeholder alle rååvare med navn som key.
 
 
-function ledeligeRaavare() {   // gemmer alle råvare i en Map.
+function ledigeRaavare() {   // gemmer alle råvare i en Map.
     $(document).ready(function () {
         var alleRaavare = [];
         var alleRaavareNavn = [];
 
         $.getJSON("/BoilerPlate_war_exploded/rest/Raavare/getRaavarer",function (data) {
             $.each(data,function (key,value) {
-                //console.log(value);
                 var raavarID = value.raavareID;
                 var raavarNavn = value.raavareNavn;
-
                 alleRaavare.push(raavarID);
                 alleRaavareNavn.push(raavarNavn);
                 alleMap.set(raavarNavn,raavarID);
@@ -29,11 +27,9 @@ function addLinje() {    //tilføjer ekstra råvare
     if(($("#recepID").val() === null) || ($("#recepnavn").val() === '')){
         alert('udfyld alle felter');
     }else {
-        ledeligeRaavare();
+        ledigeRaavare();
         counter++;
-        console.log(counter);
         let coutnum = counter;   //indeholder præcise ledeligeNavn + nr=countnum
-        console.log(coutnum);
         $("#raavareLinjer").append(
             '<tr id="raavareLines' + counter + '">\n' +
             '        <td id="RåvareID">' +
@@ -42,17 +38,16 @@ function addLinje() {    //tilføjer ekstra råvare
             '</select>' +
             '</td>\n' +
             '        <td >' +
-            '<input type="number" id="netto' + counter + '" placeholder="Mængde 1.001" value="" step="0.001" max="20" min="0.05">' +
+            '<input type="number" id="netto' + counter + '" placeholder="nonNetto" value="" step="0.001" max="20" min="0.05">' +
             '</td>\n' +
             '        <td >' +
-            '<input type="number" id="tol' + counter + '"  placeholder="Tolerance 0.1" value="" step="0.1" max="10" min="0.1"> ' +
+            '<input type="number" id="tol' + counter + '"  placeholder="Tolerance" value="" step="0.1" max="10" min="0.1"> ' +
             '</td>\n' +
             '<td>\n' +
             '            <button class="hvr-buzz" onclick="fjernRaavar('+coutnum+');" id="Fjern">Fjern</button>\n' +
             '        </td>' +
             '    </tr>');
         coutnum = 0;
-        console.log(coutnum);
         selectbtn(counter);
     }
 }
@@ -101,7 +96,7 @@ function confirmOpretRecept() {
             if (document.getElementById('recepID').value != '' && document.getElementById('recepnavn').value != '') {
                 console.log("test2");
                 if(!ingenRaavare()){
-                    alert("Tilføj en Råvare");
+                    alert("Tilføj en Recept Komponent");
                 } else if(rigtigRaavar()){
                     alert("vælg en Råvare");
                 }
@@ -142,7 +137,7 @@ function ingenDublicate() {  //funktion checker for samtlige raavar navn.
     return true;
 }
 
-function ingenRaavare() {  //funktion checker for samtlige raavar navn.
+function ingenRaavare() {  //funktion checker for
     let checkraavarNr = [];
     for (let i = 1; i <= counter ; i++) {
         if($('#ledeligeNavn'+i+'').length) {
@@ -156,7 +151,7 @@ function ingenRaavare() {  //funktion checker for samtlige raavar navn.
 
 }
 
-function rigtigRaavar(){
+function rigtigRaavar(){   //tester om råvaren er valgt i scroll down menu (HTML select -tag)
     for (let i = 1; i <= counter ; i++) {
         if($("#ledeligeNavn"+i+"").find(':selected').prop('disabled')){
             return true;
@@ -175,11 +170,8 @@ async function opretReceptList() {
             const RNavn = $("#recepnavn").val();
             const RaaNavn = document.getElementById('ledeligeNavn' + i + '').value;
             const RaaID = alleMap.get(RaaNavn);
-            //console.log("test3 " + RaaID);
             const Rnetto = $("#netto" + i + "").val();
-            // console.log("test4 " + Rnetto);
             const Rtol = $("#tol" + i + "").val();
-            //console.log("test4 " + Rtol);
             const ReceptListobj = {
                 receptId: RID,
                 receptNavn: RNavn,
@@ -204,7 +196,7 @@ async function opretReceptList() {
             alert(data.responseText);
             console.log(counter);
         } else {
-            alert('Enternal Error: Prøve igen!');
+            alert('Internal Server Error: Prøve venligst igen!');
         }
     },"POST",receptData);
 }

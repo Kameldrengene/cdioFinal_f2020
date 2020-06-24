@@ -38,10 +38,9 @@ public class RaavareFunc {
      * Kontrollerer om den nye Raavare opfylder karavene
      * @param rv  Raavare Data transfer objekt
      * @param rvList Raavarer listen i database
-     * @param type API Service type
      * @return true hvis kravene opfyldt
      */
-    public boolean isNewRaavareOk(RaavareDTO rv, List<RaavareDTO> rvList, String type) {
+    public boolean isNewRaavareOk(RaavareDTO rv, List<RaavareDTO> rvList) {
         return (!NavnExists(rv,rvList) && !IDExists(rv,rvList) && isIDOk(rv) && isNavnOk(rv) && isleverandoerOk(rv));
     }
 
@@ -49,10 +48,9 @@ public class RaavareFunc {
      * Kontrollerer om den opdaterede Raavare opfylder karavene
      * @param rv Raavare Data transfer objekt
      * @param rvList Raavarer listen i database
-     * @param type API Service type
      * @return true hvis kravene opfyldt
      */
-    public boolean isUpdateRaavareOk(RaavareDTO rv, List<RaavareDTO> rvList,String type) {
+    public boolean isUpdateRaavareOk(RaavareDTO rv, List<RaavareDTO> rvList) {
         return (!NavnExists(rv,rvList) && isNavnOk(rv) && isleverandoerOk(rv));
     }
 

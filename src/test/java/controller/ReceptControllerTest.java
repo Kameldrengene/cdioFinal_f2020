@@ -1,5 +1,6 @@
 package controller;
 
+import Funktionalitet.ReceptFunc;
 import dal.SQLDatabaseIO;
 import dal.dto.ReceptDTO;
 import org.junit.jupiter.api.MethodOrderer;
@@ -18,6 +19,7 @@ class ReceptControllerTest {
     final ReceptController receptController = new ReceptController();
     ReceptDTO testRecept;
     List<ReceptDTO> listRecept;
+    ReceptFunc receptFunc;
     @Test
     @Order(1)
     void getData() {
@@ -53,7 +55,9 @@ class ReceptControllerTest {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        int expected = 99;
+        int expectedID = 99;
+        int expectedRaavarID = 2;
+        String expectedReceptNavn = "Morfin";
         List<ReceptDTO> receptDTOList = new ArrayList<>();
         ReceptDTO newRecept = new ReceptDTO();
         newRecept.setNonNetto(5.5);
@@ -74,7 +78,9 @@ class ReceptControllerTest {
 
         receptController.opretRecept(receptDTOList);
         testRecept = receptController.getRecept(99,2);
-        assertEquals(expected,testRecept.getReceptId());
+        assertEquals(expectedID,testRecept.getReceptId());
+        assertEquals(expectedReceptNavn,testRecept.getReceptNavn());
+        assertEquals(expectedRaavarID,testRecept.getRaavareId());
     }
 
     @Test
@@ -85,29 +91,29 @@ class ReceptControllerTest {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        int expected = 99;
+        String expectedMsg = "Recept ID er optaget\n" + "Vælge en anden";
         List<ReceptDTO> receptDTOList1 = new ArrayList<>();
         ReceptDTO newRecept = new ReceptDTO();
         newRecept.setNonNetto(5.5);
         newRecept.setRaavareId(3);
         newRecept.setReceptId(99);
-        newRecept.setReceptNavn("Morfin");
+        newRecept.setReceptNavn("Test");
         newRecept.setTolerance(9.5);
 
         ReceptDTO neRecept = new ReceptDTO();
         neRecept.setNonNetto(5.5);
         neRecept.setRaavareId(2);
         neRecept.setReceptId(99);
-        neRecept.setReceptNavn("Morfin");
+        neRecept.setReceptNavn("Test");
         neRecept.setTolerance(9.5);
 
         receptDTOList1.add(newRecept);
         receptDTOList1.add(neRecept);
 
-        assertThrows(WebApplicationException.class,()->{
+        WebApplicationException WebException = assertThrows(WebApplicationException.class,()->{
             receptController.opretRecept(receptDTOList1);
         });
-
+        assertEquals(expectedMsg, WebException.getResponse().getEntity().toString());
     }
 
     @Test

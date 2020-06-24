@@ -4,15 +4,11 @@ public class ReceptDTO {
     /** recept id i området 1-99999999 */
     private int receptId;
     /** Receptnavn min. 2 max. 20 karakterer */
-    private  String receptNavn;
-    /** raavare id i området 1-99999999. Vælges af brugerne
-     *  i opgaver står der (1..N) derfor er det en array */
-
-    private String raavarNavn;
-    /** raavare Navn tilføjes for at gøre hjemmesiden brugervenligt Vælges af brugerne*/
-
+    private String receptNavn;
+    /** raavare id i området 1-99999999. Vælges af brugerne*/
     private int raavareId;
-
+    /** raavare Navn tilføjes for at gøre hjemmesiden brugervenligt Vælges af brugerne*/
+    private String raavarNavn;
     /** nonnetto i kilogram med 4 decimaler */
     private double nonNetto;
     /** tolerance i kilogram med 4 decimaler */
