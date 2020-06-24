@@ -14,8 +14,6 @@ public class  RaavarebatchService {
 
     public RaavarevbatchController raavarebatchController = new RaavarevbatchController();
 
-    // -Mikkel
-
     /**
      * Get list of all raavarebatches
      * @return Liste over alle Raavarebatches
@@ -26,8 +24,6 @@ public class  RaavarebatchService {
     public List<RaavarebatchDTO> getData() throws WebApplicationException{
         return raavarebatchController.getData();
     }
-
-    // -Mikkel
 
     /**
      * Get list of all active raavarebatches
@@ -63,8 +59,6 @@ public class  RaavarebatchService {
     public List<RaavarebatchDTO> getRVIDBatch(@PathParam("batchID") String raavareID) throws WebApplicationException {
         return raavarebatchController.getRVIDBatch(raavareID);
     }
-
-    // -Mikkel
 
     /**
      * Create raavarebatch

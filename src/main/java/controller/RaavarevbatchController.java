@@ -21,8 +21,6 @@ public class RaavarevbatchController {
         func = new RaavarebatchFunc();
     }
 
-    // -Mikkel
-
     /**
      * Get list of all raavarebatches
      * @return LIste over alle raavarebatches
@@ -34,8 +32,6 @@ public class RaavarevbatchController {
             throw buildError(Response.Status.NOT_ACCEPTABLE, SQLErrorMsg);
         }
     }
-
-    // -Mikkel
 
     /**
      * Get list of all active raavarebatches
@@ -79,8 +75,6 @@ public class RaavarevbatchController {
             throw buildError(Response.Status.NOT_ACCEPTABLE, SQLErrorMsg);
         }
     }
-
-    // -Mikkel
 
     /**
      * Create raavarebatch
