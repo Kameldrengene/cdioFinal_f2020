@@ -119,8 +119,6 @@ public class ProduktbatchDAOSQL implements IProduktbatchDAO {
         return pbList;
     }
 
-    // -Mikkel
-
     /**
      * Get the heighest productbatch ID-number
      * @return Get the heighest productbatch ID-number
