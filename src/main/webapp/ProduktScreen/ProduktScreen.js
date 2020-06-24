@@ -1,3 +1,5 @@
+//Created by Mikkel
+
 $("document").ready(function () {
 
     const loginRole = localStorage.getItem("loginRole");

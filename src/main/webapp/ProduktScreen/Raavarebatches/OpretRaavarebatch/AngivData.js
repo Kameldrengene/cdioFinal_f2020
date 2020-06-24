@@ -1,11 +1,13 @@
+//Created by Mikkel
+
 $("document").ready(async function () {
 
     const activeRaavareID = localStorage.getItem("activeRaavare");
 
+    //Show active raave ID
     $("#raavareID").html("Råvare ID: " + activeRaavareID);
 
     $("#opret").click(async function () {
-
         let confirmation = confirm("Opret råvarebatch for råvare ID: " + activeRaavareID);
         if (confirmation == true)
             await opretRaavarebatch(this.id);
@@ -31,6 +33,7 @@ async function opretRaavarebatch(){
         return
     }
 
+    //Create JSON
     const obj = { rbId: activeBatchID, raavareId: activeRaavareID, aktuelMaengde: activeStartMaengde, startMaengde: activeStartMaengde };
     const myJson = JSON.stringify(obj);
 

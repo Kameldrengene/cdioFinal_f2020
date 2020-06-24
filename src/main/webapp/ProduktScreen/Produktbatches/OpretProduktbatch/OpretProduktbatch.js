@@ -1,3 +1,5 @@
+//Created by Mikkel
+
 $("document").ready(async function () {
 
     await loadRecepter();
@@ -19,11 +21,13 @@ async function opretProduktbatch(activeReceptID){
         "/BoilerPlate_war_exploded/rest/produktbatch/getMaxPBID",
         async maxPBID => {
 
+            //Then create the object
             const newPBID = maxPBID + 1;
             obj = { pbId: newPBID, status: "Ikke påbegyndt", receptId: activeReceptID, dato: "" }
 
             let myJson = JSON.stringify(obj);
 
+            //Send data
             await sendAjax(
                 "/BoilerPlate_war_exploded/rest/produktbatch/opretProduktbatch",
                 () => success(newPBID, activeReceptID),
@@ -38,6 +42,7 @@ async function opretProduktbatch(activeReceptID){
 
 function success(activePBID, activeReceptID){
 
+    //Display success
     alert("Produktbatch oprettet successfuldt.\n" +
         "Du videresendes nu til print-siden")
 
@@ -52,6 +57,7 @@ function success(activePBID, activeReceptID){
 
     localStorage.setItem("cameFrom", "OpretProduktbatch");
 
+    //Fordward user
     switchP("ProduktScreen/Produktbatches/VisProduktbatches/AabenProduktbatch/AabenProduktbatch.html");
 
 }
@@ -71,6 +77,7 @@ function viewTable(data){
     //Variable to hold all the tabel rows
     let tabelData = "";
 
+    //Header
     tabelData += "<tr>";
     tabelData += "<th>Recept ID</th>";
     tabelData += "<th>Receptnavn</th>";
@@ -79,7 +86,7 @@ function viewTable(data){
     //Loop through
     $.each(data, function (key, value) {
 
-        //Uses userID for label reference
+        //Uses receptID for label reference
         tabelData += "<tr>";
         tabelData += "<td>"+value.receptId+"</td>";
         tabelData += "<td>"+value.receptNavn+"</td>";
@@ -88,6 +95,7 @@ function viewTable(data){
 
     });
 
+    //Fill table
     $("#receptTable").html(tabelData);
 
 }
