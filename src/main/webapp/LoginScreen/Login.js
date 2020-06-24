@@ -73,7 +73,11 @@ $("document").ready(async function () {
     const darkTheme = "<link rel=\"stylesheet\" id=\"theme\" type=\"text/css\" href=\"defaultDark.css\">";
     const lightTheme = "<link rel=\"stylesheet\" id=\"theme\" type=\"text/css\" href=\"defaultLight.css\">";
     let currentTheme = "dark";
-    if (getCookie("Theme") === "light") {currentTheme = "light"; document.getElementById("themebtn").checked = "checked"; $("#theme").replaceWith(lightTheme);}
+    if (getCookie("Theme") === "light") {
+        currentTheme = "light";
+        document.getElementById("themebtn").checked = "checked";
+        $("#theme").replaceWith(lightTheme);
+    }
 
     $(".slider").click(function () {
 
