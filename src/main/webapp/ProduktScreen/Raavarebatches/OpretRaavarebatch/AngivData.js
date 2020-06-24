@@ -19,6 +19,18 @@ async function opretRaavarebatch(){
     const activeBatchID = $('#batchID').val();
     const activeStartMaengde = $('#startMaengde').val();
 
+    //To avoid ajax conversion error
+    if( !wholeNumberTest(activeBatchID)){
+        alert("Kun heltal er tilladte som ID");
+        return
+    }
+
+    //To avoid ajax conversion error
+    if( !wholeNumberTest(activeStartMaengde)){
+        alert("Kun heltal større end 0 er tilladte som startmængde");
+        return
+    }
+
     const obj = { rbId: activeBatchID, raavareId: activeRaavareID, aktuelMaengde: activeStartMaengde, startMaengde: activeStartMaengde };
     const myJson = JSON.stringify(obj);
 
@@ -29,9 +41,21 @@ async function opretRaavarebatch(){
         "POST",
         myJson
     );
+
 };
 
 function success(){
     alert("Råvarebatch oprettet succesfuldt");
     switchP("ProduktScreen/Raavarebatches/OpretRaavarebatch/VaelgRaavare.html")
+}
+
+function wholeNumberTest(n) {
+
+    console.log("n:" + n);
+    if (n == "") return false;
+
+    const result = (n - Math.floor(n)) !== 0;
+
+    if (result) return false;
+    else return true;
 }

@@ -41,7 +41,7 @@ function success(activePBID, activeReceptID){
     alert("Produktbatch oprettet successfuldt.\n" +
         "Du videresendes nu til print-siden")
 
-    //Save data in localstorage and immediatly open the new batch
+    //Save the necessary data in localstorage and open the new batch afterwards
     localStorage.setItem("activePBId", activePBID);
     localStorage.setItem("activeStatus", "Ikke påbegyndt");
     localStorage.setItem("activeReceptID", activeReceptID);
